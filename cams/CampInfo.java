@@ -8,9 +8,10 @@ public class CampInfo {
     private String location;
     private String campDescription;
     private String staffInCharge;
-    private String [] committeeMembers;
+    private String[] committeeMembers;
 
-    public CampInfo (String campName, String dates, String registrationClosingDate, String campVisibility, String location, String campDescription, String staffInCharge, String [] committeeMembers) {
+    public CampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
+            String location, String campDescription, String staffInCharge, String[] committeeMembers) {
         this.campName = campName;
         this.dates = dates;
         this.registrationClosingDate = registrationClosingDate;
@@ -21,5 +22,12 @@ public class CampInfo {
         this.committeeMembers = committeeMembers;
     }
 
+    public String getCampName() {
+        return campName;
     }
+
+    public String getStaffInCharge() {
+        return staffInCharge;
+    }
+
 }

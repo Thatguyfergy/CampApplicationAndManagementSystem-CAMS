@@ -5,6 +5,11 @@ public abstract class Users {
     private String password = "password";
     private String facultyInfo;
 
+    public Users(String userID, String facultyInfo) {
+        this.userID = userID;
+        this.facultyInfo = facultyInfo;
+    }
+
     protected void setPassword(String newPassword) {
         this.password = newPassword;
     }
@@ -20,5 +25,4 @@ public abstract class Users {
     public String getFacultyInfo() {
         return facultyInfo;
     }
-
 }
