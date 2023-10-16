@@ -20,7 +20,7 @@ public class CampInfo {
         this.location = "";
         this.campDescription = "";
         this.staffInCharge = "";
-        this.committeeMembers = null;
+        this.committeeMembers = new String[10];
     }
 
     public CampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
@@ -32,7 +32,7 @@ public class CampInfo {
         this.location = location;
         this.campDescription = campDescription;
         this.staffInCharge = staffInCharge;
-        this.committeeMembers = committeeMembers;
+        this.committeeMembers = new String[10];
     }
 
     public String getCampName() {
@@ -95,8 +95,36 @@ public class CampInfo {
         this.staffInCharge = staffInCharge;
     }
 
-    public void setCommitteeMembers(String[] committeeMembers) {
-        this.committeeMembers = committeeMembers;
+    public void setCommitteeMembers(String committeeMember) {
+        for (int i = 0; i < committeeMembers.length; i++) {
+            if (committeeMembers[i] != null)
+                committeeMembers[i] = committeeMember;
+        }
     }
 
+    private String getCampInfo () {
+        return "Camp Name: " + campName + "\n" +
+                "Dates: " + dates + "\n" +
+                "Registration Closing Date: " + registrationClosingDate + "\n" +
+                "Camp Visibility: " + campVisibility + "\n" +
+                "Location: " + location + "\n" +
+                "Camp Description: " + campDescription + "\n" +
+                "Staff In Charge: " + staffInCharge + "\n" +
+                "Committee Members: " + committeeMembers + "\n";
+    }
+
+    public String toString() {
+        return getCampInfo();
+    }
+
+    public void setCampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
+            String location, String campDescription, String staffInCharge, String [] committeeMembers) {
+        this.campName = campName;
+        this.dates = dates;
+        this.registrationClosingDate = registrationClosingDate;
+        this.campVisibility = campVisibility;
+        this.location = location;
+        this.campDescription = campDescription;
+        this.staffInCharge = staffInCharge;
+    }
 }
