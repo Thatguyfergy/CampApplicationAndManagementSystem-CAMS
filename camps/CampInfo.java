@@ -101,14 +101,17 @@ public class CampInfo {
         this.staffInCharge = staffInCharge;
     }
 
-    public void setCommitteeMembers(String committeeMember) {
+    // used to add committee members into the committeeMembers array
+    public void addCommitteeMembers(String committeeMember) {
         for (int i = 0; i < committeeMembers.length; i++) {
-            if (committeeMembers[i] != null)
+            if (committeeMembers[i] != null){
                 committeeMembers[i] = committeeMember;
+                return;
+            }
         }
     }
 
-    // Add a date to dates array
+    // used to add dates that the camp is running for
     public void addDate(String date) {
         dates.add(date);
     }
@@ -130,11 +133,10 @@ public class CampInfo {
         return getCampInfo();
     }
 
-    // Set all camp info in a single method
+    // Set all camp info except commitee members and camp dates in a single method
     public void setCampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge, String [] committeeMembers) {
         this.campName = campName;
-        this.dates = dates;
         this.registrationClosingDate = registrationClosingDate;
         this.campVisibility = campVisibility;
         this.location = location;
