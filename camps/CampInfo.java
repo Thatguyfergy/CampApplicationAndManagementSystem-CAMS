@@ -1,10 +1,12 @@
 package camps;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class CampInfo {
     private String campName;
-    private ArrayList<String> dates;
+    private ArrayList<Date> dates;
     private String registrationClosingDate;
     private String campVisibility;
     private String location;
@@ -15,7 +17,7 @@ public class CampInfo {
     // Default constructor - Set all to empty string and create comitteeMembers array
     public CampInfo () {
         this.campName = "";
-        this.dates = new ArrayList<String>();
+        this.dates = new ArrayList<Date>();
         this.registrationClosingDate = "";
         this.campVisibility = "";
         this.location = "";
@@ -28,7 +30,7 @@ public class CampInfo {
     public CampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge, String [] committeeMembers) {
         this.campName = campName;
-        this.dates = new ArrayList<String>();
+        this.dates = new ArrayList<Date>();
         this.registrationClosingDate = registrationClosingDate;
         this.campVisibility = campVisibility;
         this.location = location;
@@ -42,7 +44,7 @@ public class CampInfo {
         return campName;
     }
 
-    public ArrayList<String> getDates() {
+    public ArrayList<Date> getDates() {
         return dates;
     }
 
@@ -106,8 +108,18 @@ public class CampInfo {
     }
 
     // used to add dates that the camp is running for
-    public void addDate(String date) {
-        dates.add(date);
+    public void addDate(Date startDate, Date endDate) {
+        if (startDate.compareTo(endDate) <= 0) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(startDate);
+            while (calendar.getTime().compareTo(endDate) <= 0) {
+                dates.add(calendar.getTime());
+                calendar.add(Calendar.DATE, 1);
+            }
+        } 
+        else {
+            System.out.println("Error: Start date cannot be after end date");
+        }
     }
 
     // Get all camp info in a single string
@@ -129,8 +141,8 @@ public class CampInfo {
     }
 
     // Set all camp info except commitee members and camp dates in a single method
-    public void setCampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
-            String location, String campDescription, String staffInCharge, String [] committeeMembers) {
+    public void setCampInfo(String campName, String registrationClosingDate, String campVisibility,
+            String location, String campDescription, String staffInCharge) {
         this.campName = campName;
         this.registrationClosingDate = registrationClosingDate;
         this.campVisibility = campVisibility;
