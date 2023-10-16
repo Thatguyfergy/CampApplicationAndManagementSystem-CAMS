@@ -12,6 +12,7 @@ public class CampInfo {
     private String staffInCharge;
     private String[] committeeMembers;
 
+    // Default constructor - Set all to empty string and create comitteeMembers array
     public CampInfo () {
         this.campName = "";
         this.dates = "";
@@ -23,6 +24,7 @@ public class CampInfo {
         this.committeeMembers = new String[10];
     }
 
+    // Constructor with all fields & create comitteeMembers array
     public CampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge, String [] committeeMembers) {
         this.campName = campName;
@@ -35,6 +37,7 @@ public class CampInfo {
         this.committeeMembers = new String[10];
     }
 
+    // Getter methods for all individual fields
     public String getCampName() {
         return campName;
     }
@@ -67,6 +70,7 @@ public class CampInfo {
         return committeeMembers;
     }
 
+    // Setter methods for all individual fields
     public void setCampName(String campName) {
         this.campName = campName;
     }
@@ -102,6 +106,7 @@ public class CampInfo {
         }
     }
 
+    // Get all camp info in a single string
     private String getCampInfo () {
         return "Camp Name: " + campName + "\n" +
                 "Dates: " + dates + "\n" +
@@ -113,10 +118,12 @@ public class CampInfo {
                 "Committee Members: " + committeeMembers + "\n";
     }
 
+    // Override toString method to return getCampInfo
     public String toString() {
         return getCampInfo();
     }
 
+    // Set all camp info in a single method
     public void setCampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge, String [] committeeMembers) {
         this.campName = campName;
