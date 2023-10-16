@@ -7,7 +7,7 @@ import java.util.Date;
 public class CampInfo {
     private String campName;
     private ArrayList<Date> dates;
-    private String registrationClosingDate;
+    private Date registrationClosingDate;
     private String campVisibility;
     private String location;
     private String campDescription;
@@ -18,7 +18,6 @@ public class CampInfo {
     public CampInfo () {
         this.campName = "";
         this.dates = new ArrayList<Date>();
-        this.registrationClosingDate = "";
         this.campVisibility = "";
         this.location = "";
         this.campDescription = "";
@@ -27,8 +26,8 @@ public class CampInfo {
     }
 
     // Constructor with all fields & create comitteeMembers array
-    public CampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
-            String location, String campDescription, String staffInCharge, String [] committeeMembers) {
+    public CampInfo(String campName, Date registrationClosingDate, String campVisibility,
+            String location, String campDescription, String staffInCharge) {
         this.campName = campName;
         this.dates = new ArrayList<Date>();
         this.registrationClosingDate = registrationClosingDate;
@@ -48,7 +47,7 @@ public class CampInfo {
         return dates;
     }
 
-    public String getRegistrationClosingDate() {
+    public Date getRegistrationClosingDate() {
         return registrationClosingDate;
     }
 
@@ -77,7 +76,7 @@ public class CampInfo {
         this.campName = campName;
     }
 
-    public void setRegistrationClosingDate(String registrationClosingDate) {
+    public void setRegistrationClosingDate(Date registrationClosingDate) {
         this.registrationClosingDate = registrationClosingDate;
     }
 
@@ -141,7 +140,7 @@ public class CampInfo {
     }
 
     // Set all camp info except commitee members and camp dates in a single method
-    public void setCampInfo(String campName, String registrationClosingDate, String campVisibility,
+    public void setCampInfo(String campName, Date registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge) {
         this.campName = campName;
         this.registrationClosingDate = registrationClosingDate;
