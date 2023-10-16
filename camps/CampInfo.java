@@ -123,6 +123,7 @@ public class CampInfo {
     }
 
     // Override toString method to return getCampInfo
+    @Override
     public String toString() {
         return getCampInfo();
     }

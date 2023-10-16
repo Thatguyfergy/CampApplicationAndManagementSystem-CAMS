@@ -24,7 +24,7 @@ public class Staff extends Users {
 
     // Edit next time
     public void viewCamp(CampArray campArray) {
-        campArray.viewCamps();
+        campArray.viewCamps(null);
     }
 
     // Suggestion nonsense will do next time
