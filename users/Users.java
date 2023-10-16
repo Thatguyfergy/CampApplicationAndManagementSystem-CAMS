@@ -1,4 +1,4 @@
-package cams;
+package users;
 
 public abstract class Users {
     private String userID;

@@ -1,4 +1,4 @@
-package cams;
+package camps;
 
 public class Camp {
     CampInfo campInfo;

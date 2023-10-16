@@ -1,4 +1,4 @@
-package cams;
+package camps;
 
 import java.util.ArrayList;
 

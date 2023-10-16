@@ -1,4 +1,6 @@
-package cams;
+package users;
+
+import camps.*;
 
 public class Staff extends Users {
     public Staff(String userID, String facultyInfo) {
