@@ -1,4 +1,4 @@
-package cams;
+package camps;
 
 import java.util.ArrayList;
 
@@ -95,7 +95,7 @@ public class CampInfo {
         this.staffInCharge = staffInCharge;
     }
 
-    public void setCommitteeMembers(ArrayList committeeMembers) {
+    public void setCommitteeMembers(String[] committeeMembers) {
         this.committeeMembers = committeeMembers;
     }
 
