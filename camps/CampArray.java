@@ -54,12 +54,11 @@ public class CampArray {
 
     public void viewCamps(Users user) {
         // Display camps based on different visibility requirements
-        // For Staff - filter by staffInCharge
+        // For Staff - No filters since every staff can view every camp
         // For Students - filter by committeeMembers
 
         for (Camp camp : camps) {
-            // Check if the user is a staff member and the staffInCharge matches the user's
-            // ID
+            // Check if the user is a staff member
             if (user instanceof Staff) {
                 System.out.println(camp.toString());
             }
