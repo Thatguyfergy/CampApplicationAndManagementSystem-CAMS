@@ -3,16 +3,14 @@ package camps;
 import java.util.ArrayList;
 
 public class Camp {
-   private CampInfo campInfo;
-   private String[] attendees;
-   
-   public Camp() {
-        //Create campInfo
+    private CampInfo campInfo;
+    private String[] attendees;
+
+    public Camp() {
+        // Create campInfo
         this.campInfo = new CampInfo();
         this.attendees = new String[10]; // Adjust the size as needed
-        
-    
-        
+
     }
 
     public String getCampName() {
@@ -47,10 +45,13 @@ public class Camp {
         return campInfo.getCommitteeMembers();
     }
 
-// Method to get the list of attendees
-public String[] getAttendees() {
-    return attendees;
-}
+    public void setCampDescription(String newDescription) {
+        campInfo.setCampDescription(newDescription);
+    }
+
+    // Method to get the list of attendees
+    public String[] getAttendees() {
+        return attendees;
+    }
 
 }
-    
