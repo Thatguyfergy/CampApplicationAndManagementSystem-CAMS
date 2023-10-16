@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CampInfo {
     private String campName;
-    private String dates;
+    private ArrayList<String> dates;
     private String registrationClosingDate;
     private String campVisibility;
     private String location;
@@ -15,7 +15,7 @@ public class CampInfo {
     // Default constructor - Set all to empty string and create comitteeMembers array
     public CampInfo () {
         this.campName = "";
-        this.dates = "";
+        this.dates = new ArrayList<String>();
         this.registrationClosingDate = "";
         this.campVisibility = "";
         this.location = "";
@@ -28,7 +28,7 @@ public class CampInfo {
     public CampInfo(String campName, String dates, String registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge, String [] committeeMembers) {
         this.campName = campName;
-        this.dates = dates;
+        this.dates = new ArrayList<String>();
         this.registrationClosingDate = registrationClosingDate;
         this.campVisibility = campVisibility;
         this.location = location;
@@ -42,8 +42,14 @@ public class CampInfo {
         return campName;
     }
 
+    // return a string of dates in format "date1, date2, date3, ..."
     public String getDates() {
-        return dates;
+        String datesString = "";
+        for (int i = 0; i < dates.size(); i++) {
+            datesString += dates.get(i) + ", ";
+        }
+        datesString += String.format("\n");
+        return datesString;
     }
 
     public String getRegistrationClosingDate() {
@@ -75,10 +81,6 @@ public class CampInfo {
         this.campName = campName;
     }
 
-    public void setDates(String dates) {
-        this.dates = dates;
-    }
-
     public void setRegistrationClosingDate(String registrationClosingDate) {
         this.registrationClosingDate = registrationClosingDate;
     }
@@ -104,6 +106,11 @@ public class CampInfo {
             if (committeeMembers[i] != null)
                 committeeMembers[i] = committeeMember;
         }
+    }
+
+    // Add a date to dates array
+    public void addDate(String date) {
+        dates.add(date);
     }
 
     // Get all camp info in a single string
