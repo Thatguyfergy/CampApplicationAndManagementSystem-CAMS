@@ -42,14 +42,8 @@ public class CampInfo {
         return campName;
     }
 
-    // return a string of dates in format "date1, date2, date3, ..."
-    public String getDates() {
-        String datesString = "";
-        for (int i = 0; i < dates.size(); i++) {
-            datesString += dates.get(i) + ", ";
-        }
-        datesString += String.format("\n");
-        return datesString;
+    public ArrayList<String> getDates() {
+        return dates;
     }
 
     public String getRegistrationClosingDate() {
