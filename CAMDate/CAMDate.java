@@ -53,6 +53,7 @@ public class CAMDate {
     }
 
     // compareTo method
+    // return 1 if this is later than other return -1 if this is earlier than other return 0 if this is the same as other
     public int compareTo(CAMDate other) {
         if (this.year > other.year) {
             return 1;
