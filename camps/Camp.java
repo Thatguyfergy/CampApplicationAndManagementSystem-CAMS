@@ -2,7 +2,7 @@ package camps;
 
 import java.util.ArrayList;
 
-import CAMDate.CAMDate;
+import camdate.CAMDate;
 
 public class Camp {
     private CampInfo campInfo;
@@ -57,10 +57,10 @@ public class Camp {
     public String[] getAttendees() {
         return attendees;
     }
+
     // Method to get the list of Committee Members
     public String[] getCommitteeMembers() {
         return committeeMembers;
     }
-
 
 }

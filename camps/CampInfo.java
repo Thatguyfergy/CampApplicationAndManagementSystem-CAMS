@@ -2,7 +2,7 @@ package camps;
 
 import java.util.ArrayList;
 
-import CAMDate.CAMDate;
+import camdate.CAMDate;
 
 public class CampInfo {
     private String campName;

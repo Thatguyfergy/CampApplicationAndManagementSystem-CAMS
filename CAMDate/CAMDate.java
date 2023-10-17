@@ -1,4 +1,4 @@
-package CAMDate;
+package camdate;
 
 public class CAMDate {
     private int day;
@@ -6,7 +6,7 @@ public class CAMDate {
     private int year;
 
     // Default constructor - Set all to 0
-    public CAMDate () {
+    public CAMDate() {
         this.day = 0;
         this.month = 0;
         this.year = 0;
@@ -23,7 +23,7 @@ public class CAMDate {
     public int getDay() {
         return day;
     }
-    
+
     public int getMonth() {
         return month;
     }
@@ -53,7 +53,8 @@ public class CAMDate {
     }
 
     // compareTo method
-    // return 1 if this is later than other return -1 if this is earlier than other return 0 if this is the same as other
+    // return 1 if this is later than other return -1 if this is earlier than other
+    // return 0 if this is the same as other
     public int compareTo(CAMDate other) {
         if (this.year > other.year) {
             return 1;
@@ -82,7 +83,8 @@ public class CAMDate {
             this.day = 1;
             this.month = 1;
             this.year++;
-        } else if (this.day == 31 && (this.month == 1 || this.month == 3 || this.month == 5 || this.month == 7 || this.month == 8 || this.month == 10)) {
+        } else if (this.day == 31 && (this.month == 1 || this.month == 3 || this.month == 5 || this.month == 7
+                || this.month == 8 || this.month == 10)) {
             this.day = 1;
             this.month++;
         } else if (this.day == 30 && (this.month == 4 || this.month == 6 || this.month == 9 || this.month == 11)) {
