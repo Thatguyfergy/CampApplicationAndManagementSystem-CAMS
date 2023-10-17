@@ -78,6 +78,9 @@ public class CampArray {
                     displayRegisteredStudents(camp);
                     System.out.println(); // Add a line break for better readability
                 }
+                else {
+                    System.out.println("None.");
+                }
             }
         } else if (user instanceof Student) {
             Student studentUser = (Student) user;
