@@ -10,32 +10,36 @@ public class CampInfo {
     private CAMDate registrationClosingDate;
     private String campVisibility;
     private String location;
+    private int totalSlots;
+    private int committeeMembersSlots;
     private String campDescription;
     private String staffInCharge;
-    private ArrayList<String> committeeMembers;
 
-    // Default constructor - Set all to empty string and create comitteeMembers array
-    public CampInfo () {
+    // Default constructor - Set all to empty string and create comitteeMembers
+    // array
+    public CampInfo() {
         this.campName = "";
         this.dates = new ArrayList<CAMDate>();
         this.campVisibility = "";
         this.location = "";
+        this.totalSlots = 0;
+        this.committeeMembersSlots = 0;
         this.campDescription = "";
         this.staffInCharge = "";
-        this.committeeMembers = new ArrayList<String>();
     }
 
     // Constructor with all fields & create comitteeMembers array
     public CampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
-            String location, String campDescription, String staffInCharge) {
+            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         this.campName = campName;
         this.dates = new ArrayList<CAMDate>();
         this.registrationClosingDate = registrationClosingDate;
         this.campVisibility = campVisibility;
         this.location = location;
+        this.totalSlots = totalSlots;
+        this.committeeMembersSlots = committeeMembersSlots;
         this.campDescription = campDescription;
         this.staffInCharge = staffInCharge;
-        this.committeeMembers = new ArrayList<String>();
     }
 
     // Getter methods for all individual fields
@@ -59,16 +63,20 @@ public class CampInfo {
         return location;
     }
 
+    public int getTotalSlots() {
+        return totalSlots;
+    }
+
+    public int getCommitteeMembersSlots() {
+        return committeeMembersSlots;
+    }
+
     public String getCampDescription() {
         return campDescription;
     }
 
     public String getStaffInCharge() {
         return staffInCharge;
-    }
-
-    public ArrayList<String> getCommitteeMembers() {
-        return committeeMembers;
     }
 
     // Setter methods for all individual fields
@@ -88,6 +96,14 @@ public class CampInfo {
         this.location = location;
     }
 
+    public void setTotalSlots(int TotalSlots) {
+        this.totalSlots = TotalSlots;
+    }
+
+    public void setCommitteeMembersSlots(int committeeMembersSlots) {
+        this.committeeMembersSlots = committeeMembersSlots;
+    }
+
     public void setCampDescription(String campDescription) {
         this.campDescription = campDescription;
     }
@@ -96,18 +112,8 @@ public class CampInfo {
         this.staffInCharge = staffInCharge;
     }
 
-    // used to add committee members into the committeeMembers array
-    public void addCommitteeMembers(String committeeMember) {
-        if (committeeMembers.size() < 10) {
-            committeeMembers.add(committeeMember);
-        }
-        else {
-            System.out.println("Error: Committee members cannot exceed 10");
-        }
-    }
-
     // used to add dates that the camp is running for
-    public void addDate(CAMDate startDate,  CAMDate endDate) {
+    public void addDate(CAMDate startDate, CAMDate endDate) {
         CAMDate temp = startDate;
         if (startDate.compareTo(endDate) <= 0) {
             while (temp.compareTo(endDate) <= 0) {
@@ -115,22 +121,17 @@ public class CampInfo {
                 temp = new CAMDate(temp.getDay(), temp.getMonth(), temp.getYear());
                 temp.nextDay();
             }
-        } 
-        else {
+        } else {
             System.out.println("Error: Start date cannot be after end date");
         }
     }
 
     // Get all camp info in a single string
-    private String getCampInfo () {
-        return "Camp Name: " + campName + "\n" +
-                "Dates: " + dates + "\n" +
-                "Registration Closing Date: " + registrationClosingDate + "\n" +
-                "Camp Visibility: " + campVisibility + "\n" +
-                "Location: " + location + "\n" +
-                "Camp Description: " + campDescription + "\n" +
-                "Staff In Charge: " + staffInCharge + "\n" +
-                "Committee Members: " + committeeMembers + "\n";
+    private String getCampInfo() {
+        return "Camp Name: " + campName + "\n" + "Camp Dates: " + dates + "\n" + "Registration Closing Date: "
+                + registrationClosingDate + "\n" + "Camp Visibility: " + campVisibility + "\n" + "Location: " + location
+                + "\n" + "Total Slots: " + totalSlots + "\n" + "Committee Members Slots: " + committeeMembersSlots
+                + "\n" + "Camp Description: " + campDescription + "\n" + "Staff In Charge: " + staffInCharge + "\n";
     }
 
     // Override toString method to return getCampInfo
@@ -141,11 +142,13 @@ public class CampInfo {
 
     // Set all camp info except commitee members and camp dates in a single method
     public void setCampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
-            String location, String campDescription, String staffInCharge) {
+            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         this.campName = campName;
         this.registrationClosingDate = registrationClosingDate;
         this.campVisibility = campVisibility;
         this.location = location;
+        this.totalSlots = totalSlots;
+        this.committeeMembersSlots = committeeMembersSlots;
         this.campDescription = campDescription;
         this.staffInCharge = staffInCharge;
     }
