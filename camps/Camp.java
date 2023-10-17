@@ -49,6 +49,11 @@ public class Camp {
         return campInfo.getCommitteeMembersSlots();
     }
 
+    public int getTotalSlots() {
+        return campInfo.getTotalSlots();
+    }
+
+
     public void setCampDescription(String newDescription) {
         campInfo.setCampDescription(newDescription);
     }
@@ -63,4 +68,23 @@ public class Camp {
         return committeeMembers;
     }
 
+    public String toggleVisibility() {
+        int totalSlots = campInfo.getTotalSlots();
+        int occupiedSlots = getAttendees().length + getCommitteeMembers().length;
+        CAMDate currentDate = new CAMDate();
+        if (currentDate.compareTo(campInfo.getRegistrationClosingDate()) > 0) {
+            // Past registration closing date, set visibility to "off"
+            return "off";
+        } 
+        else {
+
+        if (occupiedSlots < totalSlots) {
+            // There are available slots, so set visibility to "on"
+            return "on";
+        } else {
+            // All slots are taken, set visibility to "off"
+            return "off";
+        }
+    }
+    }
 }

@@ -2,8 +2,6 @@ package camps;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Calendar;
-import java.util.Date;
 
 import users.Staff;
 import users.Users;
@@ -66,6 +64,9 @@ public class CampArray {
             System.out.println("All Camps:");
             for (Camp camp : camps) {
                 System.out.println(camp.toString());
+                System.out.println(); // Add a line break for better readability
+                displayRegisteredStudents(camp);
+                System.out.println(); // Add a line break for better readability
             }
     
             // Display camps created by the staff if they are the staffInCharge
@@ -73,6 +74,9 @@ public class CampArray {
             for (Camp camp : camps) {
                 if (staffUser.getID().equals(camp.getStaffInCharge())) {
                     System.out.println(camp.toString());
+                    System.out.println(); // Add a line break for better readability
+                    displayRegisteredStudents(camp);
+                    System.out.println(); // Add a line break for better readability
                 }
             }
         } else if (user instanceof Student) {
@@ -82,12 +86,16 @@ public class CampArray {
             // and display remaining slots for each camp open to the student
             System.out.println("Open Camps for Student:");
             for (Camp camp : camps) {
-                if (camp.getCampVisibility().equals(studentUser.getFacultyInfo()) &&
-                camp.getRegistrationClosingDate() && // Check if registration is still open
-                camp.getCommitteeMembersSlots() > 0) {
+                if (camp.toggleVisibility().equalsIgnoreCase("on") && studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility())){
                     System.out.println("Camp Name: " + camp.getCampName());
-                    System.out.println("Remaining Slots: " + camp.getCommitteeMembersSlots());
-                }
+                    System.out.println("Remaining Slots for Camp Committee: " + getRemainingCommitteeSlots(camp));
+                    System.out.println("Remaining Slots for Attendees: " + getRemainingAttendeeSlots(camp));
+                    System.out.println("Camp Dates: " + camp.getDates());
+                    System.out.println("Registration Closing Date: " + camp.getRegistrationClosingDate());
+                    System.out.println("Location: " + camp.getLocation());
+                    System.out.println("Staff In Charge: " + camp.getStaffInCharge());
+                    System.out.println(); // Add a line break for better readability
+                    }
             }
     
             // Display camps the student has registered for and their roles
@@ -96,17 +104,62 @@ public class CampArray {
                 for (String attendee : camp.getAttendees()) {
                     if (attendee.equals(studentUser.getID())) {
                         System.out.println("Camp Name: " + camp.getCampName());
+                        System.out.println("Camp Dates: " + camp.getDates());
+                        System.out.println("Location: " + camp.getLocation());
+                        System.out.println("Staff In Charge: " + camp.getStaffInCharge());
                         System.out.println("Your Role: Attendee");
+                        System.out.println(); // Add a line break for better readability
                     }
                 }
                 for (String committeeMember : camp.getCommitteeMembers()) {
                     if (committeeMember.equals(studentUser.getID())) {
                         System.out.println("Camp Name: " + camp.getCampName());
+                        System.out.println("Camp Dates: " + camp.getDates());
+                        System.out.println("Location: " + camp.getLocation());
+                        System.out.println("Staff In Charge: " + camp.getStaffInCharge());
                         System.out.println("Your Role: Committee Member");
+                        displayRegisteredStudents(camp);
+                        System.out.println(); // Add a line break for better readability
                     }
                 }
             }
         }
+}
 
+// Helper method to calculate remaining slots for attendees
+private int getRemainingAttendeeSlots(Camp camp) {
+    int totalSlots = camp.getTotalSlots();
+    int occupiedAttendeeSlots = camp.getAttendees().length;
+    int occupiedCommitteeSlots = camp.getCommitteeMembers().length;
+    int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
+    
+    return totalSlots - totalOccupiedSlots;
+}
+
+// Helper method to calculate remaining slots for committee members
+private int getRemainingCommitteeSlots(Camp camp) {
+    int committeeMembersSlots = camp.getCommitteeMembersSlots();
+    int occupiedCommitteeSlots = camp.getCommitteeMembers().length;
+
+    return committeeMembersSlots - occupiedCommitteeSlots;
+}
+
+// Helper method to display the list of registered students for a camp
+private void displayRegisteredStudents(Camp camp) {
+    System.out.println("Registered Students:");
+
+    // Display attendees
+    System.out.println("Attendees:");
+    for (String attendee : camp.getAttendees()) {
+        System.out.println("- " + attendee);
+    }
+
+    // Display committee members
+    System.out.println("Committee Members:");
+    for (String committeeMember : camp.getCommitteeMembers()) {
+        System.out.println("- " + committeeMember);
+    }
+
+    System.out.println(); // Add a line break for better readability
 }
 }
