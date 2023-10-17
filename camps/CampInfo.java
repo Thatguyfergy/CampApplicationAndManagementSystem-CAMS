@@ -1,41 +1,41 @@
 package camps;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+
+import CAMDate.CAMDate;
 
 public class CampInfo {
     private String campName;
-    private ArrayList<Date> dates;
-    private Date registrationClosingDate;
+    private ArrayList<CAMDate> dates;
+    private CAMDate registrationClosingDate;
     private String campVisibility;
     private String location;
     private String campDescription;
     private String staffInCharge;
-    private String[] committeeMembers;
+    private ArrayList<String> committeeMembers;
 
     // Default constructor - Set all to empty string and create comitteeMembers array
     public CampInfo () {
         this.campName = "";
-        this.dates = new ArrayList<Date>();
+        this.dates = new ArrayList<CAMDate>();
         this.campVisibility = "";
         this.location = "";
         this.campDescription = "";
         this.staffInCharge = "";
-        this.committeeMembers = new String[10];
+        this.committeeMembers = new ArrayList<String>();
     }
 
     // Constructor with all fields & create comitteeMembers array
-    public CampInfo(String campName, Date registrationClosingDate, String campVisibility,
+    public CampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge) {
         this.campName = campName;
-        this.dates = new ArrayList<Date>();
+        this.dates = new ArrayList<CAMDate>();
         this.registrationClosingDate = registrationClosingDate;
         this.campVisibility = campVisibility;
         this.location = location;
         this.campDescription = campDescription;
         this.staffInCharge = staffInCharge;
-        this.committeeMembers = new String[10];
+        this.committeeMembers = new ArrayList<String>();
     }
 
     // Getter methods for all individual fields
@@ -43,11 +43,11 @@ public class CampInfo {
         return campName;
     }
 
-    public ArrayList<Date> getDates() {
+    public ArrayList<CAMDate> getDates() {
         return dates;
     }
 
-    public Date getRegistrationClosingDate() {
+    public CAMDate getRegistrationClosingDate() {
         return registrationClosingDate;
     }
 
@@ -67,7 +67,7 @@ public class CampInfo {
         return staffInCharge;
     }
 
-    public String[] getCommitteeMembers() {
+    public ArrayList<String> getCommitteeMembers() {
         return committeeMembers;
     }
 
@@ -76,7 +76,7 @@ public class CampInfo {
         this.campName = campName;
     }
 
-    public void setRegistrationClosingDate(Date registrationClosingDate) {
+    public void setRegistrationClosingDate(CAMDate registrationClosingDate) {
         this.registrationClosingDate = registrationClosingDate;
     }
 
@@ -98,22 +98,22 @@ public class CampInfo {
 
     // used to add committee members into the committeeMembers array
     public void addCommitteeMembers(String committeeMember) {
-        for (int i = 0; i < committeeMembers.length; i++) {
-            if (committeeMembers[i] != null){
-                committeeMembers[i] = committeeMember;
-                return;
-            }
+        if (committeeMembers.size() < 10) {
+            committeeMembers.add(committeeMember);
+        }
+        else {
+            System.out.println("Error: Committee members cannot exceed 10");
         }
     }
 
     // used to add dates that the camp is running for
-    public void addDate(Date startDate, Date endDate) {
+    public void addDate(CAMDate startDate,  CAMDate endDate) {
+        CAMDate temp = startDate;
         if (startDate.compareTo(endDate) <= 0) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(startDate);
-            while (calendar.getTime().compareTo(endDate) <= 0) {
-                dates.add(calendar.getTime());
-                calendar.add(Calendar.DATE, 1);
+            while (temp.compareTo(endDate) <= 0) {
+                dates.add(temp);
+                temp = new CAMDate(temp.getDay(), temp.getMonth(), temp.getYear());
+                temp.nextDay();
             }
         } 
         else {
@@ -140,7 +140,7 @@ public class CampInfo {
     }
 
     // Set all camp info except commitee members and camp dates in a single method
-    public void setCampInfo(String campName, Date registrationClosingDate, String campVisibility,
+    public void setCampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, String campDescription, String staffInCharge) {
         this.campName = campName;
         this.registrationClosingDate = registrationClosingDate;

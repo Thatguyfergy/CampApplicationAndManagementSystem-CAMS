@@ -1,7 +1,8 @@
 package camps;
 
 import java.util.ArrayList;
-import java.util.Date;
+
+import CAMDate.CAMDate;
 
 public class Camp {
     private CampInfo campInfo;
@@ -18,11 +19,11 @@ public class Camp {
         return campInfo.getCampName();
     }
 
-    public ArrayList<Date> getDates() {
+    public ArrayList<CAMDate> getDates() {
         return campInfo.getDates();
     }
 
-    public Date getRegistrationClosingDate() {
+    public CAMDate getRegistrationClosingDate() {
         return campInfo.getRegistrationClosingDate();
     }
 
@@ -42,7 +43,7 @@ public class Camp {
         return campInfo.getStaffInCharge();
     }
 
-    public String[] getCommitteeMembers() {
+    public ArrayList<String> getCommitteeMembers() {
         return campInfo.getCommitteeMembers();
     }
 
