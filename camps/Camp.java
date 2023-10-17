@@ -7,11 +7,13 @@ import CAMDate.CAMDate;
 public class Camp {
     private CampInfo campInfo;
     private String[] attendees;
+    private String[] committeeMembers;
 
     public Camp() {
         // Create campInfo
         this.campInfo = new CampInfo();
         this.attendees = new String[10]; // Adjust the size as needed
+        this.committeeMembers = new String[10]; // Initialize committeeMembers array
 
     }
 
@@ -43,8 +45,8 @@ public class Camp {
         return campInfo.getStaffInCharge();
     }
 
-    public ArrayList<String> getCommitteeMembers() {
-        return campInfo.getCommitteeMembers();
+    public int getCommitteeMembersSlots() {
+        return campInfo.getCommitteeMembersSlots();
     }
 
     public void setCampDescription(String newDescription) {
@@ -55,5 +57,10 @@ public class Camp {
     public String[] getAttendees() {
         return attendees;
     }
+    // Method to get the list of Committee Members
+    public String[] getCommitteeMembers() {
+        return committeeMembers;
+    }
+
 
 }

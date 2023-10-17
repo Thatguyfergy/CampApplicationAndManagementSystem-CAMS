@@ -73,8 +73,12 @@ public class CampArray {
 
     // Helper method to check if a student is in the committeeMembers list
     private boolean isStudentInCommittee(Student student, Camp camp) {
-        for (String committeeMember : camp.getCommitteeMembers()) {
-            if (committeeMember.equals(student.getID())) {
+        // Retrieve the committee members of the camp
+        String[] committeeMembers = camp.getCommitteeMembers();
+
+        // Check if the student is in the committee members list
+        for (String committeeMember : committeeMembers) {
+            if (committeeMember != null && committeeMember.equals(student.getID())) {
                 return true;
             }
         }
