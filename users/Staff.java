@@ -14,7 +14,7 @@ public class Staff extends Users {
         campArray.createCamp(obj);
     }
 
-    public void createCamp(CampArray campArray, String campName) {
+    public void editCamp(CampArray campArray, String campName) {
         campArray.editCamp(campName);
     }
 
