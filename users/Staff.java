@@ -27,6 +27,11 @@ public class Staff extends Users {
         campArray.viewCamps(null);
     }
 
+    public int compareTo(Users o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
+    }
+
     // Suggestion nonsense will do next time
 
     // Student report generation

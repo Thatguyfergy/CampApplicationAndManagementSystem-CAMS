@@ -1,6 +1,6 @@
 package users;
 
-public abstract class Users {
+public abstract class Users implements Comparable<Users>{
     private String userID;
     private String password = "password";
     private String facultyInfo;
