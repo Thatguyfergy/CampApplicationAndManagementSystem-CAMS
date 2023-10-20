@@ -13,21 +13,22 @@ public class CAMDisplay {
         System.out.println("2. Reset Password");
         System.out.println("3. Exit");
         System.out.printf("Enter your choice: ");
-        // Scanner sc = new Scanner(System.in);
-        // int choice = sc.nextInt();
-        // switch (choice) {
-        // case 1:
-        // loginScreen();
-        // break;
-        // case 2:
-        // resetPasswordScreen();
-        // break;
-        // case 3:
-        // System.exit(0);
-        // break;
-        // default:
-        // System.out.println("Invalid choice!");
-        // break;
+        Scanner sc = new Scanner(System.in);
+        int choice = sc.nextInt();
+        switch (choice) {
+            case 1:
+                loginScreen();
+                break;
+            case 2:
+                resetPasswordScreen();
+                break;
+            case 3:
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid choice!");
+                break;
+        }
     }
 
     public void loginScreen() {
