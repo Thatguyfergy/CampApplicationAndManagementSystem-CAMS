@@ -4,7 +4,8 @@ import InfoExchange.Enquiries;
 import camps.CampArray;
 
 public class Student extends Users {
-    //private boolean campCommittee = false;    // !!!NOTE!!! cannot just have a boolean check for camp committee member since a student can be a camp attendee and camp committee member at the same time
+    private boolean campCommittee = false;    // !!!NOTE!!! cannot just have a boolean check for camp committee member since a student can be a camp attendee and camp committee member at the same time
+    private String campCommitteeNOC;    // NOC: Name of Camp
     private Enquiries[] enquiriesArray = new Enquiries[10];     // max 10 enquiries per student
     private int enquiriesIndex = 0;     // to keep track of which index the enquiry is filled to
 
@@ -31,8 +32,16 @@ public class Student extends Users {
         currentCamps.viewCamps(this);        
     }
 
+    public void campCommitteeInfo(String campName){
+        campCommitteeNOC = campName;
+    }
+    // camp committee methods can have a check at the start if every method to see if campCommittee is true, then execute the method based on campCommitteeNOC
+
     public void registerCamp(String campName, boolean campCommittee){
-        //this.campCommittee = campCommittee;
+        if (campCommittee){
+            this.campCommittee = campCommittee;
+            this.campCommitteeInfo(campName);
+        }
         // add method to register for camp from camp class
     }
 
