@@ -89,7 +89,7 @@ public class Camp {
     }
     }
     public void registerStudent(Student student, boolean isCampCommittee) {
-    // Assuming there is a method in the Student class to register for the camp
+    
     student.registerCamp(getCampName(), isCampCommittee);
 
     // Update the camp's lists based on the registration type
