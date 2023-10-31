@@ -3,6 +3,7 @@ package camps;
 import java.util.ArrayList;
 
 import camdate.CAMDate;
+import users.Student;
 
 public class Camp {
     private CampInfo campInfo;
@@ -87,4 +88,22 @@ public class Camp {
         }
     }
     }
+    public void registerStudent(Student student, boolean isCampCommittee) {
+    // Assuming there is a method in the Student class to register for the camp
+    student.registerCamp(getCampName(), isCampCommittee);
+
+    // Update the camp's lists based on the registration type
+    if (isCampCommittee) {
+        // Register as a camp committee member
+        String[] committeeMembers = getCommitteeMembers();
+        // Add the student to the committeeMembers array
+        committeeMembers[committeeMembers.length] = student.getID();
+    } else {
+        // Register as an attendee
+        String[] attendees = getAttendees();
+        // Add the student to the attendees array
+        attendees[attendees.length] = student.getID();
+    }
+}
+
 }
