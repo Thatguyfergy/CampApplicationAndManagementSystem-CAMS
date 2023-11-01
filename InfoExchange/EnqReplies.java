@@ -5,12 +5,14 @@ public class EnqReplies implements Comparable<Enquiries> {
     private String replyID;
     private String replyString;
     private String recipient;
+    private String replyCreator;
 
-    public EnqReplies(String replyString, String enquiryID, String recipient, String replyID) {
+    public EnqReplies(String replyString, String enquiryID, String recipient, String replyID, String replyCreator) {
         this.replyString = replyString;
         this.enquiryID = enquiryID;
         this.recipient = recipient;
         this.replyID = replyID;
+        this.replyCreator = replyCreator;
     }
 
     public String getEnquiryID() {
@@ -27,6 +29,10 @@ public class EnqReplies implements Comparable<Enquiries> {
 
     public String getReplyID() {
         return replyID;
+    }
+
+    public String getReplyCreator() {
+        return replyCreator;
     }
 
     @Override

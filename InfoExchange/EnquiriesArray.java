@@ -89,7 +89,7 @@ public class EnquiriesArray {
         String replyString = scanner.nextLine();
 
         EnqReplies reply = new EnqReplies(replyString, enquiry.getEnquiryID(), enquiry.getSender(),
-                generateID("replies"));
+                generateID("replies"), user.getID());
         replies.add(reply);
     }
 
