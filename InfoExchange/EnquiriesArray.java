@@ -2,22 +2,54 @@ package InfoExchange;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.UUID;
 import users.*;
 
 public class EnquiriesArray {
     private static ArrayList<Enquiries> enquiries = new ArrayList<Enquiries>();
+    private static ArrayList<EnqReplies> replies = new ArrayList<EnqReplies>();
     private Scanner scanner = new Scanner(System.in);
 
-    public void createEnquiry(String senderName, String campName) {
-        System.out.printf("What would you like to enquire about %s\n", campName);
-        String enqString = scanner.nextLine();
-        Enquiries enquiry = new Enquiries(enqString, senderName, campName);
+    public void submitEnquiry(Enquiries enquiry) {
+        enquiry.setEnquiryID(generateID("enquiries"));
         enquiries.add(enquiry);
-        System.out.printf("The enquiry has been sent to the staff and committee members.\n");
     }
 
-    public void viewEnquiries(Users user) {
-        if (user instanceof Staff || user instanceof CampCommitteeMember) {
+    private String generateID(String Array) {
+        String uniqueString;
+        if (Array == "enquiries") {
+            do {
+                uniqueString = UUID.randomUUID().toString();
+            } while (findEnquiryIndex(uniqueString) != -1);
+        } else {
+            do {
+                uniqueString = UUID.randomUUID().toString();
+            } while (findRepliesIndex(uniqueString) != -1);
+        }
+        return uniqueString;
+    }
+
+    private int findEnquiryIndex(String EnquiryID) {
+        for (int i = 0; i < enquiries.size(); i++) {
+            if (enquiries.get(i).getEnquiryID() == EnquiryID) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private int findRepliesIndex(String replyID) {
+        for (int i = 0; i < enquiries.size(); i++) {
+            if (replies.get(i).getReplyID() == replyID) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public void viewEnquiries(Users user) throws Exception {
+        // Need a feature for Camp Committee members to view
+        if (user instanceof Staff) {
             System.out.println("All Submitted Enquiries:");
             for (int i = 0; i < enquiries.size(); i++) {
                 Enquiries enquiry = enquiries.get(i);
@@ -29,59 +61,36 @@ public class EnquiriesArray {
                     System.out.println(enquiry.getEnquiry());
                     System.out.println(); // Add a line break for better readability
                 }
-
-            }
-        } else if (user instanceof CampCommitteeMember) {
-            CampCommitteeMember member = (CampCommitteeMember) user;
-            System.out.println("All Submitted Enquiries:");
-            for (int i = 0; i < enquiries.size(); i++) {
-                Enquiries enquiry = enquiries.get(i);
-                if (enquiry.getSubmitStatus() && enquiry.getCampName() == member.getCampName()) {
-                    System.out.printf("=== EnquiryID %d ===\n", i);
-                    System.out.println("Camp Name: " + enquiry.getCampName());
-                    System.out.println("Sender: " + enquiry.getSender());
-                    System.out.println("------------------------------------------------------");
-                    System.out.println(enquiry.getEnquiry());
-                    System.out.println(); // Add a line break for better readability
-                }
-
             }
         } else { // Student trying to access their enquires
-            System.out.println("All unprocessed Enquiries:");
-            for (int i = 0; i < enquiries.size(); i++) {
-                Enquiries enquiry = enquiries.get(i);
-                if (!enquiry.getSubmitStatus() && enquiry.getSender() == user.getID()) {
-                    System.out.printf("=== EnquiryID %d ===\n", i);
-                    System.out.println("Camp Name: " + enquiry.getCampName());
-                    System.out.println("------------------------------------------------------");
-                    System.out.println(enquiry.getEnquiry());
-                    System.out.println(); // Add a line break for better readability
-                }
-
-            }
+            throw new Exception("You shall not pass");
         }
     }
 
-    public void modifyEnquiry(Users user) {
-        System.out.println("Key in the enquire id number: ");
-        int EnquiryID = scanner.nextInt();
-        Enquiries enquiry = enquiries.get(EnquiryID);
-        if (!enquiry.getSubmitStatus() && enquiry.getSender() == user.getID()) {
-            System.out.println("Camp Name: " + enquiry.getCampName());
-            System.out.println("Current Enquiry:" + enquiry.getEnquiry());
-            System.out.println("------------------------------------------------------");
-            System.out.println("What is your editted enquiry?");
-            String enqString = scanner.nextLine();
-            enquiry.modifyEnquiry(enqString);
-
-            // Replace the enquiry here!
-            enquiries.set(EnquiryID, enquiry);
-        } else {
-            System.out.printf("You do not have permission to edit this enquiry.\n");
-        }
-    }
-
+    // This is deprecated as it's not required in the Assignment Rubrics
     public void deleteEnquiry(Users user) throws Exception {
+        // Need a feature for Camp Committee members to delete
+        System.out.printf("EnquiryID: \n");
+        int idx = scanner.nextInt();
+
+        if (user instanceof Staff) {
+            enquiries.remove(idx);
+        } else {
+            throw new Exception("You shall not pass");
+        }
+    }
+
+    public void replyEnquiry(Users user) throws Exception {
+        System.out.printf("EnquiryID: \n");
+        int idx = scanner.nextInt();
+        Enquiries enquiry = enquiries.get(idx);
+
+        System.out.printf("What is your reply?\n");
+        String replyString = scanner.nextLine();
+
+        EnqReplies reply = new EnqReplies(replyString, enquiry.getEnquiryID(), enquiry.getSender(),
+                generateID("replies"));
+        replies.add(reply);
     }
 
 }

@@ -1,6 +1,7 @@
 package InfoExchange;
 
 public class Enquiries implements Comparable<Enquiries> {
+    private String enquiryID;
     private String enquiryString;
     private String sender;
     private String campName;
@@ -12,9 +13,9 @@ public class Enquiries implements Comparable<Enquiries> {
         this.campName = campName;
     }
 
-    public Enquiries() {
-        this(null, null, null);
-    }
+    // public Enquiries() {
+    // this(null, null, null);
+    // }
 
     public String getEnquiry() {
         return enquiryString;
@@ -38,6 +39,14 @@ public class Enquiries implements Comparable<Enquiries> {
 
     public boolean getSubmitStatus() {
         return submitted;
+    }
+
+    public void setEnquiryID(String id) {
+        this.enquiryID = id;
+    }
+
+    public String getEnquiryID() {
+        return enquiryID;
     }
 
     @Override

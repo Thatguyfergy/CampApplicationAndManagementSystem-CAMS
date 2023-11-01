@@ -2,11 +2,11 @@ package users;
 
 import camps.Camp;
 
-public class CampCommitteeMember extends Student {
+public class CampCommitteeMember {
     private String campName;
 
-    public CampCommitteeMember(String userID, String facultyInfo) {
-        super(userID, facultyInfo);
+    public CampCommitteeMember(String campName) {
+        this.campName = campName;
     }
 
     public String getCampName() {
