@@ -11,20 +11,25 @@ public class EnquiriesArray {
     private Scanner scanner = new Scanner(System.in);
 
     public void submitEnquiry(Enquiries enquiry) {
-        enquiry.setEnquiryID(generateID("enquiries"));
+        enquiry.setEnquiryID(generateID(enquiries));
         enquiries.add(enquiry);
     }
 
-    private String generateID(String Array) {
+    private String generateID(ArrayList<?> Array) {
         String uniqueString;
-        if (Array == "enquiries") {
-            do {
-                uniqueString = UUID.randomUUID().toString();
-            } while (findEnquiryIndex(uniqueString) != -1);
-        } else {
-            do {
-                uniqueString = UUID.randomUUID().toString();
-            } while (findRepliesIndex(uniqueString) != -1);
+
+        try {
+            if (Array.get(0) instanceof Enquiries) {
+                do {
+                    uniqueString = UUID.randomUUID().toString();
+                } while (findEnquiryIndex(uniqueString) != -1);
+            } else {
+                do {
+                    uniqueString = UUID.randomUUID().toString();
+                } while (findRepliesIndex(uniqueString) != -1);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            uniqueString = UUID.randomUUID().toString();
         }
         return uniqueString;
     }
@@ -89,7 +94,7 @@ public class EnquiriesArray {
         String replyString = scanner.nextLine();
 
         EnqReplies reply = new EnqReplies(replyString, enquiry.getEnquiryID(), enquiry.getSender(),
-                generateID("replies"), user.getID());
+                generateID(replies), user.getID());
         replies.add(reply);
     }
 
