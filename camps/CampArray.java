@@ -16,7 +16,7 @@ import users.Users;
 import users.Student;
 
 public class CampArray {
-    public static ArrayList<Camp> camps = new ArrayList<Camp>();
+    private static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
 
@@ -31,7 +31,9 @@ public class CampArray {
             // Committee Mem slots | Description | Staff-In-Charge | Attendees
             Camp camp = new Camp(Integer.parseInt(data[0]), data[1], new CAMDate(data[3]), data[4], data[5],
                     Integer.parseInt(data[6]), Integer.parseInt(data[8]), data[9], data[10]);
-
+            for (String gay:  data[2].split(";")) {
+                camp.addDate(new CAMDate(gay));
+            }
             camps.add(camp);
         }
         csvReader.close();
@@ -98,7 +100,8 @@ public class CampArray {
             Staff staffUser = (Staff) user;
 
             // Display all camps
-            System.out.println("All Camps:");
+            System.out.println("All Camps");
+            System.out.println("=====================================");
             for (Camp camp : camps) {
                 System.out.println(camp.toString()); // What does this do?
                 System.out.println(); // Add a line break for better readability
@@ -192,12 +195,14 @@ public class CampArray {
         // Display attendees
         System.out.println("Attendees:");
         for (String attendee : camp.getAttendees()) {
+            if(attendee != null)
             System.out.println("- " + attendee);
         }
-
+        
         // Display committee members
         System.out.println("Committee Members:");
         for (String committeeMember : camp.getCommitteeMembers()) {
+            if(committeeMember != null)
             System.out.println("- " + committeeMember);
         }
 

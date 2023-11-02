@@ -110,6 +110,6 @@ public class Camp {
     }
 
     public String toString(){
-        return campInfo.toString() + "\nAttendees: " + attendees + "\nCommittee Members: " + committeeMembers;
+        return campInfo.toString();
     }
 }

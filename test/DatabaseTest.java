@@ -1,16 +1,18 @@
 package test;
 
+import java.io.IOException;
+
 import camps.CampArray;
-import database.Database;
+import users.Staff;
 
 public class DatabaseTest {
-    public static void main(String[] args) {
-        CampArray campArray = Database.initialiseCampArray();
-        // System.out.println(campArray.camps.get(0).campInfo);
-        for (int i = 0; i < campArray.camps.size(); i++) {
-            System.out.println(campArray.camps.get(i));
-        }
-        // System.out.println(campArray.camps.get(0));
-
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        CampArray campArray = new CampArray("csvfiles\\camps.csv");
+        // for (int i = 0; i < CampArray.camps.size(); i++) {
+        //     System.out.println(CampArray.camps.get(i));
+        // }
+        Staff drloke = new Staff("lokeyman", "gayschool");
+        campArray.viewCamps(drloke);
+        
     }
 }
