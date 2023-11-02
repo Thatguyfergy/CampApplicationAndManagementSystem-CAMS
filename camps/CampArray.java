@@ -48,9 +48,6 @@ public class CampArray {
         }
     }
 
-    // Fugerson help - This one quite troublesome as there are different visibility
-    // requirements. Need to refer to Student and Staff.
-    // For Staff - I wan to filter by staffInCharge. Help me to do this.
 
     public void viewCamps(Users user) {
         // Display camps based on different visibility requirements
