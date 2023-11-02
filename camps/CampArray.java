@@ -31,7 +31,7 @@ public class CampArray {
             // Committee Mem slots | Description | Staff-In-Charge | Attendees
             Camp camp = new Camp(Integer.parseInt(data[0]), data[1], new CAMDate(data[3]), data[4], data[5],
                     Integer.parseInt(data[6]), Integer.parseInt(data[8]), data[9], data[10]);
-            for (String gay:  data[2].split(";")) {
+            for (String gay : data[2].split(";")) {
                 camp.addDate(new CAMDate(gay));
             }
             camps.add(camp);
@@ -46,8 +46,8 @@ public class CampArray {
             csvWriter.append(",");
             csvWriter.append(camp.getCampName());
             csvWriter.append(",");
-            csvWriter.append(camp.getDates());
-            csvWriter.append(",");
+            // csvWriter.append(camp.getDates());
+            // csvWriter.append(",");
             csvWriter.append(camp.getCampName());
             csvWriter.append(",");
             csvWriter.append(camp.getCampName());
@@ -169,31 +169,30 @@ public class CampArray {
             boolean hasRegisteredCamps = false; // Check if student has registered for camps
             for (Camp camp : camps) {
                 if (camp.getAttendees().contains(studentUser.getID())) {
-                System.out.println("Camp Name: " + camp.getCampName());
-                System.out.println("Camp Dates: " + camp.getDates());
-                System.out.println("Location: " + camp.getLocation());
-                System.out.println("Staff In Charge: " + camp.getStaffInCharge());
-                System.out.println("Your Role: Attendee");
-                System.out.println(); // Add a line break for better readability
-                hasRegisteredCamps = true;
-            }
+                    System.out.println("Camp Name: " + camp.getCampName());
+                    System.out.println("Camp Dates: " + camp.getDates());
+                    System.out.println("Location: " + camp.getLocation());
+                    System.out.println("Staff In Charge: " + camp.getStaffInCharge());
+                    System.out.println("Your Role: Attendee");
+                    System.out.println(); // Add a line break for better readability
+                    hasRegisteredCamps = true;
+                }
                 if (camp.getCommitteeMembers().contains(studentUser.getID())) {
-                System.out.println("Camp Name: " + camp.getCampName());
-                System.out.println("Camp Dates: " + camp.getDates());
-                System.out.println("Location: " + camp.getLocation());
-                System.out.println("Staff In Charge: " + camp.getStaffInCharge());
-                System.out.println("Your Role: Committee Member");
-                displayRegisteredStudents(camp);
-                System.out.println(); // Add a line break for better readability
-                hasRegisteredCamps = true;
+                    System.out.println("Camp Name: " + camp.getCampName());
+                    System.out.println("Camp Dates: " + camp.getDates());
+                    System.out.println("Location: " + camp.getLocation());
+                    System.out.println("Staff In Charge: " + camp.getStaffInCharge());
+                    System.out.println("Your Role: Committee Member");
+                    displayRegisteredStudents(camp);
+                    System.out.println(); // Add a line break for better readability
+                    hasRegisteredCamps = true;
+                }
             }
-        }
             if (!hasRegisteredCamps) {
-            System.out.println("None.");
+                System.out.println("None.");
             }
         }
-            }
-    
+    }
 
     // Helper method to calculate remaining slots for attendees
     private int getRemainingAttendeeSlots(Camp camp) {
@@ -220,15 +219,15 @@ public class CampArray {
         // Display attendees
         System.out.println("Attendees:");
         for (String attendee : camp.getAttendees()) {
-            if(attendee != null)
-            System.out.println("- " + attendee);
+            if (attendee != null)
+                System.out.println("- " + attendee);
         }
-        
+
         // Display committee members
         System.out.println("Committee Members:");
         for (String committeeMember : camp.getCommitteeMembers()) {
-            if(committeeMember != null)
-            System.out.println("- " + committeeMember);
+            if (committeeMember != null)
+                System.out.println("- " + committeeMember);
         }
 
         System.out.println(); // Add a line break for better readability
