@@ -14,8 +14,9 @@ public class Camp {
         // Create campInfo
         this.campInfo = new CampInfo(campID, campName, registrationClosingDate, campVisibility,
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
-                this.attendees = new ArrayList<>();
-                this.committeeMembers = new ArrayList<>();
+        this.attendees = new ArrayList<>();
+        this.committeeMembers = new ArrayList<>();
+    }
 
     // "Underloaded" Constructor for Staff
     public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
