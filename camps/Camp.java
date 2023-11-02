@@ -9,20 +9,15 @@ public class Camp {
     private List<String> attendees;
     private List<String> committeeMembers;
 
+
     public Camp(int campID, String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
         this.campInfo = new CampInfo(campID, campName, registrationClosingDate, campVisibility,
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
-        this.attendees = new ArrayList<>();
-        this.committeeMembers = new ArrayList<>();
-    }
+                this.attendees = new ArrayList<>();
+                this.committeeMembers = new ArrayList<>();
 
-    // "Underloaded" Constructor for Staff
-    public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
-            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
-        this(0, campName, registrationClosingDate, campVisibility, location, totalSlots, committeeMembersSlots,
-                campDescription, staffInCharge);
     }
 
     public int getCampID() {
@@ -100,21 +95,33 @@ public class Camp {
 
     public void registerStudent(String StudentID, boolean isCampCommittee, String campName) {
 
-        // Update the camp's lists based on the registration type
         if (isCampCommittee) {
             // Register as a camp committee member
-            committeeMembers.add(StudentID);
-        } else {
+            List<String> committeeMembers = getCommitteeMembers();
+    
+            // Check if the committeeMembers list is not already at the limit
+            if (committeeMembers.size() < 10) {
+                // Add the student to the committeeMembers list
+                committeeMembers.add(StudentID);
+            } 
+        } 
+        else {
             // Register as an attendee
+            List<String> attendees = getAttendees();
+    
+            // Add the student to the attendees list
             attendees.add(StudentID);
         }
-    }
-
+        }
+    
     public void addDate(CAMDate date) {
         campInfo.addDate(date);
     }
 
-    public String toString() {
+    public String toString(){
         return campInfo.toString();
     }
-}
+    }
+
+    
+
