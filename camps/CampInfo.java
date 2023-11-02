@@ -126,6 +126,10 @@ public class CampInfo {
         }
     }
 
+    public void addDate(CAMDate date) {
+        dates.add(date);
+    }
+
     // Get all camp info in a single string
     private String getCampInfo() {
         return "Camp Name: " + campName + "\n" + "Camp Dates: " + dates + "\n" + "Registration Closing Date: "
