@@ -16,7 +16,13 @@ public class Camp {
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
         this.attendees = new String[10]; // Adjust the size as needed
         this.committeeMembers = new String[10]; // Initialize committeeMembers array
+    }
 
+    // "Underloaded" Constructor for Staff
+    public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
+            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
+        this(0, campName, registrationClosingDate, campVisibility, location, totalSlots, committeeMembersSlots,
+                campDescription, staffInCharge);
     }
 
     public int getCampID() {
@@ -112,7 +118,7 @@ public class Camp {
         campInfo.addDate(date);
     }
 
-    public String toString(){
+    public String toString() {
         return campInfo.toString();
     }
 }
