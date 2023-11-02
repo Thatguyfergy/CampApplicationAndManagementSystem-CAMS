@@ -88,21 +88,19 @@ public class Camp {
         }
     }
     }
-    public void registerStudent(Student student, boolean isCampCommittee) {
+    public void registerStudent(String StudentID, boolean isCampCommittee, String campName) {
     
-    student.registerCamp(getCampName(), isCampCommittee);
-
     // Update the camp's lists based on the registration type
     if (isCampCommittee) {
         // Register as a camp committee member
         String[] committeeMembers = getCommitteeMembers();
         // Add the student to the committeeMembers array
-        committeeMembers[committeeMembers.length] = student.getID();
+        committeeMembers[committeeMembers.length] = StudentID;
     } else {
         // Register as an attendee
         String[] attendees = getAttendees();
         // Add the student to the attendees array
-        attendees[attendees.length] = student.getID();
+        attendees[attendees.length] = StudentID;
     }
 }
 
