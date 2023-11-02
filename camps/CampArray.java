@@ -3,6 +3,14 @@ package camps;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import camdate.CAMDate;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import users.Staff;
 import users.Users;
 import users.Student;
@@ -10,6 +18,24 @@ import users.Student;
 public class CampArray {
     public static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);
+    private static String campsFile;
+
+    public CampArray(String campsFile) throws NumberFormatException, IOException {
+        CampArray.campsFile = campsFile;
+        BufferedReader csvReader = new BufferedReader(new FileReader(campsFile));
+        String row;
+        while ((row = csvReader.readLine()) != null) {
+            String[] data = row.split(",");
+            // CSV Format: ID | Name,Dates | Closing Date | Visibility |
+            // Location | Total Slots | Committee Members |
+            // Committee Mem slots | Description | Staff-In-Charge | Attendees
+            Camp camp = new Camp(Integer.parseInt(data[0]), data[1], new CAMDate(data[3]), data[4], data[5],
+                    Integer.parseInt(data[6]), Integer.parseInt(data[8]), data[9], data[10]);
+
+            camps.add(camp);
+        }
+        csvReader.close();
+    }
 
     public void createCamp(Camp newCamp) {
         camps.add(newCamp);
@@ -48,7 +74,6 @@ public class CampArray {
         }
     }
 
-
     public void viewCamps() {
         // Display camps based on different visibility requirements
         // For Staff - No filters since every staff can view every camp
@@ -63,7 +88,6 @@ public class CampArray {
             System.out.println(); // Add a line break for better readability
         }
     }
-
 
     public void viewCamps(Users user) {
         // Display camps based on different visibility requirements

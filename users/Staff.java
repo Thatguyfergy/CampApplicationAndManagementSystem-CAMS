@@ -9,9 +9,9 @@ public class Staff extends Users {
 
     public void createCamp(CampArray campArray) {
         // Create a Camp object using CampInfo
-        Camp obj = new Camp();
+        // Camp obj = new Camp();
 
-        campArray.createCamp(obj);
+        // campArray.createCamp(obj);
     }
 
     public void editCamp(CampArray campArray, String campName) {

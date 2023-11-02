@@ -10,15 +10,15 @@ import InfoExchange.EnquiriesArray;
 
 public class CAMSapp {
     public static void main(String[] args) throws IOException {
-        CAMDisplay cams = new CAMDisplay();
-        cams.startScreen();
+        // CAMDisplay cams = new CAMDisplay();
+        // cams.startScreen();
         EnquiriesArray enquiriesArray = new EnquiriesArray("csvfiles\\enquiries.csv", "csvfiles\\replies.csv");
 
         Student yinghaoisgay = new Student("YH", "Gaysch");
         Staff drloke = new Staff("lokeyman", "gayschool");
 
-        // enquiriesArray.submitEnquiry(new Enquiries("Ying hao is gay",
-        // yinghaoisgay.getID(), "gay camp"));
+        enquiriesArray.submitEnquiry(new Enquiries("Ying hao is gay",
+        yinghaoisgay.getID(), "gay camp"));
 
         try {
             enquiriesArray.viewEnquiries(drloke);
