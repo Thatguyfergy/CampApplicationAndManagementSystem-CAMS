@@ -19,6 +19,10 @@ public class Camp {
 
     }
 
+    public int getCampID() {
+        return campInfo.getCampID();
+    }
+
     public String getCampName() {
         return campInfo.getCampName();
     }
@@ -103,13 +107,12 @@ public class Camp {
             attendees[attendees.length] = StudentID;
         }
     }
-    
 
-    public void addDate(CAMDate date){
+    public void addDate(CAMDate date) {
         campInfo.addDate(date);
     }
 
-    public String toString(){
+    public String toString() {
         return campInfo.toString() + "\nAttendees: " + attendees + "\nCommittee Members: " + committeeMembers;
     }
 }
