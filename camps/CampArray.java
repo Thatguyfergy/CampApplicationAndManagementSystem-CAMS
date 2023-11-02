@@ -8,7 +8,7 @@ import users.Users;
 import users.Student;
 
 public class CampArray {
-    private ArrayList<Camp> camps = new ArrayList<Camp>();
+    private static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);
 
     public void createCamp(Camp newCamp) {
@@ -59,16 +59,16 @@ public class CampArray {
 
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
-    
+
             // Display all camps
             System.out.println("All Camps:");
             for (Camp camp : camps) {
-                System.out.println(camp.toString());
+                System.out.println(camp.toString()); // What does this do?
                 System.out.println(); // Add a line break for better readability
                 displayRegisteredStudents(camp);
                 System.out.println(); // Add a line break for better readability
             }
-    
+
             // Display camps created by the staff if they are the staffInCharge
             System.out.println("\nYour Created Camps:");
             for (Camp camp : camps) {
@@ -77,19 +77,20 @@ public class CampArray {
                     System.out.println(); // Add a line break for better readability
                     displayRegisteredStudents(camp);
                     System.out.println(); // Add a line break for better readability
-                }
-                else {
+                } else {
                     System.out.println("None.");
                 }
             }
         } else if (user instanceof Student) {
             Student studentUser = (Student) user;
-    
-            // Display only camps open to the student's user group with visibility toggled "on"
+
+            // Display only camps open to the student's user group with visibility toggled
+            // "on"
             // and display remaining slots for each camp open to the student
             System.out.println("Open Camps for Student:");
             for (Camp camp : camps) {
-                if (camp.toggleVisibility().equalsIgnoreCase("on") && studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility())){
+                if (camp.toggleVisibility().equalsIgnoreCase("on")
+                        && studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility())) {
                     System.out.println("Camp Name: " + camp.getCampName());
                     System.out.println("Remaining Slots for Camp Committee: " + getRemainingCommitteeSlots(camp));
                     System.out.println("Remaining Slots for Attendees: " + getRemainingAttendeeSlots(camp));
@@ -98,9 +99,9 @@ public class CampArray {
                     System.out.println("Location: " + camp.getLocation());
                     System.out.println("Staff In Charge: " + camp.getStaffInCharge());
                     System.out.println(); // Add a line break for better readability
-                    }
+                }
             }
-    
+
             // Display camps the student has registered for and their roles
             System.out.println("\nYour Registered Camps:");
             for (Camp camp : camps) {
@@ -127,42 +128,42 @@ public class CampArray {
                 }
             }
         }
-}
-
-// Helper method to calculate remaining slots for attendees
-private int getRemainingAttendeeSlots(Camp camp) {
-    int totalSlots = camp.getTotalSlots();
-    int occupiedAttendeeSlots = camp.getAttendees().length;
-    int occupiedCommitteeSlots = camp.getCommitteeMembers().length;
-    int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
-    
-    return totalSlots - totalOccupiedSlots;
-}
-
-// Helper method to calculate remaining slots for committee members
-private int getRemainingCommitteeSlots(Camp camp) {
-    int committeeMembersSlots = camp.getCommitteeMembersSlots();
-    int occupiedCommitteeSlots = camp.getCommitteeMembers().length;
-
-    return committeeMembersSlots - occupiedCommitteeSlots;
-}
-
-// Helper method to display the list of registered students for a camp
-private void displayRegisteredStudents(Camp camp) {
-    System.out.println("Registered Students:");
-
-    // Display attendees
-    System.out.println("Attendees:");
-    for (String attendee : camp.getAttendees()) {
-        System.out.println("- " + attendee);
     }
 
-    // Display committee members
-    System.out.println("Committee Members:");
-    for (String committeeMember : camp.getCommitteeMembers()) {
-        System.out.println("- " + committeeMember);
+    // Helper method to calculate remaining slots for attendees
+    private int getRemainingAttendeeSlots(Camp camp) {
+        int totalSlots = camp.getTotalSlots();
+        int occupiedAttendeeSlots = camp.getAttendees().length;
+        int occupiedCommitteeSlots = camp.getCommitteeMembers().length;
+        int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
+
+        return totalSlots - totalOccupiedSlots;
     }
 
-    System.out.println(); // Add a line break for better readability
-}
+    // Helper method to calculate remaining slots for committee members
+    private int getRemainingCommitteeSlots(Camp camp) {
+        int committeeMembersSlots = camp.getCommitteeMembersSlots();
+        int occupiedCommitteeSlots = camp.getCommitteeMembers().length;
+
+        return committeeMembersSlots - occupiedCommitteeSlots;
+    }
+
+    // Helper method to display the list of registered students for a camp
+    private void displayRegisteredStudents(Camp camp) {
+        System.out.println("Registered Students:");
+
+        // Display attendees
+        System.out.println("Attendees:");
+        for (String attendee : camp.getAttendees()) {
+            System.out.println("- " + attendee);
+        }
+
+        // Display committee members
+        System.out.println("Committee Members:");
+        for (String committeeMember : camp.getCommitteeMembers()) {
+            System.out.println("- " + committeeMember);
+        }
+
+        System.out.println(); // Add a line break for better readability
+    }
 }
