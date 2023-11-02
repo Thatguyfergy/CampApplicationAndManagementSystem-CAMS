@@ -104,7 +104,8 @@ public class Camp {
            attendees.add(StudentID);
         }
         }
-        public void addDate(CAMDate date) {
+    
+    public void addDate(CAMDate date) {
         campInfo.addDate(date);
     }
 
