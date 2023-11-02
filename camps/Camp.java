@@ -1,22 +1,21 @@
 package camps;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import camdate.CAMDate;
 
 public class Camp {
     private CampInfo campInfo;
-    private String[] attendees;
-    private String[] committeeMembers;
+    private List<String> attendees;
+    private List<String> committeeMembers;
 
     public Camp(int campID, String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
         this.campInfo = new CampInfo(campID, campName, registrationClosingDate, campVisibility,
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
-        this.attendees = new String[10]; // Adjust the size as needed
-        this.committeeMembers = new String[10]; // Initialize committeeMembers array
-    }
+                this.attendees = new ArrayList<>();
+                this.committeeMembers = new ArrayList<>();
 
     // "Underloaded" Constructor for Staff
     public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
@@ -70,18 +69,18 @@ public class Camp {
     }
 
     // Method to get the list of attendees
-    public String[] getAttendees() {
+    public List<String> getAttendees() {
         return attendees;
     }
 
     // Method to get the list of Committee Members
-    public String[] getCommitteeMembers() {
+    public List<String> getCommitteeMembers() {
         return committeeMembers;
     }
 
     public String toggleVisibility() {
         int totalSlots = campInfo.getTotalSlots();
-        int occupiedSlots = getAttendees().length + getCommitteeMembers().length;
+        int occupiedSlots = getAttendees().size() + getCommitteeMembers().size();
         CAMDate currentDate = new CAMDate();
         if (currentDate.compareTo(campInfo.getRegistrationClosingDate()) > 0) {
             // Past registration closing date, set visibility to "off"
@@ -103,14 +102,10 @@ public class Camp {
         // Update the camp's lists based on the registration type
         if (isCampCommittee) {
             // Register as a camp committee member
-            String[] committeeMembers = getCommitteeMembers();
-            // Add the student to the committeeMembers array
-            committeeMembers[committeeMembers.length] = StudentID;
+            committeeMembers.add(StudentID);
         } else {
             // Register as an attendee
-            String[] attendees = getAttendees();
-            // Add the student to the attendees array
-            attendees[attendees.length] = StudentID;
+            attendees.add(StudentID);
         }
     }
 
