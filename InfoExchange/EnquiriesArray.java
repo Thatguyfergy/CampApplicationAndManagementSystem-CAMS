@@ -130,6 +130,7 @@ public class EnquiriesArray {
         // Need a feature for Camp Committee members to delete
         System.out.printf("EnquiryID: \n");
         int idx = scanner.nextInt();
+        scanner.nextLine(); // Basically flush in C
         Enquiries enquiry = enquiries.get(idx);
 
         System.out.printf("What is your reply?\n");
