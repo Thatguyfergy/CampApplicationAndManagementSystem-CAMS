@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import camdate.CAMDate;
 
 public class CampInfo {
+    private int campID;
     private String campName;
     private ArrayList<CAMDate> dates;
     private CAMDate registrationClosingDate;
@@ -18,6 +19,7 @@ public class CampInfo {
     // Default constructor - Set all to empty string and create comitteeMembers
     // array
     public CampInfo() {
+        this.campID = 0;
         this.campName = "";
         this.dates = new ArrayList<CAMDate>();
         this.campVisibility = "";
@@ -29,8 +31,10 @@ public class CampInfo {
     }
 
     // Constructor with all fields & create comitteeMembers array
-    public CampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
+    public CampInfo(int campID, String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
+        
+        this.campID = campID;
         this.campName = campName;
         this.dates = new ArrayList<CAMDate>();
         this.registrationClosingDate = registrationClosingDate;
@@ -43,6 +47,10 @@ public class CampInfo {
     }
 
     // Getter methods for all individual fields
+    public int getCampID() {
+        return campID;
+    }
+
     public String getCampName() {
         return campName;
     }
@@ -80,6 +88,11 @@ public class CampInfo {
     }
 
     // Setter methods for all individual fields
+    public void setCampID(int campID) {
+        this.campID = campID;
+    }
+
+
     public void setCampName(String campName) {
         this.campName = campName;
     }

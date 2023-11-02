@@ -9,9 +9,11 @@ public class Camp {
     private String[] attendees;
     private String[] committeeMembers;
 
-    public Camp() {
+    public Camp(int campID, String campName, CAMDate registrationClosingDate, String campVisibility,
+            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
-        this.campInfo = new CampInfo();
+        this.campInfo = new CampInfo(campID, campName, registrationClosingDate, campVisibility,
+                location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
         this.attendees = new String[10]; // Adjust the size as needed
         this.committeeMembers = new String[10]; // Initialize committeeMembers array
 
@@ -53,7 +55,6 @@ public class Camp {
         return campInfo.getTotalSlots();
     }
 
-
     public void setCampDescription(String newDescription) {
         campInfo.setCampDescription(newDescription);
     }
@@ -75,32 +76,40 @@ public class Camp {
         if (currentDate.compareTo(campInfo.getRegistrationClosingDate()) > 0) {
             // Past registration closing date, set visibility to "off"
             return "off";
-        } 
-        else {
-
-        if (occupiedSlots < totalSlots) {
-            // There are available slots, so set visibility to "on"
-            return "on";
         } else {
-            // All slots are taken, set visibility to "off"
-            return "off";
+
+            if (occupiedSlots < totalSlots) {
+                // There are available slots, so set visibility to "on"
+                return "on";
+            } else {
+                // All slots are taken, set visibility to "off"
+                return "off";
+            }
         }
     }
-    }
-    public void registerStudent(String StudentID, boolean isCampCommittee, String campName) {
-    
-    // Update the camp's lists based on the registration type
-    if (isCampCommittee) {
-        // Register as a camp committee member
-        String[] committeeMembers = getCommitteeMembers();
-        // Add the student to the committeeMembers array
-        committeeMembers[committeeMembers.length] = StudentID;
-    } else {
-        // Register as an attendee
-        String[] attendees = getAttendees();
-        // Add the student to the attendees array
-        attendees[attendees.length] = StudentID;
-    }
-}
 
+    public void registerStudent(String StudentID, boolean isCampCommittee, String campName) {
+
+        // Update the camp's lists based on the registration type
+        if (isCampCommittee) {
+            // Register as a camp committee member
+            String[] committeeMembers = getCommitteeMembers();
+            // Add the student to the committeeMembers array
+            committeeMembers[committeeMembers.length] = StudentID;
+        } else {
+            // Register as an attendee
+            String[] attendees = getAttendees();
+            // Add the student to the attendees array
+            attendees[attendees.length] = StudentID;
+        }
+    }
+    
+
+    public void addDate(CAMDate date){
+        campInfo.addDate(date);
+    }
+
+    public String toString(){
+        return campInfo.toString() + "\nAttendees: " + attendees + "\nCommittee Members: " + committeeMembers;
+    }
 }
