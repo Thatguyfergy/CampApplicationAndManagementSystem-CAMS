@@ -61,7 +61,39 @@ public class CampArray {
 
     }
 
-    public void createCamp(Camp newCamp) {
+    public void createCamp(String staffinCharge) {
+        System.out.println("Camp Name:");
+        String campName = scanner.nextLine();
+
+        System.out.println("Registration closing date (dd/mm/yyyy):");
+        CAMDate registrationClosingDate = new CAMDate(scanner.nextLine());
+
+        System.out.println("Camp start date (dd/mm/yyyy):");
+        CAMDate startDate = new CAMDate(scanner.nextLine());
+
+        System.out.println("Camp ennd date (dd/mm/yyyy):");
+        CAMDate endDate = new CAMDate(scanner.nextLine());
+
+        System.out.println("Camp Visibility (Y/N):");
+        String campVisibility = scanner.nextLine().toUpperCase();
+
+        System.out.println("Location:");
+        String location = scanner.nextLine().toUpperCase();
+
+        System.out.println("Total Slots:");
+        int totalSlots = scanner.nextInt();
+        scanner.nextLine(); // Flush
+
+        System.out.println("Committee Memebers Slots:");
+        int committeeMembersSlots = scanner.nextInt();
+        scanner.nextLine(); // Flush;
+
+        System.out.println("Camp Description:");
+        String campDescription = scanner.nextLine();
+
+        Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
+                committeeMembersSlots, campDescription, staffinCharge);
+        newCamp.addDate(startDate, endDate);
         camps.add(newCamp);
     }
 
@@ -124,8 +156,6 @@ public class CampArray {
                     System.out.println(); // Add a line break for better readability
                     displayRegisteredStudents(camp);
                     System.out.println(); // Add a line break for better readability
-                } else {
-                    System.out.println("None.");
                 }
             }
         } else if (user instanceof Student) {

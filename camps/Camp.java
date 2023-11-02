@@ -124,6 +124,10 @@ public class Camp {
         campInfo.addDate(date);
     }
 
+    public void addDate(CAMDate startDate, CAMDate endDate) {
+        campInfo.addDate(startDate, endDate);
+    }
+
     public String toString() {
         return campInfo.toString();
     }
