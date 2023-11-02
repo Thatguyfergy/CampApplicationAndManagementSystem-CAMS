@@ -98,20 +98,6 @@ public class CampArray {
         }
     }
 
-    public void viewCamps() {
-        // Display camps based on different visibility requirements
-        // For Staff - No filters since every staff can view every camp
-        // For Students - filter by committeeMembers
-
-        // Display all camps
-        System.out.println("All Camps:");
-        for (Camp camp : camps) {
-            System.out.println(camp.toString()); // What does this do?
-            System.out.println(); // Add a line break for better readability
-            displayRegisteredStudents(camp);
-            System.out.println(); // Add a line break for better readability
-        }
-    }
 
     public void viewCamps(Users user) {
         // Display camps based on different visibility requirements
