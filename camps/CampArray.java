@@ -82,8 +82,8 @@ public class CampArray {
                 }
             }
         } else if (user instanceof Student) {
-            Student studentUser = (Student) user;
 
+            Student studentUser = (Student) user;
             // Display only camps open to the student's user group with visibility toggled
             // "on"
             // and display remaining slots for each camp open to the student
