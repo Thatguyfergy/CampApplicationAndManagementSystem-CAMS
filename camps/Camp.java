@@ -3,7 +3,6 @@ package camps;
 import java.util.ArrayList;
 
 import camdate.CAMDate;
-import users.Student;
 
 public class Camp {
     private CampInfo campInfo;
