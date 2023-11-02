@@ -39,6 +39,28 @@ public class CampArray {
         csvReader.close();
     }
 
+    private void updateFile() throws Exception {
+        FileWriter csvWriter = new FileWriter(campsFile);
+        for (Camp camp : camps) {
+            csvWriter.append(String.valueOf(camp.getCampID()));
+            csvWriter.append(",");
+            csvWriter.append(camp.getCampName());
+            csvWriter.append(",");
+            csvWriter.append(camp.getDates());
+            csvWriter.append(",");
+            csvWriter.append(camp.getCampName());
+            csvWriter.append(",");
+            csvWriter.append(camp.getCampName());
+            csvWriter.append(",");
+            csvWriter.append(camp.getCampName());
+            csvWriter.append("\n");
+        }
+
+        csvWriter.flush();
+        csvWriter.close();
+
+    }
+
     public void createCamp(Camp newCamp) {
         camps.add(newCamp);
     }
