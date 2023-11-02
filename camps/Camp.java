@@ -95,13 +95,22 @@ public class Camp {
 
     public void registerStudent(String StudentID, boolean isCampCommittee, String campName) {
 
-        // Update the camp's lists based on the registration type
         if (isCampCommittee) {
             // Register as a camp committee member
-            committeeMembers.add(StudentID);
-        } else {
-           // Register as an attendee
-           attendees.add(StudentID);
+            List<String> committeeMembers = getCommitteeMembers();
+    
+            // Check if the committeeMembers list is not already at the limit
+            if (committeeMembers.size() < 10) {
+                // Add the student to the committeeMembers list
+                committeeMembers.add(StudentID);
+            } 
+        } 
+        else {
+            // Register as an attendee
+            List<String> attendees = getAttendees();
+    
+            // Add the student to the attendees list
+            attendees.add(StudentID);
         }
         }
     
