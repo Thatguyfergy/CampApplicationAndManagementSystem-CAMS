@@ -1,30 +1,55 @@
 package users;
 
+import java.util.Scanner;
+
+import camdate.CAMDate;
 import camps.*;
 
 public class Staff extends Users {
+    private Scanner scanner = new Scanner(System.in);
+
     public Staff(String userID, String facultyInfo) {
         super(userID, facultyInfo);
     }
 
     public void createCamp(CampArray campArray) {
         // Create a Camp object using CampInfo
-        // Camp obj = new Camp();
+        System.out.println("Camp Name:");
+        String campName = scanner.nextLine();
+        System.out.println("Registration closing date (dd/mm/yyyy):");
+        CAMDate registrationClosingDate = new CAMDate(scanner.nextLine());
+        System.out.println("Camp Visibility (Y/N):");
+        String campVisibility = scanner.nextLine().toUpperCase();
+        System.out.println("Location:");
+        String location = scanner.nextLine().toUpperCase();
+        System.out.println("Total Slots:");
+        int totalSlots = scanner.nextInt();
+        scanner.nextLine(); // Flush
+        System.out.println("Committee Memebers Slots:");
+        int committeeMembersSlots = scanner.nextInt();
+        scanner.nextLine(); // Flush;
+        System.out.println("Camp Description:");
+        String campDescription = scanner.nextLine();
+        String staffInCharge = this.getID();
 
-        // campArray.createCamp(obj);
+        campArray.createCamp(new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
+                committeeMembersSlots, campDescription, staffInCharge));
     }
 
-    public void editCamp(CampArray campArray, String campName) {
+    public void editCamp(CampArray campArray) {
+        System.out.println("Camp Name:");
+        String campName = scanner.nextLine();
         campArray.editCamp(campName);
     }
 
-    public void deleteCamp(CampArray campArray, String campName) {
+    public void deleteCamp(CampArray campArray) {
+        System.out.println("Camp Name:");
+        String campName = scanner.nextLine();
         campArray.deleteCamp(campName);
     }
 
-    // Edit next time
     public void viewCamp(CampArray campArray) {
-        campArray.viewCamps(null);
+        campArray.viewCamps(this);
     }
 
     public int compareTo(Users o) {
