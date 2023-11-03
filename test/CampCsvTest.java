@@ -9,9 +9,10 @@ public class CampCsvTest {
         CampArray camps = new CampArray("csvfiles\\camps.csv");
         //camps.createCamp("Loke");
         Staff staff = new Staff("Loke", "SCSE");
-        camps.viewCamps(staff);
-        camps.deleteCamp("qwewqe");
-        camps.viewCamps(staff);
+        camps.sortCamps("campName");
+        // camps.viewCamps(staff);
+        // camps.sortCamps( "campName");
+        // camps.viewCamps(staff);
 
     }
 }

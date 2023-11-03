@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import camdate.CAMDate;
 
-public class Camp {
+public class Camp{
     private CampInfo campInfo;
     private List<String> attendees;
     private List<String> committeeMembers;
@@ -130,5 +130,27 @@ public class Camp {
 
     public String toString() {
         return campInfo.toString();
+    }
+
+    public int compareTo(Camp other, String sortBy) {
+        if (sortBy.equals("campName")) {
+            return this.getCampName().compareTo(other.getCampName());
+        } else if (sortBy.equals("registrationClosingDate")) {
+            return this.getRegistrationClosingDate().compareTo(other.getRegistrationClosingDate());
+        } else if (sortBy.equals("campVisibility")) {
+            return this.getCampVisibility().compareTo(other.getCampVisibility());
+        } else if (sortBy.equals("location")) {
+            return this.getLocation().compareTo(other.getLocation());
+        } else if (sortBy.equals("totalSlots")) {
+            return -(this.getTotalSlots() - other.getTotalSlots());
+        } else if (sortBy.equals("committeeMembersSlots")) {
+            return this.getCommitteeMembersSlots() - other.getCommitteeMembersSlots();
+        } else if (sortBy.equals("campDescription")) {
+            return this.getCampDescription().compareTo(other.getCampDescription());
+        } else if (sortBy.equals("staffInCharge")) {
+            return this.getStaffInCharge().compareTo(other.getStaffInCharge());
+        } else {
+            return 0;
+        }
     }
 }

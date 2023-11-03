@@ -19,8 +19,10 @@ public class CampArray {
     private static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
+    private String sortBy;
 
     public CampArray(String campsFile) throws NumberFormatException, IOException {
+        sortBy = "campName";
         CampArray.campsFile = campsFile;
         try (BufferedReader csvReader = new BufferedReader(new FileReader(campsFile))) {
             String row;
@@ -37,6 +39,25 @@ public class CampArray {
                 camps.add(camp);
             }
         }
+    }
+
+    public void sortCamps(String sortBy) throws Exception {
+        this.sortBy = sortBy;
+        insertionSort(camps, sortBy);
+    }
+
+    private void insertionSort(ArrayList<Camp> camps, String sortBy) throws Exception{
+        for (int i = 1; i < camps.size(); i++) {
+            Camp key = camps.get(i);
+            int j = i - 1;
+            while (j >= 0 && camps.get(j).compareTo(key, sortBy) > 0) {
+                camps.set(j + 1, camps.get(j));
+                j--;
+            }
+            camps.set(j + 1, key);
+        }
+
+        updateFile(camps);
     }
 
     // update file with new campArray
@@ -92,7 +113,7 @@ public class CampArray {
         System.out.println("Camp start date (dd/mm/yyyy):");
         CAMDate startDate = new CAMDate(scanner.nextLine());
 
-        System.out.println("Camp ennd date (dd/mm/yyyy):");
+        System.out.println("Camp end date (dd/mm/yyyy):");
         CAMDate endDate = new CAMDate(scanner.nextLine());
 
         System.out.println("Camp Visibility (Y/N):");
@@ -271,5 +292,9 @@ public class CampArray {
         }
 
         System.out.println(); // Add a line break for better readability
+    }
+
+    public void sortCamps() {
+        
     }
 }
