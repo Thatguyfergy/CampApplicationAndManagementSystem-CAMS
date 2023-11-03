@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
-    private UserDatabase UserDB = new UserDatabase("csvfiles\\usersStudent.csv", "csvfiles\\usersStaff.csv");
+    private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv", "csvfiles\\usersStaff.csv");
     private Users user;
 
     public void startScreen() {

@@ -6,14 +6,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class UsersArray {
+public class UsersDatabase {
     private static ArrayList<Users> users = new ArrayList<Users>();
     private static String studentFile = "csvfiles\\students.csv";
     private static String staffFile = "csvfiles\\staff.csv";
 
-    public UsersArray(String studentFile, String staffFile) {
-        UsersArray.studentFile = studentFile;
-        UsersArray.staffFile = staffFile;
+    public UsersDatabase(String studentFile, String staffFile) {
+        UsersDatabase.studentFile = studentFile;
+        UsersDatabase.staffFile = staffFile;
+
         try (BufferedReader csvReader = new BufferedReader(new FileReader(studentFile))) {
             String row;
             while ((row = csvReader.readLine()) != null) {
@@ -83,4 +84,25 @@ public class UsersArray {
     private String extractUserIDString(String NTUEmail) {
         return NTUEmail.split("@")[0];
     }
+
+    public Users login(String username, String password) {
+        for (Users user : users) {
+            if (user.getID() == username) {
+                if (user.checkPassword(password)) {
+                    return user;
+                } else {
+                    // Wrong password
+                    return null;
+                }
+            }
+        }
+        // User cannot be found
+        return null;
+    }
+
+    public void changePassword(Users user, String newpassword) {
+        user.setPassword(newpassword);
+        updateFiles();
+    }
+
 }

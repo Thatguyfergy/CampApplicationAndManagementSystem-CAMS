@@ -3,7 +3,7 @@ package test;
 import camps.Camp;
 import camps.CampArray;
 import users.Staff;
-import users.UsersArray;
+import users.UsersDatabase;
 
 public class CampCsvTest {
     public static void main(String[] args) throws Exception {
@@ -15,6 +15,6 @@ public class CampCsvTest {
         // camps.sortCamps( "campName");
         // camps.viewCamps(staff);
 
-        UsersArray users = new UsersArray("");
+        UsersDatabase users = new UsersDatabase("");
     }
 }
