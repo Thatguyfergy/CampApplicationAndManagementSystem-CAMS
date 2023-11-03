@@ -46,6 +46,7 @@ public class CampArray {
             csvWriter.append(",");
             csvWriter.append(camp.getCampName());
             csvWriter.append(",");
+            //TODO
             csvWriter.append(camp.getDates());
             csvWriter.append(",");
             csvWriter.append(camp.getCampName());
