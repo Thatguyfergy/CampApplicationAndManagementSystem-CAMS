@@ -24,10 +24,6 @@ public class Student extends Users {
         this(FirstName, userID, facultyInfo);
     }
 
-    public Student(String userID, String facultyInfo, String password) {
-        super(userID, facultyInfo, password);
-    }
-
     /*
      * this method can return the list of camps that student is a camp committee
      * member of if student class keeps an array of camps that student is registered

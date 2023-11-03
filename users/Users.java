@@ -12,16 +12,11 @@ public abstract class Users implements Comparable<Users> {
         this.facultyInfo = facultyInfo;
     }
 
-    public Users(String userID, String password, String facultyInfo) {
-        this.userID = userID;
-        this.password = password;
-        this.facultyInfo = facultyInfo;
-    }
-
     protected void setPassword(String newPassword) {
         this.password = newPassword;
     }
 
+    // Don't make it public or else it will violate OOP principle
     protected String getPassword() {
         return this.password;
     }
@@ -40,9 +35,5 @@ public abstract class Users implements Comparable<Users> {
 
     public String getFacultyInfo() {
         return facultyInfo;
-    }
-
-    public String getPassword() {
-        return password;
     }
 }

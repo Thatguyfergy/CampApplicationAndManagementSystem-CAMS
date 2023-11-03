@@ -11,11 +11,7 @@ public class Staff extends Users {
         super(FirstName, userID, facultyInfo);
     }
 
-    public Staff(String userID, String facultyInfo, String password) {
-        super(userID, facultyInfo, password);
-    }
-
-    public void createCamp(CampArray campArray) throws Exception  {
+    public void createCamp(CampArray campArray) {
         // Create a Camp object using CampInfo
         String staffInCharge = this.getID();
         try {
