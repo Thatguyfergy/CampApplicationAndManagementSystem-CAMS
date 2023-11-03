@@ -294,7 +294,5 @@ public class CampArray {
         System.out.println(); // Add a line break for better readability
     }
 
-    public void sortCamps() {
-        
-    }
+   
 }
