@@ -148,7 +148,7 @@ public class CAMDisplay {
                     viewCampsScreen(staff);
                     break;
                 case 2:
-                    // Add the code for option 2 here
+                    viewCampDetailsScreen(staff);
                     break;
                 case 3:
                     // Add the code for option 3 here
@@ -229,6 +229,25 @@ public class CAMDisplay {
 
             campArray.viewCamps(user);
 
+            System.out.print("Press Enter to return to the main menu...");
+            sc.nextLine(); // Wait for Enter key
+            break; // Exit the viewCampsScreen and return to the main menu
+        }
+    }
+
+    private void viewCampDetailsScreen(Users user) {
+        while (true) {
+            System.out.print("\033[H\033[2J"); // Clear the entire screen
+
+            System.out.print(
+                    "╔═══════════════════════════════════════════════════════════════╗\n" +
+                            "║ Camp Application & Management System - View Camp Details      ║\n" +
+                            "╚═══════════════════════════════════════════════════════════════╝\r\n");
+
+            String buffer;
+            System.out.print("Enter the name of Camp to view details: ");
+            buffer = sc.nextLine();
+            campArray.viewCampDetails(buffer);
             System.out.print("Press Enter to return to the main menu...");
             sc.nextLine(); // Wait for Enter key
             break; // Exit the viewCampsScreen and return to the main menu

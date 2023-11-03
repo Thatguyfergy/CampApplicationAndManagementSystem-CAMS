@@ -275,8 +275,7 @@ public class CampArray {
                 System.out.println("Camp Description: " + camp.getCampDescription());
                 System.out.println("Staff In Charge: " + camp.getStaffInCharge());
                 System.out.println("Camp Visibility: " + camp.getCampVisibility());
-                System.out.println("Committee Members: " + camp.getCommitteeMembers());
-                System.out.println("Attendees: " + camp.getAttendees());
+                displayRegisteredStudents(camp);
                 System.out.println(); // Add a line break for better readability
             }
         }
