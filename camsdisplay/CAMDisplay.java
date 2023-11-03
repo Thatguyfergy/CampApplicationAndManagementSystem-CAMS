@@ -151,7 +151,7 @@ public class CAMDisplay {
                     viewCampDetailsScreen(staff);
                     break;
                 case 3:
-                    // Add the code for option 3 here
+                    createCampScreen(staff);
                     break;
                 case 4:
                     // Add the code for option 4 here
@@ -184,6 +184,22 @@ public class CAMDisplay {
                     System.out.println("Invalid choice!");
                     break;
             }
+        }
+    }
+
+    private void createCampScreen (Staff staff) {
+        while (true) {
+            System.out.print("\033[H\033[2J"); // Clear the entire screen
+            System.out.print(
+                    "╔═══════════════════════════════════════════════════════════════╗\n" +
+                            "║ Camp Application & Management System - Create Camps           ║\n" +
+                            "╚═══════════════════════════════════════════════════════════════╝\r\n");
+
+            campArray.createCamp(staff.getFirstName());
+
+            System.out.print("Press Enter to return to the main menu...");
+            sc.nextLine(); // Wait for Enter key
+            break; // Exit the viewCampsScreen and return to the main menu
         }
     }
 

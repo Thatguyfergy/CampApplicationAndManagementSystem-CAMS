@@ -104,7 +104,7 @@ public class CampArray {
         }
     }
 
-    public void createCamp(String staffinCharge) throws Exception {
+    public void createCamp(String staffinCharge){
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
 
