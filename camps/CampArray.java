@@ -71,7 +71,7 @@ public class CampArray {
         System.out.println("Camp start date (dd/mm/yyyy):");
         CAMDate startDate = new CAMDate(scanner.nextLine());
 
-        System.out.println("Camp ennd date (dd/mm/yyyy):");
+        System.out.println("Camp end date (dd/mm/yyyy):");
         CAMDate endDate = new CAMDate(scanner.nextLine());
 
         System.out.println("Camp Visibility (Y/N):");
@@ -84,8 +84,9 @@ public class CampArray {
         int totalSlots = scanner.nextInt();
         scanner.nextLine(); // Flush
 
-        System.out.println("Committee Memebers Slots:");
+        System.out.println("Committee Memebers Slots (Max 10):");
         int committeeMembersSlots = scanner.nextInt();
+        committeeMembersSlots = committeeMembersSlots > 10 ? 10 : committeeMembersSlots;
         scanner.nextLine(); // Flush;
 
         System.out.println("Camp Description:");
