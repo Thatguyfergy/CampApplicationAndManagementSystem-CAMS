@@ -126,8 +126,9 @@ public class CampArray {
         int totalSlots = scanner.nextInt();
         scanner.nextLine(); // Flush
 
-        System.out.println("Committee Memebers Slots:");
+        System.out.println("Committee Memebers Slots (Max 10):");
         int committeeMembersSlots = scanner.nextInt();
+        committeeMembersSlots = committeeMembersSlots > 10 ? 10 : committeeMembersSlots;
         scanner.nextLine(); // Flush;
 
         System.out.println("Camp Description:");

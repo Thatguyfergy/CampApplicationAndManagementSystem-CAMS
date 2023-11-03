@@ -107,7 +107,7 @@ public class Camp{
             List<String> committeeMembers = getCommitteeMembers();
 
             // Check if the committeeMembers list is not already at the limit
-            if (committeeMembers.size() < 10) {
+            if (committeeMembers.size() < campInfo.getCommitteeMembersSlots()) {
                 // Add the student to the committeeMembers list
                 committeeMembers.add(StudentID);
             }
