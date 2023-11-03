@@ -9,27 +9,27 @@ public class Camp {
     private List<String> attendees;
     private List<String> committeeMembers;
 
-    public Camp(int campID, String campName, CAMDate registrationClosingDate, String campVisibility,
+    public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
-        this.campInfo = new CampInfo(campID, campName, registrationClosingDate, campVisibility,
+        this.campInfo = new CampInfo(campName, registrationClosingDate, campVisibility,
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
         this.attendees = new ArrayList<>();
         this.committeeMembers = new ArrayList<>();
 
     }
 
-    public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
-            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
-        // Create campInfo
-        this(0, campName, registrationClosingDate, campVisibility, location, totalSlots, committeeMembersSlots,
-                campDescription, staffInCharge);
+    // public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
+    //         String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
+    //     // Create campInfo
+    //     this(0, campName, registrationClosingDate, campVisibility, location, totalSlots, committeeMembersSlots,
+    //             campDescription, staffInCharge);
 
-    }
+    // }
 
-    public int getCampID() {
-        return campInfo.getCampID();
-    }
+    // public int getCampID() {
+    //     return campInfo.getCampID();
+    // }
 
     public String getCampName() {
         return campInfo.getCampName();
