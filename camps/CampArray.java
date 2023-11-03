@@ -158,6 +158,8 @@ public class CampArray {
         }
 
         viewCampDetails(campName);
+        int choice;
+        do{
         System.out.println("What field would you like to edit?");
         System.out.println("1. Camp Name");
         System.out.println("2. Registration Closing Date");
@@ -170,7 +172,64 @@ public class CampArray {
         System.out.println("9. Remove Dates");
         System.out.println("10. Exit");
 
-        int choice = scanner.nextInt();
+        choice = scanner.nextInt();
+         scanner.nextLine(); // Flush newline
+
+    switch (choice) {
+        case 1:
+            System.out.println("Enter new name for the camp:");
+            String newName = scanner.nextLine();
+            targetCamp.getCampInfo().setCampName(newName);
+            break;
+        case 2:
+            // Add logic to edit Registration Closing Date
+            // Example: targetCamp.getCampInfo().setRegistrationClosingDate(new CAMDate(newDate));
+            break;
+        case 3:
+            System.out.println("Enter new visibility for the camp (Y/N):");
+            String newVisibility = scanner.nextLine().toUpperCase();
+            targetCamp.getCampInfo().setCampVisibility(newVisibility);
+            break;
+        case 4:
+            // Add logic to edit Location
+            // Example: targetCamp.getCampInfo().setLocation(newLocation);
+            break;
+        case 5:
+            System.out.println("Enter new total slots for the camp:");
+            int newTotalSlots = scanner.nextInt();
+            targetCamp.getCampInfo().setTotalSlots(newTotalSlots);
+            break;
+        case 6:
+            System.out.println("Enter new committee members slots for the camp (Max 10):");
+            int newCommitteeMembersSlots = scanner.nextInt();
+            newCommitteeMembersSlots = Math.min(newCommitteeMembersSlots, 10);
+            targetCamp.getCampInfo().setCommitteeMembersSlots(newCommitteeMembersSlots);
+            break;
+        case 7:
+            System.out.println("Enter new description for the camp:");
+            String newDescription = scanner.nextLine();
+            targetCamp.getCampInfo().setCampDescription(newDescription);
+            break;
+        case 8:
+            System.out.println("Enter new staff in charge for the camp:");
+            String newStaffInCharge = scanner.nextLine();
+            targetCamp.getCampInfo().setStaffInCharge(newStaffInCharge);
+            break;
+        case 9:
+            // Add logic to add dates
+            // Example: targetCamp.getCampInfo().addDate(new CAMDate(startDate), new CAMDate(endDate));
+            break;
+        case 10:
+            // Add logic to remove dates
+            // Example: targetCamp.getCampInfo().removeDate(new CAMDate(dateToRemove));
+            break;
+        case 11:
+            System.out.println("Exiting editCamp");
+            break;
+        default:
+            System.out.println("Invalid choice");
+    }
+    } while (choice !=11);
 
         
 
@@ -209,18 +268,18 @@ public class CampArray {
             for (Camp camp : camps) {
                 System.out.println(camp.toString()); // Return Camps in string format
                 System.out.println(); // Add a line break for better readability
-                //displayRegisteredStudents(camp);
-                //System.out.println(); // Add a line break for better readability
+                displayRegisteredStudents(camp);
+                System.out.println(); // Add a line break for better readability
             }
 
             // Display camps created by the staff if they are the staffInCharge
             System.out.println("\nYour Created Camps:");
             for (Camp camp : camps) {
-                if (staffUser.getID().equals(camp.getStaffInCharge())) {
+                if (staffUser.getID().equals(camp.getStaffInCharge())||staffUser.getFirstName().equals(camp.getStaffInCharge())) {
                     System.out.println(camp.toString());
                     System.out.println(); // Add a line break for better readability
-                    //displayRegisteredStudents(camp);
-                    //System.out.println(); // Add a line break for better readability
+                    displayRegisteredStudents(camp);
+                    System.out.println(); // Add a line break for better readability
                 }
             }
             System.out.println("=====================================");
@@ -249,7 +308,7 @@ public class CampArray {
             System.out.println("\nYour Registered Camps:");
             boolean hasRegisteredCamps = false; // Check if student has registered for camps
             for (Camp camp : camps) {
-                if (camp.getAttendees().contains(studentUser.getID())) {
+                if (camp.getAttendees().contains(studentUser.getID())||camp.getAttendees().contains(studentUser.getFirstName())) {
                     System.out.println("Camp Name: " + camp.getCampName());
                     System.out.println("Camp Dates: " + camp.getDates());
                     System.out.println("Location: " + camp.getLocation());
@@ -258,7 +317,7 @@ public class CampArray {
                     System.out.println(); // Add a line break for better readability
                     hasRegisteredCamps = true;
                 }
-                if (camp.getCommitteeMembers().contains(studentUser.getID())) {
+                if (camp.getCommitteeMembers().contains(studentUser.getID())||camp.getCommitteeMembers().contains(studentUser.getFirstName())) {
                     System.out.println("Camp Name: " + camp.getCampName());
                     System.out.println("Camp Dates: " + camp.getDates());
                     System.out.println("Location: " + camp.getLocation());

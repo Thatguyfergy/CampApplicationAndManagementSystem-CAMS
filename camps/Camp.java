@@ -100,7 +100,7 @@ public class Camp{
         }
     }
 
-    public void registerStudent(String StudentID, boolean isCampCommittee, String campName) {
+    public void registerStudent(String StudentID, String FirstName, boolean isCampCommittee, String campName) {
 
         if (isCampCommittee) {
             // Register as a camp committee member
@@ -109,14 +109,14 @@ public class Camp{
             // Check if the committeeMembers list is not already at the limit
             if (committeeMembers.size() < campInfo.getCommitteeMembersSlots()) {
                 // Add the student to the committeeMembers list
-                committeeMembers.add(StudentID);
+                committeeMembers.add(FirstName);
             }
         } else {
             // Register as an attendee
             List<String> attendees = getAttendees();
 
             // Add the student to the attendees list
-            attendees.add(StudentID);
+            attendees.add(FirstName);
         }
     }
 
