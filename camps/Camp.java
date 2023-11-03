@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 import camdate.CAMDate;
 
-public class Camp {
+public class Camp{
     private CampInfo campInfo;
     private List<String> attendees;
     private List<String> committeeMembers;
 
-    public Camp(int campID, String campName, CAMDate registrationClosingDate, String campVisibility,
+    public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
-        this.campInfo = new CampInfo(campID, campName, registrationClosingDate, campVisibility,
+        this.campInfo = new CampInfo(campName, registrationClosingDate, campVisibility,
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
         this.attendees = new ArrayList<>();
         this.committeeMembers = new ArrayList<>();
 
     }
 
-    public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
-            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
-        // Create campInfo
-        this(0, campName, registrationClosingDate, campVisibility, location, totalSlots, committeeMembersSlots,
-                campDescription, staffInCharge);
+    // public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
+    //         String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
+    //     // Create campInfo
+    //     this(0, campName, registrationClosingDate, campVisibility, location, totalSlots, committeeMembersSlots,
+    //             campDescription, staffInCharge);
 
-    }
+    // }
 
-    public int getCampID() {
-        return campInfo.getCampID();
-    }
+    // public int getCampID() {
+    //     return campInfo.getCampID();
+    // }
 
     public String getCampName() {
         return campInfo.getCampName();
@@ -130,5 +130,27 @@ public class Camp {
 
     public String toString() {
         return campInfo.toString();
+    }
+
+    public int compareTo(Camp other, String sortBy) {
+        if (sortBy.equals("campName")) {
+            return this.getCampName().compareTo(other.getCampName());
+        } else if (sortBy.equals("registrationClosingDate")) {
+            return this.getRegistrationClosingDate().compareTo(other.getRegistrationClosingDate());
+        } else if (sortBy.equals("campVisibility")) {
+            return this.getCampVisibility().compareTo(other.getCampVisibility());
+        } else if (sortBy.equals("location")) {
+            return this.getLocation().compareTo(other.getLocation());
+        } else if (sortBy.equals("totalSlots")) {
+            return -(this.getTotalSlots() - other.getTotalSlots());
+        } else if (sortBy.equals("committeeMembersSlots")) {
+            return this.getCommitteeMembersSlots() - other.getCommitteeMembersSlots();
+        } else if (sortBy.equals("campDescription")) {
+            return this.getCampDescription().compareTo(other.getCampDescription());
+        } else if (sortBy.equals("staffInCharge")) {
+            return this.getStaffInCharge().compareTo(other.getStaffInCharge());
+        } else {
+            return 0;
+        }
     }
 }

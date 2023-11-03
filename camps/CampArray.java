@@ -19,49 +19,91 @@ public class CampArray {
     private static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
+    private String sortBy;
 
     public CampArray(String campsFile) throws NumberFormatException, IOException {
+        sortBy = "campName";
         CampArray.campsFile = campsFile;
-        BufferedReader csvReader = new BufferedReader(new FileReader(campsFile));
-        String row;
-        while ((row = csvReader.readLine()) != null) {
-            String[] data = row.split(",");
-            // CSV Format: ID | Name,Dates | Closing Date | Visibility |
-            // Location | Total Slots | Committee Members |
-            // Committee Mem slots | Description | Staff-In-Charge | Attendees
-            Camp camp = new Camp(Integer.parseInt(data[0]), data[1], new CAMDate(data[3]), data[4], data[5],
-                    Integer.parseInt(data[6]), Integer.parseInt(data[8]), data[9], data[10]);
-            for (String gay : data[2].split(";")) {
-                camp.addDate(new CAMDate(gay));
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(campsFile))) {
+            String row;
+            while ((row = csvReader.readLine()) != null) {
+                String[] data = row.split(",");
+                // CSV Format: Name | Dates | Closing Date | Visibility |
+                // Location | Total Slots | Committee Members |
+                // Committee Mem slots | Description | Staff-In-Charge | Attendees
+                Camp camp = new Camp(data[0], new CAMDate(data[2]), data[3], data[4],
+                        Integer.parseInt(data[5]), Integer.parseInt(data[7]), data[8], data[9]);
+                for (String date : data[1].split(";")) {
+                    camp.addDate(new CAMDate(date));
+                }
+                camps.add(camp);
             }
-            camps.add(camp);
         }
-        csvReader.close();
     }
 
-    private void updateFile() throws Exception {
-        FileWriter csvWriter = new FileWriter(campsFile);
-        for (Camp camp : camps) {
-            csvWriter.append(String.valueOf(camp.getCampID()));
-            csvWriter.append(",");
-            csvWriter.append(camp.getCampName());
-            csvWriter.append(",");
-            // csvWriter.append(camp.getDates());
-            // csvWriter.append(",");
-            csvWriter.append(camp.getCampName());
-            csvWriter.append(",");
-            csvWriter.append(camp.getCampName());
-            csvWriter.append(",");
-            csvWriter.append(camp.getCampName());
-            csvWriter.append("\n");
-        }
-
-        csvWriter.flush();
-        csvWriter.close();
-
+    public void sortCamps(String sortBy) throws Exception {
+        this.sortBy = sortBy;
+        insertionSort(camps, sortBy);
     }
 
-    public void createCamp(String staffinCharge) {
+    private void insertionSort(ArrayList<Camp> camps, String sortBy) throws Exception{
+        for (int i = 1; i < camps.size(); i++) {
+            Camp key = camps.get(i);
+            int j = i - 1;
+            while (j >= 0 && camps.get(j).compareTo(key, sortBy) > 0) {
+                camps.set(j + 1, camps.get(j));
+                j--;
+            }
+            camps.set(j + 1, key);
+        }
+
+        updateFile(camps);
+    }
+
+    // update file with new campArray
+    private void updateFile(ArrayList<Camp> camps) throws Exception {
+        try (FileWriter csvWriter = new FileWriter(campsFile)) {
+            for (Camp camp : camps) {
+                csvWriter.append(camp.getCampName());
+                csvWriter.append(",");
+                for (CAMDate date : camp.getDates()) {
+                    csvWriter.append(date.toString());
+                    csvWriter.append(";");
+                }
+                csvWriter.append(",");
+                csvWriter.append(camp.getRegistrationClosingDate().toString());
+                csvWriter.append(",");
+                csvWriter.append(camp.getCampVisibility());
+                csvWriter.append(",");
+                csvWriter.append(camp.getLocation());
+                csvWriter.append(",");
+                csvWriter.append(String.valueOf(camp.getTotalSlots()));
+                csvWriter.append(",");
+                for (String committeeMember : camp.getCommitteeMembers()) {
+                    csvWriter.append(committeeMember);
+                    csvWriter.append(";");
+                }
+                csvWriter.append(",");
+                csvWriter.append(String.valueOf(camp.getCommitteeMembersSlots()));
+                csvWriter.append(",");
+                csvWriter.append(camp.getCampDescription());
+                csvWriter.append(",");
+                csvWriter.append(camp.getStaffInCharge());
+                csvWriter.append(",");
+                for (String attendee : camp.getAttendees()) {
+                    csvWriter.append(attendee);
+                    csvWriter.append(";");
+                }
+                csvWriter.append("\n");
+            }
+            csvWriter.flush();
+        } catch (Exception e) {
+            throw new Exception("Error updating file");
+        
+        }
+    }
+
+    public void createCamp(String staffinCharge) throws Exception {
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
 
@@ -96,13 +138,14 @@ public class CampArray {
                 committeeMembersSlots, campDescription, staffinCharge);
         newCamp.addDate(startDate, endDate);
         camps.add(newCamp);
+        updateFile(camps);
     }
 
     public void editCamp(String campName) {
         Camp targetCamp = null;
 
         for (int i = 0; i < camps.size(); i++) {
-            if (camps.get(i).getCampName() == campName) {
+            if (camps.get(i).getCampName().equals(campName)) {
                 targetCamp = camps.get(i);
                 break;
             }
@@ -122,13 +165,15 @@ public class CampArray {
         System.out.println("Camp edited successfully");
     }
 
-    public void deleteCamp(String campName) {
+    public void deleteCamp(String campName) throws Exception {
 
         for (int i = 0; i < camps.size(); i++) {
-            if (camps.get(i).getCampName() == campName) {
+            if (camps.get(i).getCampName().equals(campName)) {
                 camps.remove(i);
+                System.out.println("Camp deleted successfully");
             }
         }
+        updateFile(camps);
     }
 
     public void viewCamps(Users user) {
@@ -159,6 +204,7 @@ public class CampArray {
                     System.out.println(); // Add a line break for better readability
                 }
             }
+            System.out.println("=====================================");
         } else if (user instanceof Student) {
 
             Student studentUser = (Student) user;
@@ -248,4 +294,6 @@ public class CampArray {
 
         System.out.println(); // Add a line break for better readability
     }
+
+   
 }
