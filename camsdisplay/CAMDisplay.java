@@ -3,10 +3,13 @@ package camsdisplay;
 import users.*;
 import java.util.Scanner;
 
+import camps.CampArray;
+
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
     private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv", "csvfiles\\usersStaff.csv");
+    private CampArray campArray = new CampArray("csvfiles\\camps.csv");
     private Users user;
 
     public void startScreen() {
@@ -32,6 +35,7 @@ public class CAMDisplay {
                 System.out.println("Invalid choice!");
                 break;
         }
+        sc.nextLine();
     }
 
     public void loginScreen() {
@@ -114,24 +118,121 @@ public class CAMDisplay {
     }
 
     private void staffScreen(Staff staff) {
-        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println("║ Camp Application & Management System - Home                     ║");
-        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-        System.out.println("Welcome back to CAMs, Staff " + staff.getID());
-        System.out.println("1. View Camps");
-        System.out.println("2. View Camp Details");
-        System.out.println("3. Create Camp");
-        System.out.println("4. Edit Camp");
-        System.out.println("5. Delete Camp");
-        System.out.println("6. View enquiries");
-        System.out.println("7. View Suggestions");
-        System.out.println("8. View Suggestions");
-        System.out.println("9. Approve Suggestions");
-        System.out.println("10. Generate Camp Report");
-        System.out.println("11. Generate Performance Report");
-        System.out.println("12. Logout");
-        System.out.printf("Enter your choice: ");
+        while (true) {
+            System.out.print("\033[H\033[2J"); // Clear the entire screen
 
+            System.out.print(
+                    "╔═══════════════════════════════════════════════════════════════╗\n" +
+                            "║ Camp Application & Management System - Home                   ║\n" +
+                            "╚═══════════════════════════════════════════════════════════════╝\r\n");
+            System.out.print("Welcome back to CAMs, Staff " + staff.getID() + "\r\n");
+            String menu = "1. View Camps\n" +
+                    "2. View Camp Details\n" +
+                    "3. Create Camp\n" +
+                    "4. Edit Camp\n" +
+                    "5. Delete Camp\n" +
+                    "6. View Enquiries\n" +
+                    "7. View Suggestions\n" +
+                    "8. View Suggestions\n" +
+                    "9. Approve Suggestions\n" +
+                    "10. Generate Camp Report\n" +
+                    "11. Generate Performance Report\n" +
+                    "12. Logout\n" +
+                    "Enter your choice: ";
+            System.out.print(menu);
+
+            int choice = sc.nextInt();
+            sc.nextLine(); // Consume the newline character
+            switch (choice) {
+                case 1:
+                    viewCampsScreen(staff);
+                    break;
+                case 2:
+                    // Add the code for option 2 here
+                    break;
+                case 3:
+                    // Add the code for option 3 here
+                    break;
+                case 4:
+                    // Add the code for option 4 here
+                    break;
+                case 5:
+                    // Add the code for option 5 here
+                    break;
+                case 6:
+                    // Add the code for option 6 here
+                    break;
+                case 7:
+                    // Add the code for option 7 here
+                    break;
+                case 8:
+                    // Add the code for option 8 here
+                    break;
+                case 9:
+                    // Add the code for option 9 here
+                    break;
+                case 10:
+                    // Add the code for option 10 here
+                    break;
+                case 11:
+                    // Add the code for option 11 here
+                    break;
+                case 12:
+                    System.exit(0);
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+                    break;
+            }
+        }
+    }
+
+    private void viewCampsScreen(Users user) {
+        while (true) {
+            System.out.print("\033[H\033[2J"); // Clear the entire screen
+
+            System.out.print(
+                    "╔═══════════════════════════════════════════════════════════════╗\n" +
+                            "║ Camp Application & Management System - View Camps             ║\n" +
+                            "╚═══════════════════════════════════════════════════════════════╝\r\n");
+
+            String choice;
+            System.out.print("Sort by:\n" +
+                    "1. Camp Name\n" +
+                    "2. Camp Registration Closing Date\n" +
+                    "3. Camp Visibility\n" +
+                    "4. Camp location\n" +
+                    "5. Camp Staff-In-Charge\n" +
+                    "Enter your choice: ");
+            choice = sc.nextLine();
+            System.out.println();
+            switch (choice) {
+                case "1":
+                    campArray.sortCamps("campName");
+                    break;
+                case "2":
+                    campArray.sortCamps("registrationClosingDate");
+                    break;
+                case "3":
+                    campArray.sortCamps("campVisibility");
+                    break;
+                case "4":
+                    campArray.sortCamps("location");
+                    break;
+                case "5":
+                    campArray.sortCamps("staffInCharge");
+                    break;
+                default:
+                    System.out.println("Invalid choice! - Sorting by Camp Name");
+                    break;
+            }
+
+            campArray.viewCamps(user);
+
+            System.out.print("Press Enter to return to the main menu...");
+            sc.nextLine(); // Wait for Enter key
+            break; // Exit the viewCampsScreen and return to the main menu
+        }
     }
 
     public void studentScreen(Student student) {

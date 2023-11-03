@@ -16,9 +16,9 @@ public class CAMSapp {
         // "csvfiles\\replies.csv");
 
         // Student yinghaoisgay = new Student("YH", "Gaysch");
-        CampArray campArray = new CampArray("csvfiles\\camps.csv");
+        // CampArray campArray = new CampArray("csvfiles\\camps.csv");
 
-        Staff drloke = new Staff("lokelokeloke", "lokeyman", "gayschool");
+        // Staff drloke = new Staff("lokelokeloke", "lokeyman", "gayschool");
 
         // enquiriesArray.submitEnquiry(new Enquiries("Ying hao is gay",
         // yinghaoisgay.getID(), "gay camp"));
@@ -31,7 +31,13 @@ public class CAMSapp {
         // }
         // enquiriesArray.replyEnquiry(drloke);
 
-        drloke.createCamp(campArray);
-        drloke.viewCamp(campArray);
+        // drloke.createCamp(campArray);
+        // drloke.viewCamp(campArray);
+
+        CAMDisplay cams = new CAMDisplay();
+        while (true){
+            cams.userScreen(new Staff("Loke", "LYW023", "SCSE"));
+        }
+        
     }
 }
