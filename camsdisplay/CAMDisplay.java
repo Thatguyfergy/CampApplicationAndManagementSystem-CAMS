@@ -154,10 +154,10 @@ public class CAMDisplay {
                     createCampScreen(staff);
                     break;
                 case 4:
-                    // Add the code for option 4 here
+                    editCampScreen(staff);
                     break;
                 case 5:
-                    // Add the code for option 5 here
+                    deleteCampScreen(staff);
                     break;
                 case 6:
                     // Add the code for option 6 here
@@ -187,12 +187,47 @@ public class CAMDisplay {
         }
     }
 
-    private void createCampScreen (Staff staff) {
+    private void deleteCampScreen (Staff staff) {
         while (true) {
             System.out.print("\033[H\033[2J"); // Clear the entire screen
             System.out.print(
                     "╔═══════════════════════════════════════════════════════════════╗\n" +
-                            "║ Camp Application & Management System - Create Camps           ║\n" +
+                            "║ Camp Application & Management System - Delete Camp            ║\n" +
+                            "╚═══════════════════════════════════════════════════════════════╝\r\n");
+
+            String buffer;
+            System.out.print("Enter the name of Camp to delete: ");
+            buffer = sc.nextLine();
+
+            campArray.deleteCamp(buffer);
+            System.out.print("Press Enter to return to the main menu...");
+            sc.nextLine(); // Wait for Enter key
+            break; // Exit the viewCampsScreen and return to the main menu
+        }
+    }
+
+    private void editCampScreen(Staff staff) {
+        while (true) {
+            System.out.print("\033[H\033[2J"); // Clear the entire screen
+            System.out.print(
+                    "╔═══════════════════════════════════════════════════════════════╗\n" +
+                            "║ Camp Application & Management System - Edit Camp              ║\n" +
+                            "╚═══════════════════════════════════════════════════════════════╝\r\n");
+
+            campArray.editCamp(staff.getFirstName()); // TODO
+
+            System.out.print("Press Enter to return to the main menu...");
+            sc.nextLine(); // Wait for Enter key
+            break; // Exit the viewCampsScreen and return to the main menu
+        }
+    }
+
+    private void createCampScreen(Staff staff) {
+        while (true) {
+            System.out.print("\033[H\033[2J"); // Clear the entire screen
+            System.out.print(
+                    "╔═══════════════════════════════════════════════════════════════╗\n" +
+                            "║ Camp Application & Management System - Create Camp            ║\n" +
                             "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
             campArray.createCamp(staff.getFirstName());

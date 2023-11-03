@@ -142,6 +142,7 @@ public class CampArray {
         updateFile(camps);
     }
 
+    //add in the logic to edit camp details
     public void editCamp(String campName) {
         Camp targetCamp = null;
 
@@ -156,6 +157,23 @@ public class CampArray {
             return;
         }
 
+        viewCampDetails(campName);
+        System.out.println("What field would you like to edit?");
+        System.out.println("1. Camp Name");
+        System.out.println("2. Registration Closing Date");
+        System.out.println("3. Camp Visibility");
+        System.out.println("4. Location");
+        System.out.println("5. Total Slots");
+        System.out.println("6. Committee Members Slots");
+        System.out.println("7. Camp Description");
+        System.out.println("8. Add Dates");
+        System.out.println("9. Remove Dates");
+        System.out.println("10. Exit");
+
+        int choice = scanner.nextInt();
+
+        
+
         // Edit Scanner
         // Example: Editing camp description
         System.out.println("Enter new description for the camp:");
@@ -166,7 +184,7 @@ public class CampArray {
         System.out.println("Camp edited successfully");
     }
 
-    public void deleteCamp(String campName) throws Exception {
+    public void deleteCamp(String campName){
 
         for (int i = 0; i < camps.size(); i++) {
             if (camps.get(i).getCampName().equals(campName)) {
