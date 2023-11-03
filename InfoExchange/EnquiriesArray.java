@@ -46,6 +46,8 @@ public class EnquiriesArray {
         csvReader.close();
     }
 
+    // The enquiryID will only be generated after submission.
+    // If you require the ID, please use getEnquiryID() only AFTER SUBMISSION.
     public void submitEnquiry(Enquiries enquiry) {
         enquiry.setEnquiryID(generateID(enquiries));
         enquiries.add(enquiry);

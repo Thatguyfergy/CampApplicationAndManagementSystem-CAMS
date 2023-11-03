@@ -7,14 +7,19 @@ import camps.*;
 public class Staff extends Users {
     private Scanner scanner = new Scanner(System.in);
 
-    public Staff(String userID, String facultyInfo) {
-        super(userID, facultyInfo);
+    public Staff(String FirstName, String userID, String facultyInfo) {
+        super(FirstName, userID, facultyInfo);
     }
 
     public void createCamp(CampArray campArray) {
         // Create a Camp object using CampInfo
         String staffInCharge = this.getID();
-        campArray.createCamp(staffInCharge);
+        try {
+            campArray.createCamp(staffInCharge);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void editCamp(CampArray campArray) {
@@ -26,7 +31,12 @@ public class Staff extends Users {
     public void deleteCamp(CampArray campArray) {
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
-        campArray.deleteCamp(campName);
+        try {
+            campArray.deleteCamp(campName);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void viewCamp(CampArray campArray) {

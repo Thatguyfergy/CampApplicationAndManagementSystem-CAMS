@@ -12,10 +12,6 @@ public class Enquiries implements Comparable<Enquiries> {
         this.campName = campName;
     }
 
-    // public Enquiries() {
-    // this(null, null, null);
-    // }
-
     public String getEnquiry() {
         return enquiryString;
     }

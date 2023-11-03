@@ -11,8 +11,17 @@ public class Student extends Users {
     private Enquiries[] enquiriesArray = new Enquiries[10]; // max 10 enquiries per student
     private int enquiriesIndex = 0; // to keep track of which index the enquiry is filled to
 
-    public Student(String userID, String facultyInfo) {
-        super(userID, facultyInfo);
+    public Student(String FirstName, String userID, String facultyInfo) {
+        super(FirstName, userID, facultyInfo);
+    }
+
+    // Hello enric, please create an overloaded constructor so that UserDatabase can
+    // use.
+    // The purpose is to read the data from the csv file and create the Student objs
+    // Make sure that EVERY (or most) of the inputs are String type.
+    // So you might need to do convertion of String to wtv type u wan urself here
+    public Student(String FirstName, String userID, String facultyInfo, String otherInformation) {
+        this(FirstName, userID, facultyInfo);
     }
 
     /*

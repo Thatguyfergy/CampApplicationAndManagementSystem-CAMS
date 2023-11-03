@@ -18,7 +18,7 @@ public class CAMSapp {
         // Student yinghaoisgay = new Student("YH", "Gaysch");
         CampArray campArray = new CampArray("csvfiles\\camps.csv");
 
-        Staff drloke = new Staff("lokeyman", "gayschool");
+        Staff drloke = new Staff("lokelokeloke", "lokeyman", "gayschool");
 
         // enquiriesArray.submitEnquiry(new Enquiries("Ying hao is gay",
         // yinghaoisgay.getID(), "gay camp"));

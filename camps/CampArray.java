@@ -46,7 +46,7 @@ public class CampArray {
         insertionSort(camps, sortBy);
     }
 
-    private void insertionSort(ArrayList<Camp> camps, String sortBy) throws Exception{
+    private void insertionSort(ArrayList<Camp> camps, String sortBy) throws Exception {
         for (int i = 1; i < camps.size(); i++) {
             Camp key = camps.get(i);
             int j = i - 1;
@@ -99,7 +99,7 @@ public class CampArray {
             csvWriter.flush();
         } catch (Exception e) {
             throw new Exception("Error updating file");
-        
+
         }
     }
 
@@ -295,5 +295,4 @@ public class CampArray {
         System.out.println(); // Add a line break for better readability
     }
 
-   
 }

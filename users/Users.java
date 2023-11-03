@@ -1,11 +1,13 @@
 package users;
 
-public abstract class Users implements Comparable<Users>{
+public abstract class Users implements Comparable<Users> {
+    private String FirstName;
     private String userID;
     private String password = "password";
     private String facultyInfo;
 
-    public Users(String userID, String facultyInfo) {
+    public Users(String FirstName, String userID, String facultyInfo) {
+        this.FirstName = FirstName;
         this.userID = userID;
         this.facultyInfo = facultyInfo;
     }
@@ -14,8 +16,16 @@ public abstract class Users implements Comparable<Users>{
         this.password = newPassword;
     }
 
+    protected String getPassword() {
+        return this.password;
+    }
+
     public String getID() {
         return userID;
+    }
+
+    public String getFirstName() {
+        return FirstName;
     }
 
     protected Boolean checkPassword(String password) {
