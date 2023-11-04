@@ -36,8 +36,8 @@ public class CAMSapp {
 
         CAMDisplay cams = new CAMDisplay();
         while (true){
-            //cams.startScreen();
-            cams.userScreen(new Staff("Loke", "LYW023", "SCSE"));
+            cams.startScreen();
+            //cams.userScreen(new Staff("Loke", "LYW023", "SCSE"));
         }
         
     }

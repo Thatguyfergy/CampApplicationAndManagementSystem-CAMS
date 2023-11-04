@@ -11,9 +11,9 @@ import report.CampReport;
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
-    private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
-            "csvfiles\\usersStaff.csv");
-    private CampArray campArray = new CampArray("csvfiles\\camps.csv");
+    private UsersDatabase UserDB = new UsersDatabase("SC2002Project\\csvfiles\\usersStudent.csv",
+            "SC2002Project/csvfiles/usersStaff.csv");
+    private CampArray campArray = new CampArray("SC2002Project\\csvfiles\\camps.csv");
     private Users user;
 
     public CAMDisplay() {
@@ -154,11 +154,10 @@ public class CAMDisplay {
                 "5. Delete Camp\n" +
                 "6. View Enquiries\n" +
                 "7. View Suggestions\n" +
-                "8. View Suggestions\n" +
-                "9. Approve Suggestions\n" +
-                "10. Generate Camp Report\n" +
-                "11. Generate Performance Report\n" +
-                "12. Logout\n" +
+                "8. Approve Suggestions\n" +
+                "9. Generate Camp Report\n" +
+                "10. Generate Performance Report\n" +
+                "11. Logout\n" +
                 "Enter your choice: ";
         System.out.print(menu);
 
@@ -190,15 +189,12 @@ public class CAMDisplay {
                 // Add the code for option 8 here
                 break;
             case 9:
-                // Add the code for option 9 here
-                break;
-            case 10:
                 generateCampReportScreen(staff);
                 break;
-            case 11:
-                // Add the code for option 11 here
+            case 10:
+                
                 break;
-            case 12:
+            case 11:
                 startScreen();
                 break;
             default:
@@ -237,6 +233,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
+        userScreen(user);
     }
 
     private void deleteCampScreen(Staff staff) {
@@ -255,6 +252,7 @@ public class CAMDisplay {
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         // Exit the viewCampsScreen and return to the main menu
+        userScreen(user);
 
     }
 
@@ -292,6 +290,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
+        userScreen(user);
 
     }
 
@@ -307,7 +306,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-
+        userScreen(user);
     }
 
     private void viewCampsScreen(Users user) {
@@ -354,7 +353,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-
+        userScreen(user);
     }
 
     private void viewCampDetailsScreen(Users user) {
@@ -373,7 +372,7 @@ public class CAMDisplay {
         campArray.viewCampDetails(buffer);
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-
+        userScreen(user);
     }
 
     public void studentScreen(Student student) {

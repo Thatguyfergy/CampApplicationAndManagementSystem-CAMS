@@ -253,10 +253,12 @@ public class CampArray {
                 System.out.println(); // Add a line break for better readability
                 displayRegisteredStudents(camp);
                 System.out.println(); // Add a line break for better readability
+                System.out.println("-------------------------------------");
             }
 
             // Display camps created by the staff if they are the staffInCharge
             System.out.println("\nYour Created Camps:");
+            System.out.println("=====================================");
             for (Camp camp : camps) {
                 if (staffUser.getID().equals(camp.getStaffInCharge())
                         || staffUser.getFirstName().equals(camp.getStaffInCharge())) {
@@ -264,6 +266,7 @@ public class CampArray {
                     System.out.println(); // Add a line break for better readability
                     displayRegisteredStudents(camp);
                     System.out.println(); // Add a line break for better readability
+                    System.out.println("-------------------------------------");
                 }
             }
             System.out.println("=====================================");
