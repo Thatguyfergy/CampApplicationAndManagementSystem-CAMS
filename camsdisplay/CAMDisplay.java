@@ -1,6 +1,8 @@
 package camsdisplay;
 
 import users.*;
+
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +19,26 @@ public class CAMDisplay {
     private Users user;
 
     public CAMDisplay() {
+        try {
+            // Attempt to initialize with the default file paths
+            UserDB = new UsersDatabase("csvfiles\\usersStudent.csv", "csvfiles\\usersStaff.csv");
+            campArray = new CampArray("csvfiles\\camps.csv");
+        } catch (FileNotFoundException e) {
+            // If FileNotFoundException occurs, handle it
+            System.out.println("File not found. Please enter the correct file paths:");
+
+            // Prompt the user to enter the correct file paths
+            System.out.print("Enter path for usersStudent.csv: ");
+            String usersStudentPath = sc.nextLine();
+            System.out.print("Enter path for usersStaff.csv: ");
+            String usersStaffPath = sc.nextLine();
+            System.out.print("Enter path for camps.csv: ");
+            String campsPath = sc.nextLine();
+
+            // Attempt to initialize again with the user-provided file paths
+            UserDB = new UsersDatabase(usersStudentPath, usersStaffPath);
+            campArray = new CampArray(campsPath);
+        }
 
     }
 
