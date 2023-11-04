@@ -2,6 +2,7 @@ package camsdisplay;
 
 import users.*;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
 import camps.Camp;
 import camps.CampArray;
@@ -10,10 +11,14 @@ import report.CampReport;
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
-    private UsersDatabase UserDB = new UsersDatabase("SC2002Project\\csvfiles\\usersStudent.csv",
-            "SC2002Project\\csvfiles\\usersStaff.csv");
-    private CampArray campArray = new CampArray("SC2002Project\\csvfiles\\camps.csv");
+    private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
+            "csvfiles\\usersStaff.csv");
+    private CampArray campArray = new CampArray("csvfiles\\camps.csv");
     private Users user;
+
+    public CAMDisplay() {
+
+    }
 
     public void startScreen() {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -40,7 +45,15 @@ public class CAMDisplay {
                 System.out.println("Invalid choice!");
                 break;
         }
-        sc.nextLine();
+        // sc.nextLine();
+        userScreen(user);
+
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     public void loginScreen() {
@@ -62,10 +75,11 @@ public class CAMDisplay {
         if (user == null) {
             System.out.println("UserID cannot be found/Password is incorrect.");
             System.out.println("Please login again.");
+            return;
         }
 
         // Prompt to change password
-        if (password == "password") {
+        if (password.equals("password")) {
             System.out.println("You are recommended to change your password.");
             System.out.println(
                     "If you set it to the default password again, we will remind you to change your password again.");
@@ -271,7 +285,7 @@ public class CAMDisplay {
                     "Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine(); // Consume the newline character
-            campArray.editCamp(buffer, choice);
+            staff.editCamp(campArray, choice, buffer);
         } else {
             System.out.println("Camp does not exist!");
         }

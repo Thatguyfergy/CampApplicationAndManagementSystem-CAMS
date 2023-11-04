@@ -22,10 +22,8 @@ public class Staff extends Users {
         }
     }
 
-    public void editCamp(CampArray campArray) {
-        System.out.println("Camp Name:");
-        String campName = scanner.nextLine();
-        campArray.editCamp(campName);
+    public void editCamp(CampArray campArray, int choice, String campName) {
+        campArray.editCamp(campName, choice);
     }
 
     public void deleteCamp(CampArray campArray) {

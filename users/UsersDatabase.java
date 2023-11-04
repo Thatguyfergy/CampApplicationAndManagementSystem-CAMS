@@ -41,7 +41,15 @@ public class UsersDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        // printUsers();
     }
+
+    // private void printUsers() {
+    // System.out.println("Printing Users");
+    // for (Users user : users) {
+    // System.out.println(user.getID() + "|" + user.getPassword());
+    // }
+    // }
 
     private void updateFiles() {
         try (FileWriter csvWriterStudent = new FileWriter(studentFile)) {
@@ -87,16 +95,18 @@ public class UsersDatabase {
 
     public Users login(String username, String password) {
         for (Users user : users) {
-            if (user.getID() == username) {
+            if (user.getID().equals(username)) {
                 if (user.checkPassword(password)) {
                     return user;
                 } else {
                     // Wrong password
+                    System.out.println("Wrong password!");
                     return null;
                 }
             }
         }
         // User cannot be found
+        System.out.println("Username not found");
         return null;
     }
 
