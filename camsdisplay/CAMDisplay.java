@@ -4,12 +4,13 @@ import users.*;
 import java.util.Scanner;
 
 import camps.CampArray;
+import users.UsersDatabase;
 
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
-    private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv", "csvfiles\\usersStaff.csv");
-    private CampArray campArray = new CampArray("csvfiles\\camps.csv");
+    private UsersDatabase UserDB = new UsersDatabase("SC2002Project\\csvfiles\\usersStudent.csv", "SC2002Project\\csvfiles\\usersStaff.csv");
+    private CampArray campArray = new CampArray("SC2002Project\\csvfiles\\camps.csv");
     private Users user;
 
     public void startScreen() {

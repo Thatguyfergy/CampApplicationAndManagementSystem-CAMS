@@ -67,6 +67,10 @@ public class Camp{
         return campInfo.getTotalSlots();
     }
 
+    public CampInfo getCampInfo() {
+        return campInfo;
+    }
+
     public void setCampDescription(String newDescription) {
         campInfo.setCampDescription(newDescription);
     }
