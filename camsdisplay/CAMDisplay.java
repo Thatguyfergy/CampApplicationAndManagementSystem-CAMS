@@ -13,38 +13,14 @@ import report.CampReport;
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
-    private UsersDatabase UserDB = new UsersDatabase("SC2002Project\\csvfiles\\usersStudent.csv",
-            "SC2002Project/csvfiles/usersStaff.csv");
-    private CampArray campArray = new CampArray("SC2002Project\\csvfiles\\camps.csv");
+    private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
+            "csvfiles/usersStaff.csv");
+    private CampArray campArray = new CampArray("csvfiles\\camps.csv");
     private Users user;
-
-    public CAMDisplay() {
-        try {
-            // Attempt to initialize with the default file paths
-            UserDB = new UsersDatabase("csvfiles\\usersStudent.csv", "csvfiles\\usersStaff.csv");
-            campArray = new CampArray("csvfiles\\camps.csv");
-        } catch (FileNotFoundException e) {
-            // If FileNotFoundException occurs, handle it
-            System.out.println("File not found. Please enter the correct file paths:");
-
-            // Prompt the user to enter the correct file paths
-            System.out.print("Enter path for usersStudent.csv: ");
-            String usersStudentPath = sc.nextLine();
-            System.out.print("Enter path for usersStaff.csv: ");
-            String usersStaffPath = sc.nextLine();
-            System.out.print("Enter path for camps.csv: ");
-            String campsPath = sc.nextLine();
-
-            // Attempt to initialize again with the user-provided file paths
-            UserDB = new UsersDatabase(usersStudentPath, usersStaffPath);
-            campArray = new CampArray(campsPath);
-        }
-
-    }
 
     public void startScreen() {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
-        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+        System.out.println("╔═════════════════════════════════════════════════════════════════╗"); 
         System.out.println("║ Camp Application & Management System                            ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println("1. Login");
