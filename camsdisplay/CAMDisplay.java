@@ -4,12 +4,12 @@ import users.*;
 import java.util.Scanner;
 
 import camps.CampArray;
-import users.UsersDatabase;
 
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
-    private UsersDatabase UserDB = new UsersDatabase("SC2002Project\\csvfiles\\usersStudent.csv", "SC2002Project\\csvfiles\\usersStaff.csv");
+    private UsersDatabase UserDB = new UsersDatabase("SC2002Project\\csvfiles\\usersStudent.csv",
+            "SC2002Project\\csvfiles\\usersStaff.csv");
     private CampArray campArray = new CampArray("SC2002Project\\csvfiles\\camps.csv");
     private Users user;
 
@@ -188,7 +188,7 @@ public class CAMDisplay {
         }
     }
 
-    private void deleteCampScreen (Staff staff) {
+    private void deleteCampScreen(Staff staff) {
         while (true) {
             System.out.print("\033[H\033[2J"); // Clear the entire screen
             System.out.print(
@@ -215,7 +215,30 @@ public class CAMDisplay {
                             "║ Camp Application & Management System - Edit Camp              ║\n" +
                             "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
-            campArray.editCamp(staff.getFirstName()); // TODO
+            System.out.print("Enter the name of Camp to edit: ");
+            String buffer = sc.nextLine();
+            if (campArray.checkCampExists(buffer)) {
+                campArray.viewCampDetails(buffer);
+                System.out.print("What field would you like to edit?\n" +
+                        "1. Camp Name\n" +
+                        "2. Registration Closing Date\n" +
+                        "3. Camp Visibility\n" +
+                        "4. Location\n" +
+                        "5. Total Slots\n" +
+                        "6. Committee Members Slots\n" +
+                        "7. Camp Description\n" +
+                        "8. Staff In Charge\n" +
+                        "9. Add Dates\n" +
+                        "10. Remove Dates\n" +
+                        "11. Exit\n" +
+                        "Enter your choice: ");
+                int choice = sc.nextInt();
+                sc.nextLine(); // Consume the newline character
+                campArray.editCamp(buffer, choice);
+            }
+            else {
+                System.out.println("Camp does not exist!");
+            }
 
             System.out.print("Press Enter to return to the main menu...");
             sc.nextLine(); // Wait for Enter key
@@ -299,6 +322,7 @@ public class CAMDisplay {
             String buffer;
             System.out.print("Enter the name of Camp to view details: ");
             buffer = sc.nextLine();
+            System.out.println(); //for readability
             campArray.viewCampDetails(buffer);
             System.out.print("Press Enter to return to the main menu...");
             sc.nextLine(); // Wait for Enter key
