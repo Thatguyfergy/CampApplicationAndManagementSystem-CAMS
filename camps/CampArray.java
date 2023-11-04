@@ -384,4 +384,13 @@ public class CampArray {
         System.out.println(); // Add a line break for better readability
     }
 
+    public Camp getCamp(String campName) {
+        for (Camp camp : camps) {
+            if (camp.getCampName().equals(campName)) {
+                return camp;
+            }
+        }
+        return null;
+    }
+
 }

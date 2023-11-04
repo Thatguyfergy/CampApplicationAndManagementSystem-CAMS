@@ -3,7 +3,9 @@ package camsdisplay;
 import users.*;
 import java.util.Scanner;
 
+import camps.Camp;
 import camps.CampArray;
+import report.CampReport;
 
 public class CAMDisplay {
 
@@ -177,7 +179,7 @@ public class CAMDisplay {
                 // Add the code for option 9 here
                 break;
             case 10:
-                // Add the code for option 10 here
+                generateCampReportScreen(staff);
                 break;
             case 11:
                 // Add the code for option 11 here
@@ -189,6 +191,38 @@ public class CAMDisplay {
                 System.out.println("Invalid choice!");
                 break;
         }
+    }
+
+    private void generateCampReportScreen(Staff staff) {
+
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.print(
+                "╔═══════════════════════════════════════════════════════════════╗\n" +
+                        "║ Camp Application & Management System - Generate Camp Report   ║\n" +
+                        "╚═══════════════════════════════════════════════════════════════╝\r\n");
+        String campName;
+        int choice;
+        System.out.print("Enter the name of Camp to generate report: ");
+        campName = sc.nextLine();
+        System.out.print("Filter:\n" +
+                "1. None\n" +
+                "2. Camp Attendees\n" +
+                "3. Camp Committee Members\n" +
+                "Enter your choice: ");
+        choice = sc.nextInt();
+        sc.nextLine(); // Consume the newline character
+        System.out.println(); // for readability
+
+        Camp camp = campArray.getCamp(campName);
+        if (camp == null) {
+            System.out.println("Camp does not exist!");
+        } else {
+            CampReport campReport = new CampReport(camp, choice);
+            campReport.generateReport();
+        }
+
+        System.out.print("Press Enter to return to the main menu...");
+        sc.nextLine(); // Wait for Enter key
     }
 
     private void deleteCampScreen(Staff staff) {
