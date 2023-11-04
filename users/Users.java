@@ -30,7 +30,7 @@ public abstract class Users implements Comparable<Users> {
     }
 
     protected Boolean checkPassword(String password) {
-        return password == this.password;
+        return password.equals(this.password);
     }
 
     public String getFacultyInfo() {

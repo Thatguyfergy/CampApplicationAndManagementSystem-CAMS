@@ -33,14 +33,6 @@ public class Student extends Users {
     // return campCommittee;
     // }
 
-    public String getFacultyInfo() {
-        return this.getFacultyInfo();
-    }
-
-    public String getStudentID() {
-        return this.getID();
-    }
-
     public void getAvailCamps(CampArray currentCamps) {
         currentCamps.viewCamps(this);
     }
