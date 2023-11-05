@@ -1,20 +1,17 @@
 package users;
 
 import java.util.ArrayList;
-import InfoExchange.Enquiries;
+
+import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 
 public class Student extends Users {
+    private boolean IsCampComm = false;
     private CampCommitteeRole CommRole;
     private ArrayList<CampAttendeeRole> Attendee; 
-
-    //private boolean campCommittee = false; // !!!NOTE!!! cannot just have a boolean check for camp committee member
-                                           // since a student can be a camp attendee and camp committee member at the
-                                           // same time
-    private String campCommitteeNOC; // NOC: Name of Camp
-    private Enquiries[] enquiriesArray = new Enquiries[10]; // max 10 enquiries per student
-    private int enquiriesIndex = 0; // to keep track of which index the enquiry is filled to
+    private ArrayList<Camp> RegCamps;
+    private ArrayList<CAMDate> BusyDates;
 
     public Student(String FirstName, String userID, String facultyInfo) {
         super(FirstName, userID, facultyInfo);
@@ -29,69 +26,60 @@ public class Student extends Users {
         this(FirstName, userID, facultyInfo);
     }
 
-    /*
-     * this method can return the list of camps that student is a camp committee
-     * member of if student class keeps an array of camps that student is registered
-     * for
-     */
-    // public boolean getCampCommitteeStatus(){
-    // return campCommittee;
-    // }
-
-    public void getAvailCamps(CampArray currentCamps) {
+    public void viewAvailAndRegCamps(CampArray currentCamps) {
         currentCamps.viewCamps(this);
     }
 
-    public void campCommitteeInfo(String campName) {
-        campCommitteeNOC = campName;
-    }
-    // camp committee methods can have a check at the start if every method to see
-    // if campCommittee is true, then execute the method based on campCommitteeNOC
-
-    public void registerCamp(String campName, boolean campCommittee) {
-        if (campCommittee) {
-            this.campCommittee = campCommittee;
-            this.campCommitteeInfo(campName);
+    public void registerCamp(Camp camp, boolean campCommittee) {
+        // check if camp registered before
+        for (int i=0;i<RegCamps.size();i++){
+            if (camp==RegCamps.get(i)){
+                System.out.println("Camp has already been registered before!");
+                return;
+            }
         }
-        // add method to register for camp from camp class
+
+        // check if camp date clashes
+        ArrayList<CAMDate> regDates = camp.getDates();
+        for (int i=0;i<regDates.size();i++){
+            for (int j=0;j<BusyDates.size();j++){
+                if(regDates.get(i).compareTo(BusyDates.get(j))==0){
+                    System.out.println("Camp dates clashes with registered camps!");
+                    return;
+                }
+            }
+        }
+
+        // Camp Committee check
+        if (campCommittee) {
+            if (IsCampComm){
+                System.out.println("You are already a Camp Committee of another camp! Withdraw Camp Committee role and register again!");
+                return;
+            }
+            CommRole = new CampCommitteeRole(camp);
+            IsCampComm = campCommittee;
+        }
+        else{
+            CampAttendeeRole attendeeRole = new CampAttendeeRole(camp,this);
+            Attendee.add(attendeeRole);
+        }
+
+        // check if student is allowed to register for this camp, i.e. campVisibility
+        if (camp.getCampInfo().getCampVisibility() == "off"){
+            System.out.println("This camp has been closed for registration!");
+            return;
+        }
+
+        RegCamps.add(camp);
+        camp.registerStudent(super.getID(), super.getFirstName(), campCommittee, camp.getCampName());
+        for (int i=0;i<regDates.size();i++){
+            BusyDates.add(regDates.get(i));
+        }
     }
 
-    public void viewRegCamps() {
-        // need to ask if want to store an array of camps that student is currently
-        // registered for in student class itself
-    }
-
-    public void withdrawFromCamp(String campName) {
+    public void withdrawFromCamp(Camp camp) {
         // call withdraw from camp function from camp
     }
-
-    // =======================================================================================================
-    // Enquiry handling for students
-    // -------------------------------------------------------------------------------------------------------
-    // There shld be a camp Tag for each enquiry.
-    // This Camptag is auto generated when the Student is viewing a particular camp
-    // details. ie. They can only make an enquiry if he/she is viewing the details
-    // of a particular camp details.
-    // -------------------------------------------------------------------------------------------------------
-
-    // public void createEnquiry(String enqString, String campName) {
-    // enquiriesArray[enquiriesIndex] = new Enquiries(enqString);
-    // enquiriesIndex++;
-    // }
-
-    // public String viewEnquiry(int i) {
-    // return enquiriesArray[i - 1].getEnquiry();
-    // }
-
-    // public void editEnquiry(String enqString, int i) {
-    // enquiriesArray[i - 1].modifyEnquiry(enqString);
-    // }
-
-    // public void submitEnquiry(int index) {
-    // // call function from Enquiry class to submit enquiry to staff
-    // }
-
-    // =======================================================================================================
 
     public int compareTo(Users o) {
         // TODO Auto-generated method stub
@@ -99,12 +87,3 @@ public class Student extends Users {
     }
 }
 
-
-
-/*
- * have a camp committee member object and array of camp attendee object in the class
- * registering for camp need to check if student can register for the camp within student class
- *      - check for registered before
- *      - check for clashes in dates: have an arraylist of busy dates, get arraylist of dates you want to reg for from campinfo class
- *        check if there is clashes by iterating through. merge the arraylist if no clashes
- */

@@ -1,27 +1,31 @@
 package InfoExchange;
 
+import camps.Camp;
+import users.*;
+
 public class Enquiries implements Comparable<Enquiries> {
     private String enquiryID;
     private String enquiryString;
-    private String sender;
-    private String campName;
+    private Users sender;
+    private Camp camp;
 
-    public Enquiries(String enqString, String senderName, String campName) {
+
+    public Enquiries(String enqString, Users sender, Camp camp) {
         this.enquiryString = enqString;
-        this.sender = senderName;
-        this.campName = campName;
+        this.sender = sender;
+        this.camp = camp;
     }
 
     public String getEnquiry() {
         return enquiryString;
     }
 
-    public String getSender() {
+    public Users getSender() {
         return sender;
     }
 
     public String getCampName() {
-        return campName;
+        return camp.getCampName();
     }
 
     public void modifyEnquiry(String enqString) {
