@@ -92,3 +92,13 @@ public class Student extends Users {
         throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
     }
 }
+
+
+
+/*
+ * have a camp committee member object and array of camp attendee object in the class
+ * registering for camp need to check if student can register for the camp within student class
+ *      - check for registered before
+ *      - check for clashes in dates: have an arraylist of busy dates, get arraylist of dates you want to reg for from campinfo class
+ *        check if there is clashes by iterating through. merge the arraylist if no clashes
+ */
