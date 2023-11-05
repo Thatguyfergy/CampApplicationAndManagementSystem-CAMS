@@ -5,17 +5,12 @@ public class Enquiries implements Comparable<Enquiries> {
     private String enquiryString;
     private String sender;
     private String campName;
-    private Boolean submitted = false;
 
     public Enquiries(String enqString, String senderName, String campName) {
         this.enquiryString = enqString;
         this.sender = senderName;
         this.campName = campName;
     }
-
-    // public Enquiries() {
-    // this(null, null, null);
-    // }
 
     public String getEnquiry() {
         return enquiryString;
@@ -31,14 +26,6 @@ public class Enquiries implements Comparable<Enquiries> {
 
     public void modifyEnquiry(String enqString) {
         enquiryString = enqString;
-    }
-
-    public void submit() {
-        submitted = true;
-    }
-
-    public boolean getSubmitStatus() {
-        return submitted;
     }
 
     public void setEnquiryID(String id) {

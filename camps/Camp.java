@@ -1,22 +1,35 @@
 package camps;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import camdate.CAMDate;
-import users.Student;
 
-public class Camp {
+public class Camp{
     private CampInfo campInfo;
-    private String[] attendees;
-    private String[] committeeMembers;
+    private List<String> attendees;
+    private List<String> committeeMembers;
 
-    public Camp() {
+    public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
+            String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
-        this.campInfo = new CampInfo();
-        this.attendees = new String[10]; // Adjust the size as needed
-        this.committeeMembers = new String[10]; // Initialize committeeMembers array
+        this.campInfo = new CampInfo(campName, registrationClosingDate, campVisibility,
+                location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
+        this.attendees = new ArrayList<>();
+        this.committeeMembers = new ArrayList<>();
 
     }
+
+    // public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
+    //         String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
+    //     // Create campInfo
+    //     this(0, campName, registrationClosingDate, campVisibility, location, totalSlots, committeeMembersSlots,
+    //             campDescription, staffInCharge);
+
+    // }
+
+    // public int getCampID() {
+    //     return campInfo.getCampID();
+    // }
 
     public String getCampName() {
         return campInfo.getCampName();
@@ -54,56 +67,94 @@ public class Camp {
         return campInfo.getTotalSlots();
     }
 
+    public CampInfo getCampInfo() {
+        return campInfo;
+    }
 
     public void setCampDescription(String newDescription) {
         campInfo.setCampDescription(newDescription);
     }
 
     // Method to get the list of attendees
-    public String[] getAttendees() {
+    public List<String> getAttendees() {
         return attendees;
     }
 
     // Method to get the list of Committee Members
-    public String[] getCommitteeMembers() {
+    public List<String> getCommitteeMembers() {
         return committeeMembers;
     }
 
     public String toggleVisibility() {
         int totalSlots = campInfo.getTotalSlots();
-        int occupiedSlots = getAttendees().length + getCommitteeMembers().length;
+        int occupiedSlots = getAttendees().size() + getCommitteeMembers().size();
         CAMDate currentDate = new CAMDate();
         if (currentDate.compareTo(campInfo.getRegistrationClosingDate()) > 0) {
             // Past registration closing date, set visibility to "off"
             return "off";
-        } 
-        else {
-
-        if (occupiedSlots < totalSlots) {
-            // There are available slots, so set visibility to "on"
-            return "on";
         } else {
-            // All slots are taken, set visibility to "off"
-            return "off";
+
+            if (occupiedSlots < totalSlots) {
+                // There are available slots, so set visibility to "on"
+                return "on";
+            } else {
+                // All slots are taken, set visibility to "off"
+                return "off";
+            }
         }
     }
-    }
-    public void registerStudent(Student student, boolean isCampCommittee) {
-    
-    student.registerCamp(getCampName(), isCampCommittee);
 
-    // Update the camp's lists based on the registration type
-    if (isCampCommittee) {
-        // Register as a camp committee member
-        String[] committeeMembers = getCommitteeMembers();
-        // Add the student to the committeeMembers array
-        committeeMembers[committeeMembers.length] = student.getID();
-    } else {
-        // Register as an attendee
-        String[] attendees = getAttendees();
-        // Add the student to the attendees array
-        attendees[attendees.length] = student.getID();
-    }
-}
+    public void registerStudent(String StudentID, String FirstName, boolean isCampCommittee, String campName) {
 
+        if (isCampCommittee) {
+            // Register as a camp committee member
+            List<String> committeeMembers = getCommitteeMembers();
+
+            // Check if the committeeMembers list is not already at the limit
+            if (committeeMembers.size() < campInfo.getCommitteeMembersSlots()) {
+                // Add the student to the committeeMembers list
+                committeeMembers.add(FirstName);
+            }
+        } else {
+            // Register as an attendee
+            List<String> attendees = getAttendees();
+
+            // Add the student to the attendees list
+            attendees.add(FirstName);
+        }
+    }
+
+    public void addDate(CAMDate date) {
+        campInfo.addDate(date);
+    }
+
+    public void addDate(CAMDate startDate, CAMDate endDate) {
+        campInfo.addDate(startDate, endDate);
+    }
+
+    public String toString() {
+        return campInfo.toString();
+    }
+
+    public int compareTo(Camp other, String sortBy) {
+        if (sortBy.equals("campName")) {
+            return this.getCampName().compareTo(other.getCampName());
+        } else if (sortBy.equals("registrationClosingDate")) {
+            return this.getRegistrationClosingDate().compareTo(other.getRegistrationClosingDate());
+        } else if (sortBy.equals("campVisibility")) {
+            return this.getCampVisibility().compareTo(other.getCampVisibility());
+        } else if (sortBy.equals("location")) {
+            return this.getLocation().compareTo(other.getLocation());
+        } else if (sortBy.equals("totalSlots")) {
+            return -(this.getTotalSlots() - other.getTotalSlots());
+        } else if (sortBy.equals("committeeMembersSlots")) {
+            return this.getCommitteeMembersSlots() - other.getCommitteeMembersSlots();
+        } else if (sortBy.equals("campDescription")) {
+            return this.getCampDescription().compareTo(other.getCampDescription());
+        } else if (sortBy.equals("staffInCharge")) {
+            return this.getStaffInCharge().compareTo(other.getStaffInCharge());
+        } else {
+            return 0;
+        }
+    }
 }

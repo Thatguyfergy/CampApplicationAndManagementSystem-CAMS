@@ -1,18 +1,32 @@
 package users;
 
+import java.util.ArrayList;
 import InfoExchange.Enquiries;
+import camps.Camp;
 import camps.CampArray;
 
 public class Student extends Users {
-    private boolean campCommittee = false; // !!!NOTE!!! cannot just have a boolean check for camp committee member
+    private CampCommitteeRole CommRole;
+    private ArrayList<CampAttendeeRole> Attendee; 
+
+    //private boolean campCommittee = false; // !!!NOTE!!! cannot just have a boolean check for camp committee member
                                            // since a student can be a camp attendee and camp committee member at the
                                            // same time
     private String campCommitteeNOC; // NOC: Name of Camp
     private Enquiries[] enquiriesArray = new Enquiries[10]; // max 10 enquiries per student
     private int enquiriesIndex = 0; // to keep track of which index the enquiry is filled to
 
-    public Student(String userID, String facultyInfo) {
-        super(userID, facultyInfo);
+    public Student(String FirstName, String userID, String facultyInfo) {
+        super(FirstName, userID, facultyInfo);
+    }
+
+    // Hello enric, please create an overloaded constructor so that UserDatabase can
+    // use.
+    // The purpose is to read the data from the csv file and create the Student objs
+    // Make sure that EVERY (or most) of the inputs are String type.
+    // So you might need to do convertion of String to wtv type u wan urself here
+    public Student(String FirstName, String userID, String facultyInfo, String otherInformation) {
+        this(FirstName, userID, facultyInfo);
     }
 
     /*
@@ -23,14 +37,6 @@ public class Student extends Users {
     // public boolean getCampCommitteeStatus(){
     // return campCommittee;
     // }
-
-    public String getFacultyInfo() {
-        return this.getFacultyInfo();
-    }
-
-    public String getStudentID() {
-        return this.getID();
-    }
 
     public void getAvailCamps(CampArray currentCamps) {
         currentCamps.viewCamps(this);

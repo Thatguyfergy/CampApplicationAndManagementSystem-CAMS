@@ -19,6 +19,13 @@ public class CAMDate {
         this.year = year;
     }
 
+    public CAMDate(String date) {
+        String[] dateArray = date.split("/");
+        this.day = Integer.parseInt(dateArray[0]);
+        this.month = Integer.parseInt(dateArray[1]);
+        this.year = Integer.parseInt(dateArray[2]);
+    }
+
     // Getter methods for all individual fields
     public int getDay() {
         return day;
