@@ -1,10 +1,15 @@
 package users;
 
+import java.util.ArrayList;
 import InfoExchange.Enquiries;
+import camps.Camp;
 import camps.CampArray;
 
 public class Student extends Users {
-    private boolean campCommittee = false; // !!!NOTE!!! cannot just have a boolean check for camp committee member
+    private CampCommitteeRole CommRole;
+    private ArrayList<CampAttendeeRole> Attendee; 
+
+    //private boolean campCommittee = false; // !!!NOTE!!! cannot just have a boolean check for camp committee member
                                            // since a student can be a camp attendee and camp committee member at the
                                            // same time
     private String campCommitteeNOC; // NOC: Name of Camp

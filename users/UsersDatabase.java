@@ -41,15 +41,15 @@ public class UsersDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // printUsers();
+        printUsers();
     }
 
-    // private void printUsers() {
-    // System.out.println("Printing Users");
-    // for (Users user : users) {
-    // System.out.println(user.getID() + "|" + user.getPassword());
-    // }
-    // }
+    private void printUsers() {
+    System.out.println("Printing Users");
+    for (Users user : users) {
+    System.out.println(user.getID() + "|" + user.getPassword());
+    }
+    }
 
     private void updateFiles() {
         try (FileWriter csvWriterStudent = new FileWriter(studentFile)) {
