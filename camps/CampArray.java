@@ -111,6 +111,11 @@ public class CampArray {
     public void createCamp(String staffinCharge) {
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
+        // Check if the camp name already exists
+    if (campExists(campName)) {
+        System.out.println("Camp with the name '" + campName + "' already exists. Please choose a different name.");
+        return; // Exit the method
+    }
 
         System.out.println("Registration closing date (dd/mm/yyyy):");
         CAMDate registrationClosingDate = new CAMDate(scanner.nextLine());
@@ -144,6 +149,15 @@ public class CampArray {
         newCamp.addDate(startDate, endDate);
         camps.add(newCamp);
         updateFile(camps);
+    }
+    // Helper method to check if a camp with the given name already exists
+    private boolean campExists(String campName) {
+        for (Camp camp : camps) {
+            if (camp.getCampName().equalsIgnoreCase(campName)) {
+                return true; // Camp with the same name already exists
+            }
+        }
+        return false; // Camp name doesn't exist
     }
 
     // add in the logic to edit camp details
