@@ -1,7 +1,10 @@
 package camps;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
+
 
 import camdate.CAMDate;
 
@@ -20,10 +23,11 @@ public class CampArray {
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
     private String sortBy;
-
+    
     public CampArray(String campsFile) {
         sortBy = "campName";
         CampArray.campsFile = campsFile;
+
         try (BufferedReader csvReader = new BufferedReader(new FileReader(campsFile))) {
             String row;
             while ((row = csvReader.readLine()) != null) {
@@ -349,7 +353,7 @@ public class CampArray {
     }
 
     // Helper method to calculate remaining slots for attendees
-    private int getRemainingAttendeeSlots(Camp camp) {
+   private int getRemainingAttendeeSlots(Camp camp) {
         int totalSlots = camp.getTotalSlots();
         int occupiedAttendeeSlots = camp.getAttendees().size();
         int occupiedCommitteeSlots = camp.getCommitteeMembers().size();
@@ -359,7 +363,7 @@ public class CampArray {
     }
 
     // Helper method to calculate remaining slots for committee members
-    private int getRemainingCommitteeSlots(Camp camp) {
+   private int getRemainingCommitteeSlots(Camp camp) {
         int committeeMembersSlots = camp.getCommitteeMembersSlots();
         int occupiedCommitteeSlots = camp.getCommitteeMembers().size();
 
@@ -395,5 +399,5 @@ public class CampArray {
         }
         return null;
     }
-
+    
 }

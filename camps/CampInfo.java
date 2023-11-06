@@ -15,6 +15,7 @@ public class CampInfo {
     private int committeeMembersSlots;
     private String campDescription;
     private String staffInCharge;
+    
 
     // Default constructor - Set all to empty string and create comitteeMembers
     // array
