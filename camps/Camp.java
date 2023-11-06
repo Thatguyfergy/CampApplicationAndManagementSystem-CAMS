@@ -123,8 +123,10 @@ public class Camp{
             // Register as an attendee
             List<String> attendees = getAttendees();
             if (!attendees.contains(FirstName) && !hasWithdrawn(FirstName)) {
+                if(getTotalSlots()- getAttendees().size()-getCommitteeMembers().size() > 0){
             // Add the student to the attendees list
             attendees.add(FirstName);
+                }
         
     }
 }
