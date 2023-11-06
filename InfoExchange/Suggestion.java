@@ -1,15 +1,28 @@
 package InfoExchange;
 
+import users.*;
+import camps.*;
+
 public class Suggestion {
     private String suggestion;
+    private Student student;
+    private Camp camp;
     private boolean submitted = false;
     private boolean processed = false;
+    private boolean accepted = false;
     private int suggestionID;
-    private static int counter=1;
+    private static int counter;
 
-    public Suggestion(String s) {
+    public Suggestion(String s, Student std, Camp cmp) {
         suggestion = s;
+        student = std;
+        camp = cmp;
         suggestionID = counter++;
+    }
+
+    // set counter when start of program
+    public void setIDCounter(int i) {
+        counter=i;
     }
 
     public String getSuggestion() {
@@ -43,8 +56,16 @@ public class Suggestion {
         return !processed;
     }
 
-    public boolean process() {
-        if (submitted) processed=true;
+    public boolean process(boolean accept) {
+        if ((submitted) && (!processed)) {
+            processed=true;
+            accepted = accept;
+            // add points?
+        }
         return submitted;
+    }
+
+    public boolean accepted() {
+        return accepted;
     }
 }

@@ -19,8 +19,8 @@ public class UsersDatabase {
             String row;
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                // CSV Format: Name, Email, Faculty, Password, Role
-                Users user = new Student(data[0], extractUserIDString(data[1]), data[2]);
+                // CSV Format: Name, Email, Faculty, Password, CampCommCamp, CampA;CampB, busyDates
+                Users user = new Student(data[0], extractUserIDString(data[1]), data[2], data[4], data[5], data[6]);
                 user.setPassword(data[3]);
                 users.add(user);
 

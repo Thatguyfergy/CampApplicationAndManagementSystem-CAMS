@@ -18,15 +18,27 @@ public class Student extends Users {
     // }
 
     // !!! STILL NEED TO SETTLE INGESTION OF CAMPCOMM !!!
-    public Student(String FirstName, String userID, String facultyInfo, String regCamps, String busyDates) {
+    public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps, String busyDates) {
         super(FirstName, userID, facultyInfo);
         Attendee = new ArrayList<>();
         BusyDates = new ArrayList<>();
         RegCamps = new ArrayList<>();
-        for (int i=0;i<RegCamps.size();i++){
-            CampAttendeeRole attendeeRole = new CampAttendeeRole(RegCamps.get(i), this);
-            Attendee.add(attendeeRole);
+
+        if (commCamp != null) {
+            //IsCampComm = true;
+            // initialise camp comm for getCamp(commCamp)
         }
+        for (String camp : regCamps.split(";")) {
+            RegCamps.add(camp);
+        }
+        for (String date : busyDates.split(";")) {
+            BusyDates.add(new CAMDate(date));
+        }
+
+        // for (int i=0;i<RegCamps.size();i++){
+        //     CampAttendeeRole attendeeRole = new CampAttendeeRole(RegCamps.get(i), this);
+        //     Attendee.add(attendeeRole);
+        // }
     }
 
     public boolean IsCampComm(){

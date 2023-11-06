@@ -3,6 +3,7 @@ package users;
 import java.util.Scanner;
 
 import camps.*;
+import InfoExchange.*;
 
 public class Staff extends Users {
     private Scanner scanner = new Scanner(System.in);
@@ -47,7 +48,13 @@ public class Staff extends Users {
     }
 
     // Suggestion nonsense will do next time
+    public void viewSuggestions(CampArray campArray) {
+        // TODO: let campArray.viewSuggestions(this);
+    }
 
+    public void manageSuggestion(Suggestion s, boolean accept) {
+        // TODO: let campArray.manageSuggestions(this);
+    }
     // Student report generation
 
     // Performance report

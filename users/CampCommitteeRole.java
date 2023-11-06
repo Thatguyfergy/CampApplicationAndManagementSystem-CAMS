@@ -77,7 +77,8 @@ public class CampCommitteeRole {
             System.out.printf("%06d", s.getID());
             System.out.print(s.getSuggestion());
             System.out.print((s.isSubmitted())? "[Submitted, ":"[NotSubmitted, ");
-            System.out.println((s.canModify())? "Not Processed]":"Processed]");
+            System.out.println((s.canModify())? "Not Processed]":"Processed, ");
+            if (!s.canModify()) System.out.println(s.accepted()? "Accepted]":"Rejected]");
         }
     }
 

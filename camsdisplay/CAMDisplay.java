@@ -145,7 +145,7 @@ public class CAMDisplay {
             System.out.print("\033[H\033[2J"); // Clear the entire screen
 
             System.out.print(
-                    "╔═══════════════════════════════════════════════════════════════╗\n" +
+                            "╔═══════════════════════════════════════════════════════════════╗\n" +
                             "║ Camp Application & Management System - Home                   ║\n" +
                             "╚═══════════════════════════════════════════════════════════════╝\r\n");
             System.out.print("Welcome back to CAMs, Staff " + staff.getID() + "\r\n");
@@ -409,17 +409,28 @@ public class CAMDisplay {
         do {
             System.out.println("1. View Camps");
             System.out.println("2. View Remaining Camp Slots");
-            System.out.println("3. Submit Enquiry");
-            System.out.println("4. Manage your Enquiries");
-            System.out.println("5. View Registered Camps");
-            System.out.println("6. Withdraw from Camp");
-            System.out.println("7. Logout");
+            System.out.println("3. Register for Camp");
+            System.out.println("4. Submit Enquiry");
+            System.out.println("5. Manage your Enquiries");
+            System.out.println("6. View Registered Camps");
+            System.out.println("7. Withdraw from Camp");
+            System.out.println("8. Logout");
             System.out.printf("Enter your choice: ");
             choice = sc.nextInt();
-            switch (choice){
+            System.out.println();
+            switch (choice) {
                 case 1: student.viewAvailAndRegCamps(campArray); break;
                 case 2: student.viewAvailAndRegCamps(campArray); break;
-                case 3: student.listEnquiries();
+                case 3: System.out.printf("Which camp do you want to register for? ");
+                        sc.nextLine(); // flush nextline char
+                        String campname = sc.nextLine();
+                        System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
+                        boolean comm = (sc.nextInt()==1)? true:false;
+                        Camp campPtr=campArray.getCamp(campname);
+                        student.registerCamp(campPtr,comm);
+                        break;
+
+                case 4: student.listEnquiries();
                         System.out.printf("Select Enquiry to submit, input camp index: ");
                         int campindex = sc.nextInt();
                         System.out.printf("Input Enquiry index: ");
@@ -431,7 +442,7 @@ public class CAMDisplay {
                         //===========================================================================
 
                         break;
-                case 4: System.out.printf("W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nEnter your choice: ");
+                case 5: System.out.printf("W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nEnter your choice: ");
                         String enqChoice = sc.nextLine();
                         switch(enqChoice){
                             case "W",  "w": System.out.println("Write Enquiry under which camp?");
@@ -458,16 +469,17 @@ public class CAMDisplay {
                             default: System.out.println("Invalid choice");
                         }
                         break;
-                    case 5: student.viewAvailAndRegCamps(campArray); break;
-                    case 6: System.out.printf("Enter the name of the camp you are withdrawing from: ");
-                            String remCampString = sc.nextLine();
-                            Camp remCamp = campArray.getCamp(remCampString);
-                            student.withdrawFromCamp(remCamp, false);
-                            break;
-                    case 7: System.out.println("Logging out... Thank you!");
-                    default: System.out.println("Invlaid choice");
+                case 6: student.viewAvailAndRegCamps(campArray); break;
+                case 7: System.out.printf("Enter the name of the camp you are withdrawing from: ");
+                        String remCampString = sc.nextLine();
+                        Camp remCamp = campArray.getCamp(remCampString);
+                        student.withdrawFromCamp(remCamp, false);
+                        break;
+                case 8: System.out.println("Logging out... Thank you!");
+                        break;
+                default: System.out.println("Invlaid choice");
             }
-        } while(choice != 7);
+        } while(choice != 8);
     }
 
     private void committeeMemberScreen(Student student) {
