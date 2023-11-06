@@ -6,26 +6,25 @@ import users.*;
 public class Enquiries implements Comparable<Enquiries> {
     private String enquiryID;
     private String enquiryString;
-    private Users sender;
-    private Camp camp;
+    private String sender;
+    private String campName;
 
-
-    public Enquiries(String enqString, Users sender, Camp camp) {
+    public Enquiries(String enqString, String sender, String campName) {
         this.enquiryString = enqString;
         this.sender = sender;
-        this.camp = camp;
+        this.campName = campName;
     }
 
     public String getEnquiry() {
         return enquiryString;
     }
 
-    public Users getSender() {
+    public String getSender() {
         return sender;
     }
 
     public String getCampName() {
-        return camp.getCampName();
+        return campName;
     }
 
     public void modifyEnquiry(String enqString) {
