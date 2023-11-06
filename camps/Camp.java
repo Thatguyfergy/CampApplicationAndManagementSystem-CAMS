@@ -133,22 +133,16 @@ public class Camp{
     }
         }
 
-        public void withdrawFromCamp(String FirstName, Camp camp, boolean isCampCommittee) {
-    
-            if (camp != null) {
-                if (!isCampCommittee) {
-                    withdrawAttendee(camp, FirstName);
-                } else{
-                    withdrawCommitteeMember(camp, FirstName);
-                } 
-                    }
-             else {
-                System.out.println("Camp not found.");
-            }
+        public void withdrawFromCamp(String FirstName, boolean isCampCommittee) {
+            if (!isCampCommittee) {
+                withdrawAttendee(FirstName);
+            } else{
+                withdrawCommitteeMember(FirstName);
+            } 
         }
     
-        private void withdrawAttendee(Camp camp, String FirstName) {
-            List<String> attendees = camp.getAttendees();
+        private void withdrawAttendee(String FirstName) {
+            List<String> attendees = this.getAttendees();
     
             if (attendees.contains(FirstName)) {
                 attendees.remove(FirstName);
@@ -160,8 +154,8 @@ public class Camp{
             }
         }
     
-        private void withdrawCommitteeMember(Camp camp, String FirstName) {
-            List<String> committeeMembers = camp.getCommitteeMembers();
+        private void withdrawCommitteeMember(String FirstName) {
+            List<String> committeeMembers = this.getCommitteeMembers();
     
             if (committeeMembers.contains(FirstName)) {
                 committeeMembers.remove(FirstName);

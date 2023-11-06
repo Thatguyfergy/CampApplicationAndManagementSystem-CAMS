@@ -10,20 +10,35 @@ public class Student extends Users {
     private boolean IsCampComm = false;
     private CampCommitteeRole CommRole;
     private ArrayList<CampAttendeeRole> Attendee; 
-    private ArrayList<Camp> RegCamps;
+    private ArrayList<String> RegCamps;
     private ArrayList<CAMDate> BusyDates;
 
-    public Student(String FirstName, String userID, String facultyInfo) {
+    // public Student(String FirstName, String userID, String facultyInfo) {
+    //     super(FirstName, userID, facultyInfo);
+    // }
+
+    // !!! STILL NEED TO SETTLE INGESTION OF CAMPCOMM !!!
+    public Student(String FirstName, String userID, String facultyInfo, String regCamps, String busyDates) {
         super(FirstName, userID, facultyInfo);
+        Attendee = new ArrayList<>();
+        BusyDates = new ArrayList<>();
+        RegCamps = new ArrayList<>();
+        for (int i=0;i<RegCamps.size();i++){
+            CampAttendeeRole attendeeRole = new CampAttendeeRole(RegCamps.get(i), this);
+            Attendee.add(attendeeRole);
+        }
     }
 
-    // Hello enric, please create an overloaded constructor so that UserDatabase can
-    // use.
-    // The purpose is to read the data from the csv file and create the Student objs
-    // Make sure that EVERY (or most) of the inputs are String type.
-    // So you might need to do convertion of String to wtv type u wan urself here
-    public Student(String FirstName, String userID, String facultyInfo, String otherInformation) {
-        this(FirstName, userID, facultyInfo);
+    public boolean IsCampComm(){
+        return IsCampComm;
+    }
+
+    public ArrayList<CampAttendeeRole> getAttendeeArray(){
+        return this.Attendee;
+    }
+
+    public CampAttendeeRole getAttendee(int index){
+        return Attendee.get(index);
     }
 
     public void viewAvailAndRegCamps(CampArray currentCamps) {
@@ -33,7 +48,7 @@ public class Student extends Users {
     public void registerCamp(Camp camp, boolean campCommittee) {
         // check if camp registered before
         for (int i=0;i<RegCamps.size();i++){
-            if (camp==RegCamps.get(i)){
+            if (camp.getCampName().equals(RegCamps.get(i))){
                 System.out.println("Camp has already been registered before!");
                 return;
             }
@@ -60,7 +75,7 @@ public class Student extends Users {
             IsCampComm = campCommittee;
         }
         else{
-            CampAttendeeRole attendeeRole = new CampAttendeeRole(camp,this);
+            CampAttendeeRole attendeeRole = new CampAttendeeRole(camp.getCampName(),this);
             Attendee.add(attendeeRole);
         }
 
@@ -70,20 +85,56 @@ public class Student extends Users {
             return;
         }
 
-        RegCamps.add(camp);
+        RegCamps.add(camp.getCampName());
         camp.registerStudent(super.getID(), super.getFirstName(), campCommittee, camp.getCampName());
         for (int i=0;i<regDates.size();i++){
             BusyDates.add(regDates.get(i));
         }
     }
 
-    public void withdrawFromCamp(Camp camp) {
-        // call withdraw from camp function from camp
+    public void withdrawFromCamp(Camp camp, boolean campComm) {
+        if (campComm){
+            this.IsCampComm = false;
+            this.CommRole = new CampCommitteeRole(null);
+            camp.withdrawFromCamp(getFirstName(), campComm);
+        }
+        else{
+            camp.withdrawFromCamp(getFirstName(), campComm);
+            RegCamps.remove(camp.getCampName());
+            CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
+            for (int i=0;i<Attendee.size();i++){
+                if (Attendee.get(i).getCampAttending()==camp.getCampName()){
+                    remAttendee = Attendee.get(i);
+                    break;
+                }
+            }
+            Attendee.remove(remAttendee);
+            for (int i=0;i<camp.getDates().size();i++){
+                BusyDates.remove(camp.getDates().get(i));
+            }  
+        }
     }
 
-    public int compareTo(Users o) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
+    public void listEnquiries(){
+        for (int i=0;i<Attendee.size();i++){
+            System.out.println("Enquiry under camp(index): "+ Attendee.get(i).getCampAttending()+" "+"("+(i+1)+")");
+            Attendee.get(i).viewEnquiries();
+        }
+    }
+
+    public int compareTo(Users other) {
+        return this.getID().compareTo(other.getID());
+    }
+    public int compareTo(Student other, String sortBy) {
+        if (sortBy.equals("UserID")){
+            return this.getID().compareTo(other.getID());
+        }
+        else if (sortBy.equals("FirstName")){
+            return this.getFirstName().compareTo(other.getFirstName());
+        }
+        else if (sortBy.equals("FacultyInfo")){
+            return this.getFacultyInfo().compareTo(other.getFacultyInfo());
+        }
+        else return 0;
     }
 }
-

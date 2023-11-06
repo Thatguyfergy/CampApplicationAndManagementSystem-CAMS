@@ -7,23 +7,26 @@ import camps.Camp;
 
 public class CampAttendeeRole {
     private ArrayList<Enquiries> PendingEnquiries = new ArrayList<Enquiries>();
-    private Camp CampAttending;
+    private String CampAttending;
     private Student StudentAttending;
 
-    public CampAttendeeRole(Camp camp, Student student) {
+    public CampAttendeeRole(String camp, Student student) {
         CampAttending = camp;
         StudentAttending = student;
     }
 
-    public void createEnquiry(String enqString, Camp camp) {
-        Enquiries newEnquiry = new Enquiries(enqString, this.StudentAttending.getID(),
-                this.CampAttending.getCampName());
+    public String getCampAttending(){
+        return CampAttending;
+    }
+
+    public void createEnquiry(String enqString) {
+        Enquiries newEnquiry = new Enquiries(enqString, this.StudentAttending.getID(), CampAttending);
         PendingEnquiries.add(newEnquiry);
     }
 
     public void viewEnquiries() {
         for (int i = 0; i < PendingEnquiries.size(); i++) {
-            System.out.print(i + ": ");
+            System.out.print((i+1) + ": ");
             System.out.println(PendingEnquiries.get(i));
         }
     }
