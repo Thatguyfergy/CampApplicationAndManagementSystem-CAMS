@@ -134,7 +134,7 @@ public class Camp{
         public void withdrawFromCamp(String FirstName, Camp camp, boolean isCampCommittee) {
     
             if (camp != null) {
-                if (isCampCommittee) {
+                if (!isCampCommittee) {
                     withdrawAttendee(camp, FirstName);
                 } else{
                     withdrawCommitteeMember(camp, FirstName);
