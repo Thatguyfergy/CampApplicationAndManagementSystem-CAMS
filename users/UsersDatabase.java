@@ -21,12 +21,13 @@ public class UsersDatabase {
             String row;
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                // CSV Format: Name, Email, Faculty, Password, CampCommCamp, CampA;CampB,busyDates
+                // CSV Format: Name, Email, Faculty, Password, CampCommCamp,
+                // CampA;CampB,busyDates
                 Users user = new Student(data[0].trim(), extractUserIDString(data[1].trim()), data[2].trim(),
                         data[4].trim(), data[5].trim(), data[6].trim(), campArray);
                 user.setPassword(data[3].trim());
                 users.add(user);
-                
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,6 +53,14 @@ public class UsersDatabase {
         for (Users user : users) {
             System.out.println(user.getID() + "|" + user.getPassword());
         }
+    }
+
+    public String getFirstName(String userID) {
+        for (Users user : users) {
+            if (user.getID() == userID)
+                return user.getFirstName();
+        }
+        return null;
     }
 
     private void updateFiles() {
