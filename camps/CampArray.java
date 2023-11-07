@@ -458,7 +458,7 @@ public class CampArray {
                 System.out.println("Remaining Slots for Attendees: " + camp.getRemainingAttendeeSlots());
                 System.out.println("Camp Description: " + camp.getCampDescription());
                 System.out.println("Staff In Charge: " + camp.getStaffInCharge());
-                System.out.println("Camp Visibility: " + camp.getCampVisibility());
+                System.out.println("Faculty the camp is available for: " + camp.getCampVisibility());
                 if (user instanceof Staff || camp.getCommitteeMembers().contains(user.getID())) {
                     displayRegisteredStudents(camp);
                 }
