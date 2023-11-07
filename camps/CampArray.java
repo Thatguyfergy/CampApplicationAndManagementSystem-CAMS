@@ -436,7 +436,7 @@ public class CampArray {
     // this method should only be used by staff or camp committee members
     // TODO add in logic to only show details of the camp to camp committee members
     // if they are camp committee members of that camp
-    public void viewCampDetails(String campName) {
+    public void viewCampDetails(String campName, Users user) {
         // view the details of the camp
         System.out.println("Camp Details");
         System.out.println("=====================================");
@@ -447,34 +447,20 @@ public class CampArray {
                 System.out.println("Registration Closing Date: " + camp.getRegistrationClosingDate());
                 System.out.println("Location: " + camp.getLocation());
                 System.out.println("Total Slots: " + camp.getTotalSlots());
-                System.out.println("Remaining Slots for Camp Committee: " + getRemainingCommitteeSlots(camp));
-                System.out.println("Remaining Slots for Attendees: " + getRemainingAttendeeSlots(camp));
+                System.out.println("Remaining Slots for Camp Committee: " + camp.getRemainingCommitteeSlots());
+                System.out.println("Remaining Slots for Attendees: " + camp.getRemainingAttendeeSlots());
                 System.out.println("Camp Description: " + camp.getCampDescription());
                 System.out.println("Staff In Charge: " + camp.getStaffInCharge());
                 System.out.println("Camp Visibility: " + camp.getCampVisibility());
-                displayRegisteredStudents(camp);
+                if (user instanceof Staff || camp.getCommitteeMembers().contains(user.getID())) {
+                    displayRegisteredStudents(camp);
+                }
                 System.out.println(); // Add a line break for better readability
             }
         }
     }
 
-    // Helper method to calculate remaining slots for attendees
-    private int getRemainingAttendeeSlots(Camp camp) {
-        int totalSlots = camp.getTotalSlots();
-        int occupiedAttendeeSlots = camp.getAttendees().size();
-        int occupiedCommitteeSlots = camp.getCommitteeMembers().size();
-        int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
-
-        return totalSlots - totalOccupiedSlots;
-    }
-
-    // Helper method to calculate remaining slots for committee members
-    private int getRemainingCommitteeSlots(Camp camp) {
-        int committeeMembersSlots = camp.getCommitteeMembersSlots();
-        int occupiedCommitteeSlots = camp.getCommitteeMembers().size();
-
-        return committeeMembersSlots - occupiedCommitteeSlots;
-    }
+    
 
     // Helper method to display the list of registered students for a camp
     private void displayRegisteredStudents(Camp camp) {

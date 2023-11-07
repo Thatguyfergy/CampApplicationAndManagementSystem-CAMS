@@ -202,5 +202,21 @@ public class Camp {
             return 0;
         }
     }
+// Helper method to calculate remaining slots for attendees
+public int getRemainingAttendeeSlots() {
+    int totalSlots = getTotalSlots();
+    int occupiedAttendeeSlots = getAttendees().size();
+    int occupiedCommitteeSlots = getCommitteeMembers().size();
+    int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
 
+    return totalSlots - totalOccupiedSlots;
+}
+
+// Helper method to calculate remaining slots for committee members
+public int getRemainingCommitteeSlots() {
+    int committeeMembersSlots = getCommitteeMembersSlots();
+    int occupiedCommitteeSlots = getCommitteeMembers().size();
+
+    return committeeMembersSlots - occupiedCommitteeSlots;
+}
 }
