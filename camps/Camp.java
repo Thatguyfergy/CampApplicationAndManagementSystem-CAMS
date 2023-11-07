@@ -90,6 +90,10 @@ public class Camp {
         campInfo.setCampDescription(newDescription);
     }
 
+    public void setVisibility(String toggle){
+    
+    }
+
     // Method to get the list of attendees
     public List<String> getAttendees() {
         return attendees;

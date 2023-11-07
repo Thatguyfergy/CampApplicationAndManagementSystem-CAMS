@@ -22,6 +22,7 @@ public class CampArray {
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
     private String sortBy;
+    private String manualVisibility;
 
     public CampArray(String campsFile) {
         sortBy = "campName";
@@ -135,7 +136,7 @@ public class CampArray {
         System.out.println("Camp end date (dd/mm/yyyy):");
         CAMDate endDate = new CAMDate(scanner.nextLine());
 
-        System.out.println("Camp Visibility (Y/N):");
+        System.out.println("Faculty the camp is available for:");
         String campVisibility = scanner.nextLine().toUpperCase();
 
         System.out.println("Location:");
@@ -145,7 +146,7 @@ public class CampArray {
         int totalSlots = scanner.nextInt();
         scanner.nextLine(); // Flush
 
-        System.out.println("Committee Memebers Slots (Max 10):");
+        System.out.println("Committee Members Slots (Max 10):");
         int committeeMembersSlots = scanner.nextInt();
         committeeMembersSlots = committeeMembersSlots > 10 ? 10 : committeeMembersSlots;
         scanner.nextLine(); // Flush;
@@ -153,12 +154,31 @@ public class CampArray {
         System.out.println("Camp Description:");
         String campDescription = scanner.nextLine();
 
+        System.out.println("Toggle visibility for camp (on/off):");
+         manualVisibility = scanner.nextLine().toLowerCase();
+    
+
         Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
                 committeeMembersSlots, campDescription, staffinCharge);
+        // Set the visibility status based on user input
+        setManualVisibility(manualVisibility);
         newCamp.addDate(startDate, endDate);
         camps.add(newCamp);
         updateFile(camps);
         return campName;
+    }
+    //Helper method to manually set visibility on or off
+    public String setManualVisibility(String manualVisibility) {
+        if (manualVisibility.equalsIgnoreCase("on")) {
+            return "on";
+            
+        } 
+        else if (manualVisibility.equalsIgnoreCase("off")) {
+            return "off";
+        }
+        else{
+            return manualVisibility;
+        }
     }
 
     // Helper method to check if a camp with the given name already exists
@@ -190,11 +210,10 @@ public class CampArray {
                 break;
             case 2:
                 // Add logic to edit Registration Closing Date
-                // Example: targetCamp.getCampInfo().setRegistrationClosingDate(new
-                // CAMDate(newDate));
+                // targetCamp.getCampInfo().setRegistrationClosingDate(newCAMDate(newDate));
                 break;
             case 3:
-                System.out.println("Enter new visibility for the camp (Y/N):");
+                System.out.println("Enter Faculty for the camp:");
                 String newVisibility = scanner.nextLine().toUpperCase();
                 targetCamp.getCampInfo().setCampVisibility(newVisibility);
                 break;
@@ -227,14 +246,18 @@ public class CampArray {
                 break;
             case 9:
                 // Add logic to add dates
-                // Example: targetCamp.getCampInfo().addDate(new CAMDate(startDate), new
-                // CAMDate(endDate));
+                //targetCamp.getCampInfo().addDate(new CAMDate(startDate), newCAMDate(endDate));
                 break;
             case 10:
                 // Add logic to remove dates
-                // Example: targetCamp.getCampInfo().removeDate(new CAMDate(dateToRemove));
+                //targetCamp.getCampInfo().removeDate(new CAMDate(dateToRemove));
                 break;
             case 11:
+                System.out.println("Enter new visibility for camp (on/off):");
+                manualVisibility = scanner.nextLine().toLowerCase();
+                setManualVisibility(manualVisibility);
+                break;
+            case 12:
                 System.out.println("Exiting editCamp");
                 break;
             default:
@@ -245,6 +268,8 @@ public class CampArray {
 
         System.out.println("Camp edited successfully");
     }
+
+    
 
     public boolean checkCampExists(String campName) {
         for (Camp camp : camps) {
@@ -363,7 +388,7 @@ public class CampArray {
             System.out.println(
                     "============================================================================================================================================");
             for (Camp camp : camps) {
-                if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on"))
+                if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on")||setManualVisibility(manualVisibility).equalsIgnoreCase("on"))
                         && (canSeeAllCamps
                                 || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility()))) {
                     String campName = truncateWithEllipsis(camp.getCampName(), 15);
