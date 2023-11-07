@@ -18,32 +18,42 @@ public class EnquiriesArray {
     private static String repliesFile;
 
     // Constructor will load Arrays from the csv files
-    public EnquiriesArray(String enquiriesFile, String repliesFile) throws IOException, FileNotFoundException {
+    public EnquiriesArray(String enquiriesFile, String repliesFile) {
         EnquiriesArray.enquiriesFile = enquiriesFile;
         EnquiriesArray.repliesFile = repliesFile;
 
         // Load the Enquiries
-        BufferedReader csvReader = new BufferedReader(new FileReader(enquiriesFile));
-        String row;
-        while ((row = csvReader.readLine()) != null) {
-            String[] data = row.split(",");
-            // CSV Format: enquiryID | enquiryString | sender | campName
-            Enquiries enquiry = new Enquiries(data[1], data[2], data[3]);
-            enquiry.setEnquiryID(data[0]);
-            enquiries.add(enquiry);
-        }
-        csvReader.close();
+        BufferedReader csvReader;
+        try {
+            csvReader = new BufferedReader(new FileReader(enquiriesFile));
+            String row;
+            while ((row = csvReader.readLine()) != null) {
+                String[] data = row.split(",");
+                // CSV Format: enquiryID | enquiryString | sender | campName
+                Enquiries enquiry = new Enquiries(data[1], data[2], data[3]);
+                enquiry.setEnquiryID(data[0]);
+                enquiries.add(enquiry);
+            }
+            csvReader.close();
 
-        // Load the Replies
-        csvReader = new BufferedReader(new FileReader(repliesFile));
-        while ((row = csvReader.readLine()) != null) {
-            String[] data = row.split(",");
-            // CSV Format: enquiryID | replyID | replyString | recipient | replyCreator
-            EnqReplies reply = new EnqReplies(data[2], data[1], data[3],
-                    data[0], data[4]);
-            replies.add(reply);
+            // Load the Replies
+            csvReader = new BufferedReader(new FileReader(repliesFile));
+            while ((row = csvReader.readLine()) != null) {
+                String[] data = row.split(",");
+                // CSV Format: enquiryID | replyID | replyString | recipient | replyCreator
+                EnqReplies reply = new EnqReplies(data[2], data[1], data[3],
+                        data[0], data[4]);
+                replies.add(reply);
+            }
+            csvReader.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        csvReader.close();
+
     }
 
     // The enquiryID will only be generated after submission.
