@@ -394,15 +394,18 @@ public class CAMDisplay {
     }
 
     private void studentScreen(Student student) {
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
         int choice=-1;
         int logout = (student.IsCampComm())? 14:8;
         Scanner sc = new Scanner(System.in);
-        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println("║ Camp Application & Management System - Home                     ║");
-        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-        System.out.println("Welcome back to CAMs, Student " + student.getID()
-                + "! Where we get to explore the amazing camps planned!");
+        
         do {
+            // System.out.print("\033[H\033[2J"); // Clear the entire screen
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("║ Camp Application & Management System - Home                     ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println("Welcome back to CAMs, Student " + student.getID()
+                    + "! Where we get to explore the amazing camps planned!");
             System.out.println("1. View Camps");
             System.out.println("2. View Remaining Camp Slots");
             System.out.println("3. Register for Camp");
@@ -527,6 +530,8 @@ public class CAMDisplay {
 
                 default: System.out.println("Invalid choice");
             }
+            // System.out.println("Press Enter to return to menu.");
+            // sc.nextLine();
         } while(choice != logout);
     }
 
