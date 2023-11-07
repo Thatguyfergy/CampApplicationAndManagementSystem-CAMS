@@ -27,6 +27,13 @@ public class CAMDisplay {
 
     public void startScreen() {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.println();
+        System.out.println(" ██████╗ █████╗ ███╗   ███╗███████╗");
+        System.out.println("██╔════╝██╔══██╗████╗ ████║██╔════╝");
+        System.out.println("██║     ███████║██╔████╔██║███████╗");
+        System.out.println("██║     ██╔══██║██║╚██╔╝██║╚════██║");
+        System.out.println("╚██████╗██║  ██║██║ ╚═╝ ██║███████║");
+        System.out.println(" ╚═════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝");
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║ Camp Application & Management System                            ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
