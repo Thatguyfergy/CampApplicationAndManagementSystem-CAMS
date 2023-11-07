@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-
 import camdate.CAMDate;
 
 import java.io.BufferedReader;
@@ -23,7 +22,7 @@ public class CampArray {
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
     private String sortBy;
-    
+
     public CampArray(String campsFile) {
         sortBy = "campName";
         CampArray.campsFile = campsFile;
@@ -35,9 +34,10 @@ public class CampArray {
                 // CSV Format: Name | Dates | Closing Date | Visibility |
                 // Location | Total Slots | Committee Members |
                 // Committee Mem slots | Description | Staff-In-Charge | Attendees
-                Camp camp = new Camp(data[0], new CAMDate(data[2]), data[3], data[4],
-                        Integer.parseInt(data[5]), Integer.parseInt(data[7]), data[8], data[9]);
-                for (String date : data[1].split(";")) {
+                Camp camp = new Camp(data[0].trim(), new CAMDate(data[2].trim()), data[3].trim(), data[4].trim(),
+                        Integer.parseInt(data[5].trim()), Integer.parseInt(data[7].trim()), data[8].trim(),
+                        data[9].trim());
+                for (String date : data[1].trim().split(";")) {
                     camp.addDate(new CAMDate(date));
                 }
                 camps.add(camp);
@@ -112,10 +112,10 @@ public class CampArray {
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
         // Check if the camp name already exists
-    if (campExists(campName)) {
-        System.out.println("Camp with the name '" + campName + "' already exists. Please choose a different name.");
-        return; // Exit the method
-    }
+        if (campExists(campName)) {
+            System.out.println("Camp with the name '" + campName + "' already exists. Please choose a different name.");
+            return; // Exit the method
+        }
 
         System.out.println("Registration closing date (dd/mm/yyyy):");
         CAMDate registrationClosingDate = new CAMDate(scanner.nextLine());
@@ -150,6 +150,7 @@ public class CampArray {
         camps.add(newCamp);
         updateFile(camps);
     }
+
     // Helper method to check if a camp with the given name already exists
     private boolean campExists(String campName) {
         for (Camp camp : camps) {
@@ -258,11 +259,13 @@ public class CampArray {
     public void viewCamps(Users user, String sortBy) {
         sortCamps(sortBy);
         System.out.println("Camps sorted by " + sortBy);
-        System.out.println("============================================================================================================================================");
+        System.out.println(
+                "============================================================================================================================================");
         System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
                 "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description", "S-I-C");
-        System.out.println("============================================================================================================================================");
-        
+        System.out.println(
+                "============================================================================================================================================");
+
         for (Camp camp : camps) {
             String campName = truncateWithEllipsis(camp.getCampName(), 15);
             String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
@@ -273,15 +276,15 @@ public class CampArray {
             String committeeSlots = truncateWithEllipsis(String.valueOf(camp.getCommitteeMembersSlots()), 6);
             String description = truncateWithEllipsis(camp.getCampDescription(), 25);
             String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-        
+
             System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
                     campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
                     description, staffInCharge);
         }
-        System.out.println("============================================================================================================================================");
+        System.out.println(
+                "============================================================================================================================================");
     }
-    
-    
+
     private String truncateWithEllipsis(String input, int width) {
         if (input.length() > width) {
             return input.substring(0, width - 3) + "...";
@@ -289,7 +292,6 @@ public class CampArray {
             return String.format("%-" + width + "s", input);
         }
     }
-    
 
     public void viewCamps(Users user) {
         // Display camps based on different visibility requirements
@@ -304,8 +306,8 @@ public class CampArray {
             System.out.println("=====================================");
             for (Camp camp : camps) {
                 System.out.println(camp.toString()); // Return Camps in string format
-                //System.out.println(); // Add a line break for better readability
-                //displayRegisteredStudents(camp);
+                // System.out.println(); // Add a line break for better readability
+                // displayRegisteredStudents(camp);
                 System.out.println(); // Add a line break for better readability
                 System.out.println("-------------------------------------");
             }
@@ -403,7 +405,7 @@ public class CampArray {
     }
 
     // Helper method to calculate remaining slots for attendees
-   private int getRemainingAttendeeSlots(Camp camp) {
+    private int getRemainingAttendeeSlots(Camp camp) {
         int totalSlots = camp.getTotalSlots();
         int occupiedAttendeeSlots = camp.getAttendees().size();
         int occupiedCommitteeSlots = camp.getCommitteeMembers().size();
@@ -413,7 +415,7 @@ public class CampArray {
     }
 
     // Helper method to calculate remaining slots for committee members
-   private int getRemainingCommitteeSlots(Camp camp) {
+    private int getRemainingCommitteeSlots(Camp camp) {
         int committeeMembersSlots = camp.getCommitteeMembersSlots();
         int occupiedCommitteeSlots = camp.getCommitteeMembers().size();
 
@@ -449,5 +451,5 @@ public class CampArray {
         }
         return null;
     }
-    
+
 }
