@@ -367,6 +367,15 @@ public class CampArray {
         } else if (user instanceof Student) {
 
             Student studentUser = (Student) user;
+            boolean canSeeAllCamps = false;
+
+            // Check if any camp has visibility set to "NTU"
+            for (Camp camp : camps) {
+                if (camp.getCampVisibility().equalsIgnoreCase("NTU")) {
+                    canSeeAllCamps = true;
+                    break;
+                }
+            }
             // Display only camps open to the student's user group with visibility toggled
             // "on"
             // and display remaining slots for each camp open to the student
@@ -380,8 +389,8 @@ public class CampArray {
             System.out.println(
                     "============================================================================================================================================");
             for (Camp camp : camps) {
-                if (camp.toggleVisibility().equalsIgnoreCase("on")
-                        && studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility())) {
+                if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on"))
+                && (canSeeAllCamps || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility()))) {
                     String campName = truncateWithEllipsis(camp.getCampName(), 15);
                     String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
                     String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
