@@ -458,9 +458,17 @@ public class CAMDisplay {
                     ScreenClearFn();
                     break;
                 case 2:
-                    System.out.printf("Which camp do you want to register for? ");
+                    student.viewAvailAndRegCamps(campArray, "campName");
+                    String campname;
+                    System.out.printf("\nWhich camp do you want to register for? ");
                     sc.nextLine(); // flush nextline char
-                    String campname = sc.nextLine();
+                    campname = sc.nextLine();
+                    do {
+                    if (campArray.checkCampExists(campname)) break;
+                    System.out.println("No such Camp! Please try again.");
+                    System.out.printf("\nWhich camp do you want to register for? ");
+                    campname = sc.nextLine();
+                    }while (true);
                     System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
                     boolean comm = (inputInt.nextInt(sc) == 1) ? true : false;
                     Camp campPtr = campArray.getCamp(campname);
