@@ -129,7 +129,7 @@ public class Student extends Users {
         // Camp Committee check
         if (IsCampComm) {
             System.out.println(
-                    "You are already a Camp Committee of another camp! Withdraw Camp Committee role and register again!");
+                    "You are already a Camp Committee of another camp!");
             return;
         }
 
