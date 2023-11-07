@@ -133,7 +133,7 @@ public class Camp{
             if (!attendees.contains(StudentID) && !hasWithdrawn(StudentID)) {
                 if(getTotalSlots()- getAttendees().size()-getCommitteeMembers().size() > 0){
             // Add the student to the attendees list
-            attendees.add(FirstName);
+            attendees.add(StudentID);
                 }
         
     }
