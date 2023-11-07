@@ -79,6 +79,10 @@ public class Camp{
         return campInfo;
     }
 
+    public void displayCampInfo() {
+        campInfo.displayCampInfo();
+    }
+
     public void setCampDescription(String newDescription) {
         campInfo.setCampDescription(newDescription);
     }
@@ -117,16 +121,16 @@ public class Camp{
         if (isCampCommittee) {
             // Register as a camp committee member
             List<String> committeeMembers = getCommitteeMembers();
-            if (!committeeMembers.contains(FirstName) && !hasWithdrawn(FirstName)) {
+            if (!committeeMembers.contains(StudentID) && !hasWithdrawn(StudentID)) {
             // Check if the committeeMembers list is not already at the limit
             if (committeeMembers.size() < campInfo.getCommitteeMembersSlots()) {
                 // Add the student to the committeeMembers list
-                committeeMembers.add(FirstName);
+                committeeMembers.add(StudentID);
             }
         } else {
             // Register as an attendee
             List<String> attendees = getAttendees();
-            if (!attendees.contains(FirstName) && !hasWithdrawn(FirstName)) {
+            if (!attendees.contains(StudentID) && !hasWithdrawn(StudentID)) {
                 if(getTotalSlots()- getAttendees().size()-getCommitteeMembers().size() > 0){
             // Add the student to the attendees list
             attendees.add(FirstName);
@@ -137,20 +141,16 @@ public class Camp{
     }
         }
 
-        public void withdrawFromCamp(String FirstName, boolean isCampCommittee) {
-            if (!isCampCommittee) {
-                withdrawAttendee(FirstName);
-            } else{
-                withdrawCommitteeMember(FirstName);
-            } 
+        public void withdrawFromCamp(String StudentID) {
+                withdrawAttendee(StudentID);
         }
     
-        private void withdrawAttendee(String FirstName) {
+        private void withdrawAttendee(String StudentID) {
             List<String> attendees = this.getAttendees();
     
-            if (attendees.contains(FirstName)) {
-                attendees.remove(FirstName);
-                withdrawnStudents.add(FirstName); // Add the student to withdrawn list
+            if (attendees.contains(StudentID)) {
+                attendees.remove(StudentID);
+                withdrawnStudents.add(StudentID); // Add the student to withdrawn list
                 System.out.println("Withdrawal successful. Student removed from the attendee list.");
     
             } else {
@@ -158,22 +158,9 @@ public class Camp{
             }
         }
     
-        private void withdrawCommitteeMember(String FirstName) {
-            List<String> committeeMembers = this.getCommitteeMembers();
-    
-            if (committeeMembers.contains(FirstName)) {
-                committeeMembers.remove(FirstName);
-                withdrawnStudents.add(FirstName); // Add the student to withdrawn list
-                System.out.println("Withdrawal successful. Student removed from the committee member list.");
-    
-            } 
-            else{
-                System.out.println("Student is not registered as a committee member for this camp.");
-            }
-        }
 
-    private boolean hasWithdrawn(String FirstName) {
-        return withdrawnStudents.contains(FirstName);
+    private boolean hasWithdrawn(String StudentID) {
+        return withdrawnStudents.contains(StudentID);
     }
 
     public void addDate(CAMDate date) {

@@ -58,6 +58,10 @@ public class CampCommitteeRole {
         return camp.getStaffInCharge();
     }
 
+    public void displayCampInfo() {
+        camp.displayCampInfo();
+    }
+
     // Method to get the list of attendees
     public List<String> getCampAttendees() {
         return camp.getAttendees();

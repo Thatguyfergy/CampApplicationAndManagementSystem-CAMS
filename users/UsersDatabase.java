@@ -6,12 +6,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import camps.*;
+
 public class UsersDatabase {
     private static ArrayList<Users> users = new ArrayList<Users>();
     private static String studentFile = "csvfiles\\students.csv";
     private static String staffFile = "csvfiles\\staff.csv";
 
-    public UsersDatabase(String studentFile, String staffFile) {
+    public UsersDatabase(String studentFile, String staffFile, CampArray campArray) {
         UsersDatabase.studentFile = studentFile;
         UsersDatabase.staffFile = staffFile;
 
@@ -19,11 +21,12 @@ public class UsersDatabase {
             String row;
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                // CSV Format: Name, Email, Faculty, Password, CampCommCamp, CampA;CampB, busyDates
-                Users user = new Student(data[0], extractUserIDString(data[1]), data[2], data[4], data[5], data[6]);
-                user.setPassword(data[3]);
+                // CSV Format: Name, Email, Faculty, Password, CampCommCamp, CampA;CampB,busyDates
+                Users user = new Student(data[0].trim(), extractUserIDString(data[1].trim()), data[2].trim(),
+                        data[4].trim(), data[5].trim(), data[6].trim(), campArray);
+                user.setPassword(data[3].trim());
                 users.add(user);
-
+                
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,10 +48,10 @@ public class UsersDatabase {
     }
 
     private void printUsers() {
-    System.out.println("Printing Users");
-    for (Users user : users) {
-    System.out.println(user.getID() + "|" + user.getPassword());
-    }
+        System.out.println("Printing Users");
+        for (Users user : users) {
+            System.out.println(user.getID() + "|" + user.getPassword());
+        }
     }
 
     private void updateFiles() {
@@ -96,7 +99,7 @@ public class UsersDatabase {
     public Users login(String username, String password) {
         for (Users user : users) {
             if (user.getID().equals(username)) {
-                if (user.checkPassword(password)) {
+                if (user.checkPassword(password.trim())) {
                     return user;
                 } else {
                     // Wrong password

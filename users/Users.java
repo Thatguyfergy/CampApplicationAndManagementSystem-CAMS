@@ -5,6 +5,7 @@ public abstract class Users implements Comparable<Users> {
     private String userID;
     private String password = "password";
     private String facultyInfo;
+    public Object users;
 
     public Users(String FirstName, String userID, String facultyInfo) {
         this.FirstName = FirstName;

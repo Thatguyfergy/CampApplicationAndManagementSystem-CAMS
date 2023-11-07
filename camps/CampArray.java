@@ -34,9 +34,10 @@ public class CampArray {
                 // CSV Format: Name | Dates | Closing Date | Visibility |
                 // Location | Total Slots | Committee Members |
                 // Committee Mem slots | Description | Staff-In-Charge | Attendees
-                Camp camp = new Camp(data[0], new CAMDate(data[2]), data[3], data[4],
-                        Integer.parseInt(data[5]), Integer.parseInt(data[7]), data[8], data[9]);
-                for (String date : data[1].split(";")) {
+                Camp camp = new Camp(data[0].trim(), new CAMDate(data[2].trim()), data[3].trim(), data[4].trim(),
+                        Integer.parseInt(data[5].trim()), Integer.parseInt(data[7].trim()), data[8].trim(),
+                        data[9].trim());
+                for (String date : data[1].trim().split(";")) {
                     camp.addDate(new CAMDate(date));
                 }
                 camps.add(camp);
@@ -268,36 +269,51 @@ public class CampArray {
         // For Staff - No filters since every staff can view every camp
         // For Students - filter by committeeMembers
         sortCamps(sortBy);
+        System.out.println("Camps sorted by " + sortBy);
+        System.out.println("============================================================================================================================================");
+        System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
+                "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description", "S-I-C");
+        System.out.println("============================================================================================================================================");
+        
+        for (Camp camp : camps) {
+            String campName = truncateWithEllipsis(camp.getCampName(), 15);
+            String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
+            String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
+            String availability = truncateWithEllipsis(camp.getCampVisibility(), 6);
+            String location = truncateWithEllipsis(camp.getLocation(), 10);
+            String totalSlots = truncateWithEllipsis(String.valueOf(camp.getTotalSlots()), 6);
+            String committeeSlots = truncateWithEllipsis(String.valueOf(camp.getCommitteeMembersSlots()), 6);
+            String description = truncateWithEllipsis(camp.getCampDescription(), 25);
+            String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
+        
+            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
+                    campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
+                    description, staffInCharge);
+        }
+        System.out.println("============================================================================================================================================");
+    }
+    
+    
+    
+
+    public void viewCamps(Users user) {
+        // Display camps based on different visibility requirements
+        // For Staff - No filters since every staff can view every camp
+        // For Students - filter by committeeMembers
+
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
 
             // Display all camps
-            System.out.println("Camps sorted by " + sortBy);
-            System.out.println(
-                    "============================================================================================================================================");
-            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
-                    "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description",
-                    "S-I-C");
-            System.out.println(
-                    "============================================================================================================================================");
-
+            System.out.println("All Camps");
+            System.out.println("=====================================");
             for (Camp camp : camps) {
-                String campName = truncateWithEllipsis(camp.getCampName(), 15);
-                String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
-                String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
-                String availability = truncateWithEllipsis(camp.getCampVisibility(), 6);
-                String location = truncateWithEllipsis(camp.getLocation(), 10);
-                String totalSlots = truncateWithEllipsis(String.valueOf(camp.getTotalSlots()), 6);
-                String committeeSlots = truncateWithEllipsis(String.valueOf(camp.getCommitteeMembersSlots()), 6);
-                String description = truncateWithEllipsis(camp.getCampDescription(), 25);
-                String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-
-                System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
-                        campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
-                        description, staffInCharge);
+                System.out.println(camp.toString()); // Return Camps in string format
+                //System.out.println(); // Add a line break for better readability
+                //displayRegisteredStudents(camp);
+                System.out.println(); // Add a line break for better readability
+                System.out.println("-------------------------------------");
             }
-            System.out.println(
-                    "============================================================================================================================================");
 
             // Display camps created by the staff if they are the staffInCharge
             System.out.println("\nYour Created Camps:");
