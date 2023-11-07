@@ -117,7 +117,6 @@ public class Camp{
     }
 
     public void registerStudent(String StudentID, String FirstName, boolean isCampCommittee, String campName) {
-
         if (isCampCommittee) {
             // Register as a camp committee member
             List<String> committeeMembers = getCommitteeMembers();
