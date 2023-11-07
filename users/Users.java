@@ -37,4 +37,20 @@ public abstract class Users implements Comparable<Users> {
     public String getFacultyInfo() {
         return facultyInfo;
     }
+
+    public int compareTo(Users other) {
+        return this.getID().compareTo(other.getID());
+    }
+    public int compareTo(Users other, String sortBy) {
+        if (sortBy.equals("UserID")){
+            return this.getID().compareTo(other.getID());
+        }
+        else if (sortBy.equals("FirstName")){
+            return this.getFirstName().compareTo(other.getFirstName());
+        }
+        else if (sortBy.equals("FacultyInfo")){
+            return this.getFacultyInfo().compareTo(other.getFacultyInfo());
+        }
+        else return 0;
+    }
 }
