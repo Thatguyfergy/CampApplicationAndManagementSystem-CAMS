@@ -19,9 +19,9 @@ public class Student extends Users {
 
     public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps, String busyDates, CampArray campArray) {
         super(FirstName, userID, facultyInfo);
-        Attendee = new ArrayList<>();
-        BusyDates = new ArrayList<>();
-        RegCamps = new ArrayList<>();
+        Attendee = new ArrayList<CampAttendeeRole>();
+        BusyDates = new ArrayList<CAMDate>();
+        RegCamps = new ArrayList<String>();
 
         if (commCamp != null) {
             IsCampComm = true;
@@ -110,7 +110,7 @@ public class Student extends Users {
             }
         }
         else{
-            camp.withdrawFromCamp(getFirstName());
+            camp.withdrawFromCamp(getID());
             RegCamps.remove(camp.getCampName());
             CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
             for (int i=0;i<Attendee.size();i++){
@@ -137,19 +137,5 @@ public class Student extends Users {
         return CommRole;
     }
 
-    public int compareTo(Users other) {
-        return this.getID().compareTo(other.getID());
-    }
-    public int compareTo(Student other, String sortBy) {
-        if (sortBy.equals("UserID")){
-            return this.getID().compareTo(other.getID());
-        }
-        else if (sortBy.equals("FirstName")){
-            return this.getFirstName().compareTo(other.getFirstName());
-        }
-        else if (sortBy.equals("FacultyInfo")){
-            return this.getFacultyInfo().compareTo(other.getFacultyInfo());
-        }
-        else return 0;
-    }
+    
 }

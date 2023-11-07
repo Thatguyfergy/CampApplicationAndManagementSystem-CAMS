@@ -15,7 +15,7 @@ public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray = new CampArray("csvfiles\\camps.csv");
-
+    private EnquiriesArray enquiriesArray = new EnquiriesArray("csvfiles\\enquiries.csv", "csvfiles\\replies.csv");
     private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
             "csvfiles/usersStaff.csv", campArray);
     
@@ -393,19 +393,7 @@ public class CAMDisplay {
         userScreen(user);
     }
 
-    public void studentScreen(Student student) {
-        // ==TODO==: if student is committeMember use committeeMemberScreen else use
-        // attendeeScreen
-        // if (student.IsCampComm()){
-        //     this.committeeMemberScreen(student);
-        // }
-        // else {
-        //     this.attendeeScreen(student);
-        // }
-        this.attendeeScreen(student);
-    }
-
-    private void attendeeScreen(Student student) {
+    private void studentScreen(Student student) {
         int choice=-1;
         int logout = (student.IsCampComm())? 14:8;
         Scanner sc = new Scanner(System.in);
@@ -459,8 +447,8 @@ public class CAMDisplay {
                     int campindex = sc.nextInt();
                     System.out.printf("Input Enquiry index: ");
                     int enqindex = sc.nextInt();
-
-                        break;
+                    student.getAttendee(campindex-1).submitEnquiry(enquiriesArray, enqindex-1);
+                    break;
                 case 5: System.out.printf("W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nEnter your choice: ");
                         String enqChoice = sc.nextLine();
                         switch(enqChoice){
@@ -492,7 +480,7 @@ public class CAMDisplay {
                 case 7: System.out.printf("Enter the name of the camp you are withdrawing from: ");
                         String remCampString = sc.nextLine();
                         Camp remCamp = campArray.getCamp(remCampString);
-                        student.withdrawFromCamp(remCamp, false);
+                        student.withdrawFromCamp(remCamp);
                         break;
                 case 8: if (student.IsCampComm()) {
                             // view camp details for own camp
@@ -542,27 +530,27 @@ public class CAMDisplay {
         } while(choice != logout);
     }
 
-    private void committeeMemberScreen(Student student) {
-        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println("║ Camp Application & Management System - Home                     ║");
-        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-        System.out.println("Welcome back to CAMs, Student " + student.getID()
-                + "! Where we get to explore the amazing camps planned!");
-        System.out.println("1. View Camps");
-        System.out.println("2. View Remaining Camp Slots");
-        System.out.println("3. Submit Enquiry");
-        System.out.println("4. View your Enquiries");
-        System.out.println("6. View Registered Camps");
-        System.out.println("7. Withdraw from Camp");
-        System.out.println("Committee Member Options:");
-        System.out.println("8. View Camp Details");
-        System.out.println("9. Submit Suggestion");
-        System.out.println("10. View Suggestions");
-        System.out.println("11. View Enquiries");
-        System.out.println("12. Reply Enquiries");
-        System.out.println("13. Generate Camp Report");
-        System.out.println("14. Logout");
-        System.out.printf("Enter your choice: ");
-    }
+    // private void committeeMemberScreen(Student student) {
+    //     System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+    //     System.out.println("║ Camp Application & Management System - Home                     ║");
+    //     System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+    //     System.out.println("Welcome back to CAMs, Student " + student.getID()
+    //             + "! Where we get to explore the amazing camps planned!");
+    //     System.out.println("1. View Camps");
+    //     System.out.println("2. View Remaining Camp Slots");
+    //     System.out.println("3. Submit Enquiry");
+    //     System.out.println("4. View your Enquiries");
+    //     System.out.println("6. View Registered Camps");
+    //     System.out.println("7. Withdraw from Camp");
+    //     System.out.println("Committee Member Options:");
+    //     System.out.println("8. View Camp Details");
+    //     System.out.println("9. Submit Suggestion");
+    //     System.out.println("10. View Suggestions");
+    //     System.out.println("11. View Enquiries");
+    //     System.out.println("12. Reply Enquiries");
+    //     System.out.println("13. Generate Camp Report");
+    //     System.out.println("14. Logout");
+    //     System.out.printf("Enter your choice: ");
+    // }
 
 }
