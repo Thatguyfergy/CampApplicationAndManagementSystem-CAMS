@@ -129,19 +129,18 @@ public class Camp {
                     // Add the student to the committeeMembers list
                     committeeMembers.add(StudentID);
                 }
-            } 
-        }
-        else {
-                // Register as an attendee
-                List<String> attendees = getAttendees();
-                if (!attendees.contains(StudentID) && !hasWithdrawn(StudentID)) {
-                    if (getTotalSlots() - getAttendees().size() - getCommitteeMembers().size() > 0) {
-                        // Add the student to the attendees list
-                        attendees.add(StudentID);
-                    }
-
-                }
             }
+        } else {
+            // Register as an attendee
+            List<String> attendees = getAttendees();
+            if (!attendees.contains(StudentID) && !hasWithdrawn(StudentID)) {
+                if (getTotalSlots() - getAttendees().size() - getCommitteeMembers().size() > 0) {
+                    // Add the student to the attendees list
+                    attendees.add(StudentID);
+                }
+
+            }
+        }
     }
 
     public void withdrawFromCamp(String StudentID) {
@@ -195,29 +194,37 @@ public class Camp {
         } else if (sortBy.equals("staffInCharge")) {
             return this.getStaffInCharge().compareTo(other.getStaffInCharge());
         } else if (sortBy.equals("startDate")) {
-            String startDate = this.getDates().get(0).toString();
-            return startDate.compareTo(other.getDates().get(0).toString());
+            CAMDate thisStartDate = new CAMDate(this.getDates().get(0).toString());
+            CAMDate otherStartDate = new CAMDate(other.getDates().get(0).toString());
+            return thisStartDate.compareTo(otherStartDate);
         } else if (sortBy.equals("popularity")) {
-            return 1;
+            float thisPopularity = (float) this.getNumOfAttendees() / this.getTotalSlots();
+            float otherPopularity = (float) other.getNumOfAttendees() / other.getTotalSlots();
+            return -Float.compare(thisPopularity, otherPopularity);
         } else {
             return 0;
         }
     }
-// Helper method to calculate remaining slots for attendees
-public int getRemainingAttendeeSlots() {
-    int totalSlots = getTotalSlots();
-    int occupiedAttendeeSlots = getAttendees().size();
-    int occupiedCommitteeSlots = getCommitteeMembers().size();
-    int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
 
-    return totalSlots - totalOccupiedSlots;
-}
+    public int getNumOfAttendees() {
+        return getAttendees().size();
+    }
 
-// Helper method to calculate remaining slots for committee members
-public int getRemainingCommitteeSlots() {
-    int committeeMembersSlots = getCommitteeMembersSlots();
-    int occupiedCommitteeSlots = getCommitteeMembers().size();
+    // Helper method to calculate remaining slots for attendees
+    public int getRemainingAttendeeSlots() {
+        int totalSlots = getTotalSlots();
+        int occupiedAttendeeSlots = getAttendees().size();
+        int occupiedCommitteeSlots = getCommitteeMembers().size();
+        int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
 
-    return committeeMembersSlots - occupiedCommitteeSlots;
-}
+        return totalSlots - totalOccupiedSlots;
+    }
+
+    // Helper method to calculate remaining slots for committee members
+    public int getRemainingCommitteeSlots() {
+        int committeeMembersSlots = getCommitteeMembersSlots();
+        int occupiedCommitteeSlots = getCommitteeMembers().size();
+
+        return committeeMembersSlots - occupiedCommitteeSlots;
+    }
 }

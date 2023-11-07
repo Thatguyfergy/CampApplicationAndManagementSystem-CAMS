@@ -354,6 +354,8 @@ public class CAMDisplay {
                 "3. Camp Visibility\n" +
                 "4. Camp location\n" +
                 "5. Camp Staff-In-Charge\n" +
+                "6. Camp Dates\n" +
+                "7. Popularity\n"+
                 "Enter your choice: ");
         choice = sc.nextLine();
         System.out.println();
@@ -373,6 +375,11 @@ public class CAMDisplay {
                 break;
             case "5":
                 sortBy = "staffInCharge";
+                break;
+            case "6":
+                sortBy = "startDate";
+            case "7":
+                sortBy = "popularity";
                 break;
             default:
                 System.out.println("Invalid choice! - Sorting by Camp Name");
