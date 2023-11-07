@@ -369,7 +369,7 @@ public class CampArray {
             Student studentUser = (Student) user;
             boolean canSeeAllCamps = false;
 
-            // Check if any camp has visibility set to "NTU"
+            // Check if any camp availability has been set to "NTU"
             for (Camp camp : camps) {
                 if (camp.getCampVisibility().equalsIgnoreCase("NTU")) {
                     canSeeAllCamps = true;
