@@ -428,7 +428,7 @@ public class CAMDisplay {
             System.out.println();
             switch (choice) {
                 case 1:
-                    student.viewAvailAndRegCamps(campArray);
+                    student.viewAvailAndRegCamps(campArray, "campName");
                     break;
                 case 2:
                     System.out.printf("Which camp do you want to register for? ");

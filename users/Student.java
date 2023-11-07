@@ -56,8 +56,8 @@ public class Student extends Users {
         return Attendee.get(index);
     }
 
-    public void viewAvailAndRegCamps(CampArray currentCamps) {
-        currentCamps.viewCamps(this);
+    public void viewAvailAndRegCamps(CampArray currentCamps, String sortBy) {
+        currentCamps.viewCamps(this, sortBy);
     }
 
 
