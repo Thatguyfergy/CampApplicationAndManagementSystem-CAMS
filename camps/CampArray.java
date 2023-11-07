@@ -484,4 +484,22 @@ public class CampArray {
         return null;
     }
 
+    public void registerAttendee(String campName, String studentID) {
+        for (Camp camp : camps) {
+            if (camp.getCampName().equals(campName)) {
+                camp.registerStudent(studentID, studentID, false, campName);
+            }
+        }
+        updateFile(camps);
+    }
+
+    public void registerCampCom(String campName, String studentID) {
+        for (Camp camp : camps) {
+            if (camp.getCampName().equals(campName)) {
+                camp.registerStudent(studentID, studentID, true, campName);
+            }
+        }
+        updateFile(camps);
+    }
+
 }

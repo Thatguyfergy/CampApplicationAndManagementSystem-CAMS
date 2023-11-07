@@ -23,15 +23,19 @@ public class Student extends Users {
         BusyDates = new ArrayList<CAMDate>();
         RegCamps = new ArrayList<String>();
 
-        if (commCamp != null) {
+        if (commCamp != "") {
             IsCampComm = true;
             CommRole = new CampCommitteeRole(campArray.getCamp(commCamp));
         }
-        for (String camp : regCamps.split(";")) {
-            RegCamps.add(camp);
+        if (regCamps != ""){
+            for (String camp : regCamps.split(";")) {
+                RegCamps.add(camp);
+            }
         }
-        for (String date : busyDates.split(";")) {
-            BusyDates.add(new CAMDate(date));
+        if (busyDates != ""){
+            for (String date : busyDates.split(";")) {
+                BusyDates.add(new CAMDate(date));
+            }
         }
 
         for (int i=0;i<RegCamps.size();i++){
