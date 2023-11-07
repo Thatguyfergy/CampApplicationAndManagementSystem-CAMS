@@ -19,9 +19,9 @@ public class Student extends Users {
 
     public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps, String busyDates, CampArray campArray) {
         super(FirstName, userID, facultyInfo);
-        Attendee = new ArrayList<>();
-        BusyDates = new ArrayList<>();
-        RegCamps = new ArrayList<>();
+        Attendee = new ArrayList<CampAttendeeRole>();
+        BusyDates = new ArrayList<CAMDate>();
+        RegCamps = new ArrayList<String>();
 
         if (commCamp != null) {
             IsCampComm = true;

@@ -15,7 +15,7 @@ public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray = new CampArray("csvfiles\\camps.csv");
-
+    private EnquiriesArray enquiriesArray = new EnquiriesArray("csvfiles\\enquiries.csv", "csvfiles\\replies.csv");
     private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
             "csvfiles/usersStaff.csv", campArray);
     
@@ -393,19 +393,7 @@ public class CAMDisplay {
         userScreen(user);
     }
 
-    public void studentScreen(Student student) {
-        // ==TODO==: if student is committeMember use committeeMemberScreen else use
-        // attendeeScreen
-        // if (student.IsCampComm()){
-        //     this.committeeMemberScreen(student);
-        // }
-        // else {
-        //     this.attendeeScreen(student);
-        // }
-        this.attendeeScreen(student);
-    }
-
-    private void attendeeScreen(Student student) {
+    private void studentScreen(Student student) {
         int choice=-1;
         int logout = (student.IsCampComm())? 14:8;
         Scanner sc = new Scanner(System.in);
@@ -459,8 +447,8 @@ public class CAMDisplay {
                     int campindex = sc.nextInt();
                     System.out.printf("Input Enquiry index: ");
                     int enqindex = sc.nextInt();
-
-                        break;
+                    student.getAttendee(campindex-1).submitEnquiry(enquiriesArray, enqindex-1);
+                    break;
                 case 5: System.out.printf("W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nEnter your choice: ");
                         String enqChoice = sc.nextLine();
                         switch(enqChoice){
@@ -492,7 +480,7 @@ public class CAMDisplay {
                 case 7: System.out.printf("Enter the name of the camp you are withdrawing from: ");
                         String remCampString = sc.nextLine();
                         Camp remCamp = campArray.getCamp(remCampString);
-                        student.withdrawFromCamp(remCamp, false);
+                        student.withdrawFromCamp(remCamp);
                         break;
                 case 8: if (student.IsCampComm()) {
                             // view camp details for own camp
