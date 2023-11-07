@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
 import users.*;
+import utils.inputInt;
 
 public class EnquiriesArray {
     private static ArrayList<Enquiries> enquiries = new ArrayList<Enquiries>();
@@ -119,8 +120,21 @@ public class EnquiriesArray {
                 System.out.println(enquiry.getEnquiry());
                 System.out.println(); // Add a line break for better readability
             }
-        } else { // Student trying to access their enquires
-            throw new Exception("You shall not pass");
+        } else if (user instanceof Student) { // Only CampComitteeMember can view
+            System.out.println("All Submitted Enquiries:");
+            Student userStudent = (Student) user;
+            for (int i = 0; i < enquiries.size(); i++) {
+                Enquiries enquiry = enquiries.get(i);
+                if (userStudent.IsCampComm()
+                        && userStudent.getCampCommitteeRole().getCampName() == enquiry.getCampName()) {
+                    System.out.printf("=== EnquiryID %d ===\n", i);
+                    System.out.println("Camp Name: " + enquiry.getCampName());
+                    System.out.println("Sender: " + enquiry.getSender());
+                    System.out.println("------------------------------------------------------");
+                    System.out.println(enquiry.getEnquiry());
+                    System.out.println(); // Add a line break for better readability
+                }
+            }
         }
     }
 
@@ -139,12 +153,37 @@ public class EnquiriesArray {
     }
 
     public void replyEnquiry(Users user) {
-        // Need a feature for Camp Committee members to delete
-        System.out.printf("EnquiryID: \n");
-        int idx = scanner.nextInt();
-        scanner.nextLine(); // Basically flush in C
-        Enquiries enquiry = enquiries.get(idx);
+        Student userStudent;
 
+        // Early Return
+        if (user instanceof Student) {
+            userStudent = (Student) user;
+        } else {
+            return;
+        }
+
+        // Early Return
+        if (!userStudent.IsCampComm())
+            return;
+
+        System.out.printf("EnquiryID: \n");
+        int idx = inputInt.nextInt(scanner);
+        scanner.nextLine(); // Basically flush in C
+
+        Enquiries enquiry;
+        while (true) {
+            try {
+                enquiry = enquiries.get(idx);
+                break;
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Index out of bounds, make sure you selected the correct enquiry.");
+            }
+        }
+
+        if (userStudent.getCampCommitteeRole().getCampName() != enquiry.getCampName()) {
+            System.out.println("You cannot access this enquiry!");
+            return;
+        }
         System.out.printf("What is your reply?\n");
         String replyString = scanner.nextLine();
 
@@ -156,6 +195,28 @@ public class EnquiriesArray {
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+        }
+    }
+
+    public void viewReplies(Users user) {
+        System.out.println("All Submitted Enquiries & Replies:");
+        for (int i = 0; i < enquiries.size(); i++) {
+            Enquiries enquiry = enquiries.get(i);
+            if (enquiry.getSender() == user.getID()) {
+                System.out.println("Camp Name: " + enquiry.getCampName());
+                System.out.println("Your Enquiry" + enquiry.getEnquiry());
+                System.out.println("------------------------------------------------------");
+                System.out.println("Replies by Staff/Camp Committee Member");
+                for (int j = 0; j < replies.size(); j++) {
+                    EnqReplies reply = replies.get(j);
+                    if (reply.getEnquiryID() == enquiry.getEnquiryID()) {
+                        System.out.println("Replied by: " + reply.getReplyCreator());
+                        System.out.println(reply.getReplyString());
+                        System.out.println();
+                    }
+                }
+
+            }
         }
     }
 
