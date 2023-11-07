@@ -129,7 +129,9 @@ public class Camp {
                     // Add the student to the committeeMembers list
                     committeeMembers.add(StudentID);
                 }
-            } else {
+            } 
+        }
+        else {
                 // Register as an attendee
                 List<String> attendees = getAttendees();
                 if (!attendees.contains(StudentID) && !hasWithdrawn(StudentID)) {
@@ -140,7 +142,6 @@ public class Camp {
 
                 }
             }
-        }
     }
 
     public void withdrawFromCamp(String StudentID) {

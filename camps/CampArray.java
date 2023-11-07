@@ -33,7 +33,7 @@ public class CampArray {
                 String[] data = row.split(",");
                 // CSV Format: Name | Dates | Closing Date | Visibility |
                 // Location | Total Slots | Committee Members |
-                // Committee Mem slots | Description | Staff-In-Charge | Attendees
+                // Committee Mem slots | Description | Attendees | Staff-In-Charge
                 Camp camp = new Camp(data[0].trim(), new CAMDate(data[2].trim()), data[3].trim(), data[4].trim(),
                         Integer.parseInt(data[5].trim()), Integer.parseInt(data[7].trim()), data[8].trim(),
                         data[9].trim());
@@ -41,6 +41,14 @@ public class CampArray {
                     camp.addDate(new CAMDate(date));
                 }
                 camps.add(camp);
+                for (String committeeMember : data[6].trim().split(";")) {
+                    camp.registerStudent(committeeMember, committeeMember, true, camp.getCampName());
+                }
+                if (data.length > 10) {
+                    for (String attendee : data[10].trim().split(";")) {
+                        camp.registerStudent(attendee, attendee, false, camp.getCampName());
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,6 +108,7 @@ public class CampArray {
                     csvWriter.append(attendee);
                     csvWriter.append(";");
                 }
+                csvWriter.append(",");
                 csvWriter.append("\n");
             }
             csvWriter.flush();
@@ -265,41 +274,6 @@ public class CampArray {
         }
     }
 
-    // public void viewCamps(Users user, String sortBy) {
-    // // Display camps based on different visibility requirements
-    // // For Staff - No filters since every staff can view every camp
-    // // For Students - filter by committeeMembers
-    // sortCamps(sortBy);
-    // System.out.println("Camps sorted by " + sortBy);
-    // System.out.println("============================================================================================================================================");
-    // System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s
-    // | %-10s |%n",
-    // "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem",
-    // "Description", "S-I-C");
-    // System.out.println("============================================================================================================================================");
-
-    // for (Camp camp : camps) {
-    // String campName = truncateWithEllipsis(camp.getCampName(), 15);
-    // String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
-    // String closingDate =
-    // truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
-    // String availability = truncateWithEllipsis(camp.getCampVisibility(), 6);
-    // String location = truncateWithEllipsis(camp.getLocation(), 10);
-    // String totalSlots =
-    // truncateWithEllipsis(String.valueOf(camp.getTotalSlots()), 6);
-    // String committeeSlots =
-    // truncateWithEllipsis(String.valueOf(camp.getCommitteeMembersSlots()), 6);
-    // String description = truncateWithEllipsis(camp.getCampDescription(), 25);
-    // String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-
-    // System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s
-    // | %-10s |%n",
-    // campName, dates, closingDate, availability, location, totalSlots,
-    // committeeSlots,
-    // description, staffInCharge);
-    // }
-    // System.out.println("============================================================================================================================================");
-    // }
 
     public void viewCamps(Users user, String sortBy) {
         // Display camps based on different visibility requirements
@@ -381,7 +355,6 @@ public class CampArray {
             // "on"
             // and display remaining slots for each camp open to the student
             System.out.println("Open Camps for Student:");
-            System.out.println("Camps sorted by " + sortBy);
             System.out.println(
                     "============================================================================================================================================");
             System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
@@ -411,7 +384,6 @@ public class CampArray {
 
             // Display camps the student has registered for and their roles
             System.out.println("\nYour Registered Camps:");
-            System.out.println("Camps sorted by " + sortBy);
             System.out.println(
                     "============================================================================================================================================");
             System.out.printf("%-15s | %-25s | %-6s | %-10s | %-25s | %-10s | %-10s |%n",
@@ -434,7 +406,6 @@ public class CampArray {
                             camp.getCampName(), camp.getStartToEndDate(), camp.getCampVisibility(), camp.getLocation(),
                             camp.getCampDescription(), camp.getStaffInCharge(), "Com. Mem");
                     // displayRegisteredStudents(camp);
-                    System.out.println(); // Add a line break for better readability
                     hasRegisteredCamps = true;
                 }
             }
