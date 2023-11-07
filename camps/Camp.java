@@ -79,6 +79,10 @@ public class Camp{
         return campInfo;
     }
 
+    public void displayCampInfo() {
+        campInfo.displayCampInfo();
+    }
+
     public void setCampDescription(String newDescription) {
         campInfo.setCampDescription(newDescription);
     }

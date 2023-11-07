@@ -13,9 +13,11 @@ import report.CampReport;
 public class CAMDisplay {
 
     private Scanner sc = new Scanner(System.in);
-    private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
-            "csvfiles/usersStaff.csv");
     private CampArray campArray = new CampArray("csvfiles\\camps.csv");
+
+    private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
+            "csvfiles/usersStaff.csv", campArray);
+    
     private Users user;
 
     // Hello enric here, need to add the main enquiry array being used, similar concept to camparray just for enquiry
@@ -392,16 +394,18 @@ public class CAMDisplay {
     public void studentScreen(Student student) {
         // ==TODO==: if student is committeMember use committeeMemberScreen else use
         // attendeeScreen
-        if (student.IsCampComm()){
-            this.committeeMemberScreen(student);
-        }
-        else {
-            this.attendeeScreen(student);
-        }
+        // if (student.IsCampComm()){
+        //     this.committeeMemberScreen(student);
+        // }
+        // else {
+        //     this.attendeeScreen(student);
+        // }
+        this.attendeeScreen(student);
     }
 
     private void attendeeScreen(Student student) {
         int choice=-1;
+        int logout = (student.IsCampComm())? 14:8;
         Scanner sc = new Scanner(System.in);
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║ Camp Application & Management System - Home                     ║");
@@ -416,8 +420,18 @@ public class CAMDisplay {
             System.out.println("5. Manage your Enquiries");
             System.out.println("6. View Registered Camps");
             System.out.println("7. Withdraw from Camp");
-            System.out.println("8. Logout");
+            if (student.IsCampComm()) {
+                System.out.println("\nCommittee Member Options for Camp " + student.getCampCommitteeRole().getCampName() + ":");
+                System.out.println("8. View Camp Details");
+                System.out.println("9. Submit Suggestion");
+                System.out.println("10. View Suggestions");
+                System.out.println("11. View Enquiries");
+                System.out.println("12. Reply Enquiries");
+                System.out.println("13. Generate Camp Report");
+                System.out.println("14. Logout");
+            } else System.out.println("8. Logout");
             System.out.printf("Enter your choice: ");
+
             choice = sc.nextInt();
             System.out.println();
             switch (choice) {
@@ -477,11 +491,52 @@ public class CAMDisplay {
                         Camp remCamp = campArray.getCamp(remCampString);
                         student.withdrawFromCamp(remCamp, false);
                         break;
-                case 8: System.out.println("Logging out... Thank you!");
+                case 8: if (student.IsCampComm()) {
+                            // view camp details for own camp
+                            student.getCampCommitteeRole().displayCampInfo();
+                            
+                        } else System.out.println("Logging out... Thank you!");
                         break;
-                default: System.out.println("Invlaid choice");
+
+                case 9: if (student.IsCampComm()) {
+                            // submit suggestions
+
+                        } else System.out.println("Invalid choice");
+                        break;
+
+                case 10: if (student.IsCampComm()) {
+                            // view suggestions
+
+                        } else System.out.println("Invalid choice");
+                        break;
+
+                case 11: if (student.IsCampComm()) {
+                            // view enquiries
+
+                        } else System.out.println("Invalid choice");
+                        break;
+
+                case 12: if (student.IsCampComm()) {
+                            // reply enquiries
+
+                        } else System.out.println("Invalid choice");
+                        break;
+
+                case 13: if (student.IsCampComm()) {
+                            // generate camp report
+                            student.getCampCommitteeRole().generateReport();
+
+                        } else System.out.println("Invalid choice");
+                        break;
+
+                case 14: if (student.IsCampComm()) {
+                            System.out.println("Logging out... Thank you!");
+                        } else System.out.println("Invalid choice");
+                        break;
+
+                default: System.out.println("Invalid choice");
             }
-        } while(choice != 8);
+        } while(choice != logout);
     }
 
     private void committeeMemberScreen(Student student) {

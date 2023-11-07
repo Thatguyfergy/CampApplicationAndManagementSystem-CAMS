@@ -174,4 +174,24 @@ public class CampInfo {
         this.campDescription = campDescription;
         this.staffInCharge = staffInCharge;
     }
+
+    public void displayCampInfo() {
+        System.out.println("======================================");
+        System.out.println("Information for Camp " + campName);
+        System.out.println("======================================");
+        System.out.print("Dates:\t\t\t");
+        for (int i=0; i<dates.size(); i++) {
+            System.out.print(dates.get(i));
+            if (i!=dates.size()-1) System.out.print(", ");
+        }
+        System.out.println("\nClose Date:\t\t" + registrationClosingDate);
+        System.out.println("Avail:\t\t\t" + campVisibility);
+        System.out.println("Location:\t\t" + location);
+        System.out.println("Total:\t\t\t" + totalSlots);
+        System.out.println("Com-Mem:\t\t" + committeeMembersSlots);
+        System.out.println("Description:\t\t" + campDescription);
+        System.out.println("Staff-in-charge:\t" + staffInCharge);
+        System.out.println("======================================");
+        System.out.println();
+    }
 }
