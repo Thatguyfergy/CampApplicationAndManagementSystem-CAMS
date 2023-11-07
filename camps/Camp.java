@@ -141,12 +141,8 @@ public class Camp{
     }
         }
 
-        public void withdrawFromCamp(String FirstName, boolean isCampCommittee) {
-            if (!isCampCommittee) {
+        public void withdrawFromCamp(String FirstName) {
                 withdrawAttendee(FirstName);
-            } else{
-                withdrawCommitteeMember(FirstName);
-            } 
         }
     
         private void withdrawAttendee(String FirstName) {
@@ -162,19 +158,6 @@ public class Camp{
             }
         }
     
-        private void withdrawCommitteeMember(String FirstName) {
-            List<String> committeeMembers = this.getCommitteeMembers();
-    
-            if (committeeMembers.contains(FirstName)) {
-                committeeMembers.remove(FirstName);
-                withdrawnStudents.add(FirstName); // Add the student to withdrawn list
-                System.out.println("Withdrawal successful. Student removed from the committee member list.");
-    
-            } 
-            else{
-                System.out.println("Student is not registered as a committee member for this camp.");
-            }
-        }
 
     private boolean hasWithdrawn(String FirstName) {
         return withdrawnStudents.contains(FirstName);
