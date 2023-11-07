@@ -43,6 +43,10 @@ public class Camp{
         return campInfo.getDates();
     }
 
+    public String getStartToEndDate () {
+        return campInfo.getStartToEndDate();
+    }
+
     public CAMDate getRegistrationClosingDate() {
         return campInfo.getRegistrationClosingDate();
     }

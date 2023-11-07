@@ -88,6 +88,10 @@ public class CampInfo {
         return staffInCharge;
     }
 
+    public String getStartToEndDate() {
+        return dates.get(0) + " - " + dates.get(dates.size() - 1);
+    }
+
     // Setter methods for all individual fields
     // public void setCampID(int campID) {
     //     this.campID = campID;

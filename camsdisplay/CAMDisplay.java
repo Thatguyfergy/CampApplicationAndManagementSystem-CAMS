@@ -336,28 +336,30 @@ public class CAMDisplay {
                 "Enter your choice: ");
         choice = sc.nextLine();
         System.out.println();
+        String sortBy;
         switch (choice) {
             case "1":
-                campArray.sortCamps("campName");
+                sortBy = "campName";
                 break;
             case "2":
-                campArray.sortCamps("registrationClosingDate");
+                sortBy = "registrationClosingDate";
                 break;
             case "3":
-                campArray.sortCamps("campVisibility");
+                sortBy = "campVisibility";
                 break;
             case "4":
-                campArray.sortCamps("location");
+                sortBy = "location";
                 break;
             case "5":
-                campArray.sortCamps("staffInCharge");
+                sortBy = "staffInCharge";
                 break;
             default:
                 System.out.println("Invalid choice! - Sorting by Camp Name");
+                sortBy = "campName";
                 break;
         }
 
-        campArray.viewCamps(user);
+        campArray.viewCamps(user, sortBy);
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key

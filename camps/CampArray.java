@@ -255,6 +255,42 @@ public class CampArray {
         updateFile(camps);
     }
 
+    public void viewCamps(Users user, String sortBy) {
+        sortCamps(sortBy);
+        System.out.println("Camps sorted by " + sortBy);
+        System.out.println("============================================================================================================================================");
+        System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
+                "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description", "S-I-C");
+        System.out.println("============================================================================================================================================");
+        
+        for (Camp camp : camps) {
+            String campName = truncateWithEllipsis(camp.getCampName(), 15);
+            String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
+            String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
+            String availability = truncateWithEllipsis(camp.getCampVisibility(), 6);
+            String location = truncateWithEllipsis(camp.getLocation(), 10);
+            String totalSlots = truncateWithEllipsis(String.valueOf(camp.getTotalSlots()), 6);
+            String committeeSlots = truncateWithEllipsis(String.valueOf(camp.getCommitteeMembersSlots()), 6);
+            String description = truncateWithEllipsis(camp.getCampDescription(), 25);
+            String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
+        
+            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-6s | %-7s | %-25s | %-10s |%n",
+                    campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
+                    description, staffInCharge);
+        }
+        System.out.println("============================================================================================================================================");
+    }
+    
+    
+    private String truncateWithEllipsis(String input, int width) {
+        if (input.length() > width) {
+            return input.substring(0, width - 3) + "...";
+        } else {
+            return String.format("%-" + width + "s", input);
+        }
+    }
+    
+
     public void viewCamps(Users user) {
         // Display camps based on different visibility requirements
         // For Staff - No filters since every staff can view every camp
@@ -268,8 +304,8 @@ public class CampArray {
             System.out.println("=====================================");
             for (Camp camp : camps) {
                 System.out.println(camp.toString()); // Return Camps in string format
-                System.out.println(); // Add a line break for better readability
-                displayRegisteredStudents(camp);
+                //System.out.println(); // Add a line break for better readability
+                //displayRegisteredStudents(camp);
                 System.out.println(); // Add a line break for better readability
                 System.out.println("-------------------------------------");
             }
