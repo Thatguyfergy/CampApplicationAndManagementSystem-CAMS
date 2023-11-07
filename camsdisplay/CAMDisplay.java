@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import InfoExchange.EnquiriesArray;
 import camps.Camp;
 import camps.CampArray;
 import report.CampReport;
@@ -16,9 +17,11 @@ public class CAMDisplay {
     private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
             "csvfiles/usersStaff.csv");
     private CampArray campArray = new CampArray("csvfiles\\camps.csv");
+    private EnquiriesArray enquiriesArray = new EnquiriesArray("csvfiles\\enquiries.csv", "csvfiles\\replies.csv");
     private Users user;
 
-    // Hello enric here, need to add the main enquiry array being used, similar concept to camparray just for enquiry
+    // Hello enric here, need to add the main enquiry array being used, similar
+    // concept to camparray just for enquiry
 
     public void startScreen() {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -145,7 +148,7 @@ public class CAMDisplay {
             System.out.print("\033[H\033[2J"); // Clear the entire screen
 
             System.out.print(
-                            "╔═══════════════════════════════════════════════════════════════╗\n" +
+                    "╔═══════════════════════════════════════════════════════════════╗\n" +
                             "║ Camp Application & Management System - Home                   ║\n" +
                             "╚═══════════════════════════════════════════════════════════════╝\r\n");
             System.out.print("Welcome back to CAMs, Staff " + staff.getID() + "\r\n");
@@ -379,7 +382,7 @@ public class CAMDisplay {
         System.out.print("Enter the name of Camp to view details: ");
         buffer = sc.nextLine();
         System.out.println(); // for readability
-        if (campArray.checkCampExists(buffer)){
+        if (campArray.checkCampExists(buffer)) {
             campArray.viewCampDetails(buffer);
         } else {
             System.out.println("Camp does not exist!");
@@ -392,16 +395,15 @@ public class CAMDisplay {
     public void studentScreen(Student student) {
         // ==TODO==: if student is committeMember use committeeMemberScreen else use
         // attendeeScreen
-        if (student.IsCampComm()){
+        if (student.IsCampComm()) {
             this.committeeMemberScreen(student);
-        }
-        else {
+        } else {
             this.attendeeScreen(student);
         }
     }
 
     private void attendeeScreen(Student student) {
-        int choice=-1;
+        int choice = -1;
         Scanner sc = new Scanner(System.in);
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║ Camp Application & Management System - Home                     ║");
@@ -421,67 +423,85 @@ public class CAMDisplay {
             choice = sc.nextInt();
             System.out.println();
             switch (choice) {
-                case 1: student.viewAvailAndRegCamps(campArray); break;
-                case 2: student.viewAvailAndRegCamps(campArray); break;
-                case 3: System.out.printf("Which camp do you want to register for? ");
-                        sc.nextLine(); // flush nextline char
-                        String campname = sc.nextLine();
-                        System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
-                        boolean comm = (sc.nextInt()==1)? true:false;
-                        Camp campPtr=campArray.getCamp(campname);
-                        student.registerCamp(campPtr,comm);
-                        break;
+                case 1:
+                    student.viewAvailAndRegCamps(campArray);
+                    break;
+                case 2:
+                    student.viewAvailAndRegCamps(campArray);
+                    break;
+                case 3:
+                    System.out.printf("Which camp do you want to register for? ");
+                    sc.nextLine(); // flush nextline char
+                    String campname = sc.nextLine();
+                    System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
+                    boolean comm = (sc.nextInt() == 1) ? true : false;
+                    Camp campPtr = campArray.getCamp(campname);
+                    student.registerCamp(campPtr, comm);
+                    break;
 
-                case 4: student.listEnquiries();
-                        System.out.printf("Select Enquiry to submit, input camp index: ");
-                        int campindex = sc.nextInt();
-                        System.out.printf("Input Enquiry index: ");
-                        int enqindex = sc.nextInt();
-                        
-                        //===========================================================================
-                        // NOT DONE, NEED ENQUIRY ARRAY
-                        student.getAttendee(campindex-1).submitEnquiry(null, enqindex-1);
-                        //===========================================================================
+                case 4:
+                    student.listEnquiries();
+                    System.out.printf("Select Enquiry to submit, input camp index: ");
+                    int campindex = sc.nextInt();
+                    System.out.printf("Input Enquiry index: ");
+                    int enqindex = sc.nextInt();
 
-                        break;
-                case 5: System.out.printf("W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nEnter your choice: ");
-                        String enqChoice = sc.nextLine();
-                        switch(enqChoice){
-                            case "W",  "w": System.out.println("Write Enquiry under which camp?");
-                                            for (int i=0;i<student.getAttendeeArray().size();i++){
-                                                String campAttending = student.getAttendee(i).getCampAttending();
-                                                System.out.println((i+1)+ ": "+campAttending);
-                                            } 
-                                            System.out.printf("Select camp index:");
-                                            int campenqindex = sc.nextInt();
-                                            System.out.println("Please input the Enquiry:");
-                                            String enq = sc.nextLine();
-                                            student.getAttendee(campenqindex-1).createEnquiry(enq);
-                                            break;
-                            case "V",  "v": student.listEnquiries(); break;
-                            case "E",  "e": student.listEnquiries();
-                                            System.out.printf("Select Enquiry to edit, input camp index: ");
-                                            int campindex1 = sc.nextInt();
-                                            System.out.printf("Input Enquiry index: ");
-                                            int enqindex1 = sc.nextInt();
-                                            System.out.println("Please input the edited Enquiry:");
-                                            String newenq = sc.nextLine();
-                                            student.getAttendee(campindex1-1).editEnquiry(newenq, enqindex1-1);
-                                            break;
-                            default: System.out.println("Invalid choice");
-                        }
-                        break;
-                case 6: student.viewAvailAndRegCamps(campArray); break;
-                case 7: System.out.printf("Enter the name of the camp you are withdrawing from: ");
-                        String remCampString = sc.nextLine();
-                        Camp remCamp = campArray.getCamp(remCampString);
-                        student.withdrawFromCamp(remCamp, false);
-                        break;
-                case 8: System.out.println("Logging out... Thank you!");
-                        break;
-                default: System.out.println("Invlaid choice");
+                    // ===========================================================================
+                    // NOT DONE, NEED ENQUIRY ARRAY
+                    student.getAttendee(campindex - 1).submitEnquiry(null, enqindex - 1);
+                    // ===========================================================================
+
+                    break;
+                case 5:
+                    System.out.printf(
+                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nEnter your choice: ");
+                    String enqChoice = sc.nextLine();
+                    switch (enqChoice) {
+                        case "W", "w":
+                            System.out.println("Write Enquiry under which camp?");
+                            for (int i = 0; i < student.getAttendeeArray().size(); i++) {
+                                String campAttending = student.getAttendee(i).getCampAttending();
+                                System.out.println((i + 1) + ": " + campAttending);
+                            }
+                            System.out.printf("Select camp index:");
+                            int campenqindex = sc.nextInt();
+                            System.out.println("Please input the Enquiry:");
+                            String enq = sc.nextLine();
+                            student.getAttendee(campenqindex - 1).createEnquiry(enq);
+                            break;
+                        case "V", "v":
+                            student.listEnquiries();
+                            break;
+                        case "E", "e":
+                            student.listEnquiries();
+                            System.out.printf("Select Enquiry to edit, input camp index: ");
+                            int campindex1 = sc.nextInt();
+                            System.out.printf("Input Enquiry index: ");
+                            int enqindex1 = sc.nextInt();
+                            System.out.println("Please input the edited Enquiry:");
+                            String newenq = sc.nextLine();
+                            student.getAttendee(campindex1 - 1).editEnquiry(newenq, enqindex1 - 1);
+                            break;
+                        default:
+                            System.out.println("Invalid choice");
+                    }
+                    break;
+                case 6:
+                    student.viewAvailAndRegCamps(campArray);
+                    break;
+                case 7:
+                    System.out.printf("Enter the name of the camp you are withdrawing from: ");
+                    String remCampString = sc.nextLine();
+                    Camp remCamp = campArray.getCamp(remCampString);
+                    student.withdrawFromCamp(remCamp, false);
+                    break;
+                case 8:
+                    System.out.println("Logging out... Thank you!");
+                    break;
+                default:
+                    System.out.println("Invlaid choice");
             }
-        } while(choice != 8);
+        } while (choice != 8);
     }
 
     private void committeeMemberScreen(Student student) {
