@@ -107,7 +107,7 @@ public class EnquiriesArray {
         return -1;
     }
 
-    public void viewEnquiries(Users user) throws Exception {
+    public void viewEnquiries(Users user) {
         // Need a feature for Camp Committee members to view
         if (user instanceof Staff) {
             System.out.println("All Submitted Enquiries:");
@@ -126,7 +126,7 @@ public class EnquiriesArray {
             for (int i = 0; i < enquiries.size(); i++) {
                 Enquiries enquiry = enquiries.get(i);
                 if (userStudent.IsCampComm()
-                        && userStudent.getCampCommitteeRole().getCampName() == enquiry.getCampName()) {
+                        && userStudent.getCampCommitteeRole().getCampName().equals(enquiry.getCampName())) {
                     System.out.printf("=== EnquiryID %d ===\n", i);
                     System.out.println("Camp Name: " + enquiry.getCampName());
                     System.out.println("Sender: " + enquiry.getSender());
@@ -180,7 +180,7 @@ public class EnquiriesArray {
             }
         }
 
-        if (userStudent.getCampCommitteeRole().getCampName() != enquiry.getCampName()) {
+        if (!userStudent.getCampCommitteeRole().getCampName().equals(enquiry.getCampName())) {
             System.out.println("You cannot access this enquiry!");
             return;
         }
@@ -209,7 +209,7 @@ public class EnquiriesArray {
                 System.out.println("Replies by Staff/Camp Committee Member");
                 for (int j = 0; j < replies.size(); j++) {
                     EnqReplies reply = replies.get(j);
-                    if (reply.getEnquiryID() == enquiry.getEnquiryID()) {
+                    if (reply.getEnquiryID().equals(enquiry.getEnquiryID())) {
                         System.out.println("Replied by: " + reply.getReplyCreator());
                         System.out.println(reply.getReplyString());
                         System.out.println();

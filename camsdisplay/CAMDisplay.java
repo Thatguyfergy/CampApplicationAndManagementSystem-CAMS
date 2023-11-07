@@ -160,11 +160,12 @@ public class CAMDisplay {
                     "4. Edit Camp\n" +
                     "5. Delete Camp\n" +
                     "6. View Enquiries\n" +
-                    "7. View Suggestions\n" +
-                    "8. Approve Suggestions\n" +
-                    "9. Generate Camp Report\n" +
-                    "10. Generate Performance Report\n" +
-                    "11. Logout\n" +
+                    "7. Reply Enquiries\n" +
+                    "8. View Suggestions\n" +
+                    "9. Approve Suggestions\n" +
+                    "10. Generate Camp Report\n" +
+                    "11. Generate Performance Report\n" +
+                    "12. Logout\n" +
                     "Enter your choice: ";
             System.out.print(menu);
 
@@ -187,10 +188,11 @@ public class CAMDisplay {
                     deleteCampScreen(staff);
                     return;
                 case 6:
-                    // Add the code for option 6 here
+                    enquiriesArray.viewEnquiries(staff);
                     return;
                 case 7:
                     // Add the code for option 7 here
+                    enquiriesArray.replyEnquiry(staff);
                     return;
                 case 8:
                     // Add the code for option 8 here
