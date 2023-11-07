@@ -11,16 +11,17 @@ import camps.CampArray;
 public class Student extends Users {
     private boolean IsCampComm = false;
     private CampCommitteeRole CommRole;
-    private ArrayList<CampAttendeeRole> Attendee; 
+    private ArrayList<CampAttendeeRole> Attendee;
     private ArrayList<String> RegCamps;
     private ArrayList<CAMDate> BusyDates;
     private ArrayList<Enquiries> PendingEnquiries = new ArrayList<Enquiries>();
 
     // public Student(String FirstName, String userID, String facultyInfo) {
-    //     super(FirstName, userID, facultyInfo);
+    // super(FirstName, userID, facultyInfo);
     // }
 
-    public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps, String busyDates, CampArray campArray) {
+    public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps,
+            String busyDates, CampArray campArray) {
         super(FirstName, userID, facultyInfo);
         Attendee = new ArrayList<CampAttendeeRole>();
         BusyDates = new ArrayList<CAMDate>();
@@ -30,32 +31,32 @@ public class Student extends Users {
             IsCampComm = true;
             CommRole = new CampCommitteeRole(campArray.getCamp(commCamp));
         }
-        if (regCamps != ""){
+        if (regCamps != "") {
             for (String camp : regCamps.split(";")) {
                 RegCamps.add(camp);
             }
         }
-        if (busyDates != ""){
+        if (busyDates != "") {
             for (String date : busyDates.split(";")) {
                 BusyDates.add(new CAMDate(date));
             }
         }
 
-        for (int i=0;i<RegCamps.size();i++){
+        for (int i = 0; i < RegCamps.size(); i++) {
             CampAttendeeRole attendeeRole = new CampAttendeeRole(RegCamps.get(i), this);
             Attendee.add(attendeeRole);
         }
     }
 
-    public boolean IsCampComm(){
+    public boolean IsCampComm() {
         return IsCampComm;
     }
 
-    public ArrayList<CampAttendeeRole> getAttendeeArray(){
+    public ArrayList<CampAttendeeRole> getAttendeeArray() {
         return this.Attendee;
     }
 
-    public CampAttendeeRole getAttendee(int index){
+    public CampAttendeeRole getAttendee(int index) {
         return Attendee.get(index);
     }
 
@@ -63,11 +64,10 @@ public class Student extends Users {
         currentCamps.viewCamps(this, sortBy);
     }
 
-
     public void registerCampAttendee(Camp camp, CampArray campArray) {
         // check if camp registered before
-        for (int i=0;i<RegCamps.size();i++){
-            if (camp.getCampName().equals(RegCamps.get(i))){
+        for (int i = 0; i < RegCamps.size(); i++) {
+            if (camp.getCampName().equals(RegCamps.get(i))) {
                 System.out.println("Camp has already been registered before!");
                 return;
             }
@@ -75,9 +75,9 @@ public class Student extends Users {
 
         // check if camp date clashes
         ArrayList<CAMDate> regDates = camp.getDates();
-        for (int i=0;i<regDates.size();i++){
-            for (int j=0;j<BusyDates.size();j++){
-                if(regDates.get(i).compareTo(BusyDates.get(j))==0){
+        for (int i = 0; i < regDates.size(); i++) {
+            for (int j = 0; j < BusyDates.size(); j++) {
+                if (regDates.get(i).compareTo(BusyDates.get(j)) == 0) {
                     System.out.println("Camp dates clashes with registered camps!");
                     return;
                 }
@@ -85,16 +85,16 @@ public class Student extends Users {
         }
 
         // check if student is allowed to register for this camp, i.e. campVisibility
-        if (camp.getCampInfo().getCampVisibility() == "off"){
+        if (camp.getCampInfo().getCampVisibility() == "off") {
             System.out.println("This camp has been closed for registration!");
             return;
         }
 
         RegCamps.add(camp.getCampName());
-        CampAttendeeRole attendeeRole = new CampAttendeeRole(camp.getCampName(),this);
+        CampAttendeeRole attendeeRole = new CampAttendeeRole(camp.getCampName(), this);
         Attendee.add(attendeeRole);
         campArray.registerAttendee(camp.getCampName(), this.getID());
-        for (int i=0;i<regDates.size();i++){
+        for (int i = 0; i < regDates.size(); i++) {
             BusyDates.add(regDates.get(i));
         }
         System.out.println("Successfully registered as Camp Attendee!");
@@ -102,8 +102,8 @@ public class Student extends Users {
 
     public void registerCampCommittee(Camp camp, CampArray campArray) {
         // check if camp registered before
-        for (int i=0;i<RegCamps.size();i++){
-            if (camp.getCampName().equals(RegCamps.get(i))){
+        for (int i = 0; i < RegCamps.size(); i++) {
+            if (camp.getCampName().equals(RegCamps.get(i))) {
                 System.out.println("Camp has already been registered before!");
                 return;
             }
@@ -111,9 +111,9 @@ public class Student extends Users {
 
         // check if camp date clashes
         ArrayList<CAMDate> regDates = camp.getDates();
-        for (int i=0;i<regDates.size();i++){
-            for (int j=0;j<BusyDates.size();j++){
-                if(regDates.get(i).compareTo(BusyDates.get(j))==0){
+        for (int i = 0; i < regDates.size(); i++) {
+            for (int j = 0; j < BusyDates.size(); j++) {
+                if (regDates.get(i).compareTo(BusyDates.get(j)) == 0) {
                     System.out.println("Camp dates clashes with registered camps!");
                     return;
                 }
@@ -121,51 +121,51 @@ public class Student extends Users {
         }
 
         // check if student is allowed to register for this camp, i.e. campVisibility
-        if (camp.getCampInfo().getCampVisibility() == "off"){
+        if (camp.getCampInfo().getCampVisibility() == "off") {
             System.out.println("This camp has been closed for registration!");
             return;
         }
-        
+
         // Camp Committee check
-        if (IsCampComm){
-            System.out.println("You are already a Camp Committee of another camp! Withdraw Camp Committee role and register again!");
+        if (IsCampComm) {
+            System.out.println(
+                    "You are already a Camp Committee of another camp! Withdraw Camp Committee role and register again!");
             return;
         }
-        
+
         CommRole = new CampCommitteeRole(camp);
         IsCampComm = true;
         RegCamps.add(camp.getCampName());
         campArray.registerCampCom(camp.getCampName(), this.getID());
-        for (int i=0;i<regDates.size();i++){
+        for (int i = 0; i < regDates.size(); i++) {
             BusyDates.add(regDates.get(i));
         }
         System.out.println("Successfully registered as Camp Attendee!");
     }
 
     public void withdrawFromCamp(Camp camp) {
-        if (IsCampComm){
-            if (camp.getCampName().equals(CommRole.getCampName())){
+        if (IsCampComm) {
+            if (camp.getCampName().equals(CommRole.getCampName())) {
                 System.out.println("Not allowed to withdraw from Camp as a Camp Committee Member!");
             }
-        }
-        else{
+        } else {
             camp.withdrawFromCamp(getID());
             RegCamps.remove(camp.getCampName());
             CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
-            for (int i=0;i<Attendee.size();i++){
-                if (Attendee.get(i).getCampAttending()==camp.getCampName()){
+            for (int i = 0; i < Attendee.size(); i++) {
+                if (Attendee.get(i).getCampAttending() == camp.getCampName()) {
                     remAttendee = Attendee.get(i);
                     break;
                 }
             }
             Attendee.remove(remAttendee);
-            for (int i=0;i<camp.getDates().size();i++){
+            for (int i = 0; i < camp.getDates().size(); i++) {
                 BusyDates.remove(camp.getDates().get(i));
-            }  
-            System.out.println("Successfully withdrew from "+camp.getCampName());
+            }
+            System.out.println("Successfully withdrew from " + camp.getCampName());
         }
     }
-    
+
     public void createEnquiry(String enqString, String campName) {
         Enquiries newEnquiry = new Enquiries(enqString, this.getID(), campName);
         PendingEnquiries.add(newEnquiry);
@@ -174,8 +174,9 @@ public class Student extends Users {
 
     public void viewEnquiries() {
         for (int i = 0; i < PendingEnquiries.size(); i++) {
-            System.out.print((i+1) + ": ");
-            System.out.println("["+PendingEnquiries.get(i).getCampName()+"] "+PendingEnquiries.get(i).getEnquiry());
+            System.out.print((i + 1) + ": ");
+            System.out
+                    .println("[" + PendingEnquiries.get(i).getCampName() + "] " + PendingEnquiries.get(i).getEnquiry());
         }
     }
 
@@ -189,17 +190,20 @@ public class Student extends Users {
         System.out.println("Enquiry submitted successfully!");
     }
 
+    public ArrayList<CAMDate> getBusyDates() {
+        return BusyDates;
+    }
 
     // public void listEnquiries(){
-    //     for (int i=0;i<Attendee.size();i++){
-    //         System.out.println("Enquiry under camp(index): "+ Attendee.get(i).getCampAttending()+" "+"("+(i+1)+")");
-    //         Attendee.get(i).viewEnquiries();
-    //     }
+    // for (int i=0;i<Attendee.size();i++){
+    // System.out.println("Enquiry under camp(index): "+
+    // Attendee.get(i).getCampAttending()+" "+"("+(i+1)+")");
+    // Attendee.get(i).viewEnquiries();
+    // }
     // }
 
     public CampCommitteeRole getCampCommitteeRole() {
         return CommRole;
     }
 
-    
 }

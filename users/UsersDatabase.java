@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import camdate.CAMDate;
 import camps.*;
 
 public class UsersDatabase {
@@ -20,8 +21,9 @@ public class UsersDatabase {
         try (BufferedReader csvReader = new BufferedReader(new FileReader(studentFile))) {
             String row;
             while ((row = csvReader.readLine()) != null) {
-                String[] data = row.split(",",-1);
-                // CSV Format: Name, Email, Faculty, Password, CampCommCamp, CampA;CampB,busyDates
+                String[] data = row.split(",", -1);
+                // CSV Format: Name, Email, Faculty, Password, CampCommCamp,
+                // CampA;CampB,busyDates
                 Users user = new Student(data[0].trim(), extractUserIDString(data[1].trim()), data[2].trim(),
                         data[4].trim(), data[5].trim(), data[6].trim(), campArray);
                 user.setPassword(data[3].trim());
@@ -62,17 +64,32 @@ public class UsersDatabase {
         return null;
     }
 
-    private void updateFiles() {
+    public void updateFiles() {
         try (FileWriter csvWriterStudent = new FileWriter(studentFile)) {
             for (Users user : users) {
                 if (user instanceof Student) {
-                    csvWriterStudent.append(user.getFirstName());
+                    Student userStudent = (Student) user;
+                    csvWriterStudent.append(userStudent.getFirstName());
                     csvWriterStudent.append(",");
-                    csvWriterStudent.append(user.getID() + "@e.ntu.edu.sg");
+                    csvWriterStudent.append(userStudent.getID() + "@e.ntu.edu.sg");
                     csvWriterStudent.append(",");
-                    csvWriterStudent.append(user.getFacultyInfo());
+                    csvWriterStudent.append(userStudent.getFacultyInfo());
                     csvWriterStudent.append(",");
-                    csvWriterStudent.append(user.getPassword());
+                    csvWriterStudent.append(userStudent.getPassword());
+                    csvWriterStudent.append(",");
+                    if (userStudent.IsCampComm())
+                        csvWriterStudent.append(userStudent.getCampCommitteeRole().getCampName());
+                    csvWriterStudent.append(",");
+
+                    for (CampAttendeeRole attendee : userStudent.getAttendeeArray()) {
+                        csvWriterStudent.append(attendee.getCampAttending());
+                        csvWriterStudent.append(";");
+                    }
+                    csvWriterStudent.append(",");
+                    for (CAMDate date : userStudent.getBusyDates()) {
+                        csvWriterStudent.append(date.toString());
+                        csvWriterStudent.append(";");
+                    }
                     csvWriterStudent.append("\n");
                 }
             }

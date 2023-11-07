@@ -14,6 +14,7 @@ public class inputInt {
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input.");
                 System.out.println("Input again:");
+                scanner.nextLine();
             }
         }
     }

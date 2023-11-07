@@ -38,9 +38,9 @@ public class Staff extends Users {
         }
     }
 
-    public void viewCamp(CampArray campArray) {
-        campArray.viewCamps(this);
-    }
+    // public void viewCamp(CampArray campArray, String sortby) {
+    // campArray.viewCamps(this, sortby);
+    // }
 
     public int compareTo(Users o) {
         // TODO Auto-generated method stub
