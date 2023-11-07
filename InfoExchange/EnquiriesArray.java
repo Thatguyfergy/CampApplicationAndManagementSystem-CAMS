@@ -112,16 +112,19 @@ public class EnquiriesArray {
         // Need a feature for Camp Committee members to view
         if (user instanceof Staff) {
             System.out.println("All Submitted Enquiries:");
+            Staff userStaff = (Staff) user;
             for (int i = 0; i < enquiries.size(); i++) {
                 Enquiries enquiry = enquiries.get(i);
-                System.out.printf("=== EnquiryID %d ===\n", i);
-                System.out.println("Camp Name: " + enquiry.getCampName());
-                System.out.println("Sender: " + enquiry.getSender());
-                System.out.println("------------------------------------------------------");
-                System.out.println(enquiry.getEnquiry());
-                System.out.println(); // Add a line break for better readability
+                if (userStaff.checkStaffInCharge(enquiry.getCampName())) {
+                    System.out.printf("=== EnquiryID %d ===\n", i);
+                    System.out.println("Camp Name: " + enquiry.getCampName());
+                    System.out.println("Sender: " + enquiry.getSender());
+                    System.out.println("------------------------------------------------------");
+                    System.out.println(enquiry.getEnquiry());
+                    System.out.println(); // Add a line break for better readability
+                }
             }
-        } else if (user instanceof Student) { // Only CampComitteeMember can view
+        } else if (user instanceof Student && ((Student) user).IsCampComm()) { // Only CampComitteeMember can view
             System.out.println("All Submitted Enquiries:");
             Student userStudent = (Student) user;
             for (int i = 0; i < enquiries.size(); i++) {
@@ -136,6 +139,8 @@ public class EnquiriesArray {
                     System.out.println(); // Add a line break for better readability
                 }
             }
+        } else {
+            System.out.println("How did you even access this page lol");
         }
     }
 
@@ -154,48 +159,80 @@ public class EnquiriesArray {
     }
 
     public void replyEnquiry(Users user) {
-        Student userStudent;
-
-        // Early Return
+        // Student
         if (user instanceof Student) {
-            userStudent = (Student) user;
-        } else {
-            return;
-        }
+            Student userStudent = (Student) user;
 
-        // Early Return
-        if (!userStudent.IsCampComm())
-            return;
+            // Early Return - If the student is not a Camp Comm
+            if (!userStudent.IsCampComm())
+                return;
 
-        System.out.printf("EnquiryID: \n");
-        int idx = inputInt.nextInt(scanner);
-        scanner.nextLine(); // Basically flush in C
+            System.out.printf("EnquiryID: \n");
+            int idx = inputInt.nextInt(scanner);
+            scanner.nextLine(); // Basically flush in C
 
-        Enquiries enquiry;
-        while (true) {
-            try {
-                enquiry = enquiries.get(idx);
-                break;
-            } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Index out of bounds, make sure you selected the correct enquiry.");
+            Enquiries enquiry;
+            while (true) {
+                try {
+                    enquiry = enquiries.get(idx);
+                    break;
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Index out of bounds, make sure you selected the correct enquiry.");
+                }
             }
-        }
 
-        if (!userStudent.getCampCommitteeRole().getCampName().equals(enquiry.getCampName())) {
-            System.out.println("You cannot access this enquiry!");
-            return;
-        }
-        System.out.printf("What is your reply?\n");
-        String replyString = scanner.nextLine();
+            if (!userStudent.getCampCommitteeRole().getCampName().equals(enquiry.getCampName())) {
+                System.out.println("You cannot access this enquiry!");
+                return;
+            }
+            System.out.printf("What is your reply?\n");
+            String replyString = scanner.nextLine();
 
-        EnqReplies reply = new EnqReplies(replyString, enquiry.getEnquiryID(), enquiry.getSender(),
-                generateID(replies), user.getID());
-        replies.add(reply);
-        try {
-            updateFile(replies);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            EnqReplies reply = new EnqReplies(replyString, enquiry.getEnquiryID(), enquiry.getSender(),
+                    generateID(replies), user.getID());
+            replies.add(reply);
+            try {
+                updateFile(replies);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+        }
+        // Staff accessing the enquiries
+        else if (user instanceof Staff) {
+            Staff userStaff = (Staff) user;
+
+            System.out.printf("EnquiryID: \n");
+            int idx = inputInt.nextInt(scanner);
+            scanner.nextLine(); // Basically flush in C
+
+            Enquiries enquiry;
+            while (true) {
+                try {
+                    enquiry = enquiries.get(idx);
+                    break;
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("Index out of bounds, make sure you selected the correct enquiry.");
+                }
+            }
+
+            if (!userStaff.checkStaffInCharge(enquiry.getCampName())) {
+                System.out.println("You cannot access this enquiry!");
+                return;
+            }
+            System.out.printf("What is your reply?\n");
+            String replyString = scanner.nextLine();
+
+            EnqReplies reply = new EnqReplies(replyString, enquiry.getEnquiryID(), enquiry.getSender(),
+                    generateID(replies), user.getID());
+            replies.add(reply);
+            try {
+                updateFile(replies);
+            } catch (Exception e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 

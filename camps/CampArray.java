@@ -108,13 +108,13 @@ public class CampArray {
         }
     }
 
-    public void createCamp(String staffinCharge) {
+    public String createCamp(String staffinCharge) {
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
         // Check if the camp name already exists
         if (campExists(campName)) {
             System.out.println("Camp with the name '" + campName + "' already exists. Please choose a different name.");
-            return; // Exit the method
+            return null; // Exit the method
         }
 
         System.out.println("Registration closing date (dd/mm/yyyy):");
@@ -149,6 +149,7 @@ public class CampArray {
         newCamp.addDate(startDate, endDate);
         camps.add(newCamp);
         updateFile(camps);
+        return campName;
     }
 
     // Helper method to check if a camp with the given name already exists
@@ -390,7 +391,8 @@ public class CampArray {
                     "============================================================================================================================================");
             for (Camp camp : camps) {
                 if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on"))
-                && (canSeeAllCamps || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility()))) {
+                        && (canSeeAllCamps
+                                || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility()))) {
                     String campName = truncateWithEllipsis(camp.getCampName(), 15);
                     String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
                     String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
@@ -468,8 +470,6 @@ public class CampArray {
             }
         }
     }
-
-    
 
     // Helper method to display the list of registered students for a camp
     private void displayRegisteredStudents(Camp camp) {

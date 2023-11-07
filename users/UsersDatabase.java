@@ -37,9 +37,9 @@ public class UsersDatabase {
         try (BufferedReader csvReader = new BufferedReader(new FileReader(staffFile))) {
             String row;
             while ((row = csvReader.readLine()) != null) {
-                String[] data = row.split(",");
-                // CSV Format: Name, Email, Faculty, Password, Role
-                Users user = new Staff(data[0], extractUserIDString(data[1]), data[2]);
+                String[] data = row.split(",", -1);
+                // CSV Format: Name, Email, Faculty, Password, Staff-in-charge
+                Users user = new Staff(data[0], extractUserIDString(data[1]), data[2], data[4]);
                 user.setPassword(data[3]);
                 users.add(user);
             }
@@ -103,13 +103,19 @@ public class UsersDatabase {
         try (FileWriter csvWriterStaff = new FileWriter(staffFile)) {
             for (Users user : users) {
                 if (user instanceof Staff) {
-                    csvWriterStaff.append(user.getFirstName());
+                    Staff userStaff = (Staff) user;
+                    csvWriterStaff.append(userStaff.getFirstName());
                     csvWriterStaff.append(",");
-                    csvWriterStaff.append(user.getID() + "@NTU.EDU.SG");
+                    csvWriterStaff.append(userStaff.getID() + "@NTU.EDU.SG");
                     csvWriterStaff.append(",");
-                    csvWriterStaff.append(user.getFacultyInfo());
+                    csvWriterStaff.append(userStaff.getFacultyInfo());
                     csvWriterStaff.append(",");
-                    csvWriterStaff.append(user.getPassword());
+                    csvWriterStaff.append(userStaff.getPassword());
+                    csvWriterStaff.append(",");
+                    for (String camp : userStaff.getCampsInCharge()) {
+                        csvWriterStaff.append(camp);
+                        csvWriterStaff.append(";");
+                    }
                     csvWriterStaff.append("\n");
                 }
             }

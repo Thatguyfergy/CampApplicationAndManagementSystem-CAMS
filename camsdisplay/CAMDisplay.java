@@ -159,11 +159,13 @@ public class CAMDisplay {
                     "3. Create Camp\n" +
                     "4. Edit Camp\n" +
                     "5. Delete Camp\n" +
-                    "6. View Suggestions\n" +
-                    "7. Approve Suggestions\n" +
-                    "8. Generate Camp Report\n" +
-                    "9. Generate Performance Report\n" +
-                    "10. Logout\n" +
+                    "6. View Enquiries\n" +
+                    "7. Reply Enquiries\n" +
+                    "8. View Suggestions\n" +
+                    "9. Approve Suggestions\n" +
+                    "10. Generate Camp Report\n" +
+                    "11. Generate Performance Report\n" +
+                    "12. Logout\n" +
                     "Enter your choice: ";
             System.out.print(menu);
 
@@ -186,18 +188,28 @@ public class CAMDisplay {
                     deleteCampScreen(staff);
                     break;
                 case 6:
-                    // View Suggestions
+                    // View enquiries
+                    enquiriesArray.viewEnquiries(staff);
+                    ScreenClearFn();
                     break;
                 case 7:
-                    // Approve Suggestions
+                    // reply enquiries
+                    enquiriesArray.replyEnquiry(staff);
+                    ScreenClearFn();
                     break;
                 case 8:
-                    generateCampReportScreen(staff);
+                    // View Suggestions
                     break;
                 case 9:
-                    // Generate performance report
+                    // Approve Suggestions
                     break;
                 case 10:
+                    generateCampReportScreen(staff);
+                    break;
+                case 11:
+                    // Generate performance report
+                    break;
+                case 12:
                     user = null;
                     startScreen();
                     break;
@@ -277,7 +289,7 @@ public class CAMDisplay {
         System.out.print("Enter the name of Camp to edit: ");
         String buffer = sc.nextLine();
         if (campArray.checkCampExists(buffer)) {
-            campArray.viewCampDetails(buffer);
+            campArray.viewCampDetails(buffer, user);
             System.out.print("What field would you like to edit?\n" +
                     "1. Camp Name\n" +
                     "2. Registration Closing Date\n" +
@@ -312,8 +324,8 @@ public class CAMDisplay {
                         "║ Camp Application & Management System - Create Camp            ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
-        campArray.createCamp(staff.getFirstName());
-
+        staff.createCamp(campArray);
+        UserDB.updateFile();
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         userScreen(user);
@@ -382,7 +394,7 @@ public class CAMDisplay {
         buffer = sc.nextLine();
         System.out.println(); // for readability
         if (campArray.checkCampExists(buffer)) {
-            campArray.viewCampDetails(buffer);
+            campArray.viewCampDetails(buffer, user);
         } else {
             System.out.println("Camp does not exist!");
         }

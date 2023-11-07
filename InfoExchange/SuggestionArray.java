@@ -19,6 +19,10 @@ public class SuggestionArray {
     public SuggestionArray(String suggestionFile) {
         SuggestionArray.suggestionFile = suggestionFile;
 
+        // Read the suggestionFile here. Refer to UsersDB constructor for more info
+
+        // Make sure u edit the updateFile method below as well. U may check UsersDB
+        // updateFile for more info.
     }
 
     public void createSuggestion(Suggestion suggestion) {
