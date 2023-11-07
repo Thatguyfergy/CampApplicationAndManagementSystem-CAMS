@@ -428,6 +428,7 @@ public class CAMDisplay {
             switch (choice) {
                 case 1:
                     student.viewAvailAndRegCamps(campArray, "campName");
+                    studentScreenClearFn();
                     break;
                 case 2:
                     System.out.printf("Which camp do you want to register for? ");
@@ -438,6 +439,7 @@ public class CAMDisplay {
                     Camp campPtr = campArray.getCamp(campname);
                     if (comm) student.registerCampCommittee(campPtr, campArray);
                     else student.registerCampAttendee(campPtr, campArray);
+                    studentScreenClearFn();
                     break;
                 case 3: System.out.println("W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nS: Submit an Enquiry\nEnter your choice: ");
                         String enqChoice = sc.nextLine();
@@ -472,55 +474,70 @@ public class CAMDisplay {
                                             break;
                             default: System.out.println("Invalid choice");
                         }
+                        studentScreenClearFn();
                         break;
                 case 4: System.out.printf("Enter the name of the camp you are withdrawing from: ");
                         String remCampString = sc.nextLine();
                         Camp remCamp = campArray.getCamp(remCampString);
                         student.withdrawFromCamp(remCamp);
+                        studentScreenClearFn();
                         break;
                 case 5: if (student.IsCampComm()) {
                             // view camp details for own camp
                             student.getCampCommitteeRole().displayCampInfo();
                             
                         } else System.out.println("Logging out... Thank you!");
+                        studentScreenClearFn();
                         break;
 
                 case 6: if (student.IsCampComm()) {
                             // submit suggestions
                         } else
-                        System.out.println("Invalid choice");
+                            System.out.println("Invalid choice");
+                        studentScreenClearFn();
                         break;
                 case 7: if (student.IsCampComm()) {
                             // view suggestions
                         } else
                             System.out.println("Invalid choice");
+                        studentScreenClearFn();
                         break;
                 case 8: if (student.IsCampComm()) {
                             // view enquiries
                         } else
                             System.out.println("Invalid choice");
+                        studentScreenClearFn();
                         break;
                 case 9: if (student.IsCampComm()) {
                             // reply enquiries
                         } else
                             System.out.println("Invalid choice");
+                        studentScreenClearFn();
                         break;
                 case 10: if (student.IsCampComm()) {
                             // generate camp report
                             student.getCampCommitteeRole().generateReport();
                         } else
                             System.out.println("Invalid choice");
+                        studentScreenClearFn();
                         break;
                 case 11: if (student.IsCampComm()) {
                             System.out.println("Logging out... Thank you!");
                         } else System.out.println("Invalid choice");
+                        studentScreenClearFn();
                         break;
                 default:
                     System.out.println("Invalid choice");
+                    studentScreenClearFn();
             }
         } while (choice != logout);
     }
-
+    private void studentScreenClearFn(){
+        System.out.printf("\nPress Enter to return to menu.");
+        sc.nextLine();
+        //String temp = sc.nextLine();
+        System.out.print("\033[H\033[2J");
+    }
     // private void committeeMemberScreen(Student student) {
     // System.out.println("╔═════════════════════════════════════════════════════════════════╗");
     // System.out.println("║ Camp Application & Management System - Home ║");
