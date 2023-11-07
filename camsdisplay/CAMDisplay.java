@@ -398,8 +398,8 @@ public class CAMDisplay {
 
     private void studentScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
-        int choice = -1;
-        int logout = (student.IsCampComm()) ? 14 : 8;
+        int choice=-1;
+        int logout = (student.IsCampComm())? 11:5;
         Scanner sc = new Scanner(System.in);
 
         do {
@@ -409,160 +409,137 @@ public class CAMDisplay {
             System.out.println("╚═════════════════════════════════════════════════════════════════╝");
             System.out.println("Welcome back to CAMs, Student " + student.getID()
                     + "! Where we get to explore the amazing camps planned!");
-            System.out.println("1. View Camps");
-            System.out.println("2. View Remaining Camp Slots");
-            System.out.println("3. Register for Camp");
-            System.out.println("4. Submit Enquiry");
-            System.out.println("5. Manage your Enquiries");
-            System.out.println("6. View Registered Camps");
-            System.out.println("7. Withdraw from Camp");
+            System.out.println("1. View Available/Registered Camps");
+            System.out.println("2. Register for Camp");
+            System.out.println("3. Manage your Enquiries");
+            System.out.println("4. Withdraw from Camp");
             if (student.IsCampComm()) {
-                System.out.println(
-                        "\nCommittee Member Options for Camp " + student.getCampCommitteeRole().getCampName() + ":");
-                System.out.println("8. View Camp Details");
-                System.out.println("9. Submit Suggestion");
-                System.out.println("10. View Suggestions");
-                System.out.println("11. View Enquiries");
-                System.out.println("12. Reply Enquiries");
-                System.out.println("13. Generate Camp Report");
-                System.out.println("14. Logout");
-            } else
-                System.out.println("8. Logout");
+                System.out.println("\nCommittee Member Options for Camp " + student.getCampCommitteeRole().getCampName() + ":");
+                System.out.println("5. View Camp Details");
+                System.out.println("6. Submit Suggestion");
+                System.out.println("7. View Suggestions");
+                System.out.println("8. View Enquiries");
+                System.out.println("9. Reply Enquiries");
+                System.out.println("10. Generate Camp Report");
+                System.out.println("11. Logout");
+            } else System.out.println("5. Logout");
             System.out.printf("Enter your choice: ");
 
             choice = inputInt.nextInt(sc);
             System.out.println();
             switch (choice) {
                 case 1:
-                    student.viewAvailAndRegCamps(campArray);
+                    student.viewAvailAndRegCamps(campArray, "campName");
+                    studentScreenClearFn();
                     break;
                 case 2:
-                    student.viewAvailAndRegCamps(campArray);
-                    break;
-                case 3:
                     System.out.printf("Which camp do you want to register for? ");
                     sc.nextLine(); // flush nextline char
                     String campname = sc.nextLine();
                     System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
                     boolean comm = (inputInt.nextInt(sc) == 1) ? true : false;
                     Camp campPtr = campArray.getCamp(campname);
-                    student.registerCamp(campPtr, comm);
+                    if (comm) student.registerCampCommittee(campPtr, campArray);
+                    else student.registerCampAttendee(campPtr, campArray);
+                    studentScreenClearFn();
                     break;
+                case 3: System.out.println("W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nS: Submit an Enquiry\nEnter your choice: ");
+                        String enqChoice = sc.nextLine();
+                        switch(enqChoice){
+                            case "W",  "w": System.out.println("Write Enquiry under which camp?");
+                                            for (int i=0;i<student.getAttendeeArray().size();i++){
+                                                String campAttending = student.getAttendee(i).getCampAttending();
+                                                System.out.println((i+1)+ ": "+campAttending);
+                                            } 
+                                            System.out.printf("Select camp index:");
+                                            int campenqindex = sc.nextInt();
+                                            System.out.println("Please input the Enquiry:");
+                                            String enq = sc.nextLine();
+                                            student.getAttendee(campenqindex-1).createEnquiry(enq);
+                                            break;
+                            case "V",  "v": student.listEnquiries(); break;
+                            case "E",  "e": student.listEnquiries();
+                                            System.out.printf("Select Enquiry to edit, input camp index: ");
+                                            int campindex1 = sc.nextInt();
+                                            System.out.printf("Input Enquiry index: ");
+                                            int enqindex1 = sc.nextInt();
+                                            System.out.println("Please input the edited Enquiry:");
+                                            String newenq = sc.nextLine();
+                                            student.getAttendee(campindex1-1).editEnquiry(newenq, enqindex1-1);
+                                            break;
+                            case "S",  "s": student.listEnquiries();
+                                            System.out.printf("Select Enquiry to submit, input camp index: ");
+                                            int campindex = inputInt.nextInt(sc);
+                                            System.out.printf("Input Enquiry index: ");
+                                            int enqindex = inputInt.nextInt(sc);
+                                            student.getAttendee(campindex - 1).submitEnquiry(enquiriesArray, enqindex - 1);
+                                            break;
+                            default: System.out.println("Invalid choice");
+                        }
+                        studentScreenClearFn();
+                        break;
+                case 4: System.out.printf("Enter the name of the camp you are withdrawing from: ");
+                        String remCampString = sc.nextLine();
+                        Camp remCamp = campArray.getCamp(remCampString);
+                        student.withdrawFromCamp(remCamp);
+                        studentScreenClearFn();
+                        break;
+                case 5: if (student.IsCampComm()) {
+                            // view camp details for own camp
+                            student.getCampCommitteeRole().displayCampInfo();
+                            
+                        } else System.out.println("Logging out... Thank you!");
+                        studentScreenClearFn();
+                        break;
 
-                case 4:
-                    student.listEnquiries();
-                    System.out.printf("Select Enquiry to submit, input camp index: ");
-                    int campindex = inputInt.nextInt(sc);
-                    System.out.printf("Input Enquiry index: ");
-                    int enqindex = inputInt.nextInt(sc);
-                    student.getAttendee(campindex - 1).submitEnquiry(enquiriesArray, enqindex - 1);
-                    break;
-                case 5:
-                    System.out.printf(
-                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nEnter your choice: ");
-                    String enqChoice = sc.nextLine();
-                    switch (enqChoice) {
-                        case "W", "w":
-                            System.out.println("Write Enquiry under which camp?");
-                            for (int i = 0; i < student.getAttendeeArray().size(); i++) {
-                                String campAttending = student.getAttendee(i).getCampAttending();
-                                System.out.println((i + 1) + ": " + campAttending);
-                            }
-                            System.out.printf("Select camp index:");
-                            int campenqindex = inputInt.nextInt(sc);
-                            System.out.println("Please input the Enquiry:");
-                            String enq = sc.nextLine();
-                            student.getAttendee(campenqindex - 1).createEnquiry(enq);
-                            break;
-                        case "V", "v":
-                            student.listEnquiries();
-                            break;
-                        case "E", "e":
-                            student.listEnquiries();
-                            System.out.printf("Select Enquiry to edit, input camp index: ");
-                            int campindex1 = inputInt.nextInt(sc);
-                            System.out.printf("Input Enquiry index: ");
-                            int enqindex1 = inputInt.nextInt(sc);
-                            System.out.println("Please input the edited Enquiry:");
-                            String newenq = sc.nextLine();
-                            student.getAttendee(campindex1 - 1).editEnquiry(newenq, enqindex1 - 1);
-                            break;
-                        default:
+                case 6: if (student.IsCampComm()) {
+                            // submit suggestions
+                        } else
                             System.out.println("Invalid choice");
-                    }
-                    break;
-                case 6:
-                    student.viewAvailAndRegCamps(campArray);
-                    break;
-                case 7:
-                    System.out.printf("Enter the name of the camp you are withdrawing from: ");
-                    String remCampString = sc.nextLine();
-                    Camp remCamp = campArray.getCamp(remCampString);
-                    student.withdrawFromCamp(remCamp);
-                    break;
-                case 8:
-                    if (student.IsCampComm()) {
-                        // view camp details for own camp
-                        student.getCampCommitteeRole().displayCampInfo();
-
-                    } else
-                        System.out.println("Logging out... Thank you!");
-                    break;
-
-                case 9:
-                    if (student.IsCampComm()) {
-                        // submit suggestions
-
-                    } else
-                        System.out.println("Invalid choice");
-                    break;
-
-                case 10:
-                    if (student.IsCampComm()) {
-                        // view suggestions
-
-                    } else
-                        System.out.println("Invalid choice");
-                    break;
-
-                case 11:
-                    if (student.IsCampComm()) {
-                        // view enquiries
-
-                    } else
-                        System.out.println("Invalid choice");
-                    break;
-
-                case 12:
-                    if (student.IsCampComm()) {
-                        // reply enquiries
-
-                    } else
-                        System.out.println("Invalid choice");
-                    break;
-
-                case 13:
-                    if (student.IsCampComm()) {
-                        // generate camp report
-                        student.getCampCommitteeRole().generateReport();
-
-                    } else
-                        System.out.println("Invalid choice");
-                    break;
-
-                case 14:
-                    if (student.IsCampComm()) {
-                        System.out.println("Logging out... Thank you!");
-                    } else
-                        System.out.println("Invalid choice");
-                    break;
-
+                        studentScreenClearFn();
+                        break;
+                case 7: if (student.IsCampComm()) {
+                            // view suggestions
+                        } else
+                            System.out.println("Invalid choice");
+                        studentScreenClearFn();
+                        break;
+                case 8: if (student.IsCampComm()) {
+                            // view enquiries
+                        } else
+                            System.out.println("Invalid choice");
+                        studentScreenClearFn();
+                        break;
+                case 9: if (student.IsCampComm()) {
+                            // reply enquiries
+                        } else
+                            System.out.println("Invalid choice");
+                        studentScreenClearFn();
+                        break;
+                case 10: if (student.IsCampComm()) {
+                            // generate camp report
+                            student.getCampCommitteeRole().generateReport();
+                        } else
+                            System.out.println("Invalid choice");
+                        studentScreenClearFn();
+                        break;
+                case 11: if (student.IsCampComm()) {
+                            System.out.println("Logging out... Thank you!");
+                        } else System.out.println("Invalid choice");
+                        studentScreenClearFn();
+                        break;
                 default:
                     System.out.println("Invalid choice");
+                    studentScreenClearFn();
             }
         } while (choice != logout);
     }
-
+    private void studentScreenClearFn(){
+        System.out.printf("\nPress Enter to return to menu.");
+        sc.nextLine();
+        //String temp = sc.nextLine();
+        System.out.print("\033[H\033[2J");
+    }
     // private void committeeMemberScreen(Student student) {
     // System.out.println("╔═════════════════════════════════════════════════════════════════╗");
     // System.out.println("║ Camp Application & Management System - Home ║");
