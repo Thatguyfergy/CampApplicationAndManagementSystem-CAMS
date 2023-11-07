@@ -306,8 +306,8 @@ public class CAMDisplay {
                     "6. Committee Members Slots\n" +
                     "7. Camp Description\n" +
                     "8. Staff In Charge\n" +
-                    "9. Add Dates\n" +
-                    "10. Remove Dates\n" +
+                    "9. Add Date\n" +
+                    "10. Remove Date\n" +
                     "11. Exit\n" +
                     "Enter your choice: ");
             int choice = inputInt.nextInt(sc);

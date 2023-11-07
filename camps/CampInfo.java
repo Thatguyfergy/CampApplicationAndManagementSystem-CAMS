@@ -148,6 +148,24 @@ public class CampInfo {
         dates.add(date);
     }
 
+    public void removeDate(String date) {
+        for (CAMDate d : dates) {
+            if (d.toString().equals(date)) {
+                dates.remove(d);
+                break;
+            }
+        }
+    }
+
+    public boolean dateExists(String date) {
+        for (CAMDate d : dates) {
+            if (d.toString().equals(date)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Get all camp info in a single string
     private String getCampInfo() {
         return "Camp Name: " + campName + "\n" + "Camp Dates: " + dates + "\n" + "Registration Closing Date: "

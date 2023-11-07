@@ -210,7 +210,17 @@ public class CampArray {
                 break;
             case 2:
                 // Add logic to edit Registration Closing Date
-                // targetCamp.getCampInfo().setRegistrationClosingDate(newCAMDate(newDate));
+                while (true){
+                    System.out.println("Enter new Registration Closing Date for the camp: ");
+                    String newDate = scanner.nextLine();
+                    if (newDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                        targetCamp.getCampInfo().setRegistrationClosingDate(new CAMDate(newDate));
+                        break;
+                    }
+                    else{
+                        System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+                    }
+                }
                 break;
             case 3:
                 System.out.println("Enter Faculty for the camp:");
@@ -247,10 +257,44 @@ public class CampArray {
             case 9:
                 // Add logic to add dates
                 //targetCamp.getCampInfo().addDate(new CAMDate(startDate), newCAMDate(endDate));
+                while (true) {
+                    System.out.println("Enter Date to add to the camp: ");
+                    String dateToAdd = scanner.nextLine();
+                    if (dateToAdd.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                        if (targetCamp.getCampInfo().dateExists(dateToAdd)){
+                            System.out.println("Date already exists");
+                            return;
+                        }
+                        else{
+                            targetCamp.getCampInfo().addDate(new CAMDate(dateToAdd));
+                            break;
+                        }
+                    } else {
+                        System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+                    }
+                }
                 break;
+                
             case 10:
-                // Add logic to remove dates
-                //targetCamp.getCampInfo().removeDate(new CAMDate(dateToRemove));
+                // Add logic to remove date
+                
+                while (true) {
+                    System.out.println("Enter Date to remove from the camp: ");
+                    String dateToRemove = scanner.nextLine();
+                    if (dateToRemove.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                        if (targetCamp.getCampInfo().dateExists(dateToRemove)){
+                            targetCamp.getCampInfo().removeDate(dateToRemove);
+                            break;
+                        }
+                        else{
+                            System.out.println("Date does not exist");
+                            return;
+                        }
+                    } else {
+                        System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+                    }
+                    
+                }
                 break;
             case 11:
                 System.out.println("Enter new visibility for camp (on/off):");
@@ -400,7 +444,7 @@ public class CampArray {
                     String description = truncateWithEllipsis(camp.getCampDescription(), 25);
                     String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
 
-                    System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-s | %-25s | %-10s |%n",
+                    System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s |%n",
                             campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
                             description, staffInCharge);
                 }
@@ -409,11 +453,11 @@ public class CampArray {
             // Display camps the student has registered for and their roles
             System.out.println("\nYour Registered Camps:");
             System.out.println(
-                    "===============================================================================================================================================");
+                    "=========================================================================================================================");
             System.out.printf("%-15s | %-25s | %-6s | %-10s | %-25s | %-10s | %-10s |%n",
                     "Camp Name", "Dates", "Avail", "Location", "Description", "S-I-C", "Role");
             System.out.println(
-                    "===============================================================================================================================================");
+                    "=========================================================================================================================");
             boolean hasRegisteredCamps = false; // Check if student has registered for camps
             for (Camp camp : camps) {
                 if (camp.getAttendees().contains(studentUser.getID())
