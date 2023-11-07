@@ -524,7 +524,7 @@ public class CampArray {
         updateFile(camps);
     }
 
-    public ArrayList<Camp> getCampArray(){
+    public ArrayList<Camp> getCampArray() {
         return camps;
     }
 

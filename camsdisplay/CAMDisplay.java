@@ -442,7 +442,7 @@ public class CAMDisplay {
                         student.registerCampCommittee(campPtr, campArray);
                     else
                         student.registerCampAttendee(campPtr, campArray);
-                    UserDB.updateFiles();
+                    UserDB.updateFile();
                     ScreenClearFn();
                     break;
                 case 3:

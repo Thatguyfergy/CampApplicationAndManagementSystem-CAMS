@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.UUID;
+
 import users.*;
 import utils.inputInt;
 
@@ -220,7 +221,8 @@ public class EnquiriesArray {
         }
     }
 
-    private void updateFile(ArrayList<?> Array) throws Exception {
+    // @Override
+    private void updateFile(ArrayList<?> Array) {
         try {
             // Enquiries
             if (Array.get(0) instanceof Enquiries) {
@@ -259,6 +261,9 @@ public class EnquiriesArray {
                 csvWriter.close();
             }
         } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

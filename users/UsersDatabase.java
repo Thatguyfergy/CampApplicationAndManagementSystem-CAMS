@@ -64,7 +64,9 @@ public class UsersDatabase {
         return null;
     }
 
-    public void updateFiles() {
+    // Overloaded function for CAMDisplay
+
+    public void updateFile() {
         try (FileWriter csvWriterStudent = new FileWriter(studentFile)) {
             for (Users user : users) {
                 if (user instanceof Student) {
@@ -140,7 +142,7 @@ public class UsersDatabase {
 
     public void changePassword(Users user, String newpassword) {
         user.setPassword(newpassword);
-        updateFiles();
+        updateFile();
     }
 
 }
