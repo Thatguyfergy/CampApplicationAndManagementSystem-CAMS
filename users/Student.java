@@ -2,6 +2,8 @@ package users;
 
 import java.util.ArrayList;
 
+import InfoExchange.Enquiries;
+import InfoExchange.EnquiriesArray;
 import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
@@ -12,6 +14,7 @@ public class Student extends Users {
     private ArrayList<CampAttendeeRole> Attendee; 
     private ArrayList<String> RegCamps;
     private ArrayList<CAMDate> BusyDates;
+    private ArrayList<Enquiries> PendingEnquiries = new ArrayList<Enquiries>();
 
     // public Student(String FirstName, String userID, String facultyInfo) {
     //     super(FirstName, userID, facultyInfo);
@@ -94,6 +97,7 @@ public class Student extends Users {
         for (int i=0;i<regDates.size();i++){
             BusyDates.add(regDates.get(i));
         }
+        System.out.println("Successfully registered as Camp Attendee!");
     }
 
     public void registerCampCommittee(Camp camp, CampArray campArray) {
@@ -135,6 +139,7 @@ public class Student extends Users {
         for (int i=0;i<regDates.size();i++){
             BusyDates.add(regDates.get(i));
         }
+        System.out.println("Successfully registered as Camp Attendee!");
     }
 
     public void withdrawFromCamp(Camp camp) {
@@ -157,15 +162,40 @@ public class Student extends Users {
             for (int i=0;i<camp.getDates().size();i++){
                 BusyDates.remove(camp.getDates().get(i));
             }  
+            System.out.println("Successfully withdrew from "+camp.getCampName());
+        }
+    }
+    
+    public void createEnquiry(String enqString, String campName) {
+        Enquiries newEnquiry = new Enquiries(enqString, this.getID(), campName);
+        PendingEnquiries.add(newEnquiry);
+        System.out.println("Enquiry created successfully!");
+    }
+
+    public void viewEnquiries() {
+        for (int i = 0; i < PendingEnquiries.size(); i++) {
+            System.out.print((i+1) + ": ");
+            System.out.println("["+PendingEnquiries.get(i).getCampName()+"] "+PendingEnquiries.get(i).getEnquiry());
         }
     }
 
-    public void listEnquiries(){
-        for (int i=0;i<Attendee.size();i++){
-            System.out.println("Enquiry under camp(index): "+ Attendee.get(i).getCampAttending()+" "+"("+(i+1)+")");
-            Attendee.get(i).viewEnquiries();
-        }
+    public void editEnquiry(String enqString, int index) {
+        PendingEnquiries.get(index).modifyEnquiry(enqString);
+        System.out.println("Enquiry edited successfully!");
     }
+
+    public void submitEnquiry(EnquiriesArray enqArray, int index) {
+        enqArray.submitEnquiry(PendingEnquiries.get(index));
+        System.out.println("Enquiry submitted successfully!");
+    }
+
+
+    // public void listEnquiries(){
+    //     for (int i=0;i<Attendee.size();i++){
+    //         System.out.println("Enquiry under camp(index): "+ Attendee.get(i).getCampAttending()+" "+"("+(i+1)+")");
+    //         Attendee.get(i).viewEnquiries();
+    //     }
+    // }
 
     public CampCommitteeRole getCampCommitteeRole() {
         return CommRole;
