@@ -530,27 +530,27 @@ public class CAMDisplay {
         } while(choice != logout);
     }
 
-    private void committeeMemberScreen(Student student) {
-        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-        System.out.println("║ Camp Application & Management System - Home                     ║");
-        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-        System.out.println("Welcome back to CAMs, Student " + student.getID()
-                + "! Where we get to explore the amazing camps planned!");
-        System.out.println("1. View Camps");
-        System.out.println("2. View Remaining Camp Slots");
-        System.out.println("3. Submit Enquiry");
-        System.out.println("4. View your Enquiries");
-        System.out.println("6. View Registered Camps");
-        System.out.println("7. Withdraw from Camp");
-        System.out.println("Committee Member Options:");
-        System.out.println("8. View Camp Details");
-        System.out.println("9. Submit Suggestion");
-        System.out.println("10. View Suggestions");
-        System.out.println("11. View Enquiries");
-        System.out.println("12. Reply Enquiries");
-        System.out.println("13. Generate Camp Report");
-        System.out.println("14. Logout");
-        System.out.printf("Enter your choice: ");
-    }
+    // private void committeeMemberScreen(Student student) {
+    //     System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+    //     System.out.println("║ Camp Application & Management System - Home                     ║");
+    //     System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+    //     System.out.println("Welcome back to CAMs, Student " + student.getID()
+    //             + "! Where we get to explore the amazing camps planned!");
+    //     System.out.println("1. View Camps");
+    //     System.out.println("2. View Remaining Camp Slots");
+    //     System.out.println("3. Submit Enquiry");
+    //     System.out.println("4. View your Enquiries");
+    //     System.out.println("6. View Registered Camps");
+    //     System.out.println("7. Withdraw from Camp");
+    //     System.out.println("Committee Member Options:");
+    //     System.out.println("8. View Camp Details");
+    //     System.out.println("9. Submit Suggestion");
+    //     System.out.println("10. View Suggestions");
+    //     System.out.println("11. View Enquiries");
+    //     System.out.println("12. Reply Enquiries");
+    //     System.out.println("13. Generate Camp Report");
+    //     System.out.println("14. Logout");
+    //     System.out.printf("Enter your choice: ");
+    // }
 
 }
