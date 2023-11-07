@@ -17,16 +17,15 @@ public class Student extends Users {
     //     super(FirstName, userID, facultyInfo);
     // }
 
-    // !!! STILL NEED TO SETTLE INGESTION OF CAMPCOMM !!!
-    public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps, String busyDates) {
+    public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps, String busyDates, CampArray campArray) {
         super(FirstName, userID, facultyInfo);
         Attendee = new ArrayList<>();
         BusyDates = new ArrayList<>();
         RegCamps = new ArrayList<>();
 
         if (commCamp != null) {
-            //IsCampComm = true;
-            // initialise camp comm for getCamp(commCamp)
+            IsCampComm = true;
+            CommRole = new CampCommitteeRole(campArray.getCamp(commCamp));
         }
         for (String camp : regCamps.split(";")) {
             RegCamps.add(camp);
@@ -35,10 +34,10 @@ public class Student extends Users {
             BusyDates.add(new CAMDate(date));
         }
 
-        // for (int i=0;i<RegCamps.size();i++){
-        //     CampAttendeeRole attendeeRole = new CampAttendeeRole(RegCamps.get(i), this);
-        //     Attendee.add(attendeeRole);
-        // }
+        for (int i=0;i<RegCamps.size();i++){
+            CampAttendeeRole attendeeRole = new CampAttendeeRole(RegCamps.get(i), this);
+            Attendee.add(attendeeRole);
+        }
     }
 
     public boolean IsCampComm(){
@@ -132,6 +131,10 @@ public class Student extends Users {
             System.out.println("Enquiry under camp(index): "+ Attendee.get(i).getCampAttending()+" "+"("+(i+1)+")");
             Attendee.get(i).viewEnquiries();
         }
+    }
+
+    public CampCommitteeRole getCampCommitteeRole() {
+        return CommRole;
     }
 
     public int compareTo(Users other) {
