@@ -103,14 +103,14 @@ public class Student extends Users {
         }
     }
 
-    public void withdrawFromCamp(Camp camp, boolean campComm) {
-        if (campComm){
-            this.IsCampComm = false;
-            this.CommRole = new CampCommitteeRole(null);
-            camp.withdrawFromCamp(getFirstName(), campComm);
+    public void withdrawFromCamp(Camp camp) {
+        if (IsCampComm){
+            if (camp.getCampName().equals(CommRole.getCampName())){
+                System.out.println("Not allowed to withdraw from Camp as a Camp Committee Member!");
+            }
         }
         else{
-            camp.withdrawFromCamp(getFirstName(), campComm);
+            camp.withdrawFromCamp(getFirstName());
             RegCamps.remove(camp.getCampName());
             CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
             for (int i=0;i<Attendee.size();i++){
