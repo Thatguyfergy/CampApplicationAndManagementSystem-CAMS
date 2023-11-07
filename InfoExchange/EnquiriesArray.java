@@ -107,7 +107,7 @@ public class EnquiriesArray {
         return -1;
     }
 
-    public void viewEnquiries(Users user) throws Exception {
+    public void viewEnquiries(Users user) {
         // Need a feature for Camp Committee members to view
         if (user instanceof Staff) {
             System.out.println("All Submitted Enquiries:");
