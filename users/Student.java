@@ -110,7 +110,7 @@ public class Student extends Users {
             }
         }
         else{
-            camp.withdrawFromCamp(getFirstName());
+            camp.withdrawFromCamp(getID());
             RegCamps.remove(camp.getCampName());
             CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
             for (int i=0;i<Attendee.size();i++){
