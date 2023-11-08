@@ -34,8 +34,8 @@ public class CampCommitteeRole {
         return camp.getRegistrationClosingDate();
     }
 
-    public String getCampVisibility() {
-        return camp.getCampVisibility();
+    public String getCampAvailability() {
+        return camp.getCampAvailability();
     }
 
     public String getCampLocation() {

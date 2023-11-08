@@ -48,7 +48,7 @@ public class CampReport implements Report {
             }
             csvWriter.append("\n");
             csvWriter.append("Camp Visibility,");
-            csvWriter.append(camp.getCampVisibility());
+            csvWriter.append(camp.getCampAvailability());
             csvWriter.append("\n");
             csvWriter.append("Location,");
             csvWriter.append(camp.getLocation());
@@ -100,7 +100,7 @@ public class CampReport implements Report {
             }
             csvWriter.append("\n");
             csvWriter.append("Camp Visibility,");
-            csvWriter.append(camp.getCampVisibility());
+            csvWriter.append(camp.getCampAvailability());
             csvWriter.append("\n");
             csvWriter.append("Location,");
             csvWriter.append(camp.getLocation());
@@ -146,7 +146,7 @@ public class CampReport implements Report {
             }
             csvWriter.append("\n");
             csvWriter.append("Camp Visibility,");
-            csvWriter.append(camp.getCampVisibility());
+            csvWriter.append(camp.getCampAvailability());
             csvWriter.append("\n");
             csvWriter.append("Location,");
             csvWriter.append(camp.getLocation());

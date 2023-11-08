@@ -54,8 +54,8 @@ public class Camp {
         return campInfo.getRegistrationClosingDate();
     }
 
-    public String getCampVisibility() {
-        return campInfo.getCampVisibility();
+    public String getCampAvailability() {
+        return campInfo.getCampAvailability();
     }
 
     public String getLocation() {
@@ -186,7 +186,7 @@ public class Camp {
         } else if (sortBy.equals("registrationClosingDate")) {
             return this.getRegistrationClosingDate().compareTo(other.getRegistrationClosingDate());
         } else if (sortBy.equals("campVisibility")) {
-            return this.getCampVisibility().compareTo(other.getCampVisibility());
+            return this.getCampAvailability().compareTo(other.getCampAvailability());
         } else if (sortBy.equals("location")) {
             return this.getLocation().compareTo(other.getLocation());
         } else if (sortBy.equals("totalSlots")) {

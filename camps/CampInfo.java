@@ -9,7 +9,7 @@ public class CampInfo {
     private String campName;
     private ArrayList<CAMDate> dates;
     private CAMDate registrationClosingDate;
-    private String campVisibility;
+    private String campAvailability;
     private String location;
     private int totalSlots;
     private int committeeMembersSlots;
@@ -22,7 +22,7 @@ public class CampInfo {
         // this.campID = 0;
         this.campName = "";
         this.dates = new ArrayList<CAMDate>();
-        this.campVisibility = "";
+        this.campAvailability = "";
         this.location = "";
         this.totalSlots = 0;
         this.committeeMembersSlots = 0;
@@ -31,14 +31,14 @@ public class CampInfo {
     }
 
     // Constructor with all fields & create comitteeMembers array
-    public CampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
+    public CampInfo(String campName, CAMDate registrationClosingDate, String campAvailability,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
 
         // this.campID = campID;
         this.campName = campName;
         this.dates = new ArrayList<CAMDate>();
         this.registrationClosingDate = registrationClosingDate;
-        this.campVisibility = campVisibility;
+        this.campAvailability = campAvailability;
         this.location = location;
         this.totalSlots = totalSlots;
         this.committeeMembersSlots = committeeMembersSlots;
@@ -75,8 +75,8 @@ public class CampInfo {
         return registrationClosingDate;
     }
 
-    public String getCampVisibility() {
-        return campVisibility;
+    public String getCampAvailability() {
+        return campAvailability;
     }
 
     public String getLocation() {
@@ -116,8 +116,8 @@ public class CampInfo {
         this.registrationClosingDate = registrationClosingDate;
     }
 
-    public void setCampVisibility(String campVisibility) {
-        this.campVisibility = campVisibility;
+    public void setCampAvailability(String campAvailability) {
+        this.campAvailability = campAvailability;
     }
 
     public void setLocation(String location) {
@@ -179,7 +179,7 @@ public class CampInfo {
     // Get all camp info in a single string
     private String getCampInfo() {
         return "Camp Name: " + campName + "\n" + "Camp Dates: " + dates + "\n" + "Registration Closing Date: "
-                + registrationClosingDate + "\n" + "Camp Visibility: " + campVisibility + "\n" + "Location: " + location
+                + registrationClosingDate + "\n" + "Camp Visibility: " + campAvailability + "\n" + "Location: " + location
                 + "\n" + "Total Slots: " + totalSlots + "\n" + "Committee Members Slots: " + committeeMembersSlots
                 + "\n" + "Camp Description: " + campDescription + "\n" + "Staff In Charge: " + staffInCharge + "\n";
     }
@@ -191,11 +191,11 @@ public class CampInfo {
     }
 
     // Set all camp info except commitee members and camp dates in a single method
-    public void setCampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
+    public void setCampInfo(String campName, CAMDate registrationClosingDate, String campAvailability,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         this.campName = campName;
         this.registrationClosingDate = registrationClosingDate;
-        this.campVisibility = campVisibility;
+        this.campAvailability = campAvailability;
         this.location = location;
         this.totalSlots = totalSlots;
         this.committeeMembersSlots = committeeMembersSlots;
@@ -214,7 +214,7 @@ public class CampInfo {
                 System.out.print(", ");
         }
         System.out.println("\nClose Date:\t\t" + registrationClosingDate);
-        System.out.println("Avail:\t\t\t" + campVisibility);
+        System.out.println("Avail:\t\t\t" + campAvailability);
         System.out.println("Location:\t\t" + location);
         System.out.println("Total:\t\t\t" + totalSlots);
         System.out.println("Com-Mem:\t\t" + committeeMembersSlots);

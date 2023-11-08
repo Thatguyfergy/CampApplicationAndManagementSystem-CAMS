@@ -85,7 +85,7 @@ public class Student extends Users {
         }
 
         // check if student is allowed to register for this camp, i.e. campVisibility
-        if (camp.getCampInfo().getCampVisibility() == "off") {
+        if (camp.getCampInfo().getCampAvailability() == "off") {
             System.out.println("This camp has been closed for registration!");
             return;
         }
@@ -121,7 +121,7 @@ public class Student extends Users {
         }
 
         // check if student is allowed to register for this camp, i.e. campVisibility
-        if (camp.getCampInfo().getCampVisibility() == "off") {
+        if (camp.getCampInfo().getCampAvailability() == "off") {
             System.out.println("This camp has been closed for registration!");
             return;
         }
