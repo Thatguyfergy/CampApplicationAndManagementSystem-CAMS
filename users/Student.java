@@ -147,23 +147,24 @@ public class Student extends Users {
         if (IsCampComm) {
             if (camp.getCampName().equals(CommRole.getCampName())) {
                 System.out.println("Not allowed to withdraw from Camp as a Camp Committee Member!");
+                return;
             }
-        } else {
-            campArray.withdrawAttendee(camp.getCampName(), this.getID());
-            RegCamps.remove(camp.getCampName());
-            CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
-            for (int i = 0; i < Attendee.size(); i++) {
-                if (Attendee.get(i).getCampAttending() == camp.getCampName()) {
-                    remAttendee = Attendee.get(i);
-                    break;
-                }
-            }
-            Attendee.remove(remAttendee);
-            for (int i = 0; i < camp.getDates().size(); i++) {
-                BusyDates.remove(camp.getDates().get(i));
-            }
-            System.out.println("Successfully withdrew from " + camp.getCampName());
         }
+        campArray.withdrawAttendee(camp.getCampName(), this.getID());
+        RegCamps.remove(camp.getCampName());
+        CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
+        for (int i = 0; i < Attendee.size(); i++) {
+            if (Attendee.get(i).getCampAttending() == camp.getCampName()) {
+                remAttendee = Attendee.get(i);
+                break;
+            }
+        }
+        Attendee.remove(remAttendee);
+        for (int i = 0; i < camp.getDates().size(); i++) {
+            BusyDates.remove(camp.getDates().get(i));
+        }
+        System.out.println("Successfully withdrew from " + camp.getCampName());
+        
     }
 
     public void createEnquiry(String enqString, String campName) {

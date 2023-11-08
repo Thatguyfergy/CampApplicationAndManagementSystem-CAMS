@@ -237,12 +237,12 @@ public class EnquiriesArray {
     }
 
     public void viewReplies(Users user) {
-        System.out.println("All Submitted Enquiries & Replies:");
+        System.out.println("\nAll Submitted Enquiries & Replies:\n");
         for (int i = 0; i < enquiries.size(); i++) {
             Enquiries enquiry = enquiries.get(i);
             if (enquiry.getSender() == user.getID()) {
                 System.out.println("Camp Name: " + enquiry.getCampName());
-                System.out.println("Your Enquiry" + enquiry.getEnquiry());
+                System.out.println("Your Enquiry: " + enquiry.getEnquiry());
                 System.out.println("------------------------------------------------------");
                 System.out.println("Replies by Staff/Camp Committee Member");
                 for (int j = 0; j < replies.size(); j++) {
@@ -253,7 +253,7 @@ public class EnquiriesArray {
                         System.out.println();
                     }
                 }
-
+                System.out.println();
             }
         }
     }

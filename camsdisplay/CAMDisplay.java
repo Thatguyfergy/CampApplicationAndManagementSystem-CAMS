@@ -450,6 +450,7 @@ public class CAMDisplay {
                     String enqChoice = sc.nextLine();
                     switch (enqChoice) {
                         case "W", "w":
+                            System.out.println("\nFILTERING and SORTING Camps to View.");
                             student.viewAvailAndRegCamps(campArray);
                             System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name: ");
                             // sc.nextLine();
@@ -461,6 +462,7 @@ public class CAMDisplay {
                             break;
                         case "V", "v":
                             student.viewEnquiries();
+                            System.out.println("\nEND of Enquiries\n");
                             break;
                         case "E", "e":
                             student.viewEnquiries();
@@ -486,9 +488,14 @@ public class CAMDisplay {
                     ScreenClearFn();
                     break;
                 case 4:
-                    System.out.printf("Enter the name of the camp you are withdrawing from: ");
-                    sc.nextLine();
-                    String remCampString = sc.nextLine();
+                    String remCampString;
+                    do {
+                        System.out.printf("Enter the name of the camp you are withdrawing from: ");
+                        sc.nextLine();
+                        remCampString = sc.nextLine();
+                        if (campArray.checkCampExists(remCampString)) break;
+                        System.out.println("No such Camp! Please try again.");
+                    } while (true);
                     Camp remCamp = campArray.getCamp(remCampString);
                     student.withdrawFromCamp(remCamp,campArray);
                     ScreenClearFn();
