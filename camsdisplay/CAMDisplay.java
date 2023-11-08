@@ -348,47 +348,9 @@ public class CAMDisplay {
                         "║ Camp Application & Management System - View Camps             ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
-        String choice;
-        System.out.print("Sort by:\n" +
-                "1. Camp Name\n" +
-                "2. Camp Registration Closing Date\n" +
-                "3. Camp Visibility\n" +
-                "4. Camp location\n" +
-                "5. Camp Staff-In-Charge\n" +
-                "6. Camp Dates\n" +
-                "7. Popularity\n"+
-                "Enter your choice: ");
-        choice = sc.nextLine();
-        System.out.println();
-        String sortBy;
-        switch (choice) {
-            case "1":
-                sortBy = "campName";
-                break;
-            case "2":
-                sortBy = "registrationClosingDate";
-                break;
-            case "3":
-                sortBy = "campVisibility";
-                break;
-            case "4":
-                sortBy = "location";
-                break;
-            case "5":
-                sortBy = "staffInCharge";
-                break;
-            case "6":
-                sortBy = "startDate";
-            case "7":
-                sortBy = "popularity";
-                break;
-            default:
-                System.out.println("Invalid choice! - Sorting by Camp Name");
-                sortBy = "campName";
-                break;
-        }
+        
 
-        campArray.viewCamps(user, sortBy);
+        campArray.viewCamps(user);
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
@@ -455,11 +417,11 @@ public class CAMDisplay {
             System.out.println();
             switch (choice) {
                 case 1:
-                    student.viewAvailAndRegCamps(campArray, "campName");
+                    student.viewAvailAndRegCamps(campArray);
                     ScreenClearFn();
                     break;
                 case 2:
-                    student.viewAvailAndRegCamps(campArray, "campName");
+                    student.viewAvailAndRegCamps(campArray);
                     String campname;
                     System.out.printf("\nWhich camp do you want to register for? ");
                     sc.nextLine(); // flush nextline char
@@ -487,7 +449,7 @@ public class CAMDisplay {
                     String enqChoice = sc.nextLine();
                     switch (enqChoice) {
                         case "W", "w":
-                            student.viewAvailAndRegCamps(campArray, "campName");
+                            student.viewAvailAndRegCamps(campArray);
                             System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name: ");
                             // sc.nextLine();
                             String enqcamp = sc.nextLine();

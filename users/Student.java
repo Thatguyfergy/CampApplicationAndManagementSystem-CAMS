@@ -60,8 +60,8 @@ public class Student extends Users {
         return Attendee.get(index);
     }
 
-    public void viewAvailAndRegCamps(CampArray currentCamps, String sortBy) {
-        currentCamps.viewCamps(this, sortBy);
+    public void viewAvailAndRegCamps(CampArray currentCamps) {
+        currentCamps.viewCamps(this);
     }
 
     public void registerCampAttendee(Camp camp, CampArray campArray) {

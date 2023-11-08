@@ -72,7 +72,6 @@ public class CampArray {
         updateFile(camps);
     }
 
-
     // update file with new campArray
     private void updateFile(ArrayList<Camp> camps) {
         try (FileWriter csvWriter = new FileWriter(campsFile)) {
@@ -153,8 +152,7 @@ public class CampArray {
         String campDescription = scanner.nextLine();
 
         System.out.println("Toggle visibility for camp (on/off):");
-         manualVisibility = scanner.nextLine().toLowerCase();
-    
+        manualVisibility = scanner.nextLine().toLowerCase();
 
         Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
                 committeeMembersSlots, campDescription, staffinCharge);
@@ -165,16 +163,15 @@ public class CampArray {
         updateFile(camps);
         return campName;
     }
-    //Helper method to manually set visibility on or off
+
+    // Helper method to manually set visibility on or off
     public String setManualVisibility(String manualVisibility) {
         if (manualVisibility.equalsIgnoreCase("on")) {
             return "on";
-            
-        } 
-        else if (manualVisibility.equalsIgnoreCase("off")) {
+
+        } else if (manualVisibility.equalsIgnoreCase("off")) {
             return "off";
-        }
-        else{
+        } else {
             return manualVisibility;
         }
     }
@@ -208,14 +205,13 @@ public class CampArray {
                 break;
             case 2:
                 // Add logic to edit Registration Closing Date
-                while (true){
+                while (true) {
                     System.out.println("Enter new Registration Closing Date for the camp: ");
                     String newDate = scanner.nextLine();
                     if (newDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
                         targetCamp.getCampInfo().setRegistrationClosingDate(new CAMDate(newDate));
                         break;
-                    }
-                    else{
+                    } else {
                         System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
                     }
                 }
@@ -254,16 +250,16 @@ public class CampArray {
                 break;
             case 9:
                 // Add logic to add dates
-                //targetCamp.getCampInfo().addDate(new CAMDate(startDate), newCAMDate(endDate));
+                // targetCamp.getCampInfo().addDate(new CAMDate(startDate),
+                // newCAMDate(endDate));
                 while (true) {
                     System.out.println("Enter Date to add to the camp: ");
                     String dateToAdd = scanner.nextLine();
                     if (dateToAdd.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                        if (targetCamp.getCampInfo().dateExists(dateToAdd)){
+                        if (targetCamp.getCampInfo().dateExists(dateToAdd)) {
                             System.out.println("Date already exists");
                             return;
-                        }
-                        else{
+                        } else {
                             targetCamp.getCampInfo().addDate(new CAMDate(dateToAdd));
                             targetCamp.getCampInfo().sortDates();
                             break;
@@ -273,27 +269,26 @@ public class CampArray {
                     }
                 }
                 break;
-                
+
             case 10:
                 // Add logic to remove date
-                
+
                 while (true) {
                     System.out.println("Enter Date to remove from the camp: ");
                     String dateToRemove = scanner.nextLine();
                     if (dateToRemove.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                        if (targetCamp.getCampInfo().dateExists(dateToRemove)){
+                        if (targetCamp.getCampInfo().dateExists(dateToRemove)) {
                             targetCamp.getCampInfo().removeDate(dateToRemove);
                             targetCamp.getCampInfo().sortDates();
                             break;
-                        }
-                        else{
+                        } else {
                             System.out.println("Date does not exist");
                             return;
                         }
                     } else {
                         System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
                     }
-                    
+
                 }
                 break;
             case 11:
@@ -312,8 +307,6 @@ public class CampArray {
 
         System.out.println("Camp edited successfully");
     }
-
-    
 
     public boolean checkCampExists(String campName) {
         for (Camp camp : camps) {
@@ -343,10 +336,49 @@ public class CampArray {
         }
     }
 
-    public void viewCamps(Users user, String sortBy) {
+    public void viewCamps(Users user) {
         // Display camps based on different visibility requirements
         // For Staff - No filters since every staff can view every camp
         // For Students - filter by committeeMembers
+        String sortBy;
+        System.out.print("Sort by:\n" +
+                "1. Camp Name\n" +
+                "2. Camp Registration Closing Date\n" +
+                "3. Camp Visibility\n" +
+                "4. Camp location\n" +
+                "5. Camp Staff-In-Charge\n" +
+                "6. Camp Dates\n" +
+                "7. Popularity\n" +
+                "Enter your choice: ");
+        Scanner sc = new Scanner(System.in);
+        sortBy = sc.nextLine();
+        System.out.println();
+        switch (sortBy) {
+            case "1":
+                sortBy = "campName";
+                break;
+            case "2":
+                sortBy = "registrationClosingDate";
+                break;
+            case "3":
+                sortBy = "campVisibility";
+                break;
+            case "4":
+                sortBy = "location";
+                break;
+            case "5":
+                sortBy = "staffInCharge";
+                break;
+            case "6":
+                sortBy = "startDate";
+            case "7":
+                sortBy = "popularity";
+                break;
+            default:
+                System.out.println("Invalid choice! - Sorting by Camp Name");
+                sortBy = "campName";
+                break;
+        }
         sortCamps(sortBy);
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
@@ -431,7 +463,8 @@ public class CampArray {
             System.out.println(
                     "===============================================================================================================================================");
             for (Camp camp : camps) {
-                if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on")||setManualVisibility(manualVisibility).equalsIgnoreCase("on"))
+                if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on")
+                        || setManualVisibility(manualVisibility).equalsIgnoreCase("on"))
                         && (canSeeAllCamps
                                 || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampVisibility()))) {
                     String campName = truncateWithEllipsis(camp.getCampName(), 15);
@@ -447,7 +480,10 @@ public class CampArray {
                     System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s |%n",
                             campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
                             description, staffInCharge);
+                    System.out.println(
+                            "===============================================================================================================================================");
                 }
+
             }
 
             // Display camps the student has registered for and their roles
@@ -467,6 +503,9 @@ public class CampArray {
                             camp.getCampName(), camp.getStartToEndDate(), camp.getCampVisibility(), camp.getLocation(),
                             camp.getCampDescription(), camp.getStaffInCharge(), "Attendee");
                     hasRegisteredCamps = true;
+
+                    System.out.println(
+                            "=========================================================================================================================");
                 }
                 if (camp.getCommitteeMembers().contains(studentUser.getID())
                         || camp.getCommitteeMembers().contains(studentUser.getFirstName())) {
@@ -475,11 +514,14 @@ public class CampArray {
                             camp.getCampDescription(), camp.getStaffInCharge(), "Com. Mem");
                     // displayRegisteredStudents(camp);
                     hasRegisteredCamps = true;
+                    System.out.println(
+                            "=========================================================================================================================");
                 }
             }
             if (!hasRegisteredCamps) {
                 System.out.println("None.");
             }
+
         }
     }
 
