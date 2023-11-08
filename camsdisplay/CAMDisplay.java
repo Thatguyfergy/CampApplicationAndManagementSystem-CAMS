@@ -308,7 +308,8 @@ public class CAMDisplay {
                     "8. Staff In Charge\n" +
                     "9. Add Date\n" +
                     "10. Remove Date\n" +
-                    "11. Exit\n" +
+                    "11. Toggle Visibility\n" +
+                    "12. Exit\n" +
                     "Enter your choice: ");
             int choice = inputInt.nextInt(sc);
             sc.nextLine(); // Consume the newline character

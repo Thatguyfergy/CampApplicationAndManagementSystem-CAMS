@@ -41,6 +41,7 @@ public class CampArray {
                 for (String date : data[1].trim().split(";")) {
                     camp.addDate(new CAMDate(date));
                 }
+                camp.getCampInfo().sortDates();
                 camps.add(camp);
                 for (String committeeMember : data[6].trim().split(";")) {
                     camp.registerStudent(committeeMember, committeeMember, true, camp.getCampName());
@@ -58,10 +59,6 @@ public class CampArray {
 
     public void sortCamps(String sortBy) {
         this.sortBy = sortBy;
-        insertionSort(camps, sortBy);
-    }
-
-    private void insertionSort(ArrayList<Camp> camps, String sortBy) {
         for (int i = 1; i < camps.size(); i++) {
             Camp key = camps.get(i);
             int j = i - 1;
@@ -74,6 +71,7 @@ public class CampArray {
 
         updateFile(camps);
     }
+
 
     // update file with new campArray
     private void updateFile(ArrayList<Camp> camps) {
@@ -267,6 +265,7 @@ public class CampArray {
                         }
                         else{
                             targetCamp.getCampInfo().addDate(new CAMDate(dateToAdd));
+                            targetCamp.getCampInfo().sortDates();
                             break;
                         }
                     } else {
@@ -284,6 +283,7 @@ public class CampArray {
                     if (dateToRemove.matches("\\d{2}/\\d{2}/\\d{4}")) {
                         if (targetCamp.getCampInfo().dateExists(dateToRemove)){
                             targetCamp.getCampInfo().removeDate(dateToRemove);
+                            targetCamp.getCampInfo().sortDates();
                             break;
                         }
                         else{

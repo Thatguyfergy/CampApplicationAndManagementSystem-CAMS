@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import camdate.CAMDate;
 
 public class CampInfo {
-    //private int campID;
+    // private int campID;
     private String campName;
     private ArrayList<CAMDate> dates;
     private CAMDate registrationClosingDate;
@@ -15,12 +15,11 @@ public class CampInfo {
     private int committeeMembersSlots;
     private String campDescription;
     private String staffInCharge;
-    
 
     // Default constructor - Set all to empty string and create comitteeMembers
     // array
     public CampInfo() {
-        //this.campID = 0;
+        // this.campID = 0;
         this.campName = "";
         this.dates = new ArrayList<CAMDate>();
         this.campVisibility = "";
@@ -34,8 +33,8 @@ public class CampInfo {
     // Constructor with all fields & create comitteeMembers array
     public CampInfo(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
-        
-        //this.campID = campID;
+
+        // this.campID = campID;
         this.campName = campName;
         this.dates = new ArrayList<CAMDate>();
         this.registrationClosingDate = registrationClosingDate;
@@ -49,8 +48,20 @@ public class CampInfo {
 
     // Getter methods for all individual fields
     // public int getCampID() {
-    //     return campID;
+    // return campID;
     // }
+
+    public void sortDates() {
+        for (int i = 1; i < dates.size(); i++) {
+            CAMDate key = dates.get(i);
+            int j = i - 1;
+            while (j >= 0 && dates.get(j).compareTo(key) > 0){
+                dates.set(j + 1, dates.get(j));
+                j--;
+            }
+            dates.set(j + 1, key);
+            }
+    }
 
     public String getCampName() {
         return campName;
@@ -94,9 +105,8 @@ public class CampInfo {
 
     // Setter methods for all individual fields
     // public void setCampID(int campID) {
-    //     this.campID = campID;
+    // this.campID = campID;
     // }
-
 
     public void setCampName(String campName) {
         this.campName = campName;
@@ -198,9 +208,10 @@ public class CampInfo {
         System.out.println("Information for Camp " + campName);
         System.out.println("======================================");
         System.out.print("Dates:\t\t\t");
-        for (int i=0; i<dates.size(); i++) {
+        for (int i = 0; i < dates.size(); i++) {
             System.out.print(dates.get(i));
-            if (i!=dates.size()-1) System.out.print(", ");
+            if (i != dates.size() - 1)
+                System.out.print(", ");
         }
         System.out.println("\nClose Date:\t\t" + registrationClosingDate);
         System.out.println("Avail:\t\t\t" + campVisibility);
