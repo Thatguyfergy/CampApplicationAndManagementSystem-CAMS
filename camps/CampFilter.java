@@ -59,6 +59,7 @@ public class CampFilter {
         System.out.println("3. Location");
         System.out.println("4. Staff in charge");
         System.out.println("5. No filter");
+        System.out.printf("Enter choice: ");
         String choice = sc.nextLine();
         switch (choice) {
             case "1":

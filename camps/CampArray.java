@@ -64,24 +64,6 @@ public class CampArray {
         }
     }
 
-
-    public CampArray () {}
-
-    public void sortCamps(String sortBy) {
-        this.sortBy = sortBy;
-        for (int i = 1; i < camps.size(); i++) {
-            Camp key = camps.get(i);
-            int j = i - 1;
-            while (j >= 0 && camps.get(j).compareTo(key, sortBy) > 0) {
-                camps.set(j + 1, camps.get(j));
-                j--;
-            }
-            camps.set(j + 1, key);
-        }
-
-        updateFile(camps);
-    }
-
     // update file with new campArray
     private void updateFile(ArrayList<Camp> camps) {
         try (FileWriter csvWriter = new FileWriter(campsFile)) {
@@ -361,6 +343,7 @@ public class CampArray {
         
         ArrayList<Camp> filteredCamps = campFilter.filter();
         //filteredCamps.sortCamps("campName");
+        CampSorter.sortCamps(filteredCamps);
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
 

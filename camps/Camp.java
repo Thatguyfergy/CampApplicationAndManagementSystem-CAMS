@@ -197,14 +197,6 @@ public class Camp {
             return this.getCampDescription().compareTo(other.getCampDescription());
         } else if (sortBy.equals("staffInCharge")) {
             return this.getStaffInCharge().compareTo(other.getStaffInCharge());
-        } else if (sortBy.equals("startDate")) {
-            CAMDate thisStartDate = this.getDates().get(0); // Get the first date (start date
-            CAMDate otherStartDate = other.getDates().get(0); // Get the first date (start date
-            return -thisStartDate.compareTo(otherStartDate);
-        } else if (sortBy.equals("popularity")) {
-            float thisPopularity = (float) this.getNumOfAttendees() / this.getTotalSlots();
-            float otherPopularity = (float) other.getNumOfAttendees() / other.getTotalSlots();
-            return -Float.compare(thisPopularity, otherPopularity);
         } else {
             return 0;
         }
