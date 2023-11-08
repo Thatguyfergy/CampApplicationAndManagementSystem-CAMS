@@ -23,8 +23,10 @@ public class CampArray {
     private static String campsFile;
     private String sortBy;
     private String manualVisibility;
+    private CampFilter campFilter;
 
     public CampArray(String campsFile) {
+        campFilter = new CampFilter();
         sortBy = "campName";
         CampArray.campsFile = campsFile;
 
@@ -32,14 +34,18 @@ public class CampArray {
             String row;
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
-                // CSV Format: Name | Dates | Closing Date | Visibility |
+                // CSV Format: Name | Dates | Closing Date | Avail |
                 // Location | Total Slots | Committee Members |
                 // Committee Mem slots | Description | Attendees | Staff-In-Charge
                 Camp camp = new Camp(data[0].trim(), new CAMDate(data[2].trim()), data[3].trim(), data[4].trim(),
                         Integer.parseInt(data[5].trim()), Integer.parseInt(data[7].trim()), data[8].trim(),
                         data[9].trim());
+                campFilter.addAvailableFaculty(data[3].trim());
+                campFilter.addAvailableLocation(data[4].trim());
+                campFilter.addAvailableSIC(data[9].trim());
                 for (String date : data[1].trim().split(";")) {
                     camp.addDate(new CAMDate(date));
+                    campFilter.addAvailableDate(date);
                 }
                 camp.getCampInfo().sortDates();
                 camps.add(camp);
@@ -52,6 +58,7 @@ public class CampArray {
                     }
                 }
             }
+            campFilter.setUnfilteredCamps(camps);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -351,46 +358,9 @@ public class CampArray {
         // Display camps based on different visibility requirements
         // For Staff - No filters since every staff can view every camp
         // For Students - filter by committeeMembers
-        String sortBy;
-        System.out.print("Sort by:\n" +
-                "1. Camp Name\n" +
-                "2. Camp Registration Closing Date\n" +
-                "3. Camp Visibility\n" +
-                "4. Camp location\n" +
-                "5. Camp Staff-In-Charge\n" +
-                "6. Camp Dates\n" +
-                "7. Popularity\n" +
-                "Enter your choice: ");
-        Scanner sc = new Scanner(System.in);
-        sortBy = sc.nextLine();
-        System.out.println();
-        switch (sortBy) {
-            case "1":
-                sortBy = "campName";
-                break;
-            case "2":
-                sortBy = "registrationClosingDate";
-                break;
-            case "3":
-                sortBy = "campVisibility";
-                break;
-            case "4":
-                sortBy = "location";
-                break;
-            case "5":
-                sortBy = "staffInCharge";
-                break;
-            case "6":
-                sortBy = "startDate";
-            case "7":
-                sortBy = "popularity";
-                break;
-            default:
-                System.out.println("Invalid choice! - Sorting by Camp Name");
-                sortBy = "campName";
-                break;
-        }
-        sortCamps(sortBy);
+        
+        ArrayList<Camp> filteredCamps = campFilter.filter();
+        //filteredCamps.sortCamps("campName");
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
 
@@ -403,7 +373,7 @@ public class CampArray {
                     "S-I-C");
             System.out.println(
                     "===============================================================================================================================================");
-            for (Camp camp : camps) {
+            for (Camp camp : filteredCamps) {
                 String campName = truncateWithEllipsis(camp.getCampName(), 15);
                 String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
                 String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
@@ -430,7 +400,7 @@ public class CampArray {
                     "S-I-C");
             System.out.println(
                     "===============================================================================================================================================");
-            for (Camp camp : camps) {
+            for (Camp camp : filteredCamps) {
                 if (staffUser.getID().equals(camp.getStaffInCharge())
                         || staffUser.getFirstName().equals(camp.getStaffInCharge())) {
                     String campName = truncateWithEllipsis(camp.getCampName(), 15);
@@ -473,7 +443,7 @@ public class CampArray {
                     "S-I-C");
             System.out.println(
                     "===============================================================================================================================================");
-            for (Camp camp : camps) {
+            for (Camp camp : filteredCamps) {
                 if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on")
                         || setManualVisibility(manualVisibility).equalsIgnoreCase("on"))
                         && (canSeeAllCamps
@@ -506,7 +476,7 @@ public class CampArray {
             System.out.println(
                     "=========================================================================================================================");
             boolean hasRegisteredCamps = false; // Check if student has registered for camps
-            for (Camp camp : camps) {
+            for (Camp camp : filteredCamps) {
                 if (camp.getAttendees().contains(studentUser.getID())
                         || camp.getAttendees().contains(studentUser.getFirstName())) {
 
@@ -534,6 +504,7 @@ public class CampArray {
             }
 
         }
+        campFilter.clearFilteredCamps();
     }
 
     // this method should only be used by staff or camp committee members
@@ -622,6 +593,10 @@ public class CampArray {
 
     public ArrayList<Camp> getCampArray() {
         return camps;
+    }
+
+    public void setCampArray(ArrayList<Camp> camps) {
+        CampArray.camps = camps;
     }
 
 }
