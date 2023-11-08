@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import camdate.CAMDate;
+import users.Student;
+import users.Users;
 
 public class CampFilter {
 
@@ -52,7 +54,7 @@ public class CampFilter {
         return false; // Return false if the sic is already in the list
     }
 
-    public ArrayList<Camp> filter() {
+    public ArrayList<Camp> filter(Users user) {
         System.out.println("Filter by: ");
         System.out.println("1. Date");
         System.out.println("2. Faculty");
@@ -66,7 +68,7 @@ public class CampFilter {
                 filterByDate();
                 break;
             case "2":
-                filterByFaculty();
+                filterByFaculty(user);
                 break;
             case "3":
                 filterByLocation();
@@ -103,26 +105,51 @@ public class CampFilter {
         }
     }
 
-    private void filterByFaculty() {
+    private void filterByFaculty(Users user) {
         String faculty;
         System.out.println("Enter faculty to filter by: ");
-        for (int i = 0; i < availableFaculties.size(); i++) {
-            System.out.println(i + 1 + ". " + availableFaculties.get(i));
-        }
-        while (true) {
-            int choice = sc.nextInt();
-            if (choice > 0 && choice <= availableFaculties.size()) {
-                faculty = availableFaculties.get(choice - 1);
-                break;
-            } else {
-                System.out.println("Invalid choice. Please enter a number between 1 and " + availableFaculties.size());
+
+        if (user instanceof Student) {
+            System.out.println("1. " + ((Student) user).getFacultyInfo());
+            System.out.println("2. NTU");
+            while (true) {
+                int choice = sc.nextInt();
+                if (choice == 1) {
+                    faculty = ((Student) user).getFacultyInfo();
+                    break;
+                } else if (choice == 2) {
+                    faculty = "NTU";
+                    break;
+                } else {
+                    System.out.println("Invalid choice. Please enter 1 or 2");
+                }
+            }
+            for (Camp camp : unfilteredCamps) {
+                if (camp.getCampAvailability().equals(faculty)) {
+                    filteredCamps.add(camp);
+                }
+            }
+        } else {
+            for (int i = 0; i < availableFaculties.size(); i++) {
+                System.out.println(i + 1 + ". " + availableFaculties.get(i));
+            }
+            while (true) {
+                int choice = sc.nextInt();
+                if (choice > 0 && choice <= availableFaculties.size()) {
+                    faculty = availableFaculties.get(choice - 1);
+                    break;
+                } else {
+                    System.out.println(
+                            "Invalid choice. Please enter a number between 1 and " + availableFaculties.size());
+                }
+            }
+            for (Camp camp : unfilteredCamps) {
+                if (camp.getCampAvailability().equals(faculty)) {
+                    filteredCamps.add(camp);
+                }
             }
         }
-        for (Camp camp : unfilteredCamps) {
-            if (camp.getCampAvailability().equals(faculty)) {
-                filteredCamps.add(camp);
-            }
-        }
+
     }
 
     private void filterByLocation() {

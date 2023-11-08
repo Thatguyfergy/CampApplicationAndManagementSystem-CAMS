@@ -341,7 +341,7 @@ public class CampArray {
         // For Staff - No filters since every staff can view every camp
         // For Students - filter by committeeMembers
         
-        ArrayList<Camp> filteredCamps = campFilter.filter();
+        ArrayList<Camp> filteredCamps = campFilter.filter(user);
         //filteredCamps.sortCamps("campName");
         CampSorter.sortCamps(filteredCamps);
         if (user instanceof Staff) {
