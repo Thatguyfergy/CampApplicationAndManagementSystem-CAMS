@@ -600,6 +600,15 @@ public class CampArray {
         updateFile(camps);
     }
 
+    public void withdrawAttendee(String campName, String studentID) {
+        for (Camp camp : camps) {
+            if (camp.getCampName().equals(campName)) {
+                camp.withdrawAttendee(studentID);
+            }
+        }
+        updateFile(camps);
+    }
+
     public ArrayList<Camp> getCampArray() {
         return camps;
     }

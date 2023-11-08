@@ -151,7 +151,7 @@ public class Camp {
         withdrawAttendee(StudentID);
     }
 
-    private void withdrawAttendee(String StudentID) {
+    public void withdrawAttendee(String StudentID) {
         List<String> attendees = this.getAttendees();
 
         if (attendees.contains(StudentID)) {
