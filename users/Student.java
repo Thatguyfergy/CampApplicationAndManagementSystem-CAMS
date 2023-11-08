@@ -143,13 +143,13 @@ public class Student extends Users {
         System.out.println("Successfully registered as Camp Attendee!");
     }
 
-    public void withdrawFromCamp(Camp camp) {
+    public void withdrawFromCamp(Camp camp, CampArray campArray) {
         if (IsCampComm) {
             if (camp.getCampName().equals(CommRole.getCampName())) {
                 System.out.println("Not allowed to withdraw from Camp as a Camp Committee Member!");
             }
         } else {
-            camp.withdrawFromCamp(getID());
+            campArray.withdrawAttendee(camp.getCampName(), this.getID());
             RegCamps.remove(camp.getCampName());
             CampAttendeeRole remAttendee = new CampAttendeeRole(null, null);
             for (int i = 0; i < Attendee.size(); i++) {
@@ -192,6 +192,10 @@ public class Student extends Users {
 
     public ArrayList<CAMDate> getBusyDates() {
         return BusyDates;
+    }
+
+    public void viewEnquiriesReplies(EnquiriesArray enqArray){
+        enqArray.viewReplies(this);
     }
 
     // public void listEnquiries(){

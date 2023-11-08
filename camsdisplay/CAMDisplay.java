@@ -444,7 +444,8 @@ public class CAMDisplay {
                     break;
                 case 3:
                     System.out.println(
-                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\nS: Submit an Enquiry\nEnter your choice: ");
+                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\n"+
+                            "S: Submit an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
                     sc.nextLine();
                     String enqChoice = sc.nextLine();
                     switch (enqChoice) {
@@ -476,6 +477,9 @@ public class CAMDisplay {
                             int enqindex = inputInt.nextInt(sc);
                             student.submitEnquiry(enquiriesArray, enqindex - 1);
                             break;
+                        case "R","r":
+                            student.viewEnquiriesReplies(enquiriesArray);
+                            break;
                         default:
                             System.out.println("Invalid choice");
                     }
@@ -486,7 +490,7 @@ public class CAMDisplay {
                     sc.nextLine();
                     String remCampString = sc.nextLine();
                     Camp remCamp = campArray.getCamp(remCampString);
-                    student.withdrawFromCamp(remCamp);
+                    student.withdrawFromCamp(remCamp,campArray);
                     ScreenClearFn();
                     break;
                 case 5:
