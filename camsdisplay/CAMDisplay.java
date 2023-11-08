@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import InfoExchange.EnquiriesArray;
+import InfoExchange.Suggestion;
+import InfoExchange.SuggestionArray;
 import camps.Camp;
 import camps.CampArray;
 import report.CampReport;
@@ -19,6 +21,7 @@ public class CAMDisplay {
     private EnquiriesArray enquiriesArray = new EnquiriesArray("csvfiles\\enquiries.csv", "csvfiles\\replies.csv");
     private UsersDatabase UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
             "csvfiles/usersStaff.csv", campArray);
+    private SuggestionArray suggestionArray = new SuggestionArray("csvfiles\\suggestions.csv", UserDB, campArray);
 
     private Users user;
 
@@ -169,7 +172,7 @@ public class CAMDisplay {
                     "6. View Enquiries\n" +
                     "7. Reply Enquiries\n" +
                     "8. View Suggestions\n" +
-                    "9. Approve Suggestions\n" +
+                    "9. Process Suggestions\n" +
                     "10. Generate Camp Report\n" +
                     "11. Generate Performance Report\n" +
                     "12. Logout\n" +
@@ -206,9 +209,15 @@ public class CAMDisplay {
                     break;
                 case 8:
                     // View Suggestions
+                    suggestionArray.viewSuggestions(staff);
+                    suggestionArray.updateFile();
+                    ScreenClearFn();
                     break;
                 case 9:
-                    // Approve Suggestions
+                    // Process Suggestions
+                    suggestionArray.processSuggestion(staff);
+                    suggestionArray.updateFile();
+                    ScreenClearFn();
                     break;
                 case 10:
                     generateCampReportScreen(staff);
@@ -403,8 +412,8 @@ public class CAMDisplay {
                 System.out.println(
                         "\nCommittee Member Options for Camp " + student.getCampCommitteeRole().getCampName() + ":");
                 System.out.println("5. View Camp Details");
-                System.out.println("6. Submit Suggestion");
-                System.out.println("7. View Suggestions");
+                System.out.println("6. View Points");
+                System.out.println("7. Manage Suggestions");
                 System.out.println("8. View Enquiries");
                 System.out.println("9. Reply Enquiries");
                 System.out.println("10. Generate Camp Report");
@@ -467,7 +476,7 @@ public class CAMDisplay {
                         case "E", "e":
                             student.viewEnquiries();
                             System.out.printf("Select Enquiry to edit, input Enquiry index: ");
-                            int enqindex1 = sc.nextInt();
+                            int enqindex1 = inputInt.nextInt(sc);
                             System.out.printf("Please input the edited Enquiry: ");
                             sc.nextLine();
                             String newenq = sc.nextLine();
@@ -510,17 +519,52 @@ public class CAMDisplay {
                     user = null;
                     ScreenClearFn();
                     break;
-
                 case 6:
                     if (student.IsCampComm()) {
-                        // submit suggestions
+                        // view points
+                        System.out.printf("You have %d points!\n", student.getCampCommitteeRole().getPoints());
                     } else
                         System.out.println("Invalid choice");
                     ScreenClearFn();
                     break;
                 case 7:
                     if (student.IsCampComm()) {
-                        // view suggestions
+                        // manage suggestions
+                        System.out.println("W: WRITE new Suggestion\nV: VIEW all Suggestions\nE: Edit a Suggestion\n"+
+                        "S: Submit a Suggestion\nEnter your choice: ");
+                        sc.nextLine();
+                        String sugChoice = sc.nextLine();
+                        switch (sugChoice) {
+                            case "W", "w":
+                                System.out.printf("Please input the Suggestion: ");
+                                String sug = sc.nextLine();
+                                suggestionArray.createSuggestion(sug, student, campArray.getCamp(student.getCampCommitteeRole().getCampName()));
+                                suggestionArray.updateFile();
+                                break;
+                            case "V", "v":
+                                suggestionArray.viewSuggestions(student);
+                                System.out.println("\nEND of Suggestions\n");
+                                break;
+                            case "E", "e":
+                                suggestionArray.viewSuggestions(student);
+                                System.out.printf("Select Suggestion to edit, input Suggestion index: ");
+                                int sugindex1 = inputInt.nextInt(sc);
+                                System.out.printf("Please input the edited Suggestion: ");
+                                sc.nextLine();
+                                String newsug = sc.nextLine();
+                                suggestionArray.editSuggestion(student, sugindex1, newsug);
+                                suggestionArray.updateFile();
+                                break;
+                            case "S", "s":
+                                suggestionArray.viewSuggestions(student);
+                                System.out.printf("Select Suggestion to submit, input Suggestion index: ");
+                                int sugindex2 = inputInt.nextInt(sc);
+                                suggestionArray.submitSuggestion(student, sugindex2);
+                                suggestionArray.updateFile();
+                                break;
+                            default:
+                                System.out.println("Invalid choice");
+                        }
                     } else
                         System.out.println("Invalid choice");
                     ScreenClearFn();
@@ -570,27 +614,5 @@ public class CAMDisplay {
         // String temp = sc.nextLine();
         System.out.print("\033[H\033[2J");
     }
-    // private void committeeMemberScreen(Student student) {
-    // System.out.println("╔═════════════════════════════════════════════════════════════════╗");
-    // System.out.println("║ Camp Application & Management System - Home ║");
-    // System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-    // System.out.println("Welcome back to CAMs, Student " + student.getID()
-    // + "! Where we get to explore the amazing camps planned!");
-    // System.out.println("1. View Camps");
-    // System.out.println("2. View Remaining Camp Slots");
-    // System.out.println("3. Submit Enquiry");
-    // System.out.println("4. View your Enquiries");
-    // System.out.println("6. View Registered Camps");
-    // System.out.println("7. Withdraw from Camp");
-    // System.out.println("Committee Member Options:");
-    // System.out.println("8. View Camp Details");
-    // System.out.println("9. Submit Suggestion");
-    // System.out.println("10. View Suggestions");
-    // System.out.println("11. View Enquiries");
-    // System.out.println("12. Reply Enquiries");
-    // System.out.println("13. Generate Camp Report");
-    // System.out.println("14. Logout");
-    // System.out.printf("Enter your choice: ");
-    // }
 
 }

@@ -29,7 +29,8 @@ public class Student extends Users {
 
         if (commCamp != "") {
             IsCampComm = true;
-            CommRole = new CampCommitteeRole(campArray.getCamp(commCamp));
+            String[] cc = commCamp.split(";");
+            CommRole = new CampCommitteeRole(campArray.getCamp(cc[0]), Integer.parseInt(cc[1]));
         }
         if (regCamps != "") {
             for (String camp : regCamps.split(";")) {
@@ -133,7 +134,7 @@ public class Student extends Users {
             return;
         }
 
-        CommRole = new CampCommitteeRole(camp);
+        CommRole = new CampCommitteeRole(camp, 0);
         IsCampComm = true;
         RegCamps.add(camp.getCampName());
         campArray.registerCampCom(camp.getCampName(), this.getID());
@@ -209,6 +210,13 @@ public class Student extends Users {
 
     public CampCommitteeRole getCampCommitteeRole() {
         return CommRole;
+    }
+
+    public static int compareCommPoints(Student a, Student b) {
+        // if equal return 0
+        // if a better than b return 1, b better return -1
+        if (a.getCampCommitteeRole().getPoints() == b.getCampCommitteeRole().getPoints()) return 0;
+        return (a.getCampCommitteeRole().getPoints() > b.getCampCommitteeRole().getPoints()) ? 1 : -1;
     }
 
 }
