@@ -61,8 +61,13 @@ public class EnquiriesArray {
     // The enquiryID will only be generated after submission.
     // If you require the ID, please use getEnquiryID() only AFTER SUBMISSION.
     public void submitEnquiry(Enquiries enquiry) {
+        if (enquiry.getSubmitted()) {
+            System.out.println("Enquiry already submitted!");
+            return;
+        }
         enquiry.setEnquiryID(generateID(enquiries));
         enquiries.add(enquiry);
+        enquiry.setSubmittedTrue();
         try {
             updateFile(enquiries);
         } catch (Exception e) {

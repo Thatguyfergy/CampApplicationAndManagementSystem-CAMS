@@ -471,10 +471,12 @@ public class CAMDisplay {
                                     "S: Submit an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
                     sc.nextLine();
                     String enqChoice = sc.nextLine();
+                    System.out.println();
                     switch (enqChoice) {
                         case "W", "w":
                             System.out.println("\nFILTERING and SORTING Camps to View.");
                             student.viewAvailAndRegCamps(campArray);
+                            System.out.println();
                             System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name: ");
                             // sc.nextLine();
                             String enqcamp = sc.nextLine();
@@ -489,6 +491,7 @@ public class CAMDisplay {
                             break;
                         case "E", "e":
                             student.viewEnquiries();
+                            System.out.println();
                             System.out.printf("Select Enquiry to edit, input Enquiry index: ");
                             int enqindex1 = inputInt.nextInt(sc);
                             System.out.printf("Please input the edited Enquiry: ");
@@ -498,6 +501,7 @@ public class CAMDisplay {
                             break;
                         case "S", "s":
                             student.viewEnquiries();
+                            System.out.println();
                             System.out.printf("Select Enquiry to submit, input Enquiry index: ");
                             int enqindex = inputInt.nextInt(sc);
                             student.submitEnquiry(enquiriesArray, enqindex - 1);
