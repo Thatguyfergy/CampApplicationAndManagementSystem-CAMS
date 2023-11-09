@@ -6,11 +6,11 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import InfoExchange.EnquiriesArray;
-import InfoExchange.Suggestion;
-import InfoExchange.SuggestionArray;
 import camps.Camp;
 import camps.CampArray;
+import infoexchange.EnquiriesArray;
+import infoexchange.Suggestion;
+import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 

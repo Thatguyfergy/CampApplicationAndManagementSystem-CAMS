@@ -1,4 +1,4 @@
-package InfoExchange;
+package infoexchange;
 
 import users.*;
 import camps.*;
@@ -37,8 +37,9 @@ public class Suggestion {
     }
 
     public boolean setSuggestion(String s) {
-        if (processed) return false;
-        
+        if (processed)
+            return false;
+
         suggestion = s;
         return true;
     }
@@ -53,11 +54,11 @@ public class Suggestion {
 
     public boolean submit() {
         if (!submitted) {
-            submitted=true;
+            submitted = true;
             student.getCampCommitteeRole().addOnePoint();
             return true;
-        }
-        else return false;
+        } else
+            return false;
     }
 
     public boolean isProcessed() {
@@ -66,9 +67,10 @@ public class Suggestion {
 
     public boolean process(boolean accept) {
         if ((submitted) && (!processed)) {
-            processed=true;
+            processed = true;
             accepted = accept;
-            if (accept) student.getCampCommitteeRole().addOnePoint();
+            if (accept)
+                student.getCampCommitteeRole().addOnePoint();
         }
         return submitted;
     }

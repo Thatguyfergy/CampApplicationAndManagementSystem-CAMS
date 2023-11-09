@@ -1,4 +1,4 @@
-package InfoExchange;
+package infoexchange;
 
 public class EnqReplies implements Comparable<Enquiries> {
     private String enquiryID;

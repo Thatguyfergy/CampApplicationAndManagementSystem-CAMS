@@ -3,9 +3,9 @@ package users;
 import java.util.ArrayList;
 import java.util.List;
 
-import InfoExchange.Suggestion;
 import camdate.CAMDate;
 import camps.Camp;
+import infoexchange.Suggestion;
 import report.CampReport;
 
 public class CampCommitteeRole {

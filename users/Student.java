@@ -2,11 +2,11 @@ package users;
 
 import java.util.ArrayList;
 
-import InfoExchange.Enquiries;
-import InfoExchange.EnquiriesArray;
 import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
+import infoexchange.Enquiries;
+import infoexchange.EnquiriesArray;
 
 public class Student extends Users {
     private boolean IsCampComm = false;
@@ -177,11 +177,12 @@ public class Student extends Users {
     public void viewEnquiries() {
         for (int i = 0; i < PendingEnquiries.size(); i++) {
             String submittedString = "NOT SUBMITTED";
-            if (PendingEnquiries.get(i).getSubmitted()) submittedString = "SUBMITTED";
+            if (PendingEnquiries.get(i).getSubmitted())
+                submittedString = "SUBMITTED";
             System.out.print((i + 1) + ": ");
             System.out
                     .printf("[" + PendingEnquiries.get(i).getCampName() + "] " + PendingEnquiries.get(i).getEnquiry());
-            System.out.println("    ["+submittedString+"]");
+            System.out.println("    [" + submittedString + "]");
         }
     }
 

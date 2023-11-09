@@ -1,4 +1,4 @@
-package InfoExchange;
+package infoexchange;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

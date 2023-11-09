@@ -1,12 +1,11 @@
 import camps.*;
 import users.*;
 import camsdisplay.*;
+import infoexchange.Enquiries;
+import infoexchange.EnquiriesArray;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import InfoExchange.Enquiries;
-import InfoExchange.EnquiriesArray;
 
 public class CAMSapp {
     public static void main(String[] args) throws IOException {
@@ -35,10 +34,10 @@ public class CAMSapp {
         // drloke.viewCamp(campArray);
 
         CAMDisplay cams = new CAMDisplay();
-        while (true){
+        while (true) {
             cams.startScreen();
-            //cams.userScreen(new Staff("Loke", "LYW023", "SCSE"));
+            // cams.userScreen(new Staff("Loke", "LYW023", "SCSE"));
         }
-        
+
     }
 }
