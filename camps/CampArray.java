@@ -24,8 +24,8 @@ public class CampArray {
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
     private String sortBy;
-    private String manualVisibility;
     private CampFilter campFilter;
+    private String manualVisibility;
 
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
@@ -188,28 +188,14 @@ public class CampArray {
         Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
                 committeeMembersSlots, campDescription, staffinCharge);
         // Set the visibility status based on user input
-        setManualVisibility(manualVisibility);
+        newCamp.setManualVisibility(manualVisibility);
         newCamp.addDate(start, end);
         camps.add(newCamp);
         updateFile(camps);
         return campName;
     }
 
-    // Helper method to manually set visibility on or off
-    public String setManualVisibility(String manualVisibility) {
-        if (manualVisibility == null) {
-                manualVisibility = "on"; 
-            }
-       if (manualVisibility.equalsIgnoreCase("on")) {
-            return "on";
-
-        } else if (manualVisibility.equalsIgnoreCase("off")) {
-            return "off";
-        } else {
-            return manualVisibility;
-        }
-    }
-
+    
     // Helper method to check if a camp with the given name already exists
     private boolean campExists(String campName) {
         for (Camp camp : camps) {
@@ -332,7 +318,7 @@ public class CampArray {
             case 11:
                 System.out.println("Enter new visibility for camp (on/off):");
                 manualVisibility = scanner.nextLine().toLowerCase();
-                setManualVisibility(manualVisibility);
+                targetCamp.setManualVisibility(manualVisibility);
                 break;
             case 12:
                 System.out.println("Exiting editCamp");
@@ -395,9 +381,6 @@ public class CampArray {
         System.out.print("\033[u\033[J"); // Restore cursor position and clear everything below
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
-            if (manualVisibility == null) {
-                manualVisibility = "on"; // 
-            }
             // Display all camps
             System.out.println("\nAll Camps:");
             System.out.println(
@@ -416,8 +399,8 @@ public class CampArray {
                 String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
-                String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
-                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 10); // Fetch visibility
+                String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
+                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch visibility
                                                                                                     // of the camp
 
                 System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
@@ -447,8 +430,8 @@ public class CampArray {
                     String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                     String description = truncateWithEllipsis(camp.getCampDescription(), 15);
-                    String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
-                    String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 10); // Fetch
+                    String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
+                    String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 8); // Fetch
                                                                                                         // visibility of
                                                                                                         // the camp
 
@@ -489,11 +472,8 @@ public class CampArray {
                 if (camp.getRegistrationClosingDate().compareTo(new CAMDate(formattedDate)) < 0) {
                     continue;
                 }
-                if (manualVisibility == null) {
-                    manualVisibility = "on"; // default value in case manualVisibility is null
-                }
                 // Outer if - Manual visibility
-                if (setManualVisibility(manualVisibility).equalsIgnoreCase("on")) {
+                if (camp.setManualVisibility(manualVisibility).equalsIgnoreCase("on")) {
                     // Next inner if loop- AutoVisibility
                     if (camp.toggleVisibility().equalsIgnoreCase("on")) {
                         // Next inner if loop Faculty checker -> NTU or same faculty

@@ -131,6 +131,21 @@ public class Camp {
             }
         }
     }
+    // Helper method to manually set visibility on or off
+    public String setManualVisibility(String manualVisibility) {
+        if (manualVisibility == null) {
+                manualVisibility = "on"; 
+            }
+       if (manualVisibility.equalsIgnoreCase("on")) {
+            return "on";
+
+        } else if (manualVisibility.equalsIgnoreCase("off")) {
+            return "off";
+        } else {
+            return manualVisibility;
+        }
+    }
+
 
     public void registerStudent(String StudentID, String FirstName, boolean isCampCommittee, String campName) {
         if (isCampCommittee) {
