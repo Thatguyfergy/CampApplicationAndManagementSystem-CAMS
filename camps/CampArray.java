@@ -433,6 +433,10 @@ public class CampArray {
             System.out.println(
                     "===============================================================================================================================================");
             for (Camp camp : filteredCamps) {
+                // This is cancer (create another private function for this boolean)
+                // Outer if - Manual visibility
+                // Next - AutoVisibility
+                // Faculty checker -> NTU or same faculty
                 if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on")
                         || setManualVisibility(manualVisibility).equalsIgnoreCase("on"))
                         && (canSeeAllCamps
