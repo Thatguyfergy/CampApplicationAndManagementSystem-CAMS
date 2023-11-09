@@ -343,10 +343,13 @@ public class CampArray {
         // Display camps based on different visibility requirements
         // For Staff - No filters since every staff can view every camp
         // For Students - filter by committeeMembers
-        
+
+        System.out.print("\033[s"); // Save the current cursor position
+
         ArrayList<Camp> filteredCamps = campFilter.filter(user);
-        //filteredCamps.sortCamps("campName");
         CampSorter.sortCamps(filteredCamps);
+
+        System.out.print("\033[u\033[J"); // Restore cursor position and clear everything below
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
 
@@ -467,7 +470,8 @@ public class CampArray {
                         || camp.getAttendees().contains(studentUser.getFirstName())) {
 
                     System.out.printf("%-15s | %-25s | %-6s | %-10s | %-25s | %-10s | %-10s |%n",
-                            camp.getCampName(), camp.getStartToEndDate(), camp.getCampAvailability(), camp.getLocation(),
+                            camp.getCampName(), camp.getStartToEndDate(), camp.getCampAvailability(),
+                            camp.getLocation(),
                             camp.getCampDescription(), camp.getStaffInCharge(), "Attendee");
                     hasRegisteredCamps = true;
 
@@ -477,7 +481,8 @@ public class CampArray {
                 if (camp.getCommitteeMembers().contains(studentUser.getID())
                         || camp.getCommitteeMembers().contains(studentUser.getFirstName())) {
                     System.out.printf("%-15s | %-25s | %-6s | %-10s | %-25s | %-10s | %-10s |%n",
-                            camp.getCampName(), camp.getStartToEndDate(), camp.getCampAvailability(), camp.getLocation(),
+                            camp.getCampName(), camp.getStartToEndDate(), camp.getCampAvailability(),
+                            camp.getLocation(),
                             camp.getCampDescription(), camp.getStaffInCharge(), "Com. Mem");
                     // displayRegisteredStudents(camp);
                     hasRegisteredCamps = true;

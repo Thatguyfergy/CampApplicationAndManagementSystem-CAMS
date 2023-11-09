@@ -62,7 +62,13 @@ public class CampFilter {
         System.out.println("4. Staff in charge");
         System.out.println("5. No filter");
         System.out.printf("Enter choice: ");
+        
+        // Read the user input
         String choice = sc.nextLine();
+    
+        // Clear the lines printed by this function
+
+    
         switch (choice) {
             case "1":
                 filterByDate();
@@ -84,6 +90,9 @@ public class CampFilter {
         }
         return filteredCamps;
     }
+    
+    // Other functions remain the same
+    
 
     private void filterByDate() {
         String date;
@@ -113,11 +122,11 @@ public class CampFilter {
             System.out.println("1. " + ((Student) user).getFacultyInfo());
             System.out.println("2. NTU");
             while (true) {
-                int choice = sc.nextInt();
-                if (choice == 1) {
+                String choice = sc.nextLine();
+                if (choice.equals("1")) {
                     faculty = ((Student) user).getFacultyInfo();
                     break;
-                } else if (choice == 2) {
+                } else if (choice.equals("2")) {
                     faculty = "NTU";
                     break;
                 } else {
