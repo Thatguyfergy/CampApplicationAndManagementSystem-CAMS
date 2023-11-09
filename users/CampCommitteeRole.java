@@ -85,8 +85,8 @@ public class CampCommitteeRole {
         points++;
     }
 
-    public void generateReport() {
-        CampReport cr = new CampReport(camp, 1);
+    public void generateReport(int choice) {
+        CampReport cr = new CampReport(camp, choice);
         cr.generateReport(); // maybe change to be comm specific?
     }
 

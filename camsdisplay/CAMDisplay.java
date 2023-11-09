@@ -11,7 +11,7 @@ import InfoExchange.Suggestion;
 import InfoExchange.SuggestionArray;
 import camps.Camp;
 import camps.CampArray;
-import report.CampReport;
+import report.*;
 import utils.*;
 
 public class CAMDisplay {
@@ -224,6 +224,7 @@ public class CAMDisplay {
                     break;
                 case 11:
                     // Generate performance report
+                    campPerfReportScreen(staff);
                     break;
                 case 12:
                     user = null;
@@ -236,6 +237,38 @@ public class CAMDisplay {
                     break;
             }
         }
+    }
+
+    private void campPerfReportScreen(Staff staff) {
+
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.print(
+                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                        "║ Camp Application & Management System - Generate Performance Report   ║\n" +
+                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+        String campName;
+        int choice;
+        System.out.print("Enter the name of Camp to generate performance report: ");
+        campName = sc.nextLine();
+        System.out.print("Sort By:\n" +
+                "1. Name\n" +
+                "2. Points\n" +
+                "Enter your choice: ");
+        choice = inputInt.nextInt(sc);
+        sc.nextLine(); // Consume the newline character
+        System.out.println(); // for readability
+
+        Camp camp = campArray.getCamp(campName);
+        if (camp == null) {
+            System.out.println("Camp does not exist!");
+        } else {
+            PerfReport perfReport = new PerfReport(camp, choice, UserDB);
+            perfReport.generateReport();
+        }
+
+        System.out.print("Press Enter to return to the main menu...");
+        sc.nextLine(); // Wait for Enter key
+        userScreen(user);
     }
 
     private void generateCampReportScreen(Staff staff) {
@@ -588,7 +621,9 @@ public class CAMDisplay {
                 case 10:
                     if (student.IsCampComm()) {
                         // generate camp report
-                        student.getCampCommitteeRole().generateReport();
+                        System.out.println("Generate report for:\n1: All\n2: Attendees\n3: Committee Members");
+                        int repchoice = inputInt.nextInt(sc);
+                        student.getCampCommitteeRole().generateReport(repchoice);
                     } else
                         System.out.println("Invalid choice");
                     ScreenClearFn();

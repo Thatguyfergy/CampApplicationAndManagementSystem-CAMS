@@ -191,6 +191,9 @@ public class EnquiriesArray {
             EnqReplies reply = new EnqReplies(replyString, enquiry.getEnquiryID(), enquiry.getSender(),
                     generateID(replies), user.getID());
             replies.add(reply);
+
+            userStudent.getCampCommitteeRole().addOnePoint();
+
             try {
                 updateFile(replies);
             } catch (Exception e) {
