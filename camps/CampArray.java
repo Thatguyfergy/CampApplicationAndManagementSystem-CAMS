@@ -397,7 +397,7 @@ public class CampArray {
             System.out.println("\nAll Camps:");
             System.out.println(
                     "===============================================================================================================================================");
-            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s | %-8s |%n",
+            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
                     "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description",
                     "S-I-C", "Visibility");
             System.out.println(
@@ -410,12 +410,12 @@ public class CampArray {
                 String location = truncateWithEllipsis(camp.getLocation(), 10);
                 String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
-                String description = truncateWithEllipsis(camp.getCampDescription(), 25);
+                String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                 String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
                 String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch visibility
                                                                                                     // of the camp
 
-                System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s | %-8s |%n",
+                System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
                         campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
                         description, staffInCharge, visibility);
             }
@@ -426,7 +426,7 @@ public class CampArray {
             System.out.println("\nYour Created Camps:");
             System.out.println(
                     "===============================================================================================================================================");
-            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s | %-8s |%n",
+            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
                     "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description",
                     "S-I-C", "Visibility");
             System.out.println(
@@ -441,13 +441,13 @@ public class CampArray {
                     String location = truncateWithEllipsis(camp.getLocation(), 10);
                     String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
-                    String description = truncateWithEllipsis(camp.getCampDescription(), 25);
+                    String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                     String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
                     String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch
                                                                                                         // visibility of
                                                                                                         // the camp
 
-                    System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s | %-8s |%n",
+                    System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
                             campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
                             description, staffInCharge, visibility);
                 }
@@ -483,6 +483,9 @@ public class CampArray {
                 String formattedDate = today.format(formatter);
                 if (camp.getRegistrationClosingDate().compareTo(new CAMDate(formattedDate)) < 0) {
                     continue;
+                }
+                if (manualVisibility == null) {
+                    manualVisibility = "on"; // default value in case manualVisibility is null
                 }
                 // Outer if - Manual visibility
                 if (setManualVisibility(manualVisibility).equalsIgnoreCase("on")) {
