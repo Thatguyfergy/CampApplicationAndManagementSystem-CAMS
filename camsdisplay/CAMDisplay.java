@@ -100,6 +100,7 @@ public class CAMDisplay {
             System.out.println(
                     "If you set it to the default password again, we will remind you to change your password again.");
             resetPassword(user);
+            return;
         }
 
     }
@@ -267,7 +268,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-        userScreen(user);
+        return;
     }
 
     private void generateCampReportScreen(Staff staff) {
@@ -283,7 +284,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-        userScreen(user);
+        return;
     }
 
     private void deleteCampScreen(Staff staff) {
@@ -305,7 +306,7 @@ public class CAMDisplay {
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         // Exit the viewCampsScreen and return to the main menu
-        userScreen(user);
+        return;
 
     }
 
@@ -344,7 +345,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-        userScreen(user);
+        return;
 
     }
 
@@ -360,7 +361,7 @@ public class CAMDisplay {
         UserDB.updateFile();
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-        userScreen(user);
+        return;
     }
 
     private void viewCampsScreen(Users user) {
@@ -376,7 +377,7 @@ public class CAMDisplay {
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-        userScreen(user);
+        return;
     }
 
     private void viewCampDetailsScreen(Users user) {
@@ -399,7 +400,7 @@ public class CAMDisplay {
         }
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
-        userScreen(user);
+        return;
     }
 
     private void studentScreen(Student student) {
