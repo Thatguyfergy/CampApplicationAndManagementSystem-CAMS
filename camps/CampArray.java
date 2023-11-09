@@ -400,7 +400,7 @@ public class CampArray {
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                 String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
-                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 10); // Fetch visibility
+                String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 10); // Fetch visibility
                                                                                                     // of the camp
 
                 System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
