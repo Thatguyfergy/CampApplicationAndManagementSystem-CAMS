@@ -24,6 +24,8 @@ public class UsersDatabase {
                 String[] data = row.split(",", -1);
                 // CSV Format: Name, Email, Faculty, Password, CampCommCamp,
                 // CampA;CampB,busyDates
+
+                // data[4] having issues
                 Users user = new Student(data[0].trim(), extractUserIDString(data[1].trim()), data[2].trim(),
                         data[4].trim(), data[5].trim(), data[6].trim(), campArray);
                 user.setPassword(data[3].trim());
@@ -79,8 +81,12 @@ public class UsersDatabase {
                     csvWriterStudent.append(",");
                     csvWriterStudent.append(userStudent.getPassword());
                     csvWriterStudent.append(",");
-                    if (userStudent.IsCampComm())
+                    if (userStudent.IsCampComm()) {
                         csvWriterStudent.append(userStudent.getCampCommitteeRole().getCampName());
+                        csvWriterStudent.append(";");
+                        csvWriterStudent.append(String.valueOf(userStudent.getCampCommitteeRole().getPoints()));
+                    }
+
                     csvWriterStudent.append(",");
 
                     for (CampAttendeeRole attendee : userStudent.getAttendeeArray()) {

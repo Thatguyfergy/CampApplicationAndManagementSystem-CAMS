@@ -86,8 +86,8 @@ public class CampCommitteeRole {
     }
 
     public void generateReport(int choice) {
-        CampReport cr = new CampReport(camp, choice);
-        cr.generateReport(); // maybe change to be comm specific?
+        // CampReport cr = new CampReport(camp, choice);
+        // cr.generateReport(); // maybe change to be comm specific?
     }
 
     public void addOnePoint() {

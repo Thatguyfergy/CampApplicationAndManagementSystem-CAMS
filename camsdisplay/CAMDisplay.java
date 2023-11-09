@@ -243,7 +243,7 @@ public class CAMDisplay {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Performance Report   ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         String campName;
@@ -278,10 +278,9 @@ public class CAMDisplay {
                 "╔═══════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Camp Report   ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
-        
-            CampReport campReport = new CampReport(staff, campArray);
-            campReport.generateReport();
-        
+
+        CampReport campReport = new CampReport(staff, campArray);
+        campReport.generateReport();
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
@@ -374,8 +373,6 @@ public class CAMDisplay {
                         "║ Camp Application & Management System - View Camps             ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
-        
-
         campArray.viewCamps(user);
 
         System.out.print("Press Enter to return to the main menu...");
@@ -453,11 +450,12 @@ public class CAMDisplay {
                     sc.nextLine(); // flush nextline char
                     campname = sc.nextLine();
                     do {
-                    if (campArray.checkCampExists(campname)) break;
-                    System.out.println("No such Camp! Please try again.");
-                    System.out.printf("\nWhich camp do you want to register for? ");
-                    campname = sc.nextLine();
-                    }while (true);
+                        if (campArray.checkCampExists(campname))
+                            break;
+                        System.out.println("No such Camp! Please try again.");
+                        System.out.printf("\nWhich camp do you want to register for? ");
+                        campname = sc.nextLine();
+                    } while (true);
                     System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
                     boolean comm = (inputInt.nextInt(sc) == 1) ? true : false;
                     Camp campPtr = campArray.getCamp(campname);
@@ -470,8 +468,8 @@ public class CAMDisplay {
                     break;
                 case 3:
                     System.out.println(
-                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\n"+
-                            "S: Submit an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
+                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\n" +
+                                    "S: Submit an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
                     sc.nextLine();
                     String enqChoice = sc.nextLine();
                     switch (enqChoice) {
@@ -505,7 +503,7 @@ public class CAMDisplay {
                             int enqindex = inputInt.nextInt(sc);
                             student.submitEnquiry(enquiriesArray, enqindex - 1);
                             break;
-                        case "R","r":
+                        case "R", "r":
                             student.viewEnquiriesReplies(enquiriesArray);
                             break;
                         default:
@@ -519,11 +517,12 @@ public class CAMDisplay {
                         System.out.printf("Enter the name of the camp you are withdrawing from: ");
                         sc.nextLine();
                         remCampString = sc.nextLine();
-                        if (campArray.checkCampExists(remCampString)) break;
+                        if (campArray.checkCampExists(remCampString))
+                            break;
                         System.out.println("No such Camp! Please try again.");
                     } while (true);
                     Camp remCamp = campArray.getCamp(remCampString);
-                    student.withdrawFromCamp(remCamp,campArray);
+                    student.withdrawFromCamp(remCamp, campArray);
                     ScreenClearFn();
                     break;
                 case 5:
@@ -547,15 +546,16 @@ public class CAMDisplay {
                 case 7:
                     if (student.IsCampComm()) {
                         // manage suggestions
-                        System.out.println("W: WRITE new Suggestion\nV: VIEW all Suggestions\nE: Edit a Suggestion\n"+
-                        "S: Submit a Suggestion\nEnter your choice: ");
+                        System.out.println("W: WRITE new Suggestion\nV: VIEW all Suggestions\nE: Edit a Suggestion\n" +
+                                "S: Submit a Suggestion\nEnter your choice: ");
                         sc.nextLine();
                         String sugChoice = sc.nextLine();
                         switch (sugChoice) {
                             case "W", "w":
                                 System.out.printf("Please input the Suggestion: ");
                                 String sug = sc.nextLine();
-                                suggestionArray.createSuggestion(sug, student, campArray.getCamp(student.getCampCommitteeRole().getCampName()));
+                                suggestionArray.createSuggestion(sug, student,
+                                        campArray.getCamp(student.getCampCommitteeRole().getCampName()));
                                 suggestionArray.updateFile();
                                 break;
                             case "V", "v":
