@@ -3,7 +3,7 @@ package infoexchange;
 import users.*;
 import camps.*;
 
-public class Suggestion {
+public class Suggestion implements Comparable<Enquiries> {
     private String suggestion;
     private Student student;
     private Camp camp;
@@ -89,5 +89,11 @@ public class Suggestion {
 
     public int getCount() {
         return counter;
+    }
+
+    @Override
+    public int compareTo(Enquiries o) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
     }
 }
