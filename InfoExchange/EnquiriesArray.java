@@ -63,6 +63,7 @@ public class EnquiriesArray {
     public void submitEnquiry(Enquiries enquiry) {
         enquiry.setEnquiryID(generateID(enquiries));
         enquiries.add(enquiry);
+        enquiry.setSubmittedTrue();
         try {
             updateFile(enquiries);
         } catch (Exception e) {

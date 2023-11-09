@@ -176,9 +176,12 @@ public class Student extends Users {
 
     public void viewEnquiries() {
         for (int i = 0; i < PendingEnquiries.size(); i++) {
+            String submittedString = "NOT SUBMITTED";
+            if (PendingEnquiries.get(i).getSubmitted()) submittedString = "SUBMITTED";
             System.out.print((i + 1) + ": ");
             System.out
-                    .println("[" + PendingEnquiries.get(i).getCampName() + "] " + PendingEnquiries.get(i).getEnquiry());
+                    .printf("[" + PendingEnquiries.get(i).getCampName() + "] " + PendingEnquiries.get(i).getEnquiry());
+            System.out.println("    ["+submittedString+"]");
         }
     }
 

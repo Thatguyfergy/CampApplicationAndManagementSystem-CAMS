@@ -8,6 +8,7 @@ public class Enquiries implements Comparable<Enquiries> {
     private String enquiryString;
     private String sender;
     private String campName;
+    private boolean submitted=false;
 
     public Enquiries(String enqString, String sender, String campName) {
         this.enquiryString = enqString;
@@ -37,6 +38,14 @@ public class Enquiries implements Comparable<Enquiries> {
 
     public String getEnquiryID() {
         return enquiryID;
+    }
+
+    public boolean getSubmitted(){
+        return submitted;
+    }
+
+    public void setSubmittedTrue(){
+        submitted = true;
     }
 
     @Override
