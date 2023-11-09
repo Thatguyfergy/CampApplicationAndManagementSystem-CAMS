@@ -103,6 +103,37 @@ public class CampInfo {
         return dates.get(0) + " - " + dates.get(dates.size() - 1);
     }
 
+    public String getFormatedDates(){
+        String formatedDates = "";
+        CAMDate starDate = dates.get(0).clone();
+        CAMDate currentDate = starDate.clone();
+        CAMDate endDate = starDate.clone();
+        for (int i = 1; i < dates.size(); i++) {
+            currentDate.nextDay();
+            if (currentDate.equals(dates.get(i))) {
+                endDate = currentDate.clone();
+            } else {
+                if (starDate.equals(endDate)) {
+                    formatedDates += starDate.toString() + ", ";
+                } else {
+                    formatedDates += starDate.toString() + " - " + endDate.toString() + ", ";
+                }
+                starDate = dates.get(i).clone();
+                currentDate = starDate.clone();
+                endDate = starDate.clone();
+            }
+        }
+        String temp1 = starDate.toString() + " - " + endDate.toString();
+        String temp2 = starDate.toString();
+        if (!formatedDates.contains(temp1)){
+            formatedDates += temp1;
+        }
+        else if (!formatedDates.contains(temp2)){
+            formatedDates += temp2;
+        }
+        return formatedDates;
+    }
+
     // Setter methods for all individual fields
     // public void setCampID(int campID) {
     // this.campID = campID;

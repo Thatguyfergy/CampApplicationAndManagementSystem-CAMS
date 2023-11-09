@@ -50,6 +50,10 @@ public class Camp {
         return campInfo.getStartToEndDate();
     }
 
+    public String getFormatedDates(){
+        return campInfo.getFormatedDates();
+    }
+
     public CAMDate getRegistrationClosingDate() {
         return campInfo.getRegistrationClosingDate();
     }

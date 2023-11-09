@@ -119,14 +119,48 @@ public class CampArray {
             return null; // Exit the method
         }
 
+        if (campName.equals("")) {
+            System.out.println("Camp name cannot be empty");
+            return null;
+        }
+
+        if (campName.length() > 15) {
+            System.out.println("Camp name cannot be more than 15 characters");
+            return null;
+        }
+
         System.out.println("Registration closing date (dd/mm/yyyy):");
         CAMDate registrationClosingDate = new CAMDate(scanner.nextLine());
 
-        System.out.println("Camp start date (dd/mm/yyyy):");
-        CAMDate startDate = new CAMDate(scanner.nextLine());
+        String startDate, endDate;
+        while (true) {
+            System.out.println("Camp start date (dd/mm/yyyy):");
+            startDate = scanner.nextLine();
+            if (startDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                if (registrationClosingDate.compareTo(new CAMDate(startDate)) > 0) {
+                    System.out.println("Start date cannot be before registration closing date");
+                    continue;
+                } 
+                System.out.println("Camp end date (dd/mm/yyyy):");
+                endDate = scanner.nextLine();
+                if (endDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                    CAMDate start = new CAMDate(startDate);
+                    CAMDate end = new CAMDate(endDate);
+                    if (start.compareTo(end) > 0) {
+                        System.out.println("Start date cannot be after end date");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+                }
+            } else {
+                System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+            }
+        }
 
-        System.out.println("Camp end date (dd/mm/yyyy):");
-        CAMDate endDate = new CAMDate(scanner.nextLine());
+        CAMDate start = new CAMDate(startDate);
+        CAMDate end = new CAMDate(endDate);
 
         System.out.println("Faculty the camp is available for:");
         String campVisibility = scanner.nextLine().toUpperCase();
@@ -153,7 +187,7 @@ public class CampArray {
                 committeeMembersSlots, campDescription, staffinCharge);
         // Set the visibility status based on user input
         setManualVisibility(manualVisibility);
-        newCamp.addDate(startDate, endDate);
+        newCamp.addDate(start, end);
         camps.add(newCamp);
         updateFile(camps);
         return campName;
@@ -255,6 +289,10 @@ public class CampArray {
                             System.out.println("Date already exists");
                             return;
                         } else {
+                            if (targetCamp.getRegistrationClosingDate().compareTo(new CAMDate(dateToAdd)) > 0) {
+                                System.out.println("Date cannot be before registration closing date");
+                                return;
+                            }
                             targetCamp.getCampInfo().addDate(new CAMDate(dateToAdd));
                             targetCamp.getCampInfo().sortDates();
                             break;
@@ -364,7 +402,7 @@ public class CampArray {
                     "===============================================================================================================================================");
             for (Camp camp : filteredCamps) {
                 String campName = truncateWithEllipsis(camp.getCampName(), 15);
-                String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
+                String dates = truncateWithEllipsis(camp.getFormatedDates(), 25);
                 String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
                 String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
                 String location = truncateWithEllipsis(camp.getLocation(), 10);
@@ -393,7 +431,7 @@ public class CampArray {
                 if (staffUser.getID().equals(camp.getStaffInCharge())
                         || staffUser.getFirstName().equals(camp.getStaffInCharge())) {
                     String campName = truncateWithEllipsis(camp.getCampName(), 15);
-                    String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
+                    String dates = truncateWithEllipsis(camp.getFormatedDates(), 25);
                     String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
                     String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
                     String location = truncateWithEllipsis(camp.getLocation(), 10);
@@ -442,7 +480,7 @@ public class CampArray {
                         && (canSeeAllCamps
                                 || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampAvailability()))) {
                     String campName = truncateWithEllipsis(camp.getCampName(), 15);
-                    String dates = truncateWithEllipsis(camp.getStartToEndDate(), 25);
+                    String dates = truncateWithEllipsis(camp.getFormatedDates(), 25);
                     String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
                     String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
                     String location = truncateWithEllipsis(camp.getLocation(), 10);
@@ -474,7 +512,7 @@ public class CampArray {
                         || camp.getAttendees().contains(studentUser.getFirstName())) {
 
                     System.out.printf("%-15s | %-25s | %-6s | %-10s | %-25s | %-10s | %-10s |%n",
-                            camp.getCampName(), camp.getStartToEndDate(), camp.getCampAvailability(),
+                            camp.getCampName(), camp.getFormatedDates(), camp.getCampAvailability(),
                             camp.getLocation(),
                             camp.getCampDescription(), camp.getStaffInCharge(), "Attendee");
                     hasRegisteredCamps = true;
@@ -485,7 +523,7 @@ public class CampArray {
                 if (camp.getCommitteeMembers().contains(studentUser.getID())
                         || camp.getCommitteeMembers().contains(studentUser.getFirstName())) {
                     System.out.printf("%-15s | %-25s | %-6s | %-10s | %-25s | %-10s | %-10s |%n",
-                            camp.getCampName(), camp.getStartToEndDate(), camp.getCampAvailability(),
+                            camp.getCampName(), camp.getFormatedDates(), camp.getCampAvailability(),
                             camp.getLocation(),
                             camp.getCampDescription(), camp.getStaffInCharge(), "Com. Mem");
                     // displayRegisteredStudents(camp);
@@ -512,7 +550,7 @@ public class CampArray {
         for (Camp camp : camps) {
             if (camp.getCampName().equals(campName)) {
                 System.out.println("Camp Name: " + camp.getCampName());
-                System.out.println("Camp Dates: " + camp.getDates());
+                System.out.println("Camp Dates: " + camp.getFormatedDates());
                 System.out.println("Registration Closing Date: " + camp.getRegistrationClosingDate());
                 System.out.println("Location: " + camp.getLocation());
                 System.out.println("Total Slots: " + camp.getTotalSlots());
