@@ -197,7 +197,10 @@ public class CampArray {
 
     // Helper method to manually set visibility on or off
     public String setManualVisibility(String manualVisibility) {
-        if (manualVisibility.equalsIgnoreCase("on")) {
+        if (manualVisibility == null) {
+                manualVisibility = "on"; 
+            }
+       if (manualVisibility.equalsIgnoreCase("on")) {
             return "on";
 
         } else if (manualVisibility.equalsIgnoreCase("off")) {
