@@ -27,17 +27,17 @@ public class Student extends Users {
         BusyDates = new ArrayList<CAMDate>();
         RegCamps = new ArrayList<String>();
 
-        if (commCamp != "") {
+        if (!commCamp.equals("")) {
             IsCampComm = true;
             String[] cc = commCamp.split(";");
             CommRole = new CampCommitteeRole(campArray.getCamp(cc[0]), Integer.parseInt(cc[1]));
         }
-        if (regCamps != "") {
+        if (!regCamps.equals("")) {
             for (String camp : regCamps.split(";")) {
                 RegCamps.add(camp);
             }
         }
-        if (busyDates != "") {
+        if (!busyDates.equals("")) {
             for (String date : busyDates.split(";")) {
                 BusyDates.add(new CAMDate(date));
             }
