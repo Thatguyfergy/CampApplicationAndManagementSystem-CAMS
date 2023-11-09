@@ -12,6 +12,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import users.Staff;
 import users.Users;
@@ -140,7 +142,7 @@ public class CampArray {
                 if (registrationClosingDate.compareTo(new CAMDate(startDate)) > 0) {
                     System.out.println("Start date cannot be before registration closing date");
                     continue;
-                } 
+                }
                 System.out.println("Camp end date (dd/mm/yyyy):");
                 endDate = scanner.nextLine();
                 if (endDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
@@ -475,6 +477,13 @@ public class CampArray {
                 // Outer if - Manual visibility
                 // Next - AutoVisibility
                 // Faculty checker -> NTU or same faculty
+                LocalDate today = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String formattedDate = today.format(formatter);
+                if (camp.getRegistrationClosingDate().compareTo(new CAMDate(formattedDate)) < 0) {
+                    continue;
+                }
+                
                 if ((canSeeAllCamps || camp.toggleVisibility().equalsIgnoreCase("on")
                         || setManualVisibility(manualVisibility).equalsIgnoreCase("on"))
                         && (canSeeAllCamps
@@ -600,6 +609,15 @@ public class CampArray {
     public void registerAttendee(String campName, String studentID) {
         for (Camp camp : camps) {
             if (camp.getCampName().equals(campName)) {
+                // Get today's date
+                LocalDate today = LocalDate.now();
+                // Format the date as DD/MM/YYYY
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String formattedDate = today.format(formatter);
+                if (camp.getRegistrationClosingDate().compareTo(new CAMDate(formattedDate)) < 0) {
+                    System.out.println("Registration for this camp has closed.");
+                    return;
+                }
                 camp.registerStudent(studentID, studentID, false, campName);
             }
         }
@@ -609,6 +627,13 @@ public class CampArray {
     public void registerCampCom(String campName, String studentID) {
         for (Camp camp : camps) {
             if (camp.getCampName().equals(campName)) {
+                LocalDate today = LocalDate.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String formattedDate = today.format(formatter);
+                if (camp.getRegistrationClosingDate().compareTo(new CAMDate(formattedDate)) < 0) {
+                    System.out.println("Registration for this camp has closed.");
+                    return;
+                }
                 camp.registerStudent(studentID, studentID, true, campName);
             }
         }
