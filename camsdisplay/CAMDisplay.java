@@ -278,26 +278,10 @@ public class CAMDisplay {
                 "╔═══════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Camp Report   ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
-        String campName;
-        int choice;
-        System.out.print("Enter the name of Camp to generate report: ");
-        campName = sc.nextLine();
-        System.out.print("Filter:\n" +
-                "1. None\n" +
-                "2. Camp Attendees\n" +
-                "3. Camp Committee Members\n" +
-                "Enter your choice: ");
-        choice = inputInt.nextInt(sc);
-        sc.nextLine(); // Consume the newline character
-        System.out.println(); // for readability
-
-        Camp camp = campArray.getCamp(campName);
-        if (camp == null) {
-            System.out.println("Camp does not exist!");
-        } else {
-            CampReport campReport = new CampReport(camp, choice);
-            campReport.generateReport(UserDB);
-        }
+        
+            CampReport campReport = new CampReport(staff, campArray);
+            campReport.generateReport();
+        
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key

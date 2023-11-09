@@ -3,39 +3,71 @@ package report;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 import org.w3c.dom.UserDataHandler;
 
 import camdate.CAMDate;
 import camps.Camp;
+import camps.CampArray;
+import users.Staff;
+import users.Users;
 import users.UsersDatabase;
+
 
 public class CampReport implements Report {
 
     Camp camp;
-    int choice;
+    Scanner sc = new Scanner(System.in);
+    Staff user;
+    String[] createdCamps = user.getCampsInCharge();
     String fileName;
 
-    public CampReport(Camp camp, int choice) {
-        this.camp = camp;
-        this.choice = choice;
-        this.fileName = "CampReports\\" + camp.getCampName() + "_Report.csv";
+    public CampReport(Staff user) {
+        this.user = user;
     }
 
-    public void generateReport(UsersDatabase userDB) {
-        System.out.println("Generating report for " + camp.getCampName() + "...");
-        if (choice == 1) {
-            generateCampReport(userDB);
-        } else if (choice == 2) {
-            generateCampAttendeesReport(userDB);
-        } else if (choice == 3) {
-            generateCampCommitteeMembersReport(userDB);
-        } else {
-            System.out.println("Invalid choice!");
+    public void generateReport() {
+        System.out.println("Select a camp to generate report for: ");
+        for (int i = 0; i < user.get.length; i++) {
+            System.out.println(i + 1 + ". " + createdCamps[i]);
         }
+        System.out.printf("Enter choice: ");
+        String choice = sc.nextLine();
+        camp = camps.getCamp(createdCamps[Integer.parseInt(choice) - 1]);
+
+        System.out.println("Select Filter: ");
+        System.out.println("1. No Filter");
+        System.out.println("2. Attendees");
+        System.out.println("3. Committee Members");
+        System.out.printf("Enter choice: ");
+        choice = sc.nextLine();
+
+        switch (choice) {
+            case "1":
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() +"_Report.csv";
+                generateCampReport();
+                break;
+            case "2":
+                fileName = "CampReports\\" + camp.getCampName() + "_Attendees_Report.csv";
+                generateCampAttendeesReport();
+                break;
+            case "3":
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_CommitteeMembers_Report.csv";
+                generateCampCommitteeMembersReport();
+                break;
+            default:
+                System.out.println("Invalid choice! - Applying no filter");
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
+                generateCampReport();
+                break;
+        }
+
+        System.out.println("Generating report for " + camp.getCampName() + "...");
+
     }
 
-    private void generateCampReport(UsersDatabase userDB) {
+    private void generateCampReport( ) {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
         try (FileWriter csvWriter = new FileWriter(file)) {
@@ -72,7 +104,7 @@ public class CampReport implements Report {
             csvWriter.append("Attendee,");
             for (String attendee : camp.getAttendees()) {
                 
-                csvWriter.append(userDB.getFirstName(attendee));
+                csvWriter.append(UsersDatabase.getFirstName(attendee));
                 csvWriter.append(";");
             }
             csvWriter.append("\n");
@@ -88,7 +120,7 @@ public class CampReport implements Report {
         }
     }
 
-    private void generateCampAttendeesReport(UsersDatabase userDB) {
+    private void generateCampAttendeesReport( ) {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
         try (FileWriter csvWriter = new FileWriter(file)) {
@@ -124,7 +156,7 @@ public class CampReport implements Report {
             csvWriter.append("\n");
             csvWriter.append("Attendee,");
             for (String attendee : camp.getAttendees()) {
-                csvWriter.append(userDB.getFirstName(attendee));
+                csvWriter.append(UsersDatabase.getFirstName(attendee));
                 csvWriter.append(";");
             }
             csvWriter.append("\n");
@@ -134,7 +166,7 @@ public class CampReport implements Report {
         }
     }
 
-    private void generateCampCommitteeMembersReport(UsersDatabase userDB) {
+    private void generateCampCommitteeMembersReport() {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
         try (FileWriter csvWriter = new FileWriter(file)) {
@@ -170,7 +202,7 @@ public class CampReport implements Report {
             csvWriter.append("\n");
             csvWriter.append("Committee Member,");
             for (String committeeMember : camp.getCommitteeMembers()) {
-                csvWriter.append(userDB.getFirstName(committeeMember));
+                csvWriter.append(UsersDatabase.getFirstName(committeeMember));
                 csvWriter.append(";");
             }
             csvWriter.append("\n");
