@@ -402,7 +402,7 @@ public class CampArray {
             System.out.println("\nAll Camps:");
             System.out.println(
                     "===============================================================================================================================================");
-            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
+            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
                     "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description",
                     "S-I-C", "Visibility");
             System.out.println(
@@ -416,11 +416,11 @@ public class CampArray {
                 String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
-                String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch visibility
+                String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
+                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 10); // Fetch visibility
                                                                                                     // of the camp
 
-                System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
+                System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
                         campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
                         description, staffInCharge, visibility);
             }
@@ -431,7 +431,7 @@ public class CampArray {
             System.out.println("\nYour Created Camps:");
             System.out.println(
                     "===============================================================================================================================================");
-            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
+            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
                     "Camp Name", "Dates", "Close Date", "Avail", "Location", "Total", "Com-Mem", "Description",
                     "S-I-C", "Visibility");
             System.out.println(
@@ -447,12 +447,12 @@ public class CampArray {
                     String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                     String description = truncateWithEllipsis(camp.getCampDescription(), 15);
-                    String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-                    String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch
+                    String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
+                    String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 10); // Fetch
                                                                                                         // visibility of
                                                                                                         // the camp
 
-                    System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-10s | %-8s |%n",
+                    System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
                             campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
                             description, staffInCharge, visibility);
                 }
