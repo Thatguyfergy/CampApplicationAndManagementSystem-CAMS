@@ -125,7 +125,7 @@ public class CampInfo {
         }
         String temp1 = starDate.toString() + " - " + endDate.toString();
         String temp2 = starDate.toString();
-        if (!formatedDates.contains(temp1)){
+        if (!formatedDates.contains(temp1) && !starDate.equals(endDate)){
             formatedDates += temp1;
         }
         else if (!formatedDates.contains(temp2)){
