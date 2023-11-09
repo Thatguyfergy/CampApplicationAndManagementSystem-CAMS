@@ -36,7 +36,7 @@ public class CampArray {
                 String[] data = row.split(",");
                 // CSV Format: Name | Dates | Closing Date | Avail |
                 // Location | Total Slots | Committee Members |
-                // Committee Mem slots | Description | Attendees | Staff-In-Charge
+                // Committee Mem slots | Description | Staff-In-Charge | Attendees
                 Camp camp = new Camp(data[0].trim(), new CAMDate(data[2].trim()), data[3].trim(), data[4].trim(),
                         Integer.parseInt(data[5].trim()), Integer.parseInt(data[7].trim()), data[8].trim(),
                         data[9].trim());
@@ -50,6 +50,9 @@ public class CampArray {
                 camp.getCampInfo().sortDates();
                 camps.add(camp);
                 for (String committeeMember : data[6].trim().split(";")) {
+                    if (committeeMember.equals("")) {
+                        continue;
+                    }
                     camp.registerStudent(committeeMember, committeeMember, true, camp.getCampName());
                 }
                 if (data.length > 10) {

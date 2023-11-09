@@ -3,15 +3,14 @@ package report;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import org.w3c.dom.UserDataHandler;
 
 import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import users.Staff;
-import users.Users;
 import users.UsersDatabase;
 
 
@@ -20,21 +19,24 @@ public class CampReport implements Report {
     Camp camp;
     Scanner sc = new Scanner(System.in);
     Staff user;
-    String[] createdCamps = user.getCampsInCharge();
+    ArrayList<String> createdCamps;
+    CampArray campArray; 
     String fileName;
 
-    public CampReport(Staff user) {
+    public CampReport(Staff user, CampArray campArray) {
         this.user = user;
+        this.campArray = campArray;
+        createdCamps = user.getCampsInCharge();
     }
 
     public void generateReport() {
         System.out.println("Select a camp to generate report for: ");
-        for (int i = 0; i < user.get.length; i++) {
-            System.out.println(i + 1 + ". " + createdCamps[i]);
+        for (String camp : createdCamps) {
+            System.out.println(createdCamps.indexOf(camp) + 1 + ". " + camp);
         }
         System.out.printf("Enter choice: ");
         String choice = sc.nextLine();
-        camp = camps.getCamp(createdCamps[Integer.parseInt(choice) - 1]);
+        camp = campArray.getCamp(createdCamps.get(Integer.parseInt(choice) - 1));
 
         System.out.println("Select Filter: ");
         System.out.println("1. No Filter");
@@ -64,7 +66,6 @@ public class CampReport implements Report {
         }
 
         System.out.println("Generating report for " + camp.getCampName() + "...");
-
     }
 
     private void generateCampReport( ) {
@@ -103,7 +104,6 @@ public class CampReport implements Report {
             csvWriter.append("\n");
             csvWriter.append("Attendee,");
             for (String attendee : camp.getAttendees()) {
-                
                 csvWriter.append(UsersDatabase.getFirstName(attendee));
                 csvWriter.append(";");
             }
