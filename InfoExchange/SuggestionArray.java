@@ -26,9 +26,10 @@ public class SuggestionArray {
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
 
-                //CSV Format: Suggestion, StudentName, CampName, submitted, processed, accepted, suggestionID, counter
+                // CSV Format: Suggestion, StudentName, CampName, submitted, processed,
+                // accepted, suggestionID, counter
                 suggestions.add(new Suggestion(data[0], users.getStudentbyID(data[1]), campArray.getCamp(data[2]),
-                 data[3], data[4], data[5], data[6], data[7]));
+                        data[3], data[4], data[5], data[6], data[7]));
             }
 
         } catch (IOException e) {
@@ -40,20 +41,25 @@ public class SuggestionArray {
         suggestions.add(new Suggestion(s, std, cmp));
     }
 
+    // Method Overloading
     public void viewSuggestions(Staff staff) {
         // Staff sees all suggestions he/she is incharge of only
         for (Suggestion suggestion : suggestions) {
             if ((staff.checkStaffInCharge(suggestion.getCamp().getCampName())) && (suggestion.isSubmitted())) {
-                System.out.printf("Suggestion %06d by %s", suggestion.getID(), suggestion.getStudent().getID());
+                System.out.printf("Suggestion %06d by %s - Camp : %s", suggestion.getID(),
+                        suggestion.getStudent().getID(), suggestion.getCamp().getCampName());
                 if (suggestion.isSubmitted()) {
                     System.out.print(" [Submitted");
                     if (suggestion.isProcessed()) {
                         System.out.print(", Processed");
-                        if (suggestion.isAccepted()) System.out.print(", Accepted]");
-                        else System.out.print(", Rejected]");
-                    }
-                    else System.out.print(", Not Processed]");
-                } else System.out.print( " [Not Submitted]");
+                        if (suggestion.isAccepted())
+                            System.out.print(", Accepted]");
+                        else
+                            System.out.print(", Rejected]");
+                    } else
+                        System.out.print(", Not Processed]");
+                } else
+                    System.out.print(" [Not Submitted]");
                 System.out.println();
                 System.out.println(suggestion.getSuggestion());
                 System.out.println();
@@ -61,6 +67,7 @@ public class SuggestionArray {
         }
     }
 
+    // Method Overloading
     public void viewSuggestions(Student std) {
         // Student sees all suggestions created by them
         for (Suggestion suggestion : suggestions) {
@@ -70,11 +77,14 @@ public class SuggestionArray {
                     System.out.print(" [Submitted");
                     if (suggestion.isProcessed()) {
                         System.out.print(", Processed");
-                        if (suggestion.isAccepted()) System.out.print(", Accepted]");
-                        else System.out.print(", Rejected]");
-                    }
-                    else System.out.print(", Not Processed]");
-                } else System.out.print( " [Not Submitted]");
+                        if (suggestion.isAccepted())
+                            System.out.print(", Accepted]");
+                        else
+                            System.out.print(", Rejected]");
+                    } else
+                        System.out.print(", Not Processed]");
+                } else
+                    System.out.print(" [Not Submitted]");
                 System.out.println();
                 System.out.println(suggestion.getSuggestion());
                 System.out.println();
@@ -84,20 +94,25 @@ public class SuggestionArray {
 
     public void editSuggestion(Student std, int i, String s) {
         for (Suggestion suggestion : suggestions) {
-            if ((suggestion.getStudent().equals(std)) && (suggestion.getID()==i)) {
-                if (suggestion.setSuggestion(s)) System.out.println("Suggestion successfully edited!");
-                else System.out.println("Suggestion cannot be edited after being processed!");
+            if ((suggestion.getStudent().equals(std)) && (suggestion.getID() == i)) {
+                if (suggestion.setSuggestion(s))
+                    System.out.println("Suggestion successfully edited!");
+                else
+                    System.out.println("Suggestion cannot be edited after being processed!");
 
                 System.out.printf("Suggestion %06d", suggestion.getID());
                 if (suggestion.isSubmitted()) {
                     System.out.print(" [Submitted");
                     if (suggestion.isProcessed()) {
                         System.out.print(", Processed");
-                        if (suggestion.isAccepted()) System.out.print(", Accepted]");
-                        else System.out.print(", Rejected]");
-                    }
-                    else System.out.print(", Not Processed]");
-                } else System.out.print( " [Not Submitted]");
+                        if (suggestion.isAccepted())
+                            System.out.print(", Accepted]");
+                        else
+                            System.out.print(", Rejected]");
+                    } else
+                        System.out.print(", Not Processed]");
+                } else
+                    System.out.print(" [Not Submitted]");
                 System.out.println();
                 System.out.println(suggestion.getSuggestion());
                 System.out.println();
@@ -108,20 +123,25 @@ public class SuggestionArray {
 
     public void submitSuggestion(Student std, int i) {
         for (Suggestion suggestion : suggestions) {
-            if ((suggestion.getStudent().equals(std)) && (suggestion.getID()==i)) {
-                if (suggestion.submit()) System.out.println("Suggestion successfully submitted!");
-                else System.out.println("Suggestion already submtitted!");
+            if ((suggestion.getStudent().equals(std)) && (suggestion.getID() == i)) {
+                if (suggestion.submit())
+                    System.out.println("Suggestion successfully submitted!");
+                else
+                    System.out.println("Suggestion already submtitted!");
 
                 System.out.printf("Suggestion %06d", suggestion.getID());
                 if (suggestion.isSubmitted()) {
                     System.out.print(" [Submitted");
                     if (suggestion.isProcessed()) {
                         System.out.print(", Processed");
-                        if (suggestion.isAccepted()) System.out.print(", Accepted]");
-                        else System.out.print(", Rejected]");
-                    }
-                    else System.out.print(", Not Processed]");
-                } else System.out.print( " [Not Submitted]");
+                        if (suggestion.isAccepted())
+                            System.out.print(", Accepted]");
+                        else
+                            System.out.print(", Rejected]");
+                    } else
+                        System.out.print(", Not Processed]");
+                } else
+                    System.out.print(" [Not Submitted]");
                 System.out.println();
                 System.out.println(suggestion.getSuggestion());
                 System.out.println();
@@ -141,20 +161,26 @@ public class SuggestionArray {
         do {
             System.out.println("Do you want to accept (1) or reject (0) this suggestion? ");
             a = inputInt.nextInt(sc);
-        } while (a!=0 && a!=1);
-        boolean accept = (a==1)? true:false;
+        } while (a != 0 && a != 1);
+        boolean accept = (a == 1) ? true : false;
 
         for (Suggestion suggestion : suggestions) {
-            if ((staff.checkStaffInCharge(suggestion.getCamp().getCampName())) && (suggestion.getID()==id) && (suggestion.isSubmitted())) {
+            if ((staff.checkStaffInCharge(suggestion.getCamp().getCampName())) && (suggestion.getID() == id)
+                    && (suggestion.isSubmitted())) {
                 if (suggestion.isProcessed()) {
-                    System.out.println("Suggestion has already been " + (suggestion.isAccepted()? "Accepted":"Rejected"));
+                    System.out.println(
+                            "Suggestion has already been " + (suggestion.isAccepted() ? "Accepted" : "Rejected"));
+                    return;
                 } else {
                     suggestion.process(accept);
-                    System.out.println("Suggestion " + id + " has been " + (suggestion.isAccepted()? "Accepted":"Rejected"));
+                    System.out.println(
+                            "Suggestion " + id + " has been " + (suggestion.isAccepted() ? "Accepted" : "Rejected"));
+                    return;
                 }
-            } else System.out.println("Suggestion does not exist!");
-            return;
+            }
         }
+        System.out.println("Suggestion does not exist!");
+        return;
     }
 
     public void updateFile() {
@@ -166,15 +192,15 @@ public class SuggestionArray {
                 csvWriter.append(",");
                 csvWriter.append(suggestion.getCamp().getCampName());
                 csvWriter.append(",");
-                csvWriter.append(suggestion.isSubmitted()? "1":"0");
+                csvWriter.append(suggestion.isSubmitted() ? "1" : "0");
                 csvWriter.append(",");
-                csvWriter.append(suggestion.isProcessed()? "1":"0");
+                csvWriter.append(suggestion.isProcessed() ? "1" : "0");
                 csvWriter.append(",");
-                csvWriter.append(suggestion.isAccepted()? "1":"0");
+                csvWriter.append(suggestion.isAccepted() ? "1" : "0");
                 csvWriter.append(",");
-                csvWriter.append(suggestion.getID()+"");
+                csvWriter.append(suggestion.getID() + "");
                 csvWriter.append(",");
-                csvWriter.append(suggestion.getCount()+"");
+                csvWriter.append(suggestion.getCount() + "");
                 csvWriter.append("\n");
             }
             csvWriter.flush();
