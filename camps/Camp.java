@@ -50,7 +50,7 @@ public class Camp {
         return campInfo.getStartToEndDate();
     }
 
-    public String getFormatedDates(){
+    public String getFormatedDates() {
         return campInfo.getFormatedDates();
     }
 
@@ -94,8 +94,8 @@ public class Camp {
         campInfo.setCampDescription(newDescription);
     }
 
-    public void setVisibility(String toggle){
-    
+    public void setVisibility(String toggle) {
+
     }
 
     // Method to get the list of attendees
@@ -227,4 +227,5 @@ public class Camp {
 
         return committeeMembersSlots - occupiedCommitteeSlots;
     }
+
 }
