@@ -254,7 +254,7 @@ public class CAMDisplay {
             System.out.println("Camp does not exist!");
         } else {
             CampReport campReport = new CampReport(camp, choice);
-            campReport.generateReport();
+            campReport.generateReport(UserDB);
         }
 
         System.out.print("Press Enter to return to the main menu...");

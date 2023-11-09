@@ -58,7 +58,7 @@ public class UsersDatabase {
 
     public String getFirstName(String userID) {
         for (Users user : users) {
-            if (user.getID() == userID)
+            if (user.getID().equals(userID))
                 return user.getFirstName();
         }
         return null;
