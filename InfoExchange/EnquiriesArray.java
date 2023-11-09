@@ -69,6 +69,7 @@ public class EnquiriesArray {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        updateFile(enquiries);
     }
 
     private String generateID(ArrayList<?> Array) {
@@ -167,13 +168,14 @@ public class EnquiriesArray {
             if (!userStudent.IsCampComm())
                 return;
 
-            System.out.printf("EnquiryID: \n");
-            int idx = inputInt.nextInt(scanner);
-            scanner.nextLine(); // Basically flush in C
-
+            // Basically flush in C
+            viewEnquiries(user);
             Enquiries enquiry;
             while (true) {
                 try {
+                    System.out.printf("EnquiryID: \n");
+                    int idx = inputInt.nextInt(scanner);
+                    scanner.nextLine();
                     enquiry = enquiries.get(idx);
                     break;
                 } catch (IndexOutOfBoundsException e) {
@@ -237,6 +239,7 @@ public class EnquiriesArray {
                 e.printStackTrace();
             }
         }
+        updateFile(replies);
     }
 
     public void viewReplies(Users user) {

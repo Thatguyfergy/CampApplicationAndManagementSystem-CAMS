@@ -227,9 +227,8 @@ public class CAMDisplay {
                     campPerfReportScreen(staff);
                     break;
                 case 12:
-                    user = null;
-                    startScreen();
-                    break;
+                    this.user = null;
+                    return;
                 default:
                     System.out.println("Invalid choice!");
                     System.out.print("Press Enter to continue...");
@@ -615,6 +614,7 @@ public class CAMDisplay {
                 case 11:
                     if (student.IsCampComm()) {
                         System.out.println("Logging out... Thank you!");
+                        this.user = null;
                     } else
                         System.out.println("Invalid choice");
                     ScreenClearFn();
@@ -623,6 +623,7 @@ public class CAMDisplay {
                     System.out.println("Invalid choice");
                     user = null;
                     ScreenClearFn();
+                    return;
             }
         } while (choice != logout);
     }

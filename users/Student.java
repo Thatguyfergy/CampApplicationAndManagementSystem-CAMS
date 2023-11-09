@@ -141,7 +141,7 @@ public class Student extends Users {
         for (int i = 0; i < regDates.size(); i++) {
             BusyDates.add(regDates.get(i));
         }
-        System.out.println("Successfully registered as Camp Attendee!");
+        System.out.println("Successfully registered as Camp Committee!");
     }
 
     public void withdrawFromCamp(Camp camp, CampArray campArray) {
@@ -165,7 +165,7 @@ public class Student extends Users {
             BusyDates.remove(camp.getDates().get(i));
         }
         System.out.println("Successfully withdrew from " + camp.getCampName());
-        
+
     }
 
     public void createEnquiry(String enqString, String campName) {
@@ -196,7 +196,7 @@ public class Student extends Users {
         return BusyDates;
     }
 
-    public void viewEnquiriesReplies(EnquiriesArray enqArray){
+    public void viewEnquiriesReplies(EnquiriesArray enqArray) {
         enqArray.viewReplies(this);
     }
 
@@ -215,7 +215,8 @@ public class Student extends Users {
     public static int compareCommPoints(Student a, Student b) {
         // if equal return 0
         // if a better than b return 1, b better return -1
-        if (a.getCampCommitteeRole().getPoints() == b.getCampCommitteeRole().getPoints()) return 0;
+        if (a.getCampCommitteeRole().getPoints() == b.getCampCommitteeRole().getPoints())
+            return 0;
         return (a.getCampCommitteeRole().getPoints() > b.getCampCommitteeRole().getPoints()) ? 1 : -1;
     }
 
