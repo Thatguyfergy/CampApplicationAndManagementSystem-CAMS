@@ -144,6 +144,7 @@ public class CampFilter {
             }
             while (true) {
                 int choice = sc.nextInt();
+                sc.nextLine();
                 if (choice > 0 && choice <= availableFaculties.size()) {
                     faculty = availableFaculties.get(choice - 1);
                     break;
@@ -169,6 +170,7 @@ public class CampFilter {
         }
         while (true) {
             int choice = sc.nextInt();
+            sc.nextLine();
             if (choice > 0 && choice <= availableLocations.size()) {
                 location = availableLocations.get(choice - 1);
                 break;
@@ -193,6 +195,7 @@ public class CampFilter {
         }
         while (true) {
             int choice = sc.nextInt();
+            sc.nextLine();
             if (choice > 0 && choice <= availableSIC.size()) {
                 sic = availableSIC.get(choice - 1);
                 break;
