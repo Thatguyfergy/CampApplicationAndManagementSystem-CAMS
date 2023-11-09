@@ -107,4 +107,18 @@ public class CAMDate {
             this.day++;
         }
     }
+
+    public CAMDate clone() {
+        return new CAMDate(this.day, this.month, this.year);
+    }
+
+    public boolean equals(CAMDate other) {
+        return this.day == other.day && this.month == other.month && this.year == other.year;
+    }
+
+    public CAMDate getNextDay (){
+        CAMDate nextDay = this.clone();
+        nextDay.nextDay();
+        return nextDay;
+    }
 }
