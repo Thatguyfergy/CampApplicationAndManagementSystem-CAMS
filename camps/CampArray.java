@@ -392,7 +392,9 @@ public class CampArray {
         System.out.print("\033[u\033[J"); // Restore cursor position and clear everything below
         if (user instanceof Staff) {
             Staff staffUser = (Staff) user;
-
+            if (manualVisibility == null) {
+                manualVisibility = "on"; // 
+            }
             // Display all camps
             System.out.println("\nAll Camps:");
             System.out.println(
