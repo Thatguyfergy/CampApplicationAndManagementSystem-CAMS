@@ -20,9 +20,16 @@ public class Suggestion {
         suggestionID = counter++;
     }
 
-    // set counter when start of program
-    public void setIDCounter(int i) {
-        counter=i;
+    public Suggestion(String s, Student std, Camp cmp, String sub, String pro, String acc, String id, String count) {
+        // for use when loading from DB
+        suggestion = s;
+        student = std;
+        camp = cmp;
+        submitted = (sub.equals("1")) ? true : false;
+        processed = (pro.equals("1")) ? true : false;
+        accepted = (acc.equals("1")) ? true : false;
+        suggestionID = Integer.parseInt(id);
+        counter = Integer.parseInt(count);
     }
 
     public String getSuggestion() {
@@ -47,25 +54,38 @@ public class Suggestion {
     public boolean submit() {
         if (!submitted) {
             submitted=true;
+            student.getCampCommitteeRole().addOnePoint();
             return true;
         }
         else return false;
     }
 
-    public boolean canModify() {
-        return !processed;
+    public boolean isProcessed() {
+        return processed;
     }
 
     public boolean process(boolean accept) {
         if ((submitted) && (!processed)) {
             processed=true;
             accepted = accept;
-            // add points?
+            if (accept) student.getCampCommitteeRole().addOnePoint();
         }
         return submitted;
     }
 
-    public boolean accepted() {
+    public boolean isAccepted() {
         return accepted;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Camp getCamp() {
+        return camp;
+    }
+
+    public int getCount() {
+        return counter;
     }
 }

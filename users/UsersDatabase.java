@@ -151,4 +151,14 @@ public class UsersDatabase {
         updateFile();
     }
 
+    public Student getStudentbyID(String id) {
+        for (Users user : users) {
+            if (user.getID().equals(id)) {
+                if (user instanceof Student) {
+                    return (Student) user;
+                }
+            }
+        }
+        return null;
+    }
 }
