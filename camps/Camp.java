@@ -1,5 +1,7 @@
 package camps;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -50,7 +52,7 @@ public class Camp {
         return campInfo.getStartToEndDate();
     }
 
-    public String getFormatedDates(){
+    public String getFormatedDates() {
         return campInfo.getFormatedDates();
     }
 
@@ -94,8 +96,8 @@ public class Camp {
         campInfo.setCampDescription(newDescription);
     }
 
-    public void setVisibility(String toggle){
-    
+    public void setVisibility(String toggle) {
+
     }
 
     // Method to get the list of attendees
@@ -111,7 +113,10 @@ public class Camp {
     public String toggleVisibility() {
         int totalSlots = campInfo.getTotalSlots();
         int occupiedSlots = getAttendees().size() + getCommitteeMembers().size();
-        CAMDate currentDate = new CAMDate();
+        LocalDate today = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String formattedDate = today.format(formatter);
+        CAMDate currentDate = new CAMDate(formattedDate);
         if (currentDate.compareTo(campInfo.getRegistrationClosingDate()) > 0) {
             // Past registration closing date, set visibility to "off"
             return "off";
