@@ -2,11 +2,11 @@ package users;
 
 import java.util.ArrayList;
 
-import InfoExchange.*;
 import camps.Camp;
+import infoexchange.*;
 
 public class CampAttendeeRole {
-    
+
     private String CampAttending;
     private Student StudentAttending;
 
@@ -15,7 +15,7 @@ public class CampAttendeeRole {
         StudentAttending = student;
     }
 
-    public String getCampAttending(){
+    public String getCampAttending() {
         return CampAttending;
     }
 

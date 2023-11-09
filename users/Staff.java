@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import camps.*;
-import InfoExchange.*;
+import infoexchange.*;
 
 public class Staff extends Users {
     private Scanner scanner = new Scanner(System.in);
@@ -66,16 +66,4 @@ public class Staff extends Users {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
     }
-
-    // Suggestion nonsense will do next time
-    public void viewSuggestions(CampArray campArray) {
-        // TODO: let campArray.viewSuggestions(this);
-    }
-
-    public void manageSuggestion(Suggestion s, boolean accept) {
-        // TODO: let campArray.manageSuggestions(this);
-    }
-    // Student report generation
-
-    // Performance report
 }

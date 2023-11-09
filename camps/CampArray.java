@@ -412,8 +412,8 @@ public class CampArray {
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 25);
                 String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch visibility of the camp
-
+                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch visibility
+                                                                                                    // of the camp
 
                 System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s | %-8s |%n",
                         campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
@@ -443,7 +443,9 @@ public class CampArray {
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                     String description = truncateWithEllipsis(camp.getCampDescription(), 25);
                     String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-                    String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch visibility of the camp
+                    String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch
+                                                                                                        // visibility of
+                                                                                                        // the camp
 
                     System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s | %-8s |%n",
                             campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
@@ -487,26 +489,29 @@ public class CampArray {
                     // Next inner if loop- AutoVisibility
                     if (camp.toggleVisibility().equalsIgnoreCase("on")) {
                         // Next inner if loop Faculty checker -> NTU or same faculty
-                        if (canSeeAllCamps || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampAvailability())) {
-                    String campName = truncateWithEllipsis(camp.getCampName(), 15);
-                    String dates = truncateWithEllipsis(camp.getFormatedDates(), 25);
-                    String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
-                    String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
-                    String location = truncateWithEllipsis(camp.getLocation(), 10);
-                    String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
-                    String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
-                    String description = truncateWithEllipsis(camp.getCampDescription(), 25);
-                    String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
+                        if (canSeeAllCamps
+                                || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampAvailability())) {
+                            String campName = truncateWithEllipsis(camp.getCampName(), 15);
+                            String dates = truncateWithEllipsis(camp.getFormatedDates(), 25);
+                            String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
+                            String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
+                            String location = truncateWithEllipsis(camp.getLocation(), 10);
+                            String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
+                            String committeeSlots = camp.getRemainingCommitteeSlots() + "/"
+                                    + camp.getCommitteeMembersSlots();
+                            String description = truncateWithEllipsis(camp.getCampDescription(), 25);
+                            String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
 
-                    System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s |%n",
-                            campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
-                            description, staffInCharge);
-                    System.out.println(
-                            "===============================================================================================================================================");
+                            System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-25s | %-10s |%n",
+                                    campName, dates, closingDate, availability, location, totalSlots, committeeSlots,
+                                    description, staffInCharge);
+                            System.out.println(
+                                    "===============================================================================================================================================");
+                        }
+
+                    }
                 }
-
             }
-
             // Display camps the student has registered for and their roles
             System.out.println("\nYour Registered Camps:");
             System.out.println(

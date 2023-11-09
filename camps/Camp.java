@@ -232,4 +232,5 @@ public class Camp {
 
         return committeeMembersSlots - occupiedCommitteeSlots;
     }
+
 }
