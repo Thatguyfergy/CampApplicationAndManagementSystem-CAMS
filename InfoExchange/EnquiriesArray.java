@@ -117,31 +117,40 @@ public class EnquiriesArray {
     public void viewEnquiries(Users user) {
         // Need a feature for Camp Committee members to view
         if (user instanceof Staff) {
-            System.out.println("All Submitted Enquiries:");
+
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("║ All Submitted Enquiries:                                        ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println("");
             Staff userStaff = (Staff) user;
             for (int i = 0; i < enquiries.size(); i++) {
                 Enquiries enquiry = enquiries.get(i);
                 if (userStaff.checkStaffInCharge(enquiry.getCampName())) {
-                    System.out.printf("=== EnquiryID %d ===\n", i);
-                    System.out.println("Camp Name: " + enquiry.getCampName());
-                    System.out.println("Sender: " + enquiry.getSender());
-                    System.out.println("------------------------------------------------------");
+                    System.out.printf("╔════════════════════════ EnquiryID %-2d ═══════════════════════════╗\n", i);
+                    System.out.println("○ Camp Name: " + enquiry.getCampName());
+                    System.out.println("○ Sender: " + enquiry.getSender());
+                    System.out.println("✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏");
                     System.out.println(enquiry.getEnquiry());
+                    System.out.println("═══════════════════════════════════════════════════════════════════");
                     System.out.println(); // Add a line break for better readability
                 }
             }
         } else if (user instanceof Student && ((Student) user).IsCampComm()) { // Only CampComitteeMember can view
-            System.out.println("All Submitted Enquiries:");
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("║ All Submitted Enquiries:                                        ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+            System.out.println("");
             Student userStudent = (Student) user;
             for (int i = 0; i < enquiries.size(); i++) {
                 Enquiries enquiry = enquiries.get(i);
                 if (userStudent.IsCampComm()
                         && userStudent.getCampCommitteeRole().getCampName().equals(enquiry.getCampName())) {
-                    System.out.printf("=== EnquiryID %d ===\n", i);
-                    System.out.println("Camp Name: " + enquiry.getCampName());
-                    System.out.println("Sender: " + enquiry.getSender());
-                    System.out.println("------------------------------------------------------");
+                    System.out.printf("╔════════════════════════ EnquiryID %-2d ═══════════════════════════╗\n", i);
+                    System.out.println("○ Camp Name: " + enquiry.getCampName());
+                    System.out.println("○ Sender: " + enquiry.getSender());
+                    System.out.println("✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏");
                     System.out.println(enquiry.getEnquiry());
+                    System.out.println("═══════════════════════════════════════════════════════════════════");
                     System.out.println(); // Add a line break for better readability
                 }
             }
@@ -173,6 +182,9 @@ public class EnquiriesArray {
             if (!userStudent.IsCampComm())
                 return;
             viewEnquiries(user);
+            System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+            System.out.println("║ Enquiry Replies                                                 ║");
+            System.out.println("╚═════════════════════════════════════════════════════════════════╝");
             Enquiries enquiry;
             while (true) {
                 try {
@@ -189,6 +201,12 @@ public class EnquiriesArray {
             if (!userStudent.getCampCommitteeRole().getCampName().equals(enquiry.getCampName())) {
                 System.out.println("You cannot access this enquiry!");
                 return;
+            } else {
+                System.out.println("╒═════════════════════════════════════════════════════════════════╕");
+                System.out.println("> Camp Name: " + enquiry.getCampName());
+                System.out.println("> Sender: " + enquiry.getSender());
+                System.out.println("> Enquiry: " + enquiry.getEnquiry());
+                System.out.println("-------------------------------------------------------------------");
             }
             System.out.printf("What is your reply?\n");
             String replyString = scanner.nextLine();
@@ -229,6 +247,12 @@ public class EnquiriesArray {
             if (!userStaff.checkStaffInCharge(enquiry.getCampName())) {
                 System.out.println("You cannot access this enquiry!");
                 return;
+            } else {
+                System.out.println("╒═════════════════════════════════════════════════════════════════╕");
+                System.out.println("> Camp Name: " + enquiry.getCampName());
+                System.out.println("> Sender: " + enquiry.getSender());
+                System.out.println("> Enquiry: " + enquiry.getEnquiry());
+                System.out.println("-------------------------------------------------------------------");
             }
             System.out.printf("What is your reply?\n");
             String replyString = scanner.nextLine();
@@ -247,20 +271,30 @@ public class EnquiriesArray {
     }
 
     public void viewReplies(Users user) {
-        System.out.println("\nAll Submitted Enquiries & Replies:\n");
+        System.out.println("╔═════════════════════════════════════════════════════════════════╗");
+        System.out.println("║ All Submitted Enquiries & Replies:                              ║");
+        System.out.println("╚═════════════════════════════════════════════════════════════════╝");
+
+        System.out.println("");
         for (int i = 0; i < enquiries.size(); i++) {
             Enquiries enquiry = enquiries.get(i);
             if (enquiry.getSender().equals(user.getID())) {
-                System.out.println("Camp Name: " + enquiry.getCampName());
-                System.out.println("Your Enquiry: " + enquiry.getEnquiry());
-                System.out.println("------------------------------------------------------");
-                System.out.println("Replies by Staff/Camp Committee Member");
+                System.out.println("╒═════════════════════════════════════════════════════════════════╕");
+                System.out.println("> Camp Name: " + enquiry.getCampName());
+                System.out.println("> Sender: " + enquiry.getSender());
+                System.out.println("> Your enquiry: " + enquiry.getEnquiry());
+                System.out.println("-------------------------------------------------------------------");
+                // System.out.println("Replies by Staff/Camp Committee Member");
+                // System.out.println();
                 for (int j = 0; j < replies.size(); j++) {
                     EnqReplies reply = replies.get(j);
                     if (reply.getEnquiryID().equals(enquiry.getEnquiryID())) {
                         System.out.println("Replied by: " + reply.getReplyCreator());
+                        System.out.println();
                         System.out.println(reply.getReplyString());
                         System.out.println();
+                        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
                     }
                 }
                 System.out.println();
