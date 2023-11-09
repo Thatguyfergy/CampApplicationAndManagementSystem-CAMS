@@ -399,8 +399,8 @@ public class CampArray {
                 String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
-                String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 8); // Fetch visibility
+                String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
+                String visibility = truncateWithEllipsis(setManualVisibility(manualVisibility), 10); // Fetch visibility
                                                                                                     // of the camp
 
                 System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
@@ -430,8 +430,8 @@ public class CampArray {
                     String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                     String description = truncateWithEllipsis(camp.getCampDescription(), 15);
-                    String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 10);
-                    String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 8); // Fetch
+                    String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
+                    String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 10); // Fetch
                                                                                                         // visibility of
                                                                                                         // the camp
 
