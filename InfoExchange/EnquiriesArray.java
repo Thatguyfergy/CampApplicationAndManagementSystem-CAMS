@@ -43,8 +43,8 @@ public class EnquiriesArray {
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",");
                 // CSV Format: enquiryID | replyID | replyString | recipient | replyCreator
-                EnqReplies reply = new EnqReplies(data[2], data[1], data[3],
-                        data[0], data[4]);
+                EnqReplies reply = new EnqReplies(data[2], data[0], data[3],
+                        data[1], data[4]);
                 replies.add(reply);
             }
             csvReader.close();
@@ -172,8 +172,6 @@ public class EnquiriesArray {
             // Early Return - If the student is not a Camp Comm
             if (!userStudent.IsCampComm())
                 return;
-
-            // Basically flush in C
             viewEnquiries(user);
             Enquiries enquiry;
             while (true) {
@@ -184,7 +182,7 @@ public class EnquiriesArray {
                     enquiry = enquiries.get(idx);
                     break;
                 } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Index out of bounds, make sure you selected the correct enquiry.");
+                    System.out.println("Enquiry cannot be found, make sure you selected the correct enquiry.");
                 }
             }
 
@@ -212,18 +210,19 @@ public class EnquiriesArray {
         // Staff accessing the enquiries
         else if (user instanceof Staff) {
             Staff userStaff = (Staff) user;
-
-            System.out.printf("EnquiryID: \n");
-            int idx = inputInt.nextInt(scanner);
-            scanner.nextLine(); // Basically flush in C
+            viewEnquiries(user);
 
             Enquiries enquiry;
+
             while (true) {
                 try {
+                    System.out.printf("EnquiryID: \n");
+                    int idx = inputInt.nextInt(scanner);
+                    scanner.nextLine(); // Basically flush in C
                     enquiry = enquiries.get(idx);
                     break;
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("Index out of bounds, make sure you selected the correct enquiry.");
+                    System.out.println("Enquiry cannot be found, make sure you selected the correct enquiry.");
                 }
             }
 
@@ -251,7 +250,7 @@ public class EnquiriesArray {
         System.out.println("\nAll Submitted Enquiries & Replies:\n");
         for (int i = 0; i < enquiries.size(); i++) {
             Enquiries enquiry = enquiries.get(i);
-            if (enquiry.getSender() == user.getID()) {
+            if (enquiry.getSender().equals(user.getID())) {
                 System.out.println("Camp Name: " + enquiry.getCampName());
                 System.out.println("Your Enquiry: " + enquiry.getEnquiry());
                 System.out.println("------------------------------------------------------");
