@@ -43,8 +43,8 @@ public class Staff extends Users {
         }
     }
 
-    public void editCamp(CampArray campArray, int choice, String campName) {
-        campArray.editCamp(campName, choice);
+    public void editCamp(CampArray campArray) {
+        campArray.editCamp(this);
     }
 
     public void deleteCamp(CampArray campArray) {

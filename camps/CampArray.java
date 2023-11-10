@@ -25,7 +25,6 @@ public class CampArray {
     private static String campsFile;
     private CampFilter campFilter;
 
-
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
         CampArray.campsFile = campsFile;
@@ -180,14 +179,13 @@ public class CampArray {
         System.out.println("Camp Description:");
         String campDescription = scanner.nextLine();
 
-
         Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
                 committeeMembersSlots, campDescription, staffinCharge);
         // Set the visibility status based on user input
         while (true) {
             System.out.println("Toggle visibility for camp (on/off):");
             String manualVisibility = scanner.nextLine().toLowerCase();
-        
+
             if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
                 newCamp.setManualVisibility(manualVisibility);
                 break;
@@ -195,7 +193,7 @@ public class CampArray {
                 System.out.println("Invalid input. Please enter 'on' or 'off'.");
             }
         }
-        
+
         newCamp.addDate(start, end);
         camps.add(newCamp);
         updateFile(camps);
@@ -213,7 +211,16 @@ public class CampArray {
     }
 
     // add in the logic to edit camp details
-    public void editCamp(String campName, int option) {
+    public void editCamp(Staff staff) {
+        ArrayList<String> campsInCharge = staff.getCampsInCharge();
+
+        System.out.println("Select camp to edit:");
+        for (String camp : campsInCharge) {
+            System.out.println(campsInCharge.indexOf(camp) + 1 + ". " + camp);
+        }
+        System.out.printf("Enter choice: ");
+        String choice = scanner.nextLine();
+        String campName = campsInCharge.get(Integer.parseInt(choice) - 1);
         Camp targetCamp = null;
 
         for (int i = 0; i < camps.size(); i++) {
@@ -223,11 +230,31 @@ public class CampArray {
             }
         }
 
+        viewCampDetails(campName, staff);
+
+        System.out.print("What field would you like to edit?\n" +
+                "1. Camp Name\n" +
+                "2. Registration Closing Date\n" +
+                "3. Camp Visibility\n" +
+                "4. Location\n" +
+                "5. Total Slots\n" +
+                "6. Committee Members Slots\n" +
+                "7. Camp Description\n" +
+                "8. Staff In Charge\n" +
+                "9. Add Date\n" +
+                "10. Remove Date\n" +
+                "11. Toggle Visibility\n" +
+                "12. Exit\n" +
+                "Enter your choice: ");
+
+        int option = scanner.nextInt();
+        scanner.nextLine(); // Flush
         switch (option) {
             case 1:
                 System.out.println("Enter new name for the camp:");
                 String newName = scanner.nextLine();
                 targetCamp.getCampInfo().setCampName(newName);
+                campsInCharge.set(campsInCharge.indexOf(campName), newName);
                 break;
             case 2:
                 // Add logic to edit Registration Closing Date
@@ -323,20 +350,20 @@ public class CampArray {
                 break;
             case 11:
                 while (true) {
-                System.out.println("Enter new visibility for camp (on/off):");
-                String manualVisibility = scanner.nextLine().toLowerCase();
-            
-                if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
-                    targetCamp.setManualVisibility(manualVisibility);
-                    break;
-                } else {
-                    System.out.println("Invalid input. Please enter 'on' or 'off'.");
+                    System.out.println("Enter new visibility for camp (on/off):");
+                    String manualVisibility = scanner.nextLine().toLowerCase();
+
+                    if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
+                        targetCamp.setManualVisibility(manualVisibility);
+                        break;
+                    } else {
+                        System.out.println("Invalid input. Please enter 'on' or 'off'.");
+                    }
                 }
-            }
                 break;
             case 12:
-                System.out.println("Exiting editCamp");
-                break;
+                System.out.println("Exiting Edit Camp");
+                return;
             default:
                 System.out.println("Invalid choice");
         }
@@ -415,7 +442,7 @@ public class CampArray {
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                 String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
                 String visibility = camp.getManualVisibility(); // Fetch
-                                                                                                          // visibility
+                                                                // visibility
                 // of the camp
 
                 System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",

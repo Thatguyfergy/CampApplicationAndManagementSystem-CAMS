@@ -318,31 +318,7 @@ public class CAMDisplay {
                 "╔═══════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Edit Camp              ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
-
-        System.out.print("Enter the name of Camp to edit: ");
-        String buffer = sc.nextLine();
-        if (campArray.checkCampExists(buffer)) {
-            campArray.viewCampDetails(buffer, user);
-            System.out.print("What field would you like to edit?\n" +
-                    "1. Camp Name\n" +
-                    "2. Registration Closing Date\n" +
-                    "3. Camp Visibility\n" +
-                    "4. Location\n" +
-                    "5. Total Slots\n" +
-                    "6. Committee Members Slots\n" +
-                    "7. Camp Description\n" +
-                    "8. Staff In Charge\n" +
-                    "9. Add Date\n" +
-                    "10. Remove Date\n" +
-                    "11. Toggle Visibility\n" +
-                    "12. Exit\n" +
-                    "Enter your choice: ");
-            int choice = inputInt.nextInt(sc);
-            sc.nextLine(); // Consume the newline character
-            staff.editCamp(campArray, choice, buffer);
-        } else {
-            System.out.println("Camp does not exist!");
-        }
+        campArray.editCamp(staff);
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
