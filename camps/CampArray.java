@@ -325,7 +325,7 @@ public class CampArray {
                 }
                 break;
             case 11:
-            while (true) {
+                while (true) {
                 System.out.println("Enter new visibility for camp (on/off):");
                 String manualVisibility = scanner.nextLine().toLowerCase();
             
