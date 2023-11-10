@@ -25,7 +25,7 @@ public class CampArray {
     private static String campsFile;
     private String sortBy;
     private CampFilter campFilter;
-    private String manualVisibility;
+
 
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
@@ -182,13 +182,22 @@ public class CampArray {
         System.out.println("Camp Description:");
         String campDescription = scanner.nextLine();
 
-        System.out.println("Toggle visibility for camp (on/off):");
-        manualVisibility = scanner.nextLine().toLowerCase();
 
         Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
                 committeeMembersSlots, campDescription, staffinCharge);
         // Set the visibility status based on user input
-        newCamp.setManualVisibility(manualVisibility);
+        while (true) {
+            System.out.println("Toggle visibility for camp (on/off):");
+            String manualVisibility = scanner.nextLine().toLowerCase();
+        
+            if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
+                newCamp.setManualVisibility(manualVisibility);
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter 'on' or 'off'.");
+            }
+        }
+        
         newCamp.addDate(start, end);
         camps.add(newCamp);
         updateFile(camps);
@@ -315,9 +324,17 @@ public class CampArray {
                 }
                 break;
             case 11:
+                while (true) {
                 System.out.println("Enter new visibility for camp (on/off):");
-                manualVisibility = scanner.nextLine().toLowerCase();
-                targetCamp.setManualVisibility(manualVisibility);
+                String manualVisibility = scanner.nextLine().toLowerCase();
+            
+                if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
+                    targetCamp.setManualVisibility(manualVisibility);
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter 'on' or 'off'.");
+                }
+            }
                 break;
             case 12:
                 System.out.println("Exiting editCamp");
@@ -399,7 +416,7 @@ public class CampArray {
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                 String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
-                String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 10); // Fetch
+                String visibility = truncateWithEllipsis(camp.getManualVisibility(), 10); // Fetch
                                                                                                           // visibility
                 // of the camp
 
@@ -431,7 +448,7 @@ public class CampArray {
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                     String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                     String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
-                    String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 10); // Fetch
+                    String visibility = truncateWithEllipsis(camp.getManualVisibility(), 10); // Fetch
                     // visibility of
                     // the camp
 
@@ -473,7 +490,7 @@ public class CampArray {
                     continue;
                 }
                 // Outer if - Manual visibility
-                if (camp.setManualVisibility(manualVisibility).equalsIgnoreCase("on")) {
+                if (camp.getManualVisibility().equalsIgnoreCase("on")) {
                     // Next inner if loop- AutoVisibility
                     if (camp.toggleVisibility().equalsIgnoreCase("on")) {
                         // Next inner if loop Faculty checker -> NTU or same faculty
