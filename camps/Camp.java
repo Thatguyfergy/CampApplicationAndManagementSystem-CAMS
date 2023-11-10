@@ -24,7 +24,7 @@ public class Camp {
         this.attendees = new ArrayList<>();
         this.committeeMembers = new ArrayList<>();
         this.withdrawnStudents = new HashSet<>();
-
+        this.manualVisibility = "on"; 
     }
 
     // public Camp(String campName, CAMDate registrationClosingDate, String
