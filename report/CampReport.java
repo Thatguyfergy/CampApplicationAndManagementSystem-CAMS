@@ -79,12 +79,9 @@ public class CampReport implements Report {
             csvWriter.append(camp.getRegistrationClosingDate().toString());
             csvWriter.append("\n");
             csvWriter.append("Camp Dates,");
-            for (CAMDate date : camp.getDates()) {
-                csvWriter.append(date.toString());
-                csvWriter.append(";");
-            }
+            csvWriter.append(camp.getFormatedDates());
             csvWriter.append("\n");
-            csvWriter.append("Camp Visibility,");
+            csvWriter.append("Camp Availability,");
             csvWriter.append(camp.getCampAvailability());
             csvWriter.append("\n");
             csvWriter.append("Location,");
@@ -102,13 +99,13 @@ public class CampReport implements Report {
             csvWriter.append("Staff In Charge,");
             csvWriter.append(camp.getStaffInCharge());
             csvWriter.append("\n");
-            csvWriter.append("Attendee,");
+            csvWriter.append("Attendees,");
             for (String attendee : camp.getAttendees()) {
                 csvWriter.append(UsersDatabase.getFirstName(attendee));
                 csvWriter.append(";");
             }
             csvWriter.append("\n");
-            csvWriter.append("Committee Member,");
+            csvWriter.append("Committee Members,");
             for (String committeeMember : camp.getCommitteeMembers()) {
                 csvWriter.append(committeeMember);
                 csvWriter.append(";");
@@ -131,12 +128,9 @@ public class CampReport implements Report {
             csvWriter.append(camp.getRegistrationClosingDate().toString());
             csvWriter.append("\n");
             csvWriter.append("Camp Dates,");
-            for (CAMDate date : camp.getDates()) {
-                csvWriter.append(date.toString());
-                csvWriter.append(";");
-            }
+            csvWriter.append(camp.getFormatedDates());
             csvWriter.append("\n");
-            csvWriter.append("Camp Visibility,");
+            csvWriter.append("Camp Availability,");
             csvWriter.append(camp.getCampAvailability());
             csvWriter.append("\n");
             csvWriter.append("Location,");
@@ -154,7 +148,7 @@ public class CampReport implements Report {
             csvWriter.append("Staff In Charge,");
             csvWriter.append(camp.getStaffInCharge());
             csvWriter.append("\n");
-            csvWriter.append("Attendee,");
+            csvWriter.append("Attendees,");
             for (String attendee : camp.getAttendees()) {
                 csvWriter.append(UsersDatabase.getFirstName(attendee));
                 csvWriter.append(";");
@@ -177,12 +171,9 @@ public class CampReport implements Report {
             csvWriter.append(camp.getRegistrationClosingDate().toString());
             csvWriter.append("\n");
             csvWriter.append("Camp Dates,");
-            for (CAMDate date : camp.getDates()) {
-                csvWriter.append(date.toString());
-                csvWriter.append(";");
-            }
+            csvWriter.append(camp.getFormatedDates());
             csvWriter.append("\n");
-            csvWriter.append("Camp Visibility,");
+            csvWriter.append("Camp Availability,");
             csvWriter.append(camp.getCampAvailability());
             csvWriter.append("\n");
             csvWriter.append("Location,");
@@ -200,7 +191,7 @@ public class CampReport implements Report {
             csvWriter.append("Staff In Charge,");
             csvWriter.append(camp.getStaffInCharge());
             csvWriter.append("\n");
-            csvWriter.append("Committee Member,");
+            csvWriter.append("Committee Members,");
             for (String committeeMember : camp.getCommitteeMembers()) {
                 csvWriter.append(UsersDatabase.getFirstName(committeeMember));
                 csvWriter.append(";");

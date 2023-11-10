@@ -164,7 +164,8 @@ public class CAMDisplay {
                     "╔═══════════════════════════════════════════════════════════════╗\n" +
                             "║ Camp Application & Management System - Home                   ║\n" +
                             "╚═══════════════════════════════════════════════════════════════╝\r\n");
-            System.out.print("Welcome back to CAMs, Staff " + staff.getID() + "\r\n");
+            System.out.print("Welcome back to CAMs, Staff " + UsersDatabase.getFirstName(staff.getID()) + " of "
+                    + staff.getFacultyInfo() + "\r\n");
             String menu = "1. View Camps\n" +
                     "2. View Camp Details\n" +
                     "3. Create Camp\n" +
@@ -416,8 +417,8 @@ public class CAMDisplay {
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
             System.out.println("║ Camp Application & Management System - Home                     ║");
             System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-            System.out.println("Welcome back to CAMs, Student " + student.getID()
-                    + "! Where we get to explore the amazing camps planned!");
+            System.out.println("Welcome back to CAMs, Student " + UsersDatabase.getFirstName(student.getID()) + " of "
+                    + student.getFacultyInfo() + "!");
             System.out.println("1. View Available/Registered Camps");
             System.out.println("2. Register for Camp");
             System.out.println("3. Manage your Enquiries");
