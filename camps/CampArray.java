@@ -336,6 +336,7 @@ public class CampArray {
                     System.out.println("Invalid input. Please enter 'on' or 'off'.");
                 }
             }
+                break;
             case 12:
                 System.out.println("Exiting editCamp");
                 break;
