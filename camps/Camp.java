@@ -13,7 +13,7 @@ public class Camp {
     private CampInfo campInfo;
     private List<String> attendees;
     private List<String> committeeMembers;
-    private Set<String> withdrawnStudents = new HashSet<>();
+    private Set<String> withdrawnStudents;
     private String manualVisibility;
 
     public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
@@ -23,6 +23,7 @@ public class Camp {
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
         this.attendees = new ArrayList<>();
         this.committeeMembers = new ArrayList<>();
+        this.withdrawnStudents = new HashSet<>();
 
     }
 
