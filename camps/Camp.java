@@ -13,7 +13,7 @@ public class Camp {
     private CampInfo campInfo;
     private List<String> attendees;
     private List<String> committeeMembers;
-    private Set<String> withdrawnStudents = new HashSet<>();
+    private Set<String> withdrawnStudents;
     private String manualVisibility;
 
     public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
@@ -23,7 +23,8 @@ public class Camp {
                 location, totalSlots, committeeMembersSlots, campDescription, staffInCharge);
         this.attendees = new ArrayList<>();
         this.committeeMembers = new ArrayList<>();
-
+        this.withdrawnStudents = new HashSet<>();
+        this.manualVisibility = "on"; 
     }
 
     public String getCampName() {
@@ -111,17 +112,13 @@ public class Camp {
         }
     }
     // Helper method to manually set visibility on or off
-    public String setManualVisibility(String manualVisibility) {
+    public void setManualVisibility(String manualVisibility) {
         if (manualVisibility == null) {
-                manualVisibility = "on"; 
-            }
-       if (manualVisibility.equalsIgnoreCase("on")) {
-            return "on";
-
-        } else if (manualVisibility.equalsIgnoreCase("off")) {
-            return "off";
+            this.manualVisibility = "on";  // Update the instance field
+        } else if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
+            this.manualVisibility = manualVisibility.toLowerCase();  // Update the instance field
         } else {
-            return manualVisibility;
+            this.manualVisibility = manualVisibility;  // Update the instance field
         }
     }
 
@@ -172,7 +169,7 @@ public class Camp {
     }
 
     private boolean hasWithdrawn(String StudentID) {
-        return withdrawnStudents.contains(StudentID);
+        return this.withdrawnStudents.contains(StudentID);
     }
 
     public void addDate(CAMDate date) {
