@@ -26,21 +26,6 @@ public class Camp {
 
     }
 
-    // public Camp(String campName, CAMDate registrationClosingDate, String
-    // campVisibility,
-    // String location, int totalSlots, int committeeMembersSlots, String
-    // campDescription, String staffInCharge) {
-    // // Create campInfo
-    // this(0, campName, registrationClosingDate, campVisibility, location,
-    // totalSlots, committeeMembersSlots,
-    // campDescription, staffInCharge);
-
-    // }
-
-    // public int getCampID() {
-    // return campInfo.getCampID();
-    // }
-
     public String getCampName() {
         return campInfo.getCampName();
     }
@@ -49,9 +34,6 @@ public class Camp {
         return campInfo.getDates();
     }
 
-    public String getStartToEndDate() {
-        return campInfo.getStartToEndDate();
-    }
 
     public String getFormatedDates() {
         return campInfo.getFormatedDates();

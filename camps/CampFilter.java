@@ -15,7 +15,7 @@ public class CampFilter {
     private ArrayList<String> availableSIC;
     private ArrayList<Camp> filteredCamps;
     private ArrayList<Camp> unfilteredCamps;
-    private Scanner sc = new Scanner(System.in);
+    private Scanner sc;
 
     public CampFilter() {
         availableDates = new ArrayList<String>();
@@ -24,6 +24,7 @@ public class CampFilter {
         availableSIC = new ArrayList<String>();
         filteredCamps = new ArrayList<Camp>();
         unfilteredCamps = new ArrayList<Camp>();
+        sc = new Scanner(System.in);
     }
 
     public boolean addAvailableDate(String date) {

@@ -11,22 +11,28 @@ import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import users.Staff;
+import users.Student;
+import users.Users;
 import users.UsersDatabase;
 
 
 public class CampReport implements Report {
 
-    Camp camp;
-    Scanner sc = new Scanner(System.in);
-    Staff user;
-    ArrayList<String> createdCamps;
-    CampArray campArray; 
-    String fileName;
+    private Camp camp;
+    private Scanner sc;
+    private Users user;
+    private ArrayList<String> createdCamps;
+    private CampArray campArray; 
+    private String fileName;
 
-    public CampReport(Staff user, CampArray campArray) {
+    public CampReport(Users user, CampArray campArray) {
         this.user = user;
         this.campArray = campArray;
-        createdCamps = user.getCampsInCharge();
+        if (user instanceof Staff)
+            createdCamps = ((Staff) user).getCampsInCharge();
+        else
+            createdCamps.add(((Student) user).getCampCommitteeRole().getCamp().getCampName());
+        sc = new Scanner(System.in);
     }
 
     public void generateReport() {

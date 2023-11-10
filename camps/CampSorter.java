@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class CampSorter {
     private static String sortBy;
 
-    public static void insertionSort(ArrayList<Camp> camps, String sortBy) {
+    private static void insertionSort(ArrayList<Camp> camps, String sortBy) {
         for (int i = 1; i < camps.size(); i++) {
             Camp key = camps.get(i);
             int j = i - 1;

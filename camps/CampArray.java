@@ -23,13 +23,11 @@ public class CampArray {
     private static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
-    private String sortBy;
     private CampFilter campFilter;
 
 
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
-        sortBy = "campName";
         CampArray.campsFile = campsFile;
 
         try (BufferedReader csvReader = new BufferedReader(new FileReader(campsFile))) {
