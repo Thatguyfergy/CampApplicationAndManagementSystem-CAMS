@@ -190,7 +190,7 @@ public class CampArray {
             System.out.println("Toggle visibility for camp (on/off):");
             String manualVisibility = scanner.nextLine().toLowerCase();
         
-            if (manualVisibility.equals("on") || manualVisibility.equals("off")) {
+            if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
                 newCamp.setManualVisibility(manualVisibility);
                 break;
             } else {
@@ -329,7 +329,7 @@ public class CampArray {
                 System.out.println("Enter new visibility for camp (on/off):");
                 String manualVisibility = scanner.nextLine().toLowerCase();
             
-                if (manualVisibility.equals("on") || manualVisibility.equals("off")) {
+                if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
                     targetCamp.setManualVisibility(manualVisibility);
                     break;
                 } else {
