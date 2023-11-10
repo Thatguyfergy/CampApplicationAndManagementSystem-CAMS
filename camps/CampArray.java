@@ -182,13 +182,22 @@ public class CampArray {
         System.out.println("Camp Description:");
         String campDescription = scanner.nextLine();
 
-        System.out.println("Toggle visibility for camp (on/off):");
-        String manualVisibility = scanner.nextLine().toLowerCase();
 
         Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
                 committeeMembersSlots, campDescription, staffinCharge);
         // Set the visibility status based on user input
-        newCamp.setManualVisibility(manualVisibility);
+        while (true) {
+            System.out.println("Toggle visibility for camp (on/off):");
+            String manualVisibility = scanner.nextLine().toLowerCase();
+        
+            if (manualVisibility.equals("on") || manualVisibility.equals("off")) {
+                newCamp.setManualVisibility(manualVisibility);
+                break;
+            } else {
+                System.out.println("Invalid input. Please enter 'on' or 'off'.");
+            }
+        }
+        
         newCamp.addDate(start, end);
         camps.add(newCamp);
         updateFile(camps);
@@ -316,10 +325,17 @@ public class CampArray {
                 }
                 break;
             case 11:
+            while (true) {
                 System.out.println("Enter new visibility for camp (on/off):");
-              String manualVisibility = scanner.nextLine().toLowerCase();
-                targetCamp.setManualVisibility(manualVisibility);
-                break;
+                String manualVisibility = scanner.nextLine().toLowerCase();
+            
+                if (manualVisibility.equals("on") || manualVisibility.equals("off")) {
+                    targetCamp.setManualVisibility(manualVisibility);
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter 'on' or 'off'.");
+                }
+            }
             case 12:
                 System.out.println("Exiting editCamp");
                 break;
