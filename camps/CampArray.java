@@ -25,7 +25,7 @@ public class CampArray {
     private static String campsFile;
     private String sortBy;
     private CampFilter campFilter;
-    private String manualVisibility;
+
 
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
@@ -183,7 +183,7 @@ public class CampArray {
         String campDescription = scanner.nextLine();
 
         System.out.println("Toggle visibility for camp (on/off):");
-        manualVisibility = scanner.nextLine().toLowerCase();
+        String manualVisibility = scanner.nextLine().toLowerCase();
 
         Camp newCamp = new Camp(campName, registrationClosingDate, campVisibility, location, totalSlots,
                 committeeMembersSlots, campDescription, staffinCharge);
@@ -317,7 +317,7 @@ public class CampArray {
                 break;
             case 11:
                 System.out.println("Enter new visibility for camp (on/off):");
-                manualVisibility = scanner.nextLine().toLowerCase();
+              String manualVisibility = scanner.nextLine().toLowerCase();
                 targetCamp.setManualVisibility(manualVisibility);
                 break;
             case 12:
@@ -400,7 +400,7 @@ public class CampArray {
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                 String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
-                String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 10); // Fetch visibility
+                String visibility = truncateWithEllipsis(camp.getManualVisibility(), 10); // Fetch visibility
                                                                                                     // of the camp
 
                 System.out.printf("%-15s | %-25s | %-10s | %-6s | %-10s | %-8s | %-8s | %-15s | %-7s | %-10s |%n",
@@ -431,7 +431,7 @@ public class CampArray {
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                     String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                     String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
-                    String visibility = truncateWithEllipsis(camp.setManualVisibility(manualVisibility), 10); // Fetch
+                    String visibility = truncateWithEllipsis(camp.getManualVisibility(), 10); // Fetch
                                                                                                         // visibility of
                                                                                                         // the camp
 
@@ -473,7 +473,7 @@ public class CampArray {
                     continue;
                 }
                 // Outer if - Manual visibility
-                if (camp.setManualVisibility(manualVisibility).equalsIgnoreCase("on")) {
+                if (camp.getManualVisibility().equalsIgnoreCase("on")) {
                     // Next inner if loop- AutoVisibility
                     if (camp.toggleVisibility().equalsIgnoreCase("on")) {
                         // Next inner if loop Faculty checker -> NTU or same faculty

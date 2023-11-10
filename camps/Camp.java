@@ -14,6 +14,7 @@ public class Camp {
     private List<String> attendees;
     private List<String> committeeMembers;
     private Set<String> withdrawnStudents = new HashSet<>();
+    private String manualVisibility;
 
     public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
@@ -96,10 +97,6 @@ public class Camp {
         campInfo.setCampDescription(newDescription);
     }
 
-    public void setVisibility(String toggle) {
-
-    }
-
     // Method to get the list of attendees
     public List<String> getAttendees() {
         return attendees;
@@ -144,6 +141,10 @@ public class Camp {
         } else {
             return manualVisibility;
         }
+    }
+
+    public String getManualVisibility() {
+        return manualVisibility;
     }
 
 
