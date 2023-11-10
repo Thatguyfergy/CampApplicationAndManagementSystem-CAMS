@@ -129,17 +129,13 @@ public class Camp {
         }
     }
     // Helper method to manually set visibility on or off
-    public String setManualVisibility(String manualVisibility) {
+    public void setManualVisibility(String manualVisibility) {
         if (manualVisibility == null) {
-                manualVisibility = "on"; 
-            }
-       if (manualVisibility.equalsIgnoreCase("on")) {
-            return "on";
-
-        } else if (manualVisibility.equalsIgnoreCase("off")) {
-            return "off";
+            this.manualVisibility = "on";  // Update the instance field
+        } else if (manualVisibility.equalsIgnoreCase("on") || manualVisibility.equalsIgnoreCase("off")) {
+            this.manualVisibility = manualVisibility.toLowerCase();  // Update the instance field
         } else {
-            return manualVisibility;
+            this.manualVisibility = manualVisibility;  // Update the instance field
         }
     }
 
@@ -190,7 +186,7 @@ public class Camp {
     }
 
     private boolean hasWithdrawn(String StudentID) {
-        return withdrawnStudents.contains(StudentID);
+        return this.withdrawnStudents.contains(StudentID);
     }
 
     public void addDate(CAMDate date) {
