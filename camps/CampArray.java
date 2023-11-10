@@ -462,15 +462,6 @@ public class CampArray {
         } else if (user instanceof Student) {
 
             Student studentUser = (Student) user;
-            boolean canSeeAllCamps = false;
-
-            // Check if any camp availability has been set to "NTU"
-            for (Camp camp : camps) {
-                if (camp.getCampAvailability().equalsIgnoreCase("NTU")) {
-                    canSeeAllCamps = true;
-                    break;
-                }
-            }
             // Display only camps open to the student's user group with visibility toggled
             // "on"
             // and display remaining slots for each camp open to the student
@@ -494,7 +485,7 @@ public class CampArray {
                     // Next inner if loop- AutoVisibility
                     if (camp.toggleVisibility().equalsIgnoreCase("on")) {
                         // Next inner if loop Faculty checker -> NTU or same faculty
-                        if (canSeeAllCamps
+                        if (camp.getCampAvailability().equalsIgnoreCase("NTU")
                                 || studentUser.getFacultyInfo().equalsIgnoreCase(camp.getCampAvailability())) {
                             String campName = truncateWithEllipsis(camp.getCampName(), 15);
                             String dates = truncateWithEllipsis(camp.getFormatedDates(), 25);
