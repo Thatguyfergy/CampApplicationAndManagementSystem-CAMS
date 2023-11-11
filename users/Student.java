@@ -65,6 +65,11 @@ public class Student extends Users {
         currentCamps.viewCamps(this);
     }
 
+
+    public ArrayList<String> getRegCampsArray(){
+        return RegCamps;
+    }
+
     public void registerCampAttendee(Camp camp, CampArray campArray) {
         // check if camp registered before
         for (int i = 0; i < RegCamps.size(); i++) {
@@ -88,6 +93,12 @@ public class Student extends Users {
         // check if student is allowed to register for this camp, i.e. campVisibility
         if (camp.getCampInfo().getCampAvailability() == "off") {
             System.out.println("This camp has been closed for registration!");
+            return;
+        }
+        
+        // Blacklist check
+        if (camp.hasWithdrawn(this.getID())){
+            System.out.println("Student has been withdrawn from the camp and cannot be registered again!");
             return;
         }
 
@@ -124,6 +135,12 @@ public class Student extends Users {
         // check if student is allowed to register for this camp, i.e. campVisibility
         if (camp.getCampInfo().getCampAvailability() == "off") {
             System.out.println("This camp has been closed for registration!");
+            return;
+        }
+
+        // Blacklist check
+        if (camp.hasWithdrawn(this.getID())){
+            System.out.println("Student has been withdrawn from the camp and cannot be registered again!");
             return;
         }
 
@@ -235,6 +252,10 @@ public class Student extends Users {
                 for (CAMDate date : deleteDates) {
                     BusyDates.remove(date);
                 }
+
+                // Remove from RegCamps
+                RegCamps.remove(campName);
+                
                 return;
             }
         }
@@ -255,6 +276,11 @@ public class Student extends Users {
             if (attend.getCampAttending().equals(oldName)) {
                 attend.setCampAttending(newName);
                 return;
+            }
+        }
+        for (String campName : RegCamps){
+            if (campName == oldName){
+                campName = newName;
             }
         }
     }

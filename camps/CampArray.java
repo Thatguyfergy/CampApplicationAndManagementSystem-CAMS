@@ -659,9 +659,9 @@ public class CampArray {
     // if they are camp committee members of that camp
     public void viewCampDetails(String campName, Users user) {
         // view the details of the camp
-        System.out.println("==========================================================================================");
+        System.out.println("══════════════════════════════════════════════════════════════════════════════════════════");
         System.out.println("Camp Details");
-        System.out.println("==========================================================================================");
+        System.out.println("══════════════════════════════════════════════════════════════════════════════════════════");
         for (Camp camp : camps) {
             if (camp.getCampName().equals(campName)) {
                 System.out.println("Camp Name: \t\t\t\t" + camp.getCampName());
@@ -677,7 +677,7 @@ public class CampArray {
                 if (user instanceof Staff || camp.getCommitteeMembers().contains(user.getID())) {
                     displayRegisteredStudents(camp);
                 }
-                System.out.println(); // Add a line break for better readability
+                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════");
                 return; // since only one camp can have that name, don't need to continue checking
             }
         }

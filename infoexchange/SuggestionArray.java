@@ -66,8 +66,8 @@ public class SuggestionArray {
                 System.out.println();
             }
         }
-        if (suggestions.size() == 0) System.out.println("═════════════════════════No Suggestions Found!══════════════════════════");
-        else                         System.out.println("═══════════════════════════End of Suggestions═══════════════════════════");
+        if (suggestions.size() == 0) System.out.println("═════════════════════════No Suggestions Found!══════════════════════════\n");
+        else                         System.out.println("═══════════════════════════End of Suggestions═══════════════════════════\n");
     }
 
     // Method Overloading
@@ -93,8 +93,8 @@ public class SuggestionArray {
                 System.out.println();
             }
         }
-        if (suggestions.size() == 0) System.out.println("No Suggestions Found!");
-        else System.out.println("====================End of Suggestions====================");
+        if (suggestions.size() == 0) System.out.println("═════════════════════════No Suggestions Found!══════════════════════════\n");
+        else                         System.out.println("═══════════════════════════End of Suggestions═══════════════════════════\n");
     }
 
     public void editSuggestion(Student std, int i, String s) {
@@ -170,12 +170,6 @@ public class SuggestionArray {
         viewSuggestions(staff);
         System.out.println("Which Suggestion do you want to process? ");
         int id = inputInt.nextInt(sc);
-        int a;
-        do {
-            System.out.println("Do you want to accept (1) or reject (0) this suggestion? ");
-            a = inputInt.nextInt(sc);
-        } while (a != 0 && a != 1);
-        boolean accept = (a == 1) ? true : false;
 
         for (Suggestion suggestion : suggestions) {
             if ((staff.checkStaffInCharge(suggestion.getCamp().getCampName())) && (suggestion.getID() == id)
@@ -184,6 +178,13 @@ public class SuggestionArray {
                     System.out.printf(
                             "Suggestion %06d has already been %s\n", id, (suggestion.isAccepted() ? "Accepted" : "Rejected"));
                 } else {
+                    int a;
+                    do {
+                        System.out.println("Do you want to accept (1) or reject (0) this suggestion? ");
+                        a = inputInt.nextInt(sc);
+                    } while (a != 0 && a != 1);
+                    boolean accept = (a == 1) ? true : false;
+
                     suggestion.process(accept);
                     updateFile();
                     System.out.printf(
@@ -194,6 +195,13 @@ public class SuggestionArray {
         }
         System.out.println("Suggestion does not exist!");
         return;
+    }
+
+    public boolean suggestionExists(Student std, int i) {
+        for (Suggestion s : suggestions) {
+            if ((s.getStudent().equals(std)) && (s.getID() == i)) return true;
+        }
+        return false;
     }
 
     private void updateFile() {
