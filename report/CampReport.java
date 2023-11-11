@@ -36,12 +36,31 @@ public class CampReport implements Report {
     }
 
     public void generateReport() {
+
+        if (createdCamps.size() == 0) {
+            System.out.println("You have not created any camps!");
+            return;
+        }
         System.out.println("Select a camp to generate report for: ");
         for (String camp : createdCamps) {
             System.out.println(createdCamps.indexOf(camp) + 1 + ". " + camp);
         }
-        System.out.printf("Enter choice: ");
-        String choice = sc.nextLine();
+        System.out.println(createdCamps.size() + 1 + ". Exit (not a camp name)");
+
+        String choice;
+        try {
+            System.out.printf("Enter choice: ");
+            choice = sc.nextLine();
+            if (Integer.parseInt(choice) == createdCamps.size() + 1)
+                return;
+            if (Integer.parseInt(choice) > createdCamps.size() + 1)
+                throw new NumberFormatException();
+            
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid choice!");
+            return;
+        }
+
         camp = campArray.getCamp(createdCamps.get(Integer.parseInt(choice) - 1));
 
         System.out.println("Select Filter: ");
