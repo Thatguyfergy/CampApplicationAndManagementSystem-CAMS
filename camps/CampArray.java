@@ -647,24 +647,26 @@ public class CampArray {
     // if they are camp committee members of that camp
     public void viewCampDetails(String campName, Users user) {
         // view the details of the camp
+        System.out.println("==========================================================================================");
         System.out.println("Camp Details");
-        System.out.println("=====================================");
+        System.out.println("==========================================================================================");
         for (Camp camp : camps) {
             if (camp.getCampName().equals(campName)) {
-                System.out.println("Camp Name: " + camp.getCampName());
-                System.out.println("Camp Dates: " + camp.getFormatedDates());
-                System.out.println("Registration Closing Date: " + camp.getRegistrationClosingDate());
-                System.out.println("Location: " + camp.getLocation());
-                System.out.println("Total Slots: " + camp.getTotalSlots());
-                System.out.println("Remaining Slots for Camp Committee: " + camp.getRemainingCommitteeSlots());
-                System.out.println("Remaining Slots for Attendees: " + camp.getRemainingAttendeeSlots());
-                System.out.println("Camp Description: " + camp.getCampDescription());
-                System.out.println("Staff In Charge: " + camp.getStaffInCharge());
-                System.out.println("Faculty the camp is available for: " + camp.getCampAvailability());
+                System.out.println("Camp Name: \t\t\t\t" + camp.getCampName());
+                System.out.println("Camp Dates: \t\t\t\t" + camp.getFormatedDates());
+                System.out.println("Registration Closing Date: \t\t" + camp.getRegistrationClosingDate());
+                System.out.println("Location: \t\t\t\t" + camp.getLocation());
+                System.out.println("Total Slots: \t\t\t\t" + camp.getTotalSlots());
+                System.out.println("Remaining Slots for Camp Committee: \t" + camp.getRemainingCommitteeSlots());
+                System.out.println("Remaining Slots for Attendees: \t\t" + camp.getRemainingAttendeeSlots());
+                System.out.println("Camp Description: \t\t\t" + camp.getCampDescription());
+                System.out.println("Staff In Charge: \t\t\t" + camp.getStaffInCharge());
+                System.out.println("Faculty the camp is available for: \t" + camp.getCampAvailability());
                 if (user instanceof Staff || camp.getCommitteeMembers().contains(user.getID())) {
                     displayRegisteredStudents(camp);
                 }
                 System.out.println(); // Add a line break for better readability
+                return; // since only one camp can have that name, don't need to continue checking
             }
         }
     }

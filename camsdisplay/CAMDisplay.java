@@ -206,13 +206,12 @@ public class CAMDisplay {
                 case 8:
                     // View Suggestions
                     suggestionArray.viewSuggestions(staff);
-                    suggestionArray.updateFile();
                     ScreenClearFn();
                     break;
                 case 9:
                     // Process Suggestions
                     suggestionArray.processSuggestion(staff);
-                    suggestionArray.updateFile();
+                    UserDB.updateFile(); // for change in points
                     ScreenClearFn();
                     break;
                 case 10:
@@ -504,6 +503,7 @@ public class CAMDisplay {
                     if (student.IsCampComm()) {
                         // view camp details for own camp
                         student.getCampCommitteeRole().displayCampInfo();
+                        campArray.viewCampDetails(student.getCampCommitteeRole().getCampName(), student);
 
                     } else
                         System.out.println("Logging out... Thank you!");
@@ -531,11 +531,9 @@ public class CAMDisplay {
                                 String sug = sc.nextLine();
                                 suggestionArray.createSuggestion(sug, student,
                                         campArray.getCamp(student.getCampCommitteeRole().getCampName()));
-                                suggestionArray.updateFile();
                                 break;
                             case "V", "v":
                                 suggestionArray.viewSuggestions(student);
-                                System.out.println("\nEND of Suggestions\n");
                                 break;
                             case "E", "e":
                                 suggestionArray.viewSuggestions(student);
@@ -545,14 +543,13 @@ public class CAMDisplay {
                                 sc.nextLine();
                                 String newsug = sc.nextLine();
                                 suggestionArray.editSuggestion(student, sugindex1, newsug);
-                                suggestionArray.updateFile();
                                 break;
                             case "S", "s":
                                 suggestionArray.viewSuggestions(student);
                                 System.out.printf("Select Suggestion to submit, input Suggestion index: ");
                                 int sugindex2 = inputInt.nextInt(sc);
                                 suggestionArray.submitSuggestion(student, sugindex2);
-                                suggestionArray.updateFile();
+                                UserDB.updateFile(); // for change in points
                                 break;
                             default:
                                 System.out.println("Invalid choice");
@@ -573,6 +570,7 @@ public class CAMDisplay {
                     if (student.IsCampComm()) {
                         // reply enquiries
                         enquiriesArray.replyEnquiry(student);
+                        UserDB.updateFile(); // for change in points
                     } else
                         System.out.println("Invalid choice");
                     ScreenClearFn();

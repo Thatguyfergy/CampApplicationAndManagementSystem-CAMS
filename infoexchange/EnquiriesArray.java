@@ -215,7 +215,7 @@ public class EnquiriesArray {
                     generateID(replies), user.getID());
             replies.add(reply);
 
-            userStudent.getCampCommitteeRole().addOnePoint();
+            userStudent.getCampCommitteeRole().addOnePoint(); // student gets point for enq reply
 
             try {
                 updateFile(replies);

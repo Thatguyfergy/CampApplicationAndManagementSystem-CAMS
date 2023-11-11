@@ -39,6 +39,7 @@ public class SuggestionArray {
 
     public void createSuggestion(String s, Student std, Camp cmp) {
         suggestions.add(new Suggestion(s, std, cmp));
+        updateFile();
     }
 
     // Method Overloading
@@ -65,6 +66,8 @@ public class SuggestionArray {
                 System.out.println();
             }
         }
+        if (suggestions.size() == 0) System.out.println("No Suggestions Found!");
+        else System.out.println("====================End of Suggestions====================");
     }
 
     // Method Overloading
@@ -90,13 +93,17 @@ public class SuggestionArray {
                 System.out.println();
             }
         }
+        if (suggestions.size() == 0) System.out.println("No Suggestions Found!");
+        else System.out.println("====================End of Suggestions====================");
     }
 
     public void editSuggestion(Student std, int i, String s) {
         for (Suggestion suggestion : suggestions) {
             if ((suggestion.getStudent().equals(std)) && (suggestion.getID() == i)) {
-                if (suggestion.setSuggestion(s))
+                if (suggestion.setSuggestion(s)) {
                     System.out.println("Suggestion successfully edited!");
+                    updateFile();
+                }
                 else
                     System.out.println("Suggestion cannot be edited after being processed!");
 
@@ -119,13 +126,17 @@ public class SuggestionArray {
                 return;
             }
         }
+        System.out.println("Suggestion does not exist!");
+        return;
     }
 
     public void submitSuggestion(Student std, int i) {
         for (Suggestion suggestion : suggestions) {
             if ((suggestion.getStudent().equals(std)) && (suggestion.getID() == i)) {
-                if (suggestion.submit())
+                if (suggestion.submit()) {
                     System.out.println("Suggestion successfully submitted!");
+                    updateFile();
+                }
                 else
                     System.out.println("Suggestion already submtitted!");
 
@@ -151,6 +162,8 @@ public class SuggestionArray {
                 return;
             }
         }
+        System.out.println("Suggestion does not exist!");
+        return;
     }
 
     public void processSuggestion(Staff staff) {
@@ -168,22 +181,22 @@ public class SuggestionArray {
             if ((staff.checkStaffInCharge(suggestion.getCamp().getCampName())) && (suggestion.getID() == id)
                     && (suggestion.isSubmitted())) {
                 if (suggestion.isProcessed()) {
-                    System.out.println(
-                            "Suggestion has already been " + (suggestion.isAccepted() ? "Accepted" : "Rejected"));
-                    return;
+                    System.out.printf(
+                            "Suggestion %06d has already been %s\n", id, (suggestion.isAccepted() ? "Accepted" : "Rejected"));
                 } else {
                     suggestion.process(accept);
-                    System.out.println(
-                            "Suggestion " + id + " has been " + (suggestion.isAccepted() ? "Accepted" : "Rejected"));
-                    return;
+                    updateFile();
+                    System.out.printf(
+                            "Suggestion %06d has been %s\n", id, (suggestion.isAccepted() ? "Accepted" : "Rejected"));
                 }
+                return;
             }
         }
         System.out.println("Suggestion does not exist!");
         return;
     }
 
-    public void updateFile() {
+    private void updateFile() {
         try (FileWriter csvWriter = new FileWriter(suggestionFile)) {
             for (Suggestion suggestion : suggestions) {
                 csvWriter.append(suggestion.getSuggestion());
