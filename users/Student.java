@@ -224,4 +224,39 @@ public class Student extends Users {
         return (a.getCampCommitteeRole().getPoints() > b.getCampCommitteeRole().getPoints()) ? 1 : -1;
     }
 
+    // Camp is deleted. If the student is a campCom, then he will be removed
+    // Will also be removed from reg camp is necessary
+    public void deleteCamp(String campName, ArrayList<CAMDate> deleteDates) {
+        for (int i = 0; i < Attendee.size(); i++) {
+            if (Attendee.get(i).getCampAttending().equals(campName)) {
+                Attendee.remove(i);
+
+                // Remove busy dates
+                for (CAMDate date : deleteDates) {
+                    BusyDates.remove(date);
+                }
+                return;
+            }
+        }
+        // Remove Camp Comm
+        if (this.IsCampComm && this.getCampCommitteeRole().getCampName().equals(campName)) {
+            IsCampComm = false;
+            CommRole = null;
+            RegCamps.remove(campName);
+            for (CAMDate date : deleteDates) {
+                BusyDates.remove(date);
+            }
+        }
+
+    }
+
+    public void editCamp(String oldName, String newName) {
+        for (CampAttendeeRole attend : Attendee) {
+            if (attend.getCampAttending().equals(oldName)) {
+                attend.setCampAttending(newName);
+                return;
+            }
+        }
+    }
+
 }

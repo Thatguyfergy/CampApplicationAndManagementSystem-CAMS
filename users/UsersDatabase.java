@@ -167,4 +167,28 @@ public class UsersDatabase {
         }
         return null;
     }
+
+    public void deleteCamp(String campName, ArrayList<CAMDate> deletedDates) {
+        for (Users user : users) {
+            if (user instanceof Staff) {
+                Staff userStaff = (Staff) user;
+                if (userStaff.checkStaffInCharge(campName)) {
+                    userStaff.deleteCamp(campName);
+                }
+            } else if (user instanceof Student) {
+                Student userStudent = (Student) user;
+                userStudent.deleteCamp(campName, deletedDates);
+            }
+        }
+    }
+
+    // Only used for Student
+    public void studentEditCamp(String oldName, String newName) {
+        for (Users user : users) {
+            if (user instanceof Student) {
+                Student userStudent = (Student) user;
+                userStudent.editCamp(oldName, newName);
+            }
+        }
+    }
 }

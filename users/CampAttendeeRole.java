@@ -19,6 +19,11 @@ public class CampAttendeeRole {
         return CampAttending;
     }
 
+    public void setCampAttending(String newName) {
+        CampAttending = newName;
+
+    }
+
 }
 
 // =======================================================================================================

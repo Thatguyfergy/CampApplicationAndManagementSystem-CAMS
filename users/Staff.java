@@ -31,6 +31,10 @@ public class Staff extends Users {
         return campsInCharge;
     }
 
+    public void changeCampName(String oldName, String newName) {
+        campsInCharge.set(campsInCharge.indexOf(oldName), newName);
+    }
+
     public void createCamp(CampArray campArray) {
         // Create a Camp object using CampInfo
         try {
@@ -43,19 +47,12 @@ public class Staff extends Users {
         }
     }
 
-    public void editCamp(CampArray campArray) {
-        campArray.editCamp(this);
+    public void editCamp(CampArray campArray, EnquiriesArray enquiriesArray) {
+        campArray.editCamp(this, enquiriesArray);
     }
 
-    public void deleteCamp(CampArray campArray) {
-        System.out.println("Camp Name:");
-        String campName = scanner.nextLine();
-        try {
-            campArray.deleteCamp(campName);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+    public void deleteCamp(String campName) {
+        campsInCharge.remove(campName);
     }
 
     // public void viewCamp(CampArray campArray, String sortby) {

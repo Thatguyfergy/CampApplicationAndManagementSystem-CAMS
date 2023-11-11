@@ -3,9 +3,11 @@ package camsdisplay;
 import users.*;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
+import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import infoexchange.EnquiriesArray;
@@ -41,8 +43,8 @@ public class CAMDisplay {
         System.out.println("║ Camp Application & Management System                            ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
         System.out.println("1. Login");
-        System.out.println("2. Reset Password");
-        System.out.println("3. Exit");
+        // System.out.println("2. Reset Password");
+        System.out.println("2. Exit");
         System.out.printf("Enter your choice: ");
         int choice = inputInt.nextInt(sc);
         sc.nextLine(); // Consume the newline character
@@ -50,10 +52,10 @@ public class CAMDisplay {
             case 1:
                 loginScreen();
                 break;
+            // case 2:
+            // resetPasswordScreen();
+            // break;
             case 2:
-                resetPasswordScreen();
-                break;
-            case 3:
                 System.exit(0);
                 break;
             default:
@@ -105,25 +107,12 @@ public class CAMDisplay {
 
     }
 
-    public void resetPasswordScreen() {
+    public void resetPasswordScreen(Users user) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
-        String userID, oldPassword;
         // Scanner sc = new Scanner(System.in);
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║ Camp Application & Management System - Password Reset           ║");
         System.out.println("╚═════════════════════════════════════════════════════════════════╝");
-
-        System.out.println("Enter your userID: ");
-        userID = sc.nextLine();
-        System.out.println("Enter your previous password: ");
-        oldPassword = sc.nextLine();
-        user = UserDB.login(userID, oldPassword);
-
-        if (user == null) {
-            System.out.println("UserID cannot be found/Password is incorrect.");
-            System.out.println("Please try again.");
-            return;
-        }
 
         resetPassword(user);
     }
@@ -166,7 +155,8 @@ public class CAMDisplay {
                             "╚═══════════════════════════════════════════════════════════════╝\r\n");
             System.out.print("Welcome back to CAMs, Staff " + UsersDatabase.getFirstName(staff.getID()) + " of "
                     + staff.getFacultyInfo() + "\r\n");
-            String menu = "1. View Camps\n" +
+            String menu = "0. Reset Password\n" +
+                    "1. View Camps\n" +
                     "2. View Camp Details\n" +
                     "3. Create Camp\n" +
                     "4. Edit Camp\n" +
@@ -184,6 +174,10 @@ public class CAMDisplay {
             int choice = inputInt.nextInt(sc);
             sc.nextLine(); // Consume the newline character
             switch (choice) {
+                case 0:
+                    resetPasswordScreen(user);
+                    System.out.println("Please login again!");
+                    return;
                 case 1:
                     viewCampsScreen(staff);
                     break;
@@ -300,7 +294,13 @@ public class CAMDisplay {
         System.out.print("Enter the name of Camp to delete: ");
         buffer = sc.nextLine();
         if (campArray.checkCampExists(buffer)) {
+            ArrayList<CAMDate> deletedDates = campArray.getCamp(buffer).getDates();
             campArray.deleteCamp(buffer);
+
+            UserDB.deleteCamp(buffer, deletedDates);
+            enquiriesArray.deleteCamp(buffer);
+
+            UserDB.updateFile();
         } else {
             System.out.println("Camp does not exist!");
         }
@@ -318,12 +318,12 @@ public class CAMDisplay {
                 "╔═══════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Edit Camp              ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
-        campArray.editCamp(staff);
+        campArray.editCamp(staff, enquiriesArray, UserDB);
+        UserDB.updateFile();
 
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         return;
-
     }
 
     private void createCampScreen(Staff staff) {
@@ -395,6 +395,7 @@ public class CAMDisplay {
             System.out.println("╚═════════════════════════════════════════════════════════════════╝");
             System.out.println("Welcome back to CAMs, Student " + UsersDatabase.getFirstName(student.getID()) + " of "
                     + student.getFacultyInfo() + "!");
+            System.out.println("0. Reset password");
             System.out.println("1. View Available/Registered Camps");
             System.out.println("2. Register for Camp");
             System.out.println("3. Manage your Enquiries");
@@ -416,6 +417,10 @@ public class CAMDisplay {
             choice = inputInt.nextInt(sc);
             System.out.println();
             switch (choice) {
+                case 0:
+                    resetPasswordScreen(user);
+                    System.out.println("Please login again!");
+                    return;
                 case 1:
                     student.viewAvailAndRegCamps(campArray);
                     ScreenClearFn();

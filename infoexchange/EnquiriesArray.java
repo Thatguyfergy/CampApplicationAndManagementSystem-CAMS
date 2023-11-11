@@ -348,4 +348,34 @@ public class EnquiriesArray {
         }
     }
 
+    public void deleteCamp(String campName) {
+        for (int i = 0; i < enquiries.size(); i++) {
+            Enquiries enquiry = enquiries.get(i);
+            if (enquiry.getCampName().equals(campName)) {
+                // Remove any related replies first
+                for (int j = 0; j < replies.size();) {
+                    if (replies.get(j).getEnquiryID().equals(enquiry.getEnquiryID())) {
+                        replies.remove(j);
+                    } else { // Cannot auto j++ in for loop as the size of the replies array shrinks
+                        j++;
+                    }
+                }
+                // Remove enquiry now
+                enquiries.remove(i);
+            }
+        }
+
+        updateFile(enquiries);
+        updateFile(replies);
+    }
+
+    public void editCamp(String oldName, String newName) {
+        for (int i = 0; i < enquiries.size(); i++) {
+            Enquiries enquiry = enquiries.get(i);
+            if (enquiry.getCampName().equals(oldName)) {
+                enquiry.changeCampName(newName);
+            }
+        }
+        updateFile(enquiries);
+    }
 }

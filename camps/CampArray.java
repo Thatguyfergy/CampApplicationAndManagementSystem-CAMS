@@ -6,6 +6,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import camdate.CAMDate;
+import infoexchange.EnquiriesArray;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 
 import users.Staff;
 import users.Users;
+import users.UsersDatabase;
 import users.Student;
 
 public class CampArray {
@@ -211,16 +213,26 @@ public class CampArray {
     }
 
     // add in the logic to edit camp details
-    public void editCamp(Staff staff) {
+    public void editCamp(Staff staff, EnquiriesArray enquiriesArray, UsersDatabase usersDB) {
         ArrayList<String> campsInCharge = staff.getCampsInCharge();
 
         System.out.println("Select camp to edit:");
         for (String camp : campsInCharge) {
             System.out.println(campsInCharge.indexOf(camp) + 1 + ". " + camp);
         }
-        System.out.printf("Enter choice: ");
-        String choice = scanner.nextLine();
-        String campName = campsInCharge.get(Integer.parseInt(choice) - 1);
+        String campName;
+
+        while (true) {
+            try {
+                System.out.printf("Enter choice: ");
+                String choice = scanner.nextLine();
+                campName = campsInCharge.get(Integer.parseInt(choice) - 1);
+                break;
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("Invalid value. Try again");
+            }
+        }
+
         Camp targetCamp = null;
 
         for (int i = 0; i < camps.size(); i++) {
@@ -253,8 +265,17 @@ public class CampArray {
             case 1:
                 System.out.println("Enter new name for the camp:");
                 String newName = scanner.nextLine();
+                String oldName = targetCamp.getCampInfo().getCampName();
                 targetCamp.getCampInfo().setCampName(newName);
-                campsInCharge.set(campsInCharge.indexOf(campName), newName);
+
+                // Staff change Camp Name
+                staff.changeCampName(oldName, newName);
+
+                // Student change Camp Name (for Attendees only as they have campName as String)
+                usersDB.studentEditCamp(oldName, newName);
+
+                // Enquiries change Camp Name
+                enquiriesArray.editCamp(oldName, newName);
                 break;
             case 2:
                 // Add logic to edit Registration Closing Date

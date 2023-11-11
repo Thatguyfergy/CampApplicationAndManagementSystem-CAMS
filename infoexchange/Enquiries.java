@@ -48,6 +48,10 @@ public class Enquiries implements Comparable<Enquiries> {
         submitted = true;
     }
 
+    public void changeCampName(String newName) {
+        campName = newName;
+    }
+
     @Override
     public int compareTo(Enquiries o) {
         // TODO Auto-generated method stub
