@@ -47,9 +47,9 @@ public class Staff extends Users {
         }
     }
 
-    public void editCamp(CampArray campArray, EnquiriesArray enquiriesArray) {
-        campArray.editCamp(this, enquiriesArray);
-    }
+    // public void editCamp(CampArray campArray, EnquiriesArray enquiriesArray) {
+    // campArray.editCamp(this, enquiriesArray);
+    // }
 
     public void deleteCamp(String campName) {
         campsInCharge.remove(campName);

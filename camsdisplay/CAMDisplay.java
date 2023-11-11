@@ -195,11 +195,13 @@ public class CAMDisplay {
                     break;
                 case 6:
                     // View enquiries
+                    System.out.print("\033[H\033[2J");
                     enquiriesArray.viewEnquiries(staff);
                     ScreenClearFn();
                     break;
                 case 7:
                     // reply enquiries
+                    System.out.print("\033[H\033[2J");
                     enquiriesArray.replyEnquiry(staff);
                     ScreenClearFn();
                     break;
@@ -329,7 +331,7 @@ public class CAMDisplay {
 
         campArray.deleteCamp(staff);
         UserDB.updateFile();
-        
+
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         // Exit the viewCampsScreen and return to the main menu
