@@ -8,6 +8,7 @@ import java.util.Collections;
 
 import camps.Camp;
 import users.UsersDatabase;
+import users.Staff;
 
 public class PerfReport implements Report {
 
@@ -16,11 +17,11 @@ public class PerfReport implements Report {
     private String fileName;
     private UsersDatabase users;
 
-    public PerfReport(Camp cmp, int c, UsersDatabase usrs) {
+    public PerfReport(Camp cmp, int c, UsersDatabase usrs, Staff staff) {
         camp = cmp;
         choice = c;
         users = usrs;
-        fileName = "PerfReports\\" + camp.getCampName() + "_PerfReport_by" + 
+        fileName = "PerfReports\\" + camp.getCampName() + "_for" + staff.getFirstName()+ "_PerfReport_by" + 
         ((choice==1)? "Name":(choice==2)? "Points":"ERROR") + ".csv";
     }
 

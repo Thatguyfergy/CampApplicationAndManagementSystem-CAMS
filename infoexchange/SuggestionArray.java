@@ -66,8 +66,8 @@ public class SuggestionArray {
                 System.out.println();
             }
         }
-        if (suggestions.size() == 0) System.out.println("No Suggestions Found!");
-        else System.out.println("====================End of Suggestions====================");
+        if (suggestions.size() == 0) System.out.println("═════════════════════════No Suggestions Found!══════════════════════════");
+        else                         System.out.println("═══════════════════════════End of Suggestions═══════════════════════════");
     }
 
     // Method Overloading
