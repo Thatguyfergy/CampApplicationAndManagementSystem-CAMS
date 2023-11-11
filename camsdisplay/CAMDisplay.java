@@ -195,25 +195,23 @@ public class CAMDisplay {
                     break;
                 case 6:
                     // View enquiries
-                    ScreenClearFn();
+                    System.out.print("\033[H\033[2J");
                     enquiriesArray.viewEnquiries(staff);
                     ScreenClearFn();
                     break;
                 case 7:
                     // reply enquiries
-                    ScreenClearFn();
+                    System.out.print("\033[H\033[2J");
                     enquiriesArray.replyEnquiry(staff);
                     ScreenClearFn();
                     break;
                 case 8:
                     // View Suggestions
-                    ScreenClearFn();
                     suggestionArray.viewSuggestions(staff);
                     ScreenClearFn();
                     break;
                 case 9:
                     // Process Suggestions
-                    ScreenClearFn();
                     suggestionArray.processSuggestion(staff);
                     UserDB.updateFile(); // for change in points
                     ScreenClearFn();
