@@ -240,6 +240,10 @@ public class Student extends Users {
                 for (CAMDate date : deleteDates) {
                     BusyDates.remove(date);
                 }
+
+                // Remove from RegCamps
+                RegCamps.remove(campName);
+                
                 return;
             }
         }
