@@ -65,6 +65,11 @@ public class Student extends Users {
         currentCamps.viewCamps(this);
     }
 
+
+    public ArrayList<String> getRegCampsArray(){
+        return RegCamps;
+    }
+
     public void registerCampAttendee(Camp camp, CampArray campArray) {
         // check if camp registered before
         for (int i = 0; i < RegCamps.size(); i++) {
@@ -255,6 +260,11 @@ public class Student extends Users {
             if (attend.getCampAttending().equals(oldName)) {
                 attend.setCampAttending(newName);
                 return;
+            }
+        }
+        for (String campName : RegCamps){
+            if (campName == oldName){
+                campName = newName;
             }
         }
     }
