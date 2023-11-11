@@ -172,7 +172,7 @@ public class Camp {
         }
     }
 
-    private boolean hasWithdrawn(String StudentID) {
+    public boolean hasWithdrawn(String StudentID) {
         return this.withdrawnStudents.contains(StudentID);
     }
 

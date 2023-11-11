@@ -95,6 +95,12 @@ public class Student extends Users {
             System.out.println("This camp has been closed for registration!");
             return;
         }
+        
+        // Blacklist check
+        if (camp.hasWithdrawn(this.getID())){
+            System.out.println("Student has been withdrawn from the camp and cannot be registered again!");
+            return;
+        }
 
         RegCamps.add(camp.getCampName());
         CampAttendeeRole attendeeRole = new CampAttendeeRole(camp.getCampName(), this);
@@ -129,6 +135,12 @@ public class Student extends Users {
         // check if student is allowed to register for this camp, i.e. campVisibility
         if (camp.getCampInfo().getCampAvailability() == "off") {
             System.out.println("This camp has been closed for registration!");
+            return;
+        }
+
+        // Blacklist check
+        if (camp.hasWithdrawn(this.getID())){
+            System.out.println("Student has been withdrawn from the camp and cannot be registered again!");
             return;
         }
 
