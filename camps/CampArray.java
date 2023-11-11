@@ -430,7 +430,7 @@ public class CampArray {
         return camps;
     }
 
-    public void deleteCamp(Staff staff) {
+    public void deleteCamp(Staff staff, UsersDatabase usersDB, EnquiriesArray enquiriesArray) {
         ArrayList<String> campsInCharge = staff.getCampsInCharge();
 
         if (campsInCharge.size() == 0) {
@@ -459,14 +459,17 @@ public class CampArray {
             }
         }
 
-        for (int i = 0; i < camps.size(); i++) {
-            if (camps.get(i).getCampName().equals(campName)) {
-                camps.remove(i);
-                System.out.println("Camp deleted successfully");
-            }
-        }
+        
+        Camp targetCamp = getCamp(campName);
+        ArrayList<CAMDate> deletedDates = targetCamp.getDates();
+        camps.remove(targetCamp);
+        usersDB.deleteCamp(campName, deletedDates);
+        enquiriesArray.deleteCamp(campName);
+        usersDB.updateFile();
+        
+        System.out.println("Camp deleted successfully");
 
-        staff.getCampsInCharge().remove(campName);
+        staff.getCampsInCharge().remove(campName);  
         updateFile(camps);
     }
 

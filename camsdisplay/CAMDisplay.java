@@ -235,10 +235,9 @@ public class CAMDisplay {
     private void processSuggestionScreen(Staff staff) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Process Suggestions           ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
-
 
         suggestionArray.processSuggestion(staff);
         UserDB.updateFile(); // for change in points
@@ -248,10 +247,9 @@ public class CAMDisplay {
     private void viewSuggestionsScreen(Staff staff) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Suggestions                   ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
-
 
         suggestionArray.viewSuggestions(staff);
         ScreenClearFn();
@@ -261,7 +259,7 @@ public class CAMDisplay {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Performance Report   ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         ArrayList<String> createdCamps = staff.getCampsInCharge();
@@ -329,7 +327,8 @@ public class CAMDisplay {
                         "║ Camp Application & Management System - Delete Camp            ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
-        campArray.deleteCamp(staff);
+        campArray.deleteCamp(staff, UserDB, enquiriesArray);
+        
         UserDB.updateFile();
 
         System.out.print("Press Enter to return to the main menu...");
