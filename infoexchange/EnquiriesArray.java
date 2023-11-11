@@ -129,7 +129,7 @@ public class EnquiriesArray {
                     System.out.printf("╔════════════════════════ EnquiryID %-2d ═══════════════════════════╗\n", i);
                     System.out.println("○ Camp Name: " + enquiry.getCampName());
                     System.out.println("○ Sender: " + enquiry.getSender());
-                    System.out.println("✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println(enquiry.getEnquiry());
                     System.out.println("═══════════════════════════════════════════════════════════════════");
                     System.out.println(); // Add a line break for better readability
@@ -148,7 +148,7 @@ public class EnquiriesArray {
                     System.out.printf("╔════════════════════════ EnquiryID %-2d ═══════════════════════════╗\n", i);
                     System.out.println("○ Camp Name: " + enquiry.getCampName());
                     System.out.println("○ Sender: " + enquiry.getSender());
-                    System.out.println("✎﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏﹏");
+                    System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println(enquiry.getEnquiry());
                     System.out.println("═══════════════════════════════════════════════════════════════════");
                     System.out.println(); // Add a line break for better readability
