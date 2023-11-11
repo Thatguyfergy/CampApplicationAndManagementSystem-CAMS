@@ -523,17 +523,22 @@ public class CAMDisplay {
                     }
                     break;
                 case 4:
-                    String remCampString;
+                    ArrayList<String> studentRegCamps = student.getRegCampsArray();
+                    int remCampIndex;
+                    for (int i=0; i<studentRegCamps.size();i++){
+                        System.out.println((i+1)+": "+studentRegCamps.get(i));
+                    }
                     do {
-                        System.out.printf("Enter the name of the camp you are withdrawing from: ");
+                        System.out.printf("Enter the index of the camp you are withdrawing from: ");
                         sc.nextLine();
-                        remCampString = sc.nextLine();
-                        if (campArray.checkCampExists(remCampString))
+                        remCampIndex = inputInt.nextInt(sc) -1;
+                        if (remCampIndex >=0 && remCampIndex<=(studentRegCamps.size()-1))
                             break;
-                        System.out.println("No such Camp! Please try again.");
+                        System.out.println("Invalid index! Please try again.");
                     } while (true);
-                    Camp remCamp = campArray.getCamp(remCampString);
+                    Camp remCamp = campArray.getCamp(studentRegCamps.get(remCampIndex));
                     student.withdrawFromCamp(remCamp, campArray);
+                    UserDB.updateFile();
                     break;
                 
                 case 5:
