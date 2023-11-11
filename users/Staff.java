@@ -39,7 +39,7 @@ public class Staff extends Users {
                 campsInCharge.add(campName);
         } catch (Exception e) {
             // TODO Auto-generated catch block
-            e.printStackTrace();
+            System.out.println("Camp Creation unsuccessful.");
         }
     }
 
