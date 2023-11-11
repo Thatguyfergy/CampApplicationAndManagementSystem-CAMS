@@ -131,7 +131,7 @@ public class Camp {
         if (isCampCommittee) {
             // Register as a camp committee member
             List<String> committeeMembers = getCommitteeMembers();
-            if (!committeeMembers.contains(StudentID) && !hasWithdrawn(StudentID)) {
+            if (!committeeMembers.contains(StudentID)) {
                 // Check if the committeeMembers list is not already at the limit
                 if (committeeMembers.size() < campInfo.getCommitteeMembersSlots()) {
                     // Add the student to the committeeMembers list
@@ -146,10 +146,14 @@ public class Camp {
                     // Add the student to the attendees list
                     attendees.add(StudentID);
                 }
+            } else if (hasWithdrawn(StudentID)) {
+                System.out.println("Student has been withdrawn from the camp and cannot be registered again.");
+            } else {
+                System.out.println("Student is already registered as an attendee for this camp.");
+            }
 
             }
         }
-    }
 
     public void withdrawFromCamp(String StudentID) {
         withdrawAttendee(StudentID);
