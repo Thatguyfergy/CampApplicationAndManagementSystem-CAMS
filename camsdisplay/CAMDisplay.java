@@ -195,28 +195,23 @@ public class CAMDisplay {
                     break;
                 case 6:
                     // View enquiries
-                    ScreenClearFn();
+                    System.out.print("\033[H\033[2J");
                     enquiriesArray.viewEnquiries(staff);
                     ScreenClearFn();
                     break;
                 case 7:
                     // reply enquiries
-                    ScreenClearFn();
+                    System.out.print("\033[H\033[2J");
                     enquiriesArray.replyEnquiry(staff);
                     ScreenClearFn();
                     break;
                 case 8:
                     // View Suggestions
-                    ScreenClearFn();
-                    suggestionArray.viewSuggestions(staff);
-                    ScreenClearFn();
+                    viewSuggestionsScreen(staff);
                     break;
                 case 9:
                     // Process Suggestions
-                    ScreenClearFn();
-                    suggestionArray.processSuggestion(staff);
-                    UserDB.updateFile(); // for change in points
-                    ScreenClearFn();
+                    processSuggestionScreen(staff);
                     break;
                 case 10:
                     generateCampReportScreen(staff);
@@ -237,17 +232,64 @@ public class CAMDisplay {
         }
     }
 
+    private void processSuggestionScreen(Staff staff) {
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.print(
+                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                        "║ Camp Application & Management System - Process Suggestions           ║\n" +
+                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+
+
+        suggestionArray.processSuggestion(staff);
+        UserDB.updateFile(); // for change in points
+        ScreenClearFn();
+    }
+
+    private void viewSuggestionsScreen(Staff staff) {
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.print(
+                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                        "║ Camp Application & Management System - Suggestions                   ║\n" +
+                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+
+
+        suggestionArray.viewSuggestions(staff);
+        ScreenClearFn();
+    }
+
     private void campPerfReportScreen(Staff staff) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Performance Report   ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
-        String campName;
+        ArrayList<String> createdCamps = staff.getCampsInCharge();
+        int campChoice;
         int choice;
-        System.out.print("Enter the name of Camp to generate performance report: ");
-        campName = sc.nextLine();
+
+        if (createdCamps.size() == 0) {
+            System.out.println("You have not created any camps!");
+            ScreenClearFn();
+            return;
+        }
+        System.out.println("Select a camp to generate report for: ");
+        for (String camp : createdCamps) {
+            System.out.println(createdCamps.indexOf(camp) + 1 + ". " + camp);
+        }
+        System.out.println(createdCamps.size() + 1 + ". Exit (not a camp name)");
+
+        do {
+            System.out.printf("Enter choice: ");
+            campChoice = inputInt.nextInt(sc);
+            if (campChoice == createdCamps.size() + 1) {
+                System.out.print("\033[H\033[2J"); // Clear the entire screen
+                return;
+            }
+        } while ((campChoice > createdCamps.size() + 1) || (campChoice <= 0));
+
+        Camp camp = campArray.getCamp(createdCamps.get(campChoice - 1));
+
         System.out.print("Sort By:\n" +
                 "1. Name\n" +
                 "2. Points\n" +
@@ -256,16 +298,10 @@ public class CAMDisplay {
         sc.nextLine(); // Consume the newline character
         System.out.println(); // for readability
 
-        Camp camp = campArray.getCamp(campName);
-        if (camp == null) {
-            System.out.println("Camp does not exist!");
-        } else {
-            PerfReport perfReport = new PerfReport(camp, choice, UserDB);
-            perfReport.generateReport();
-        }
+        PerfReport perfReport = new PerfReport(camp, choice, UserDB, staff);
+        perfReport.generateReport();
 
-        System.out.print("Press Enter to return to the main menu...");
-        sc.nextLine(); // Wait for Enter key
+        ScreenClearFn();
         return;
     }
 

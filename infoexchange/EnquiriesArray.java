@@ -128,8 +128,8 @@ public class EnquiriesArray {
                 Enquiries enquiry = enquiries.get(i);
                 if (userStaff.checkStaffInCharge(enquiry.getCampName())) {
                     System.out.printf("╔════════════════════════ EnquiryID %-2d ═══════════════════════════╗\n", i);
-                    System.out.println("○ Camp Name: " + enquiry.getCampName());
-                    System.out.println("○ Sender: " + enquiry.getSender());
+                    System.out.println("> Camp Name: " + enquiry.getCampName());
+                    System.out.println("> Sender: " + enquiry.getSender());
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println(enquiry.getEnquiry());
                     System.out.println("═══════════════════════════════════════════════════════════════════");
@@ -152,8 +152,8 @@ public class EnquiriesArray {
                 if (userStudent.IsCampComm()
                         && userStudent.getCampCommitteeRole().getCampName().equals(enquiry.getCampName())) {
                     System.out.printf("╔════════════════════════ EnquiryID %-2d ═══════════════════════════╗\n", i);
-                    System.out.println("○ Camp Name: " + enquiry.getCampName());
-                    System.out.println("○ Sender: " + enquiry.getSender());
+                    System.out.println("> Camp Name: " + enquiry.getCampName());
+                    System.out.println("> Sender: " + enquiry.getSender());
                     System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     System.out.println(enquiry.getEnquiry());
                     System.out.println("═══════════════════════════════════════════════════════════════════");
@@ -278,10 +278,10 @@ public class EnquiriesArray {
                 try {
                     System.out.printf("EnquiryID: \n");
                     int idx = inputInt.nextInt(scanner);
-                    scanner.nextLine(); // Basically flush in C
+                    scanner.nextLine();
                     enquiry = enquiries.get(idx);
                     break;
-                } catch (ArrayIndexOutOfBoundsException e) {
+                } catch (IndexOutOfBoundsException e) {
                     System.out.println("Enquiry cannot be found, make sure you selected the correct enquiry.");
                 }
             }

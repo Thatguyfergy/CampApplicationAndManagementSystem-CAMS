@@ -340,7 +340,7 @@ public class CampArray {
                     System.out.println("You cannot add dates to a camp with registered attendees");
                     return;
                 }
-                
+
                 while (true) {
                     System.out.println("Enter Date to add to the camp: ");
                     String dateToAdd = scanner.nextLine();
@@ -365,6 +365,10 @@ public class CampArray {
 
             case 10:
                 // Add logic to remove date
+                if (targetCamp.getAttendees().size() > 0) {
+                    System.out.println("You cannot remove dates from a camp with registered attendees");
+                    return;
+                }
 
                 while (true) {
                     System.out.println("Enter Date to remove from the camp: ");
