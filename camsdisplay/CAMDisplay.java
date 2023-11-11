@@ -290,20 +290,9 @@ public class CAMDisplay {
                         "║ Camp Application & Management System - Delete Camp            ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
-        String buffer;
-        System.out.print("Enter the name of Camp to delete: ");
-        buffer = sc.nextLine();
-        if (campArray.checkCampExists(buffer)) {
-            ArrayList<CAMDate> deletedDates = campArray.getCamp(buffer).getDates();
-            campArray.deleteCamp(buffer);
-
-            UserDB.deleteCamp(buffer, deletedDates);
-            enquiriesArray.deleteCamp(buffer);
-
-            UserDB.updateFile();
-        } else {
-            System.out.println("Camp does not exist!");
-        }
+        campArray.deleteCamp(staff);
+        UserDB.updateFile();
+        
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         // Exit the viewCampsScreen and return to the main menu

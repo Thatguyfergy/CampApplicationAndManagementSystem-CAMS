@@ -216,19 +216,29 @@ public class CampArray {
     public void editCamp(Staff staff, EnquiriesArray enquiriesArray, UsersDatabase usersDB) {
         ArrayList<String> campsInCharge = staff.getCampsInCharge();
 
+        if (campsInCharge.size() == 0) {
+            System.out.println("You have no camps to edit");
+            System.out.println();
+            return;
+        }
+
         System.out.println("Select camp to edit:");
         for (String camp : campsInCharge) {
             System.out.println(campsInCharge.indexOf(camp) + 1 + ". " + camp);
         }
+        System.out.println("0. Exit (Not a camp name)");
         String campName;
 
         while (true) {
             try {
                 System.out.printf("Enter choice: ");
                 String choice = scanner.nextLine();
+                if (choice.equals("0")) {
+                    return;
+                }
                 campName = campsInCharge.get(Integer.parseInt(choice) - 1);
                 break;
-            } catch (IndexOutOfBoundsException e) {
+            } catch (Exception e) {
                 System.out.println("Invalid value. Try again");
             }
         }
@@ -411,7 +421,34 @@ public class CampArray {
         return camps;
     }
 
-    public void deleteCamp(String campName) {
+    public void deleteCamp(Staff staff) {
+        ArrayList<String> campsInCharge = staff.getCampsInCharge();
+
+        if (campsInCharge.size() == 0) {
+            System.out.println("You have no camps to delete");
+            System.out.println();
+            return;
+        }
+
+        System.out.println("Select camp to delete:");
+        for (String camp : campsInCharge) {
+            System.out.println(campsInCharge.indexOf(camp) + 1 + ". " + camp);
+        }
+        System.out.println("0. Exit (Not a camp name)");
+        String campName;
+        while (true) {
+            try {
+                System.out.printf("Enter choice: ");
+                String choice = scanner.nextLine();
+                if (choice.equals("0")) {
+                    return;
+                }
+                campName = campsInCharge.get(Integer.parseInt(choice) - 1);
+                break;
+            } catch (Exception e) {
+                System.out.println("Invalid value. Try again");
+            }
+        }
 
         for (int i = 0; i < camps.size(); i++) {
             if (camps.get(i).getCampName().equals(campName)) {
@@ -419,6 +456,8 @@ public class CampArray {
                 System.out.println("Camp deleted successfully");
             }
         }
+
+        staff.getCampsInCharge().remove(campName);
         updateFile(camps);
     }
 
