@@ -158,6 +158,7 @@ public class EnquiriesArray {
                     System.out.println(enquiry.getEnquiry());
                     System.out.println("═══════════════════════════════════════════════════════════════════");
                     System.out.println(); // Add a line break for better readability
+                    localCounter++;
                 }
             }
             if (localCounter == 0) {
