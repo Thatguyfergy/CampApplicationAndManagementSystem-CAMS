@@ -451,7 +451,6 @@ public class CAMDisplay {
                     return;
                 case 1:
                     student.viewAvailAndRegCamps(campArray);
-                    ScreenClearFn();
                     break;
                 case 2:
                     student.viewAvailAndRegCamps(campArray);
@@ -474,7 +473,6 @@ public class CAMDisplay {
                     else
                         student.registerCampAttendee(campPtr, campArray);
                     UserDB.updateFile();
-                    ScreenClearFn();
                     break;
                 case 3:
                     System.out.println(
@@ -523,7 +521,6 @@ public class CAMDisplay {
                         default:
                             System.out.println("Invalid choice");
                     }
-                    ScreenClearFn();
                     break;
                 case 4:
                     String remCampString;
@@ -537,18 +534,18 @@ public class CAMDisplay {
                     } while (true);
                     Camp remCamp = campArray.getCamp(remCampString);
                     student.withdrawFromCamp(remCamp, campArray);
-                    ScreenClearFn();
                     break;
+                
                 case 5:
                     if (student.IsCampComm()) {
                         // view camp details for own camp
-                        student.getCampCommitteeRole().displayCampInfo();
+                        // student.getCampCommitteeRole().displayCampInfo();
                         campArray.viewCampDetails(student.getCampCommitteeRole().getCampName(), student);
 
-                    } else
+                    } else {
                         System.out.println("Logging out... Thank you!");
-                    user = null;
-                    ScreenClearFn();
+                        user = null;
+                    }
                     break;
                 case 6:
                     if (student.IsCampComm()) {
@@ -556,47 +553,13 @@ public class CAMDisplay {
                         System.out.printf("You have %d points!\n", student.getCampCommitteeRole().getPoints());
                     } else
                         System.out.println("Invalid choice");
-                    ScreenClearFn();
                     break;
                 case 7:
                     if (student.IsCampComm()) {
                         // manage suggestions
-                        System.out.println("W: WRITE new Suggestion\nV: VIEW all Suggestions\nE: Edit a Suggestion\n" +
-                                "S: Submit a Suggestion\nEnter your choice: ");
-                        sc.nextLine();
-                        String sugChoice = sc.nextLine();
-                        switch (sugChoice) {
-                            case "W", "w":
-                                System.out.printf("Please input the Suggestion: ");
-                                String sug = sc.nextLine();
-                                suggestionArray.createSuggestion(sug, student,
-                                        campArray.getCamp(student.getCampCommitteeRole().getCampName()));
-                                break;
-                            case "V", "v":
-                                suggestionArray.viewSuggestions(student);
-                                break;
-                            case "E", "e":
-                                suggestionArray.viewSuggestions(student);
-                                System.out.printf("Select Suggestion to edit, input Suggestion index: ");
-                                int sugindex1 = inputInt.nextInt(sc);
-                                System.out.printf("Please input the edited Suggestion: ");
-                                sc.nextLine();
-                                String newsug = sc.nextLine();
-                                suggestionArray.editSuggestion(student, sugindex1, newsug);
-                                break;
-                            case "S", "s":
-                                suggestionArray.viewSuggestions(student);
-                                System.out.printf("Select Suggestion to submit, input Suggestion index: ");
-                                int sugindex2 = inputInt.nextInt(sc);
-                                suggestionArray.submitSuggestion(student, sugindex2);
-                                UserDB.updateFile(); // for change in points
-                                break;
-                            default:
-                                System.out.println("Invalid choice");
-                        }
+                        manageSuggestions(student);
                     } else
                         System.out.println("Invalid choice");
-                    ScreenClearFn();
                     break;
                 case 8:
                     if (student.IsCampComm()) {
@@ -604,7 +567,6 @@ public class CAMDisplay {
                         enquiriesArray.viewEnquiries(student);
                     } else
                         System.out.println("Invalid choice");
-                    ScreenClearFn();
                     break;
                 case 9:
                     if (student.IsCampComm()) {
@@ -613,7 +575,6 @@ public class CAMDisplay {
                         UserDB.updateFile(); // for change in points
                     } else
                         System.out.println("Invalid choice");
-                    ScreenClearFn();
                     break;
                 case 10:
                     if (student.IsCampComm()) {
@@ -623,7 +584,6 @@ public class CAMDisplay {
                         student.getCampCommitteeRole().generateReport(repchoice);
                     } else
                         System.out.println("Invalid choice");
-                    ScreenClearFn();
                     break;
                 case 11:
                     if (student.IsCampComm()) {
@@ -631,15 +591,57 @@ public class CAMDisplay {
                         this.user = null;
                     } else
                         System.out.println("Invalid choice");
-                    ScreenClearFn();
                     break;
                 default:
                     System.out.println("Invalid choice");
-                    user = null;
-                    ScreenClearFn();
-                    return;
+                    // user = null;
+                    // return;
             }
+            ScreenClearFn();
         } while (choice != logout);
+    }
+
+    private void manageSuggestions(Student student) {
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.print(
+                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                        "║ Camp Application & Management System - Manage Suggestions            ║\n" +
+                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+
+        suggestionArray.viewSuggestions(student);
+        
+        System.out.println("W: WRITE new Suggestion\nE: EDIT a Suggestion\n" +
+                                "S: SUBMIT a Suggestion\nB: BACK\nEnter your choice: ");
+            String sugChoice = sc.nextLine();
+            switch (sugChoice) {
+                case "W", "w":
+                    System.out.println("Please input the Suggestion: ");
+                    String sug = sc.nextLine();
+                    suggestionArray.createSuggestion(sug, student,
+                            campArray.getCamp(student.getCampCommitteeRole().getCampName()));
+                    break;
+                case "E", "e":
+                    System.out.printf("Select Suggestion to edit, input Suggestion index: ");
+                    int sugindex1 = inputInt.nextInt(sc);
+                    sc.nextLine();
+                    if (suggestionArray.suggestionExists(student, sugindex1)) {
+                        System.out.printf("Please input the edited Suggestion: ");
+                        String newsug = sc.nextLine();
+                        suggestionArray.editSuggestion(student, sugindex1, newsug);
+                    } else System.out.println("Suggestion does not exist!");
+                    break;
+                case "S", "s":
+                    System.out.printf("Select Suggestion to submit, input Suggestion index: ");
+                    int sugindex2 = inputInt.nextInt(sc);
+                    sc.nextLine();
+                    suggestionArray.submitSuggestion(student, sugindex2);
+                    UserDB.updateFile(); // for change in points
+                    break;
+                case "B", "b":
+                    break;
+                default:
+                    System.out.println("Invalid choice");
+            }
     }
 
     private void ScreenClearFn() {
