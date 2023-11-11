@@ -195,21 +195,25 @@ public class CAMDisplay {
                     break;
                 case 6:
                     // View enquiries
+                    ScreenClearFn();
                     enquiriesArray.viewEnquiries(staff);
                     ScreenClearFn();
                     break;
                 case 7:
                     // reply enquiries
+                    ScreenClearFn();
                     enquiriesArray.replyEnquiry(staff);
                     ScreenClearFn();
                     break;
                 case 8:
                     // View Suggestions
+                    ScreenClearFn();
                     suggestionArray.viewSuggestions(staff);
                     ScreenClearFn();
                     break;
                 case 9:
                     // Process Suggestions
+                    ScreenClearFn();
                     suggestionArray.processSuggestion(staff);
                     UserDB.updateFile(); // for change in points
                     ScreenClearFn();
@@ -291,7 +295,7 @@ public class CAMDisplay {
 
         campArray.deleteCamp(staff);
         UserDB.updateFile();
-        
+
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         // Exit the viewCampsScreen and return to the main menu
