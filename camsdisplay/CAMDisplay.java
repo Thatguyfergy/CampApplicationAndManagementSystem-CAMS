@@ -469,9 +469,19 @@ public class CAMDisplay {
                     System.out.println("Please login again!");
                     return;
                 case 1:
+                    System.out.print("\033[H\033[2J"); // Clear the entire screen
+                    System.out.print(
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                "║ Camp Application & Management System - View Camps                    ║\n" +
+                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     student.viewAvailAndRegCamps(campArray);
                     break;
                 case 2:
+                    System.out.print("\033[H\033[2J"); // Clear the entire screen
+                    System.out.print(
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                "║ Camp Application & Management System - Register Camps                ║\n" +
+                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     student.viewAvailAndRegCamps(campArray);
                     String campname;
                     System.out.printf("\nWhich camp do you want to register for? ");
@@ -591,14 +601,17 @@ public class CAMDisplay {
                     for (int i = 0; i < studentRegCamps.size(); i++) {
                         System.out.println((i + 1) + ": " + studentRegCamps.get(i));
                     }
+                    System.out.println("0: Exit to menu");
                     do {
                         System.out.printf("Enter the index of the camp you are withdrawing from: ");
                         sc.nextLine();
                         remCampIndex = inputInt.nextInt(sc) - 1;
+                        if (remCampIndex==-1) break;
                         if (remCampIndex >= 0 && remCampIndex <= (studentRegCamps.size() - 1))
                             break;
                         System.out.println("Invalid index! Please try again.");
                     } while (true);
+                    if (remCampIndex==-1) break;
                     Camp remCamp = campArray.getCamp(studentRegCamps.get(remCampIndex));
                     student.withdrawFromCamp(remCamp, campArray);
                     UserDB.updateFile();
