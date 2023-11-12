@@ -167,7 +167,8 @@ public class CAMDisplay {
                     "9. Process Suggestions\n" +
                     "10. Generate Camp Report\n" +
                     "11. Generate Performance Report\n" +
-                    "12. Logout\n" +
+                    "12. Generate Enquiries Report\n" +
+                    "13. Logout\n" +
                     "Enter your choice: ";
             System.out.print(menu);
 
@@ -221,6 +222,9 @@ public class CAMDisplay {
                     campPerfReportScreen(staff);
                     break;
                 case 12:
+                    generateEnquiriesReportScreen(staff);
+                    break;
+                case 13:
                     this.user = null;
                     return;
                 default:
@@ -328,7 +332,7 @@ public class CAMDisplay {
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
         campArray.deleteCamp(staff, UserDB, enquiriesArray);
-        
+
         UserDB.updateFile();
 
         System.out.print("Press Enter to return to the main menu...");
@@ -402,6 +406,22 @@ public class CAMDisplay {
         } else {
             System.out.println("Camp does not exist!");
         }
+        System.out.print("Press Enter to return to the main menu...");
+        sc.nextLine(); // Wait for Enter key
+        return;
+    }
+
+    private void generateEnquiriesReportScreen(Staff staff) {
+
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.print(
+                "╔════════════════════════════════════════════════════════════════════╗\n" +
+                        "║ Camp Application & Management System - Generate Enquiries Report   ║\n" +
+                        "╚════════════════════════════════════════════════════════════════════╝\r\n");
+
+        EnquiriesReport enquiriesReport = new EnquiriesReport(staff, enquiriesArray);
+        enquiriesReport.generateReport();
+
         System.out.print("Press Enter to return to the main menu...");
         sc.nextLine(); // Wait for Enter key
         return;
@@ -524,14 +544,14 @@ public class CAMDisplay {
                 case 4:
                     ArrayList<String> studentRegCamps = student.getRegCampsArray();
                     int remCampIndex;
-                    for (int i=0; i<studentRegCamps.size();i++){
-                        System.out.println((i+1)+": "+studentRegCamps.get(i));
+                    for (int i = 0; i < studentRegCamps.size(); i++) {
+                        System.out.println((i + 1) + ": " + studentRegCamps.get(i));
                     }
                     do {
                         System.out.printf("Enter the index of the camp you are withdrawing from: ");
                         sc.nextLine();
-                        remCampIndex = inputInt.nextInt(sc) -1;
-                        if (remCampIndex >=0 && remCampIndex<=(studentRegCamps.size()-1))
+                        remCampIndex = inputInt.nextInt(sc) - 1;
+                        if (remCampIndex >= 0 && remCampIndex <= (studentRegCamps.size() - 1))
                             break;
                         System.out.println("Invalid index! Please try again.");
                     } while (true);
@@ -539,7 +559,7 @@ public class CAMDisplay {
                     student.withdrawFromCamp(remCamp, campArray);
                     UserDB.updateFile();
                     break;
-                
+
                 case 5:
                     if (student.IsCampComm()) {
                         // view camp details for own camp
@@ -557,9 +577,9 @@ public class CAMDisplay {
                         // view points
                         System.out.print("\033[H\033[2J");
                         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                        "║ Camp Application & Management System - Committee Points              ║\n" +
-                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                        "║ Camp Application & Management System - Committee Points              ║\n" +
+                                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                         System.out.printf("You have %d points!\n", student.getCampCommitteeRole().getPoints());
                     } else
                         System.out.println("Invalid choice");
@@ -576,9 +596,9 @@ public class CAMDisplay {
                         // view enquiries
                         System.out.print("\033[H\033[2J"); // Clear the entire screen
                         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                        "║ Camp Application & Management System - View Enquiries                ║\n" +
-                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                        "║ Camp Application & Management System - View Enquiries                ║\n" +
+                                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                         enquiriesArray.viewEnquiries(student);
                     } else
                         System.out.println("Invalid choice");
@@ -588,9 +608,9 @@ public class CAMDisplay {
                         // reply enquiries
                         System.out.print("\033[H\033[2J"); // Clear the entire screen
                         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                        "║ Camp Application & Management System - Reply to Enquiries            ║\n" +
-                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                        "║ Camp Application & Management System - Reply to Enquiries            ║\n" +
+                                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                         enquiriesArray.replyEnquiry(student);
                         UserDB.updateFile(); // for change in points
                     } else
@@ -601,9 +621,9 @@ public class CAMDisplay {
                         // generate camp report
                         System.out.print("\033[H\033[2J"); // Clear the entire screen
                         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                        "║ Camp Application & Management System - Generate Camp Report          ║\n" +
-                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                        "║ Camp Application & Management System - Generate Camp Report          ║\n" +
+                                        "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                         System.out.print("1: All\n2: Attendees\n3: Committee Members\n\nGenerate report for: ");
                         int repchoice = inputInt.nextInt(sc);
                         student.getCampCommitteeRole().generateReport(repchoice);
@@ -627,16 +647,16 @@ public class CAMDisplay {
     private void manageSuggestionsScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Manage Suggestions            ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
-        
+
         System.out.print("V: VIEW all Suggestions\nW: WRITE new Suggestion\nE: EDIT a Suggestion\n" +
-                                "S: SUBMIT a Suggestion\n\nEnter your choice: ");
+                "S: SUBMIT a Suggestion\n\nEnter your choice: ");
         String sugChoice = sc.nextLine();
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Manage Suggestions            ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
 
@@ -659,7 +679,8 @@ public class CAMDisplay {
                     System.out.printf("Please input the edited Suggestion: ");
                     String newsug = sc.nextLine();
                     suggestionArray.editSuggestion(student, sugindex1, newsug);
-                } else System.out.println("Suggestion does not exist!");
+                } else
+                    System.out.println("Suggestion does not exist!");
                 break;
             case "S", "s":
                 suggestionArray.viewSuggestions(student);

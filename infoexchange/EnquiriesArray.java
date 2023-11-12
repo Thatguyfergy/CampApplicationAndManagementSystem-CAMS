@@ -428,4 +428,12 @@ public class EnquiriesArray {
         }
         updateFile(enquiries);
     }
+
+    public ArrayList<Enquiries> getEnquiries() {
+        return enquiries;
+    }
+
+    public ArrayList<EnqReplies> getReplies() {
+        return replies;
+    }
 }
