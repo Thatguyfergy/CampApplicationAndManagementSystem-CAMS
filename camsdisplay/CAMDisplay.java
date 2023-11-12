@@ -539,9 +539,13 @@ public class CAMDisplay {
                             break;
                         case "V", "v":
                             student.viewEnquiries();
-                            System.out.println("\n=====END of Enquiries=====\n");
+                            System.out.println("\n===== END of Enquiries =====\n");
                             break;
                         case "E", "e":
+                            if (student.getPendingEnquiriesSize()==0){
+                                System.out.println("\n=== No Pending Enquiries to EDIT ===");
+                                break;
+                            }
                             student.viewEnquiries();
                             System.out.println();
                             int enqindex1;
@@ -558,6 +562,10 @@ public class CAMDisplay {
                             student.editEnquiry(newenq, enqindex1 - 1);
                             break;
                         case "D", "d":
+                            if (student.getPendingEnquiriesSize()==0){
+                                    System.out.println("\n=== No Pending Enquiries to DELETE ===");
+                                    break;
+                                }
                             student.viewEnquiries();
                             System.out.println();
                             int enqindex2;
@@ -571,6 +579,10 @@ public class CAMDisplay {
                             student.deleteEnquiry(enqindex2-1);
                             break;
                         case "S", "s":
+                            if (student.getPendingEnquiriesSize()==0){
+                                    System.out.println("\n=== No Pending Enquiries to SUBMIT ===");
+                                    break;
+                                }
                             student.viewEnquiries();
                             System.out.println();
                             int enqindex;
