@@ -782,4 +782,11 @@ public class CampArray {
         CampArray.camps = camps;
     }
 
+    public boolean checkEligibleCamp(Student student, String campName){
+        Camp targetCamp = getCamp(campName);
+        //System.out.println(targetCamp.getCampAvailability()+"   "+student.getFacultyInfo());
+        if (targetCamp.getCampAvailability().equals(student.getFacultyInfo())) return true;
+        else return false;
+    }
+
 }

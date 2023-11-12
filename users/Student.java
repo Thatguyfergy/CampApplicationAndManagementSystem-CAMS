@@ -91,7 +91,7 @@ public class Student extends Users {
         }
 
         // check if student is allowed to register for this camp, i.e. campVisibility
-        if (camp.getCampInfo().getCampAvailability() == "off") {
+        if (camp.toggleVisibility() == "off") {
             System.out.println("This camp has been closed for registration!");
             return;
         }
@@ -194,12 +194,16 @@ public class Student extends Users {
     public void viewEnquiries() {
         for (int i = 0; i < PendingEnquiries.size(); i++) {
             String submittedString = "NOT SUBMITTED";
-            if (PendingEnquiries.get(i).getSubmitted())
+            System.out.println("================================================================================");
+            System.out.print((i + 1) + ") ");
+            if (PendingEnquiries.get(i).getSubmitted()){
                 submittedString = "SUBMITTED";
-            System.out.print((i + 1) + ": ");
-            System.out
-                    .printf("[" + PendingEnquiries.get(i).getCampName() + "] " + PendingEnquiries.get(i).getEnquiry());
-            System.out.println("    [" + submittedString + "]");
+                System.out.print("["+submittedString+"]     ");
+            }
+            else System.out.print("["+submittedString+"] ");
+            System.out.println("Camp Name - "+PendingEnquiries.get(i).getCampName());
+            System.out.println("   Enquiry : " + PendingEnquiries.get(i).getEnquiry());
+            System.out.println("================================================================================");
         }
     }
 
@@ -213,12 +217,21 @@ public class Student extends Users {
         System.out.println("Enquiry submitted successfully!");
     }
 
+    public void deleteEnquiry(int index){
+        PendingEnquiries.remove(index);
+        System.out.println("Enquiry removed!");
+    }
+
     public ArrayList<CAMDate> getBusyDates() {
         return BusyDates;
     }
 
     public void viewEnquiriesReplies(EnquiriesArray enqArray) {
         enqArray.viewReplies(this);
+    }
+
+    public int getPendingEnquiriesSize(){
+        return PendingEnquiries.size();
     }
 
     // public void listEnquiries(){

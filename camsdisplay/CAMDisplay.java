@@ -495,8 +495,8 @@ public class CAMDisplay {
                     break;
                 case 3:
                     System.out.println(
-                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: Edit an Enquiry\n" +
-                                    "S: Submit an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
+                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: EDIT an Enquiry\nD: DELETE an Enquiry\n" +
+                                    "S: SUBMIT an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
                     sc.nextLine();
                     String enqChoice = sc.nextLine();
                     System.out.println();
@@ -505,9 +505,18 @@ public class CAMDisplay {
                             System.out.println("\nFILTERING and SORTING Camps to View.");
                             student.viewAvailAndRegCamps(campArray);
                             System.out.println();
-                            System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name: ");
-                            // sc.nextLine();
-                            String enqcamp = sc.nextLine();
+                            String enqcamp;
+                            do {
+                                System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name: ");
+                                // sc.nextLine();
+                                enqcamp = sc.nextLine();
+                                //System.out.println(campArray.checkCampExists(enqcamp) + "   "+campArray.checkEligibleCamp(student, enqcamp));
+                                if (campArray.checkCampExists(enqcamp)
+                                    &&campArray.checkEligibleCamp(student, enqcamp)){
+                                        break;
+                                    }
+                                System.out.println("You are not eligible for that camp or camp does not exist!\n");
+                                } while (true);
                             System.out.printf("Please input the Enquiry: ");
                             // sc.nextLine();
                             String enq = sc.nextLine();
@@ -515,23 +524,48 @@ public class CAMDisplay {
                             break;
                         case "V", "v":
                             student.viewEnquiries();
-                            System.out.println("\nEND of Enquiries\n");
+                            System.out.println("\n=====END of Enquiries=====\n");
                             break;
                         case "E", "e":
                             student.viewEnquiries();
                             System.out.println();
-                            System.out.printf("Select Enquiry to edit, input Enquiry index: ");
-                            int enqindex1 = inputInt.nextInt(sc);
+                            int enqindex1;
+                            do {
+                                System.out.printf("Select Enquiry to edit, input Enquiry index: ");
+                                enqindex1 = inputInt.nextInt(sc);
+                                int enqArraySize = student.getPendingEnquiriesSize();
+                                if (enqindex1>=1 && enqindex1<=enqArraySize) break;
+                                System.out.println("Invalid index! Please try again!");
+                            } while (true);
                             System.out.printf("Please input the edited Enquiry: ");
                             sc.nextLine();
                             String newenq = sc.nextLine();
                             student.editEnquiry(newenq, enqindex1 - 1);
                             break;
+                        case "D", "d":
+                            student.viewEnquiries();
+                            System.out.println();
+                            int enqindex2;
+                            do {
+                                System.out.printf("Select Enquiry to delete, input Enquiry index: ");
+                                enqindex2 = inputInt.nextInt(sc);
+                                int enqArraySize = student.getPendingEnquiriesSize();
+                                if (enqindex2>=1 && enqindex2<=enqArraySize) break;
+                                System.out.println("Invalid index! Please try again!");
+                            } while (true);
+                            student.deleteEnquiry(enqindex2-1);
+                            break;
                         case "S", "s":
                             student.viewEnquiries();
                             System.out.println();
-                            System.out.printf("Select Enquiry to submit, input Enquiry index: ");
-                            int enqindex = inputInt.nextInt(sc);
+                            int enqindex;
+                            do{
+                                System.out.printf("Select Enquiry to submit, input Enquiry index: ");
+                                enqindex = inputInt.nextInt(sc);
+                                int enqArraySize = student.getPendingEnquiriesSize();
+                                if (enqindex>=1 && enqindex<=enqArraySize) break;
+                                System.out.println("Invalid index! Please try again!");
+                            } while(true);
                             student.submitEnquiry(enquiriesArray, enqindex - 1);
                             break;
                         case "R", "r":
