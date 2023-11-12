@@ -471,17 +471,17 @@ public class CAMDisplay {
                 case 1:
                     System.out.print("\033[H\033[2J"); // Clear the entire screen
                     System.out.print(
-                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                                "║ Camp Application & Management System - View Camps                    ║\n" +
-                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                            "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                    "║ Camp Application & Management System - View Camps                    ║\n" +
+                                    "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     student.viewAvailAndRegCamps(campArray);
                     break;
                 case 2:
                     System.out.print("\033[H\033[2J"); // Clear the entire screen
                     System.out.print(
-                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                                "║ Camp Application & Management System - Register Camps                ║\n" +
-                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                            "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                    "║ Camp Application & Management System - Register Camps                ║\n" +
+                                    "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     student.viewAvailAndRegCamps(campArray);
                     String campname;
                     System.out.printf("\nWhich camp do you want to register for? ");
@@ -506,12 +506,16 @@ public class CAMDisplay {
                 case 3:
                     System.out.print("\033[H\033[2J"); // Clear the entire screen
                     System.out.print(
-                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                                "║ Camp Application & Management System - Manage Enquiries              ║\n" +
-                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                            "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                    "║ Camp Application & Management System - Manage Enquiries              ║\n" +
+                                    "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     System.out.println(
-                            "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: EDIT an Enquiry\nD: DELETE an Enquiry\n" +
-                                    "S: SUBMIT an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
+                            "W: WRITE new Enquiry\n" +
+                                    "V: VIEW current Enquiries\n" +
+                                    "E: EDIT an Enquiry\nD: DELETE an Enquiry\n" +
+                                    "S: SUBMIT an Enquiry\n" +
+                                    "R: View submitted Enquiries and REPLIES\n" +
+                                    "Enter your choice: ");
                     sc.nextLine();
                     String enqChoice = sc.nextLine();
                     System.out.println();
@@ -525,13 +529,14 @@ public class CAMDisplay {
                                 System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name: ");
                                 // sc.nextLine();
                                 enqcamp = sc.nextLine();
-                                //System.out.println(campArray.checkCampExists(enqcamp) + "   "+campArray.checkEligibleCamp(student, enqcamp));
+                                // System.out.println(campArray.checkCampExists(enqcamp) + "
+                                // "+campArray.checkEligibleCamp(student, enqcamp));
                                 if (campArray.checkCampExists(enqcamp)
-                                    &&campArray.checkEligibleCamp(student, enqcamp)){
-                                        break;
-                                    }
+                                        && campArray.checkEligibleCamp(student, enqcamp)) {
+                                    break;
+                                }
                                 System.out.println("You are not eligible for that camp or camp does not exist!\n");
-                                } while (true);
+                            } while (true);
                             System.out.printf("Please input the Enquiry: ");
                             // sc.nextLine();
                             String enq = sc.nextLine();
@@ -542,7 +547,7 @@ public class CAMDisplay {
                             System.out.println("\n===== END of Enquiries =====\n");
                             break;
                         case "E", "e":
-                            if (student.getPendingEnquiriesSize()==0){
+                            if (student.getPendingEnquiriesSize() == 0) {
                                 System.out.println("\n=== No Pending Enquiries to EDIT ===");
                                 break;
                             }
@@ -553,7 +558,8 @@ public class CAMDisplay {
                                 System.out.printf("Select Enquiry to edit, input Enquiry index: ");
                                 enqindex1 = inputInt.nextInt(sc);
                                 int enqArraySize = student.getPendingEnquiriesSize();
-                                if (enqindex1>=1 && enqindex1<=enqArraySize) break;
+                                if (enqindex1 >= 1 && enqindex1 <= enqArraySize)
+                                    break;
                                 System.out.println("Invalid index! Please try again!");
                             } while (true);
                             System.out.printf("Please input the edited Enquiry: ");
@@ -562,10 +568,10 @@ public class CAMDisplay {
                             student.editEnquiry(newenq, enqindex1 - 1);
                             break;
                         case "D", "d":
-                            if (student.getPendingEnquiriesSize()==0){
-                                    System.out.println("\n=== No Pending Enquiries to DELETE ===");
-                                    break;
-                                }
+                            if (student.getPendingEnquiriesSize() == 0) {
+                                System.out.println("\n=== No Pending Enquiries to DELETE ===");
+                                break;
+                            }
                             student.viewEnquiries();
                             System.out.println();
                             int enqindex2;
@@ -573,26 +579,28 @@ public class CAMDisplay {
                                 System.out.printf("Select Enquiry to delete, input Enquiry index: ");
                                 enqindex2 = inputInt.nextInt(sc);
                                 int enqArraySize = student.getPendingEnquiriesSize();
-                                if (enqindex2>=1 && enqindex2<=enqArraySize) break;
+                                if (enqindex2 >= 1 && enqindex2 <= enqArraySize)
+                                    break;
                                 System.out.println("Invalid index! Please try again!");
                             } while (true);
-                            student.deleteEnquiry(enqindex2-1);
+                            student.deleteEnquiry(enqindex2 - 1);
                             break;
                         case "S", "s":
-                            if (student.getPendingEnquiriesSize()==0){
-                                    System.out.println("\n=== No Pending Enquiries to SUBMIT ===");
-                                    break;
-                                }
+                            if (student.getPendingEnquiriesSize() == 0) {
+                                System.out.println("\n=== No Pending Enquiries to SUBMIT ===");
+                                break;
+                            }
                             student.viewEnquiries();
                             System.out.println();
                             int enqindex;
-                            do{
+                            do {
                                 System.out.printf("Select Enquiry to submit, input Enquiry index: ");
                                 enqindex = inputInt.nextInt(sc);
                                 int enqArraySize = student.getPendingEnquiriesSize();
-                                if (enqindex>=1 && enqindex<=enqArraySize) break;
+                                if (enqindex >= 1 && enqindex <= enqArraySize)
+                                    break;
                                 System.out.println("Invalid index! Please try again!");
-                            } while(true);
+                            } while (true);
                             student.submitEnquiry(enquiriesArray, enqindex - 1);
                             break;
                         case "R", "r":
@@ -605,9 +613,9 @@ public class CAMDisplay {
                 case 4:
                     System.out.print("\033[H\033[2J"); // Clear the entire screen
                     System.out.print(
-                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
-                                "║ Camp Application & Management System - Withdraw from Camp            ║\n" +
-                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
+                            "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                    "║ Camp Application & Management System - Withdraw from Camp            ║\n" +
+                                    "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     ArrayList<String> studentRegCamps = student.getRegCampsArray();
                     int remCampIndex;
                     for (int i = 0; i < studentRegCamps.size(); i++) {
@@ -618,12 +626,14 @@ public class CAMDisplay {
                         System.out.printf("Enter the index of the camp you are withdrawing from: ");
                         sc.nextLine();
                         remCampIndex = inputInt.nextInt(sc) - 1;
-                        if (remCampIndex==-1) break;
+                        if (remCampIndex == -1)
+                            break;
                         if (remCampIndex >= 0 && remCampIndex <= (studentRegCamps.size() - 1))
                             break;
                         System.out.println("Invalid index! Please try again.");
                     } while (true);
-                    if (remCampIndex==-1) break;
+                    if (remCampIndex == -1)
+                        break;
                     Camp remCamp = campArray.getCamp(studentRegCamps.get(remCampIndex));
                     student.withdrawFromCamp(remCamp, campArray);
                     UserDB.updateFile();
