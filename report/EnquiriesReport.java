@@ -81,6 +81,7 @@ public class EnquiriesReport implements Report {
                     csvWriter.append(enquiry.getSender() + "\n");
                     csvWriter.append("Enquiry,");
                     csvWriter.append(enquiry.getEnquiry() + "\n");
+                    j = 0;
                     for (EnqReplies reply : enquiriesArray.getReplies()) {
                         if (reply.getEnquiryID().equals(enquiry.getEnquiryID())) {
                             j++;

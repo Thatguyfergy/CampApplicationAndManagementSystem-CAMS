@@ -399,7 +399,7 @@ public class EnquiriesArray {
     }
 
     public void deleteCamp(String campName) {
-        for (int i = 0; i < enquiries.size(); i++) {
+        for (int i = 0; i < enquiries.size();) {
             Enquiries enquiry = enquiries.get(i);
             if (enquiry.getCampName().equals(campName)) {
                 // Remove any related replies first
@@ -412,6 +412,8 @@ public class EnquiriesArray {
                 }
                 // Remove enquiry now
                 enquiries.remove(i);
+            } else {
+                i++; // Cannot auto i++ in for loop as the size of the Enquiry array shrinks
             }
         }
 
