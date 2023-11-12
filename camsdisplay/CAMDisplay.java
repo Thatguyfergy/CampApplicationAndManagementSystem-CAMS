@@ -494,6 +494,11 @@ public class CAMDisplay {
                     UserDB.updateFile();
                     break;
                 case 3:
+                    System.out.print("\033[H\033[2J"); // Clear the entire screen
+                    System.out.print(
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                "║ Camp Application & Management System - Manage Enquiries              ║\n" +
+                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     System.out.println(
                             "W: WRITE new Enquiry\nV: VIEW current Enquiries\nE: EDIT an Enquiry\nD: DELETE an Enquiry\n" +
                                     "S: SUBMIT an Enquiry\nR: View submitted Enquiries and REPLIES\nEnter your choice: ");
@@ -576,6 +581,11 @@ public class CAMDisplay {
                     }
                     break;
                 case 4:
+                    System.out.print("\033[H\033[2J"); // Clear the entire screen
+                    System.out.print(
+                                "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                                "║ Camp Application & Management System - Withdraw from Camp            ║\n" +
+                                "╚══════════════════════════════════════════════════════════════════════╝\r\n");
                     ArrayList<String> studentRegCamps = student.getRegCampsArray();
                     int remCampIndex;
                     for (int i = 0; i < studentRegCamps.size(); i++) {
