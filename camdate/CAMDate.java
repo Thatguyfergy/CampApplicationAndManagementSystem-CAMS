@@ -14,16 +14,27 @@ public class CAMDate {
 
     // Constructor with all fields
     public CAMDate(int day, int month, int year) {
-        this.day = day;
-        this.month = month;
-        this.year = year;
+        if (isValidDate(day, month, year)) {
+            this.day = day;
+            this.month = month;
+            this.year = year;
+        } else {
+            throw new IllegalArgumentException("Invalid date");
+        }
     }
 
     public CAMDate(String date) {
         String[] dateArray = date.split("/");
-        this.day = Integer.parseInt(dateArray[0]);
-        this.month = Integer.parseInt(dateArray[1]);
-        this.year = Integer.parseInt(dateArray[2]);
+        int newDay = Integer.parseInt(dateArray[0]);
+        int newMonth = Integer.parseInt(dateArray[1]);
+        int newYear = Integer.parseInt(dateArray[2]);
+        if (isValidDate(newDay, newMonth, newYear)) {
+            this.day = newDay;
+            this.month = newMonth;
+            this.year = newYear;
+        } else {
+            throw new IllegalArgumentException("Invalid date");
+        }
     }
 
     // Getter methods for all individual fields
@@ -120,5 +131,24 @@ public class CAMDate {
         CAMDate nextDay = this.clone();
         nextDay.nextDay();
         return nextDay;
+    }
+
+    private boolean isValidDate(int day, int month, int year) {
+        if (year < 1 || month < 1 || month > 12 || day < 1) {
+            return false;
+        }
+
+        int maxDays = 31; // Initialize maxDays to the maximum days in a month
+        if (month == 4 || month == 6 || month == 9 || month == 11) {
+            maxDays = 30;
+        } else if (month == 2) {
+            if ((year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+                maxDays = 29;
+            } else {
+                maxDays = 28;
+            }
+        }
+
+        return day <= maxDays;
     }
 }

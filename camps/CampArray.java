@@ -135,7 +135,13 @@ public class CampArray {
             System.out.println("Registration closing date (dd/mm/yyyy):");
             String date = scanner.nextLine();
             if (date.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                registrationClosingDate = new CAMDate(date);
+                try {
+                    registrationClosingDate = new CAMDate(date);
+                } catch (Exception IllegalArgumentException) {
+                    System.out.println("Date does not exist. Please enter a valid date.");
+                    continue;
+                }
+
                 LocalDate today = LocalDate.now();
                 // Format the date as DD/MM/YYYY
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -150,32 +156,36 @@ public class CampArray {
             }
         }
 
-
         String startDate, endDate;
         while (true) {
             System.out.println("Camp start date (dd/mm/yyyy):");
             startDate = scanner.nextLine();
-            if (startDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                if (registrationClosingDate.compareTo(new CAMDate(startDate)) > 0) {
-                    System.out.println("Start date cannot be before registration closing date");
-                    continue;
-                }
-                System.out.println("Camp end date (dd/mm/yyyy):");
-                endDate = scanner.nextLine();
-                if (endDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                    CAMDate start = new CAMDate(startDate);
-                    CAMDate end = new CAMDate(endDate);
-                    if (start.compareTo(end) > 0) {
-                        System.out.println("Start date cannot be after end date");
+            try {
+                if (startDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                    if (registrationClosingDate.compareTo(new CAMDate(startDate)) > 0) {
+                        System.out.println("Start date cannot be before registration closing date");
+                        continue;
+                    }
+                    System.out.println("Camp end date (dd/mm/yyyy):");
+                    endDate = scanner.nextLine();
+                    if (endDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                        CAMDate start = new CAMDate(startDate);
+                        CAMDate end = new CAMDate(endDate);
+                        if (start.compareTo(end) > 0) {
+                            System.out.println("Start date cannot be after end date");
+                        } else {
+                            break;
+                        }
                     } else {
-                        break;
+                        System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
                     }
                 } else {
                     System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
                 }
-            } else {
-                System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+            } catch (Exception IllegalArgumentException) {
+                System.out.println("Date does not exist. Please enter a valid date.");
             }
+
         }
 
         CAMDate start = new CAMDate(startDate);
@@ -269,7 +279,6 @@ public class CampArray {
                 break;
             }
         }
-
         viewCampDetails(campName, staff);
 
         System.out.print("What field would you like to edit?\n" +
@@ -287,10 +296,9 @@ public class CampArray {
                 "12. Exit\n" +
                 "Enter your choice: ");
 
-        int option = scanner.nextInt();
-        scanner.nextLine(); // Flush
+        String option = scanner.nextLine();
         switch (option) {
-            case 1:
+            case "1":
                 System.out.println("Enter new name for the camp:");
                 String newName = scanner.nextLine();
                 String oldName = targetCamp.getCampInfo().getCampName();
@@ -305,52 +313,71 @@ public class CampArray {
                 // Enquiries change Camp Name
                 enquiriesArray.editCamp(oldName, newName);
                 break;
-            case 2:
+            case "2":
                 // Add logic to edit Registration Closing Date
                 while (true) {
-                    System.out.println("Enter new Registration Closing Date for the camp: ");
-                    String newDate = scanner.nextLine();
-                    if (newDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                        targetCamp.getCampInfo().setRegistrationClosingDate(new CAMDate(newDate));
-                        break;
-                    } else {
-                        System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+                    try{
+                        System.out.println("Enter new Registration Closing Date for the camp: ");
+                        String newDate = scanner.nextLine();
+                        if (newDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                            if (new CAMDate(newDate).compareTo(targetCamp.getDates().get(0)) > 0) {
+                                System.out.println("Registration Closing Date cannot be after camp start date");
+                                return;
+                            }
+                            targetCamp.getCampInfo().setRegistrationClosingDate(new CAMDate(newDate));
+                            break;
+                        } else {
+                            System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+                        }
+                    } catch (Exception IllegalArgumentException) {
+                        System.out.println("Date does not exist. Please enter a valid date.");
                     }
                 }
                 break;
-            case 3:
+            case "3":
                 System.out.println("Enter Faculty for the camp:");
                 String newVisibility = scanner.nextLine().toUpperCase();
                 targetCamp.getCampInfo().setCampAvailability(newVisibility);
                 break;
-            case 4:
+            case "4":
                 // Add logic to edit Location
                 System.out.println("Enter new location for the camp:");
                 String newLocation = scanner.nextLine();
                 targetCamp.getCampInfo().setLocation(newLocation);
                 break;
-            case 5:
+            case "5":
                 System.out.println("Enter new total slots for the camp:");
                 int newTotalSlots = scanner.nextInt();
+                scanner.nextLine(); // Flush
+                if (newTotalSlots < targetCamp.getAttendees().size()) {
+                    System.out.println("Total slots cannot be less than the number of registered attendees");
+                    return;
+                }
                 targetCamp.getCampInfo().setTotalSlots(newTotalSlots);
                 break;
-            case 6:
+            case "6":
                 System.out.println("Enter new committee members slots for the camp (Max 10):");
                 int newCommitteeMembersSlots = scanner.nextInt();
+                scanner.nextLine(); // Flush
+                if (newCommitteeMembersSlots < targetCamp.getCommitteeMembers().size()) {
+                    System.out.println(
+                            "Committee members slots cannot be less than the number of registered committee members");
+                    return;
+                }
                 newCommitteeMembersSlots = Math.min(newCommitteeMembersSlots, 10);
                 targetCamp.getCampInfo().setCommitteeMembersSlots(newCommitteeMembersSlots);
                 break;
-            case 7:
+            case "7":
                 System.out.println("Enter new description for the camp:");
                 String newDescription = scanner.nextLine();
                 targetCamp.getCampInfo().setCampDescription(newDescription);
                 break;
-            case 8:
+            case "8":
                 System.out.println("Enter new staff in charge for the camp:");
                 String newStaffInCharge = scanner.nextLine();
                 targetCamp.getCampInfo().setStaffInCharge(newStaffInCharge);
                 break;
-            case 9:
+            case "9":
                 // Add logic to add dates
                 // targetCamp.getCampInfo().addDate(new CAMDate(startDate),
                 // newCAMDate(endDate));
@@ -367,8 +394,13 @@ public class CampArray {
                             System.out.println("Date already exists");
                             return;
                         } else {
-                            if (targetCamp.getRegistrationClosingDate().compareTo(new CAMDate(dateToAdd)) > 0) {
-                                System.out.println("Date cannot be before registration closing date");
+                            try {
+                                if (new CAMDate(dateToAdd).compareTo(targetCamp.getRegistrationClosingDate()) < 0) {
+                                    System.out.println("Date cannot be before registration closing date");
+                                    return;
+                                }
+                            } catch (Exception IllegalArgumentException) {
+                                System.out.println("Date does not exist. Please enter a valid date.");
                                 return;
                             }
                             targetCamp.getCampInfo().addDate(new CAMDate(dateToAdd));
@@ -381,7 +413,7 @@ public class CampArray {
                 }
                 break;
 
-            case 10:
+            case "10":
                 // Add logic to remove date
                 if (targetCamp.getAttendees().size() > 0) {
                     System.out.println("You cannot remove dates from a camp with registered attendees");
@@ -406,7 +438,7 @@ public class CampArray {
 
                 }
                 break;
-            case 11:
+            case "11":
                 while (true) {
                     System.out.println("Enter new visibility for camp (on/off):");
                     String manualVisibility = scanner.nextLine().toLowerCase();
@@ -419,7 +451,7 @@ public class CampArray {
                     }
                 }
                 break;
-            case 12:
+            case "12":
                 System.out.println("Exiting Edit Camp");
                 return;
             default:
@@ -477,17 +509,16 @@ public class CampArray {
             }
         }
 
-        
         Camp targetCamp = getCamp(campName);
         ArrayList<CAMDate> deletedDates = targetCamp.getDates();
         camps.remove(targetCamp);
         usersDB.deleteCamp(campName, deletedDates);
         enquiriesArray.deleteCamp(campName);
         usersDB.updateFile();
-        
+
         System.out.println("Camp deleted successfully");
 
-        staff.getCampsInCharge().remove(campName);  
+        staff.getCampsInCharge().remove(campName);
         updateFile(camps);
     }
 
@@ -677,9 +708,11 @@ public class CampArray {
     // if they are camp committee members of that camp
     public void viewCampDetails(String campName, Users user) {
         // view the details of the camp
-        System.out.println("══════════════════════════════════════════════════════════════════════════════════════════");
+        System.out
+                .println("══════════════════════════════════════════════════════════════════════════════════════════");
         System.out.println("Camp Details");
-        System.out.println("══════════════════════════════════════════════════════════════════════════════════════════");
+        System.out
+                .println("══════════════════════════════════════════════════════════════════════════════════════════");
         for (Camp camp : camps) {
             if (camp.getCampName().equals(campName)) {
                 System.out.println("Camp Name: \t\t\t\t" + camp.getCampName());
@@ -695,7 +728,8 @@ public class CampArray {
                 if (user instanceof Staff || camp.getCommitteeMembers().contains(user.getID())) {
                     displayRegisteredStudents(camp);
                 }
-                System.out.println("══════════════════════════════════════════════════════════════════════════════════════════");
+                System.out.println(
+                        "══════════════════════════════════════════════════════════════════════════════════════════");
                 return; // since only one camp can have that name, don't need to continue checking
             }
         }
@@ -782,11 +816,14 @@ public class CampArray {
         CampArray.camps = camps;
     }
 
-    public boolean checkEligibleCamp(Student student, String campName){
+    public boolean checkEligibleCamp(Student student, String campName) {
         Camp targetCamp = getCamp(campName);
-        //System.out.println(targetCamp.getCampAvailability()+"   "+student.getFacultyInfo());
-        if (targetCamp.getCampAvailability().equals(student.getFacultyInfo())) return true;
-        else return false;
+        // System.out.println(targetCamp.getCampAvailability()+"
+        // "+student.getFacultyInfo());
+        if (targetCamp.getCampAvailability().equals(student.getFacultyInfo()))
+            return true;
+        else
+            return false;
     }
 
 }
