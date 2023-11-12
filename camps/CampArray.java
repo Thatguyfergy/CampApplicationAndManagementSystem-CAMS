@@ -130,8 +130,26 @@ public class CampArray {
             return null;
         }
 
-        System.out.println("Registration closing date (dd/mm/yyyy):");
-        CAMDate registrationClosingDate = new CAMDate(scanner.nextLine());
+        CAMDate registrationClosingDate;
+        while (true) {
+            System.out.println("Registration closing date (dd/mm/yyyy):");
+            String date = scanner.nextLine();
+            if (date.matches("\\d{2}/\\d{2}/\\d{4}")) {
+                registrationClosingDate = new CAMDate(date);
+                LocalDate today = LocalDate.now();
+                // Format the date as DD/MM/YYYY
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String formattedDate = today.format(formatter);
+                if (registrationClosingDate.compareTo(new CAMDate(formattedDate)) < 0) {
+                    System.out.println("Registration closing date cannot be before today's date");
+                    continue;
+                }
+                break;
+            } else {
+                System.out.println("Invalid date format. Please enter date in the format dd/mm/yyyy");
+            }
+        }
+
 
         String startDate, endDate;
         while (true) {
