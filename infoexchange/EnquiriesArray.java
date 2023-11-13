@@ -391,9 +391,9 @@ public class EnquiriesArray {
                 csvWriter.close();
             }
         } catch (IndexOutOfBoundsException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
