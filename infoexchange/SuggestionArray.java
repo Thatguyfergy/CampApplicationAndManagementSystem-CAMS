@@ -1,13 +1,11 @@
 package infoexchange;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.UUID;
 
 import users.*;
 import camps.*;
@@ -47,10 +45,10 @@ public class SuggestionArray {
         // Staff sees all suggestions he/she is incharge of only
         boolean x=false;
         for (Suggestion suggestion : suggestions) {
-            if ((staff.checkStaffInCharge(suggestion.getCamp().getCampName())) && (suggestion.isSubmitted())) {
+            if ((staff.checkStaffInCharge(suggestion.getCampName())) && (suggestion.isSubmitted())) {
                 x=true;
                 System.out.printf("Suggestion %06d by %s - Camp : %s", suggestion.getID(),
-                        suggestion.getStudent().getID(), suggestion.getCamp().getCampName());
+                        suggestion.getStudentID(), suggestion.getCampName());
                 if (suggestion.isSubmitted()) {
                     System.out.print(" [Submitted");
                     if (suggestion.isProcessed()) {
@@ -79,7 +77,7 @@ public class SuggestionArray {
         // Student sees all suggestions created by them and not processed
         boolean x=false;
         for (Suggestion suggestion : suggestions) {
-            if ((suggestion.getStudent().equals(std)) && (!suggestion.isProcessed())) {
+            if ((suggestion.getStudentID().equals(std.getID())) && (!suggestion.isProcessed())) {
                 printSuggestion(suggestion);
                 x=true;
             }
@@ -95,7 +93,7 @@ public class SuggestionArray {
     public void viewProcessedSuggestions(Student std) {
         boolean x=false;
         for (Suggestion suggestion : suggestions) {
-            if ((suggestion.getStudent().equals(std)) && (suggestion.isProcessed())) {
+            if ((suggestion.getStudentID().equals(std.getID())) && (suggestion.isProcessed())) {
                 printSuggestion(suggestion);
                 x=true;
             }
@@ -108,7 +106,7 @@ public class SuggestionArray {
 
     public void editSuggestion(Student std, int i, String s) {
         for (Suggestion suggestion : suggestions) {
-            if ((suggestion.getStudent().equals(std)) && (suggestion.getID() == i)) {
+            if ((suggestion.getStudentID().equals(std.getID())) && (suggestion.getID() == i)) {
                 if (suggestion.setSuggestion(s)) {
                     System.out.println("Suggestion successfully edited!");
                     updateFile();
@@ -126,7 +124,7 @@ public class SuggestionArray {
 
     public void submitSuggestion(Student std, int i) {
         for (Suggestion suggestion : suggestions) {
-            if ((suggestion.getStudent().equals(std)) && (suggestion.getID() == i)) {
+            if ((suggestion.getStudentID().equals(std.getID())) && (suggestion.getID() == i)) {
                 if (suggestion.submit()) {
                     System.out.println("Suggestion successfully submitted!");
                     updateFile();
@@ -154,7 +152,7 @@ public class SuggestionArray {
         int id = inputInt.nextInt(sc);
 
         for (Suggestion suggestion : suggestions) {
-            if ((staff.checkStaffInCharge(suggestion.getCamp().getCampName())) && (suggestion.getID() == id)
+            if ((staff.checkStaffInCharge(suggestion.getCampName())) && (suggestion.getID() == id)
                     && (suggestion.isSubmitted())) {
                 if (suggestion.isProcessed()) {
                     System.out.printf(
@@ -181,7 +179,7 @@ public class SuggestionArray {
 
     public int suggestionCanEdit(Student std, int i) {
         for (Suggestion s : suggestions) {
-            if ((s.getStudent().equals(std)) && (s.getID() == i)) {
+            if ((s.getStudentID().equals(std.getID())) && (s.getID() == i)) {
                 if (!s.isProcessed()) {
                     return 1;
                 }
@@ -193,7 +191,7 @@ public class SuggestionArray {
 
     public void deleteSuggestion(Student std, int i) {
         for (int j=0; j<suggestions.size(); j++) {
-            if ((suggestions.get(j).getStudent().equals(std)) && (suggestions.get(j).getID() == i)) {
+            if ((suggestions.get(j).getStudentID().equals(std.getID())) && (suggestions.get(j).getID() == i)) {
                 if (suggestions.get(j).isProcessed()) {
                     System.out.println("Suggestion cannot be deleted as it has been processed");
                     printSuggestion(suggestions.get(j));
@@ -212,7 +210,7 @@ public class SuggestionArray {
 
     public void deleteCamp(Camp camp) {
         for (int i=0; i<suggestions.size(); i++) {
-            if (suggestions.get(i).getCamp().equals(camp)) {
+            if (suggestions.get(i).getCampName().equals(camp.getCampName())) {
                 suggestions.remove(i);
             }
         }
@@ -243,9 +241,9 @@ public class SuggestionArray {
             for (Suggestion suggestion : suggestions) {
                 csvWriter.append(suggestion.getSuggestion());
                 csvWriter.append(",");
-                csvWriter.append(suggestion.getStudent().getID());
+                csvWriter.append(suggestion.getStudentID());
                 csvWriter.append(",");
-                csvWriter.append(suggestion.getCamp().getCampName());
+                csvWriter.append(suggestion.getCampName());
                 csvWriter.append(",");
                 csvWriter.append(suggestion.isSubmitted() ? "1" : "0");
                 csvWriter.append(",");
