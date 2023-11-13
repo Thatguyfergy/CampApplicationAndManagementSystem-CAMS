@@ -74,7 +74,6 @@ public class EnquiriesArray {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        updateFile(enquiries);
     }
 
     private String generateID(ArrayList<?> Array) {
