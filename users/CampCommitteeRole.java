@@ -5,8 +5,6 @@ import java.util.List;
 
 import camdate.CAMDate;
 import camps.Camp;
-import infoexchange.Suggestion;
-import report.CampReport;
 
 public class CampCommitteeRole {
     private Camp camp;
@@ -22,14 +20,6 @@ public class CampCommitteeRole {
     public String getCampName() {
         return camp.getCampName();
     }
-
-    public Camp getCamp() {
-        return camp;
-    }
-
-    // public int getCampID() {
-    // return camp.getcampID();
-    // }
 
     public ArrayList<CAMDate> getCampDates() {
         return camp.getDates();
@@ -75,14 +65,6 @@ public class CampCommitteeRole {
     // Method to get the list of Committee Members
     public List<String> getCampCommitteeMembers() {
         return camp.getCommitteeMembers();
-    }
-
-    public void viewEnquiries() {
-
-    }
-
-    public void replyEnquiry() {
-        points++;
     }
 
     public void addOnePoint() {

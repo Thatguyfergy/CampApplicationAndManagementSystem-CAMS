@@ -31,7 +31,7 @@ public class CampReport implements Report {
         if (user instanceof Staff)
             createdCamps = ((Staff) user).getCampsInCharge();
         else
-            createdCamps.add(((Student) user).getCampCommitteeRole().getCamp().getCampName());
+            createdCamps.add(((Student) user).getCampCommitteeRole().getCampName());
         sc = new Scanner(System.in);
     }
 
