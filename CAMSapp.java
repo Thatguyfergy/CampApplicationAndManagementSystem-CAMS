@@ -10,15 +10,15 @@ public class CAMSapp {
         // CAMDisplay
         // Comment out the one you dw to use, tyvm
 
-        // DisplayLogin cams = new DisplayLogin(true);
+        DisplayLogin cams = new DisplayLogin(true);
 
-        CAMDisplay cams = new CAMDisplay();
+        // CAMDisplay cams = new CAMDisplay();
 
-        if (cams instanceof CAMDisplay) {
-            System.out.println("Currently running CampDisplay!");
-        } else {
-            System.out.println("Currently running DisplayLogin!");
-        }
+        // if (cams instanceof CAMDisplay) {
+        //     System.out.println("Currently running CampDisplay!");
+        // } else {
+        //     System.out.println("Currently running DisplayLogin!");
+        // }
 
         System.out.println("This shit is running on CAMSapp.java, go and dig for this file.");
 

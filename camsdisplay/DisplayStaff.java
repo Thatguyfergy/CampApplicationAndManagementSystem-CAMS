@@ -252,8 +252,9 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
-    private void generateEnquiriesReportScreen(Staff staff) {
-
+    public void generateEnquiriesReportScreen(Users user) {
+        if (!(user instanceof Staff)) return;
+        Staff staff = (Staff) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                 "╔════════════════════════════════════════════════════════════════════╗\n" +
@@ -318,16 +319,16 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
     }
 
     public void viewEnquiriesScreen(Users user) {
-        Staff staff = new Staff(null, null, null, null);
-        if (user instanceof Staff) {staff = (Staff) user;}
+        if (!(user instanceof Staff)) return;
+        Staff staff = (Staff) user;
         System.out.print("\033[H\033[2J");
         enquiriesArray.viewEnquiries(staff);
         ScreenClearFn();
     }
 
     public void replyEnquiriesScreen(Users user) {
-        Staff staff = new Staff(null, null, null, null);
-        if (user instanceof Staff) {staff = (Staff) user;}
+        if (!(user instanceof Staff)) return;
+        Staff staff = (Staff) user;
         System.out.print("\033[H\033[2J");
         enquiriesArray.replyEnquiry(staff);
         ScreenClearFn();

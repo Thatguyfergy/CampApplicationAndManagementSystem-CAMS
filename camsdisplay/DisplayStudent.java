@@ -41,11 +41,11 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     private void studentScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         int choice = -1;
-        int logout = (student.IsCampComm()) ? 11 : 5;
+        int logout = (student.IsCampComm()) ? 12 : 5;
         Scanner sc = new Scanner(System.in);
 
         do {
-            logout = (student.IsCampComm()) ? 11 : 5;
+            logout = (student.IsCampComm()) ? 12 : 5;
             // System.out.println(logout);
             // System.out.print("\033[H\033[2J"); // Clear the entire screen
             System.out.println("╔═════════════════════════════════════════════════════════════════╗");
@@ -67,7 +67,8 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
                 System.out.println("8. View Enquiries");
                 System.out.println("9. Reply Enquiries");
                 System.out.println("10. Generate Camp Report");
-                System.out.println("11. Logout");
+                System.out.println("11. Generate Enquiries Report");
+                System.out.println("12. Logout");
             } else
                 System.out.println("5. Logout");
             System.out.printf("Enter your choice: ");
@@ -120,6 +121,10 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
                     else System.out.println("Invalid choice");
                     break;
                 case 11:
+                    if (student.IsCampComm()) generateEnquiriesReportScreen(student);
+                    else System.out.println("Invalid choice");
+                    break;
+                case 12:
                     if (student.IsCampComm()) {
                         System.out.println("Logging out... Thank you!");
                         this.user = null;
@@ -401,8 +406,8 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     }
 
     public void viewEnquiriesScreen(Users user) {
-        Student student = new Student(null, null, null, null, null, null, campArray);
-        if (user instanceof Student) {student = (Student) user;}
+        if (!(user instanceof Student)) return;
+        Student student = (Student) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                         "╔══════════════════════════════════════════════════════════════════════╗\n" +
@@ -412,8 +417,8 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     }
 
     public void replyEnquiriesScreen(Users user) {
-        Student student = new Student(null, null, null, null, null, null, campArray);
-        if (user instanceof Student) {student = (Student) user;}
+        if (!(user instanceof Student)) return;
+        Student student = (Student) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                         "╔══════════════════════════════════════════════════════════════════════╗\n" +
@@ -435,6 +440,23 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
         CampReport campReport = new CampReport(student,
                 campArray.getCamp(student.getCampCommitteeRole().getCampName()));
         campReport.generateReportforComm(repchoice);
+    }
+
+    public void generateEnquiriesReportScreen(Users user) {
+        if (!(user instanceof Student)) return;
+        Student student = (Student) user;
+        System.out.print("\033[H\033[2J"); // Clear the entire screen
+        System.out.print(
+                        "╔════════════════════════════════════════════════════════════════════╗\n" +
+                        "║ Camp Application & Management System - Generate Enquiries Report   ║\n" +
+                        "╚════════════════════════════════════════════════════════════════════╝\r\n");
+
+        EnquiriesReport enquiriesReport = new EnquiriesReport(student, enquiriesArray);
+        enquiriesReport.generateReport();
+
+        System.out.print("Press Enter to return to the main menu...");
+        sc.nextLine(); // Wait for Enter key
+        return;
     }
 
 }
