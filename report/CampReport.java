@@ -35,6 +35,36 @@ public class CampReport implements Report {
         sc = new Scanner(System.in);
     }
 
+    public CampReport(Users usr, Camp cmp) {
+        user = usr;
+        camp = cmp;
+        sc = new Scanner(System.in);
+    }
+
+    public void generateReportforComm(int choice) {
+        switch (choice) {
+            case 1:
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() +"_Report.csv";
+                generateCampReport();
+                break;
+            case 2:
+                fileName = "CampReports\\" + camp.getCampName() + "_Attendees_Report.csv";
+                generateCampAttendeesReport();
+                break;
+            case 3:
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_CommitteeMembers_Report.csv";
+                generateCampCommitteeMembersReport();
+                break;
+            default:
+                System.out.println("Invalid choice! - Applying no filter");
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
+                generateCampReport();
+                break;
+        }
+
+        System.out.println("Generating report for " + camp.getCampName() + "...");
+    }
+
     public void generateReport() {
 
         if (createdCamps.size() == 0) {
