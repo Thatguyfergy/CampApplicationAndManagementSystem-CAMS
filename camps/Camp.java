@@ -232,4 +232,12 @@ public class Camp {
         return committeeMembersSlots - occupiedCommitteeSlots;
     }
 
+    public int getRemainingSlots() {
+        int totalSlots = getTotalSlots();
+        int occupiedAttendeeSlots = getAttendees().size();
+        int occupiedCommitteeSlots = getCommitteeMembers().size();
+        int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
+
+        return totalSlots - totalOccupiedSlots;
+    }
 }

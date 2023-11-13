@@ -568,7 +568,7 @@ public class CampArray {
                 String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
                 String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
                 String location = truncateWithEllipsis(camp.getLocation(), 10);
-                String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
+                String totalSlots = camp.getRemainingSlots() + "/" + camp.getTotalSlots();
                 String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                 String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                 String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
@@ -600,7 +600,7 @@ public class CampArray {
                     String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
                     String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
                     String location = truncateWithEllipsis(camp.getLocation(), 10);
-                    String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
+                    String totalSlots = camp.getRemainingSlots() + "/" + camp.getTotalSlots();
                     String committeeSlots = camp.getRemainingCommitteeSlots() + "/" + camp.getCommitteeMembersSlots();
                     String description = truncateWithEllipsis(camp.getCampDescription(), 15);
                     String staffInCharge = truncateWithEllipsis(camp.getStaffInCharge(), 7);
@@ -648,7 +648,7 @@ public class CampArray {
                             String closingDate = truncateWithEllipsis(camp.getRegistrationClosingDate().toString(), 10);
                             String availability = truncateWithEllipsis(camp.getCampAvailability(), 6);
                             String location = truncateWithEllipsis(camp.getLocation(), 10);
-                            String totalSlots = camp.getRemainingAttendeeSlots() + "/" + camp.getTotalSlots();
+                            String totalSlots = camp.getRemainingSlots() + "/" + camp.getTotalSlots();
                             String committeeSlots = camp.getRemainingCommitteeSlots() + "/"
                                     + camp.getCommitteeMembersSlots();
                             String description = truncateWithEllipsis(camp.getCampDescription(), 25);
