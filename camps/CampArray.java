@@ -820,7 +820,7 @@ public class CampArray {
         Camp targetCamp = getCamp(campName);
         // System.out.println(targetCamp.getCampAvailability()+"
         // "+student.getFacultyInfo());
-        if (targetCamp.getCampAvailability().equals(student.getFacultyInfo()))
+        if (targetCamp.getCampAvailability().equals(student.getFacultyInfo()) || targetCamp.getCampAvailability().equals("NTU"))
             return true;
         else
             return false;
