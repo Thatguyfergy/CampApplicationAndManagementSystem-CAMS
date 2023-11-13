@@ -218,8 +218,8 @@ public class Camp {
     public int getRemainingAttendeeSlots() {
         int totalSlots = getTotalSlots();
         int occupiedAttendeeSlots = getAttendees().size();
-        int occupiedCommitteeSlots = getCommitteeMembers().size();
-        int totalOccupiedSlots = occupiedAttendeeSlots + occupiedCommitteeSlots;
+        int committeeMemberSlots = getCommitteeMembersSlots();
+        int totalOccupiedSlots = occupiedAttendeeSlots + committeeMemberSlots;
 
         return totalSlots - totalOccupiedSlots;
     }
