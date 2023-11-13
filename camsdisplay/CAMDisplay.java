@@ -762,7 +762,7 @@ public class CAMDisplay {
                         String newsug = sc.nextLine();
                         suggestionArray.editSuggestion(student, sugindex1, newsug);
                     } else if (suggestionArray.suggestionCanEdit(student, sugindex1)==0)
-                        System.out.println("Suggestion cannot be edited as it is processed!");
+                        System.out.println("Suggestion cannot be edited as it has been processed!");
                     else System.out.println("Suggestion does not exist!");
                 } else System.out.println("No Suggestions to Edit!");
                 break;
