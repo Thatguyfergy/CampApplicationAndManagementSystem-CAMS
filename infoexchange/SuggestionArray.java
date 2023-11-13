@@ -210,6 +210,15 @@ public class SuggestionArray {
         return;
     }
 
+    public void deleteCamp(Camp camp) {
+        for (int i=0; i<suggestions.size(); i++) {
+            if (suggestions.get(i).getCamp().equals(camp)) {
+                suggestions.remove(i);
+            }
+        }
+        updateFile();
+    }
+
     private static void printSuggestion(Suggestion suggestion) {
         System.out.printf("Suggestion %06d", suggestion.getID());
                 if (suggestion.isSubmitted()) {
