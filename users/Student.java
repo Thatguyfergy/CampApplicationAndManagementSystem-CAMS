@@ -218,6 +218,10 @@ public class Student extends Users {
     }
 
     public void deleteEnquiry(int index){
+        if (PendingEnquiries.get(index).getSubmitted()){
+            System.out.println("Submitted Enquiry cannot be deleted!");
+            return;
+        }
         PendingEnquiries.remove(index);
         System.out.println("Enquiry removed!");
     }

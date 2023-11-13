@@ -16,7 +16,7 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
-public class DisplayStudent extends DisplayLogin implements viewCampsScreen, ScreenClearFn {
+public class DisplayStudent extends DisplayLogin implements viewCampsScreen, ScreenClearFn, registerCamps, replyEnquiries {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -144,7 +144,9 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
         ((Student) user).viewAvailAndRegCamps(campArray);
     }
 
-    private void registerCampsScreen(Student student) {
+    public void registerCampsScreen(Users user) {
+        Student student = new Student(null, null, null, null, null, null, campArray);
+        if (user instanceof Student) {student = (Student)user;}
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                         "╔══════════════════════════════════════════════════════════════════════╗\n" +
@@ -398,7 +400,9 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
         }
     }
 
-    private void viewEnquiriesScreen(Student student) {
+    public void viewEnquiriesScreen(Users user) {
+        Student student = new Student(null, null, null, null, null, null, campArray);
+        if (user instanceof Student) {student = (Student) user;}
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                         "╔══════════════════════════════════════════════════════════════════════╗\n" +
@@ -407,7 +411,9 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
         enquiriesArray.viewEnquiries(student);
     }
 
-    private void replyEnquiriesScreen(Student student) {
+    public void replyEnquiriesScreen(Users user) {
+        Student student = new Student(null, null, null, null, null, null, campArray);
+        if (user instanceof Student) {student = (Student) user;}
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                         "╔══════════════════════════════════════════════════════════════════════╗\n" +

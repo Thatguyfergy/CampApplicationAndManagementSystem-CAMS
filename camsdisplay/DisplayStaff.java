@@ -16,7 +16,7 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
-public class DisplayStaff extends DisplayLogin implements viewCampsScreen, ScreenClearFn {
+public class DisplayStaff extends DisplayLogin implements viewCampsScreen, ScreenClearFn, replyEnquiries {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -317,13 +317,17 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
 
     }
 
-    private void viewEnquiriesScreen(Staff staff) {
+    public void viewEnquiriesScreen(Users user) {
+        Staff staff = new Staff(null, null, null, null);
+        if (user instanceof Staff) {staff = (Staff) user;}
         System.out.print("\033[H\033[2J");
         enquiriesArray.viewEnquiries(staff);
         ScreenClearFn();
     }
 
-    private void replyEnquiriesScreen(Staff staff) {
+    public void replyEnquiriesScreen(Users user) {
+        Staff staff = new Staff(null, null, null, null);
+        if (user instanceof Staff) {staff = (Staff) user;}
         System.out.print("\033[H\033[2J");
         enquiriesArray.replyEnquiry(staff);
         ScreenClearFn();
