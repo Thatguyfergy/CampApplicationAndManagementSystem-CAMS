@@ -90,15 +90,11 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
                     break;
                 case 6:
                     // View enquiries
-                    System.out.print("\033[H\033[2J");
-                    enquiriesArray.viewEnquiries(staff);
-                    ScreenClearFn();
+                    viewEnquiriesScreen(staff);
                     break;
                 case 7:
                     // reply enquiries
-                    System.out.print("\033[H\033[2J");
-                    enquiriesArray.replyEnquiry(staff);
-                    ScreenClearFn();
+                    replyEnquiriesScreen(staff);
                     break;
                 case 8:
                     // View Suggestions
@@ -319,5 +315,17 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         // Exit the viewCampsScreen and return to the main menu
         return;
 
+    }
+
+    private void viewEnquiriesScreen(Staff staff) {
+        System.out.print("\033[H\033[2J");
+        enquiriesArray.viewEnquiries(staff);
+        ScreenClearFn();
+    }
+
+    private void replyEnquiriesScreen(Staff staff) {
+        System.out.print("\033[H\033[2J");
+        enquiriesArray.replyEnquiry(staff);
+        ScreenClearFn();
     }
 }
