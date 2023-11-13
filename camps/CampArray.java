@@ -302,6 +302,10 @@ public class CampArray {
             case "1":
                 System.out.println("Enter new name for the camp:");
                 String newName = scanner.nextLine();
+                if (checkCampExists(newName)) {
+                    System.out.println("Camp with the name '" + newName + "' already exists. Please choose a different name.");
+                    return;
+                }
                 String oldName = targetCamp.getCampInfo().getCampName();
                 targetCamp.getCampInfo().setCampName(newName);
 
