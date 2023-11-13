@@ -169,18 +169,18 @@ public class EnquiriesArray {
     }
 
     // This is deprecated as it's not required in the Assignment Rubrics
-    public void deleteEnquiry(Users user) throws Exception {
-        // Need a feature for Camp Committee members to delete
-        System.out.printf("EnquiryID: \n");
-        int idx = scanner.nextInt();
+    // public void deleteEnquiry(Users user) throws Exception {
+    // // Need a feature for Camp Committee members to delete
+    // System.out.printf("EnquiryID: \n");
+    // int idx = scanner.nextInt();
 
-        if (user instanceof Staff) {
-            enquiries.remove(idx);
-        } else {
-            throw new Exception("You shall not pass");
-        }
-        updateFile(enquiries);
-    }
+    // if (user instanceof Staff) {
+    // enquiries.remove(idx);
+    // } else {
+    // throw new Exception("You shall not pass");
+    // }
+    // updateFile(enquiries);
+    // }
 
     private Boolean checkExistEnquiries(Users user) {
         if (user instanceof Student) {
@@ -391,9 +391,9 @@ public class EnquiriesArray {
                 csvWriter.close();
             }
         } catch (IndexOutOfBoundsException e) {
-            //e.printStackTrace();
+            // e.printStackTrace();
         } catch (IOException e) {
-            //e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
