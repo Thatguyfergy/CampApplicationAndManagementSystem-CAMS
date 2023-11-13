@@ -7,6 +7,7 @@ import java.util.Set;
 
 import camdate.CAMDate;
 import infoexchange.EnquiriesArray;
+import infoexchange.SuggestionArray;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -480,7 +481,7 @@ public class CampArray {
         return camps;
     }
 
-    public void deleteCamp(Staff staff, UsersDatabase usersDB, EnquiriesArray enquiriesArray) {
+    public void deleteCamp(Staff staff, UsersDatabase usersDB, EnquiriesArray enquiriesArray, SuggestionArray suggestionArray) {
         ArrayList<String> campsInCharge = staff.getCampsInCharge();
 
         if (campsInCharge.size() == 0) {
@@ -511,6 +512,7 @@ public class CampArray {
 
         Camp targetCamp = getCamp(campName);
         ArrayList<CAMDate> deletedDates = targetCamp.getDates();
+        suggestionArray.deleteCamp(targetCamp);
         camps.remove(targetCamp);
         usersDB.deleteCamp(campName, deletedDates);
         enquiriesArray.deleteCamp(campName);

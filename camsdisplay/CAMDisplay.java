@@ -331,7 +331,7 @@ public class CAMDisplay {
                         "║ Camp Application & Management System - Delete Camp            ║\n" +
                         "╚═══════════════════════════════════════════════════════════════╝\r\n");
 
-        campArray.deleteCamp(staff, UserDB, enquiriesArray);
+        campArray.deleteCamp(staff, UserDB, enquiriesArray, suggestionArray);
 
         UserDB.updateFile();
 
