@@ -11,7 +11,7 @@ public class Suggestion implements Comparable<Enquiries> {
     private boolean processed = false;
     private boolean accepted = false;
     private int suggestionID;
-    private static int counter;
+    private static int counter=1;
 
     public Suggestion(String s, Student std, Camp cmp) {
         suggestion = s;

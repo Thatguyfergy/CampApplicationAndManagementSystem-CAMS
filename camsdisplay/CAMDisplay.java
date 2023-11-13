@@ -730,8 +730,8 @@ public class CAMDisplay {
                         "║ Camp Application & Management System - Manage Suggestions            ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
 
-        System.out.print("V: VIEW all Suggestions\nW: WRITE new Suggestion\nE: EDIT a Suggestion\n" +
-                "S: SUBMIT a Suggestion\n\nEnter your choice: ");
+        System.out.print("V: VIEW all Suggestions\nP: view PROCESSED Suggestions\nW: WRITE new Suggestion\nE: EDIT a Suggestion\n" +
+                "D: DELETE a Suggestion\nS: SUBMIT a Suggestion\n\nEnter your choice: ");
         String sugChoice = sc.nextLine();
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
@@ -743,6 +743,9 @@ public class CAMDisplay {
             case "V", "v":
                 suggestionArray.viewSuggestions(student);
                 break;
+            case "P", "p":
+                suggestionArray.viewProcessedSuggestions(student);
+                break;
             case "W", "w":
                 System.out.println("Please input the Suggestion: ");
                 String sug = sc.nextLine();
@@ -750,24 +753,35 @@ public class CAMDisplay {
                         campArray.getCamp(student.getCampCommitteeRole().getCampName()));
                 break;
             case "E", "e":
-                suggestionArray.viewSuggestions(student);
-                System.out.printf("Select Suggestion to edit, input Suggestion index: ");
-                int sugindex1 = inputInt.nextInt(sc);
-                sc.nextLine();
-                if (suggestionArray.suggestionExists(student, sugindex1)) {
-                    System.out.printf("Please input the edited Suggestion: ");
-                    String newsug = sc.nextLine();
-                    suggestionArray.editSuggestion(student, sugindex1, newsug);
-                } else
-                    System.out.println("Suggestion does not exist!");
+                if (suggestionArray.viewSuggestions(student)) {
+                    System.out.printf("Select Suggestion to edit, input Suggestion index: ");
+                    int sugindex1 = inputInt.nextInt(sc);
+                    sc.nextLine();
+                    if (suggestionArray.suggestionCanEdit(student, sugindex1)==1) {
+                        System.out.printf("Please input the edited Suggestion: ");
+                        String newsug = sc.nextLine();
+                        suggestionArray.editSuggestion(student, sugindex1, newsug);
+                    } else if (suggestionArray.suggestionCanEdit(student, sugindex1)==0)
+                        System.out.println("Suggestion cannot be edited as it has been processed!");
+                    else System.out.println("Suggestion does not exist!");
+                } else System.out.println("No Suggestions to Edit!");
+                break;
+            case "D", "d":
+                if (suggestionArray.viewSuggestions(student)) {
+                    System.out.printf("Select Suggestion to delete, input Suggestion index: ");
+                    int delindex = inputInt.nextInt(sc);
+                    sc.nextLine();
+                    suggestionArray.deleteSuggestion(student, delindex);
+                } else System.out.println("No Suggestions to Delete!");
                 break;
             case "S", "s":
-                suggestionArray.viewSuggestions(student);
-                System.out.printf("Select Suggestion to submit, input Suggestion index: ");
-                int sugindex2 = inputInt.nextInt(sc);
-                sc.nextLine();
-                suggestionArray.submitSuggestion(student, sugindex2);
-                UserDB.updateFile(); // for change in points
+                if (suggestionArray.viewSuggestions(student)) {
+                    System.out.printf("Select Suggestion to submit, input Suggestion index: ");
+                    int sugindex2 = inputInt.nextInt(sc);
+                    sc.nextLine();
+                    suggestionArray.submitSuggestion(student, sugindex2);
+                    UserDB.updateFile(); // for change in points
+                } else System.out.println("No Suggestions to Submit!");
                 break;
             default:
                 System.out.println("Invalid choice");
