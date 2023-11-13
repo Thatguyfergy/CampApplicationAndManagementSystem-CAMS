@@ -68,6 +68,10 @@ public class CampArray {
         }
     }
 
+    public CampArray(Boolean bool) {
+
+    }
+
     // update file with new campArray
     private void updateFile(ArrayList<Camp> camps) {
         try (FileWriter csvWriter = new FileWriter(campsFile)) {
@@ -316,7 +320,7 @@ public class CampArray {
             case "2":
                 // Add logic to edit Registration Closing Date
                 while (true) {
-                    try{
+                    try {
                         System.out.println("Enter new Registration Closing Date for the camp: ");
                         String newDate = scanner.nextLine();
                         if (newDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
@@ -820,7 +824,8 @@ public class CampArray {
         Camp targetCamp = getCamp(campName);
         // System.out.println(targetCamp.getCampAvailability()+"
         // "+student.getFacultyInfo());
-        if (targetCamp.getCampAvailability().equals(student.getFacultyInfo()) || targetCamp.getCampAvailability().equals("NTU"))
+        if (targetCamp.getCampAvailability().equals(student.getFacultyInfo())
+                || targetCamp.getCampAvailability().equals("NTU"))
             return true;
         else
             return false;

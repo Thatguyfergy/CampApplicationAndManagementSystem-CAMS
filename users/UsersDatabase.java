@@ -48,15 +48,15 @@ public class UsersDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        printUsers();
+        // printUsers();
     }
 
-    private void printUsers() {
-        System.out.println("Printing Users");
-        for (Users user : users) {
-            System.out.println(user.getID() + "|" + user.getPassword());
-        }
-    }
+    // private void printUsers() {
+    // System.out.println("Printing Users");
+    // for (Users user : users) {
+    // System.out.println(user.getID() + "|" + user.getPassword());
+    // }
+    // }
 
     public static String getFirstName(String userID) {
         for (Users user : users) {
