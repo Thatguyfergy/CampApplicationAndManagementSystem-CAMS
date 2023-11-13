@@ -137,6 +137,8 @@ public class Camp {
                     // Add the student to the committeeMembers list
                     committeeMembers.add(StudentID);
                 }
+                else{System.out.println("No more camp committee slots!");
+            }
             }
         } else {
             // Register as an attendee
@@ -146,6 +148,8 @@ public class Camp {
                     // Add the student to the attendees list
                     attendees.add(StudentID);
                 }
+                else {System.out.println("No more attendee slots!");
+            }
             } else if (hasWithdrawn(StudentID)) {
                 System.out.println("Student has been withdrawn from the camp and cannot be registered again.");
             } else {
