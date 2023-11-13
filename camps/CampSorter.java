@@ -21,17 +21,17 @@ public class CampSorter {
     public static void sortCamps(ArrayList<Camp> camps) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Sort by: ");
-        System.out.println("1. Camp Name");
+        System.out.println("1. Camp Name (Default))");
         System.out.println("2. Registration Closing Date");
         System.out.println("3. Camp Availability");
         System.out.println("4. Location");
         System.out.println("5. Total Slots");
         System.out.println("6. Committee Members Slots");
         System.out.println("7. Staff in Charge");
-        System.out.println("8. No sort");
         System.out.printf("Enter choice: ");
         String choice = sc.nextLine();
         // Clear the lines printed by this function
+        insertionSort(camps, "campName");
         switch (choice) {
             case "1":
                 sortBy = "campName";
@@ -54,8 +54,6 @@ public class CampSorter {
             case "7":
                 sortBy = "staffInCharge";
                 break;
-            case "8":
-                return;
             default:
                 System.out.println("Invalid choice! - Applying no sort");
                 return;
