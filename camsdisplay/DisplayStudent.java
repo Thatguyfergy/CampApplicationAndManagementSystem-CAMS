@@ -16,7 +16,8 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
-public class DisplayStudent extends DisplayLogin implements viewCampsScreen, ScreenClearFn, registerCamps, replyEnquiries {
+public class DisplayStudent extends DisplayLogin
+        implements viewCampsScreen, ScreenClearFn, registerCamps, replyEnquiries {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -94,35 +95,48 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
                     break;
 
                 case 5:
-                    if (student.IsCampComm()) viewCampDetailsScreen(student);
+                    if (student.IsCampComm())
+                        viewCampDetailsScreen(student);
                     else {
                         System.out.println("Logging out... Thank you!");
                         user = null;
                     }
                     break;
                 case 6:
-                    if (student.IsCampComm()) viewPointsScreen(student);
-                    else System.out.println("Invalid choice");
+                    if (student.IsCampComm())
+                        viewPointsScreen(student);
+                    else
+                        System.out.println("Invalid choice");
                     break;
                 case 7:
-                    if (student.IsCampComm()) manageSuggestionsScreen(student);
-                    else System.out.println("Invalid choice");
+                    if (student.IsCampComm())
+                        manageSuggestionsScreen(student);
+                    else
+                        System.out.println("Invalid choice");
                     break;
                 case 8:
-                    if (student.IsCampComm()) viewEnquiriesScreen(student);
-                    else System.out.println("Invalid choice");
+                    if (student.IsCampComm())
+                        viewEnquiriesScreen(student);
+                    else
+                        System.out.println("Invalid choice");
                     break;
                 case 9:
-                    if (student.IsCampComm()) replyEnquiriesScreen(student);
-                    else System.out.println("Invalid choice");
+                    if (student.IsCampComm())
+                        replyEnquiriesScreen(student);
+                    else
+                        System.out.println("Invalid choice");
                     break;
                 case 10:
-                    if (student.IsCampComm()) generateReportScreen(student);
-                    else System.out.println("Invalid choice");
+                    if (student.IsCampComm())
+                        generateReportScreen(student);
+                    else
+                        System.out.println("Invalid choice");
                     break;
                 case 11:
-                    if (student.IsCampComm()) generateEnquiriesReportScreen(student);
-                    else System.out.println("Invalid choice");
+                    if (student.IsCampComm())
+                        generateEnquiriesReportScreen(student);
+                    else
+                        System.out.println("Invalid choice");
                     break;
                 case 12:
                     if (student.IsCampComm()) {
@@ -142,19 +156,21 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - View Camps                    ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
-        
+
         ((Student) user).viewAvailAndRegCamps(campArray);
     }
 
     public void registerCampsScreen(Users user) {
         Student student = new Student(null, null, null, null, null, null, campArray);
-        if (user instanceof Student) {student = (Student)user;}
+        if (user instanceof Student) {
+            student = (Student) user;
+        }
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Register Camps                ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         student.viewAvailAndRegCamps(campArray);
@@ -178,11 +194,11 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
             student.registerCampAttendee(campPtr, campArray);
         UserDB.updateFile();
     }
-    
+
     private void manageEnquiriesScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Manage Enquiries              ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         System.out.println(
@@ -290,7 +306,7 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     private void withdrawFromCampScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Withdraw from Camp            ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         ArrayList<String> studentRegCamps = student.getRegCampsArray();
@@ -319,16 +335,16 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     public void viewCampDetailsScreen(Users user) {
         System.out.print("\033[H\033[2J");
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - View Camp Details             ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         campArray.viewCampDetails(((Student) user).getCampCommitteeRole().getCampName(), ((Student) user));
     }
-       
+
     private void viewPointsScreen(Student student) {
         System.out.print("\033[H\033[2J");
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Committee Points              ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         System.out.printf("You have %d points!\n", student.getCampCommitteeRole().getPoints());
@@ -337,7 +353,7 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     private void manageSuggestionsScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Manage Suggestions            ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
 
@@ -348,7 +364,7 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
         String sugChoice = sc.nextLine();
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Manage Suggestions            ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
 
@@ -406,22 +422,24 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     }
 
     public void viewEnquiriesScreen(Users user) {
-        if (!(user instanceof Student)) return;
+        if (!(user instanceof Student))
+            return;
         Student student = (Student) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - View Enquiries                ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         enquiriesArray.viewEnquiries(student);
     }
 
     public void replyEnquiriesScreen(Users user) {
-        if (!(user instanceof Student)) return;
+        if (!(user instanceof Student))
+            return;
         Student student = (Student) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Reply to Enquiries            ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         enquiriesArray.replyEnquiry(student);
@@ -431,7 +449,7 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     private void generateReportScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔══════════════════════════════════════════════════════════════════════╗\n" +
+                "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Camp Report          ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
         System.out.print(
@@ -443,19 +461,18 @@ public class DisplayStudent extends DisplayLogin implements viewCampsScreen, Scr
     }
 
     public void generateEnquiriesReportScreen(Users user) {
-        if (!(user instanceof Student)) return;
+        if (!(user instanceof Student))
+            return;
         Student student = (Student) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
-                        "╔════════════════════════════════════════════════════════════════════╗\n" +
+                "╔════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Enquiries Report   ║\n" +
                         "╚════════════════════════════════════════════════════════════════════╝\r\n");
 
         EnquiriesReport enquiriesReport = new EnquiriesReport(student, enquiriesArray);
         enquiriesReport.generateReport();
 
-        System.out.print("Press Enter to return to the main menu...");
-        sc.nextLine(); // Wait for Enter key
         return;
     }
 

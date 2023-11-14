@@ -20,6 +20,7 @@ import utils.inputInt;
 
 public class EnquiriesReport implements Report {
     private Staff userStaff;
+    private Student userStudent;
     private EnquiriesArray enquiriesArray;
     private static String folderPath = "EnquiriesReport\\";
     private ArrayList<String> createdCamps;
@@ -28,12 +29,16 @@ public class EnquiriesReport implements Report {
     public EnquiriesReport(Users user, EnquiriesArray enquiriesArray) {
         if (user instanceof Staff) {
             userStaff = (Staff) user;
+            this.createdCamps = userStaff.getCampsInCharge();
+        } else if (user instanceof Student && ((Student) user).IsCampComm()) {
+            userStudent = (Student) user;
+            this.createdCamps = new ArrayList<String>();
+            this.createdCamps.add(userStudent.getCampCommitteeRole().getCampName());
         } else {
             System.out.println("You are not allowed to access Enquiries Report!");
             return;
         }
         this.enquiriesArray = enquiriesArray;
-        this.createdCamps = userStaff.getCampsInCharge();
     }
 
     public void generateReport() {
