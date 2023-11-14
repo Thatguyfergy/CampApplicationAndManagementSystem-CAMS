@@ -208,7 +208,6 @@ public class DisplayStudent extends DisplayLogin
                         "S: SUBMIT an Enquiry\n" +
                         "R: View submitted Enquiries and REPLIES\n" +
                         "Enter your choice: ");
-        sc.nextLine();
         String enqChoice = sc.nextLine();
         System.out.println();
         switch (enqChoice) {
@@ -218,16 +217,26 @@ public class DisplayStudent extends DisplayLogin
                 System.out.println();
                 String enqcamp;
                 do {
-                    System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name: ");
+                    System.out.printf("Write Enquiry under which camp?\nPlease input Camp Name (Key in -1 to leave): ");
                     // sc.nextLine();
                     enqcamp = sc.nextLine();
                     // System.out.println(campArray.checkCampExists(enqcamp) + "
                     // "+campArray.checkEligibleCamp(student, enqcamp));
+                    if (enqcamp.equals("-1")) {
+                        return;
+                    }
+
+                    if (student.IsCampComm() && student.getCampCommitteeRole().getCampName().equals(enqcamp)) {
+                        System.out.println("Unable to enquiry for this camp as you are the camp committee member\n");
+                        continue;
+                    }
+
                     if (campArray.checkCampExists(enqcamp)
                             && campArray.checkEligibleCamp(student, enqcamp)) {
                         break;
+                    } else {
+                        System.out.println("You are not eligible for that camp or camp does not exist!\n");
                     }
-                    System.out.println("You are not eligible for that camp or camp does not exist!\n");
                 } while (true);
                 System.out.printf("Please input the Enquiry: ");
                 // sc.nextLine();
