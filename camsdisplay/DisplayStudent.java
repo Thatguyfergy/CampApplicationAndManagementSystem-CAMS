@@ -26,6 +26,15 @@ public class DisplayStudent extends DisplayLogin
 
     private Student user;
 
+    // The above code is defining a constructor for a class called DisplayStudent.
+    // The constructor
+    // takes in several parameters, including a Student object, CampArray object,
+    // EnquiriesArray
+    // object, UsersDatabase object, and SuggestionArray object. It assigns these
+    // objects to instance
+    // variables within the class. Finally, it calls the studentScreen method,
+    // passing in the user
+    // object.
     public DisplayStudent(Student _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
             SuggestionArray _suggestionArray) {
 
@@ -39,6 +48,15 @@ public class DisplayStudent extends DisplayLogin
         studentScreen(user);
     }
 
+    /**
+     * The `studentScreen` function displays a menu for a student in a camp
+     * management system and
+     * allows them to perform various actions based on their role.
+     * 
+     * @param student The parameter "student" is an object of the class "Student".
+     *                It represents a
+     *                student user in the Camp Application & Management System.
+     */
     private void studentScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         int choice = -1;
@@ -152,6 +170,16 @@ public class DisplayStudent extends DisplayLogin
         } while (choice != logout);
     }
 
+    /**
+     * The function "viewCampsScreen" displays a screen for viewing camps in a camp
+     * application and
+     * management system.
+     * 
+     * @param user The "user" parameter is of type "Users", which suggests that it
+     *             represents a user in
+     *             the system. It could be any type of user, such as a student,
+     *             teacher, or administrator.
+     */
     public void viewCampsScreen(Users user) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -163,6 +191,16 @@ public class DisplayStudent extends DisplayLogin
         ((Student) user).viewAvailAndRegCamps(campArray);
     }
 
+    /**
+     * The function "registerCampsScreen" allows a user to register for a camp as
+     * either a committee
+     * member or an attendee.
+     * 
+     * @param user The user object represents the user who is registering for camps.
+     *             It is of type
+     *             Users, which is a superclass for different types of users (e.g.,
+     *             Student, Staff, etc.).
+     */
     public void registerCampsScreen(Users user) {
         Student student = new Student(null, null, null, null, null, null, campArray);
         if (user instanceof Student) {
@@ -195,6 +233,16 @@ public class DisplayStudent extends DisplayLogin
         UserDB.updateFile();
     }
 
+    /**
+     * The function "manageEnquiriesScreen" is a Java method that displays a menu
+     * for managing
+     * enquiries and performs various actions based on the user's choice.
+     * 
+     * @param student The "student" parameter is an object of the Student class. It
+     *                represents the
+     *                student who is using the application and managing their
+     *                enquiries.
+     */
     private void manageEnquiriesScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
@@ -312,6 +360,12 @@ public class DisplayStudent extends DisplayLogin
         }
     }
 
+    /**
+     * The function withdraws a student from a camp in a camp management system.
+     * 
+     * @param student The student object represents a student who wants to withdraw
+     *                from a camp.
+     */
     private void withdrawFromCampScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
@@ -341,6 +395,17 @@ public class DisplayStudent extends DisplayLogin
         UserDB.updateFile();
     }
 
+    /**
+     * The function "viewCampDetailsScreen" displays the camp details for a specific
+     * user.
+     * 
+     * @param user The "user" parameter is an instance of the "Users" class, which
+     *             represents a user in
+     *             the system. It is used to determine the type of user (e.g.,
+     *             student, staff, etc.) and access
+     *             their specific information. In this case, the "user" parameter is
+     *             cast to
+     */
     public void viewCampDetailsScreen(Users user) {
         System.out.print("\033[H\033[2J");
         System.out.print(
@@ -350,6 +415,17 @@ public class DisplayStudent extends DisplayLogin
         campArray.viewCampDetails(((Student) user).getCampCommitteeRole().getCampName(), ((Student) user));
     }
 
+    /**
+     * The function "viewPointsScreen" displays the number of points a student has
+     * in a camp committee
+     * role.
+     * 
+     * @param student The student object represents a student in the camp
+     *                application system. It
+     *                contains information about the student, including their camp
+     *                committee role and the number of
+     *                points they have earned.
+     */
     private void viewPointsScreen(Student student) {
         System.out.print("\033[H\033[2J");
         System.out.print(
@@ -359,6 +435,17 @@ public class DisplayStudent extends DisplayLogin
         System.out.printf("You have %d points!\n", student.getCampCommitteeRole().getPoints());
     }
 
+    /**
+     * The function "manageSuggestionsScreen" is a Java method that displays a menu
+     * for managing
+     * suggestions and performs various actions based on the user's choice.
+     * 
+     * @param student The "student" parameter is an object of the Student class. It
+     *                represents the
+     *                student who is accessing the manage suggestions screen in the
+     *                camp application and management
+     *                system.
+     */
     private void manageSuggestionsScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
@@ -430,6 +517,15 @@ public class DisplayStudent extends DisplayLogin
         }
     }
 
+    /**
+     * The function "viewEnquiriesScreen" displays the view enquiries screen for a
+     * student user in a
+     * camp application and management system.
+     * 
+     * @param user The "user" parameter is an instance of the "Users" class, which
+     *             is a superclass. It
+     *             represents a user of the system.
+     */
     public void viewEnquiriesScreen(Users user) {
         if (!(user instanceof Student))
             return;
@@ -442,6 +538,16 @@ public class DisplayStudent extends DisplayLogin
         enquiriesArray.viewEnquiries(student);
     }
 
+    /**
+     * The function "replyEnquiriesScreen" displays a screen for replying to
+     * enquiries in a camp
+     * application and management system, specifically for students.
+     * 
+     * @param user The parameter "user" is an instance of the "Users" class, which
+     *             represents a user in
+     *             the system. It is used to determine if the user is a student or
+     *             not.
+     */
     public void replyEnquiriesScreen(Users user) {
         if (!(user instanceof Student))
             return;
@@ -455,6 +561,17 @@ public class DisplayStudent extends DisplayLogin
         UserDB.updateFile(); // for change in points
     }
 
+    /**
+     * The function generates a report screen for a student in a camp management
+     * system, allowing them
+     * to select a filter and generate a report based on their role in the camp.
+     * 
+     * @param student The student object represents a specific student for whom the
+     *                report is being
+     *                generated. It contains information about the student, such as
+     *                their name, ID, and camp committee
+     *                role.
+     */
     private void generateReportScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
@@ -469,6 +586,17 @@ public class DisplayStudent extends DisplayLogin
         campReport.generateReportforComm(repchoice);
     }
 
+    /**
+     * The function generates an enquiries report screen for a student user in a
+     * camp application and
+     * management system.
+     * 
+     * @param user The user parameter is of type Users, which is a superclass. It is
+     *             used to check if
+     *             the user is an instance of the Student class. If it is not, the
+     *             method returns without
+     *             generating the report.
+     */
     public void generateEnquiriesReportScreen(Users user) {
         if (!(user instanceof Student))
             return;

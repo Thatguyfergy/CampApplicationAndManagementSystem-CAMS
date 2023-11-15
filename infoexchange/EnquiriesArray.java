@@ -19,7 +19,11 @@ public class EnquiriesArray {
     private static String enquiriesFile;
     private static String repliesFile;
 
-    // Constructor will load Arrays from the csv files
+    // The above code is a constructor for the EnquiriesArray class. It takes two
+    // parameters,
+    // enquiriesFile and repliesFile, which are the file paths for the enquiries and
+    // replies CSV files,
+    // respectively.
     public EnquiriesArray(String enquiriesFile, String repliesFile) {
         EnquiriesArray.enquiriesFile = enquiriesFile;
         EnquiriesArray.repliesFile = repliesFile;
@@ -58,8 +62,15 @@ public class EnquiriesArray {
 
     }
 
-    // The enquiryID will only be generated after submission.
-    // If you require the ID, please use getEnquiryID() only AFTER SUBMISSION.
+    /**
+     * The submitEnquiry function checks if an enquiry has already been submitted,
+     * generates an ID for the
+     * enquiry, adds it to a list of enquiries, marks it as submitted, and updates a
+     * file with the list of
+     * enquiries.
+     * 
+     * @param enquiry The parameter "enquiry" is an object of type "Enquiries".
+     */
     public void submitEnquiry(Enquiries enquiry) {
         if (enquiry.getSubmitted()) {
             System.out.println("Enquiry already submitted!");
@@ -76,6 +87,15 @@ public class EnquiriesArray {
         }
     }
 
+    /**
+     * The function generates a unique ID string for an object in an ArrayList,
+     * based on whether the
+     * object is an Enquiry or a Reply.
+     * 
+     * @param Array An ArrayList containing objects of type Enquiries or Replies.
+     * @return The method is returning a unique string generated using
+     *         UUID.randomUUID().toString().
+     */
     private String generateID(ArrayList<?> Array) {
         String uniqueString;
 
@@ -95,6 +115,19 @@ public class EnquiriesArray {
         return uniqueString;
     }
 
+    /**
+     * The function `findEnquiryIndex` searches for a specific EnquiryID in a list
+     * of enquiries and returns
+     * its index if found, otherwise it returns -1.
+     * 
+     * @param EnquiryID The EnquiryID is a unique identifier for each enquiry. It is
+     *                  used to search for a
+     *                  specific enquiry in the list of enquiries.
+     * @return The method is returning the index of the enquiry with the specified
+     *         EnquiryID in the
+     *         enquiries list. If no enquiry with the specified EnquiryID is found,
+     *         it returns -1.
+     */
     private int findEnquiryIndex(String EnquiryID) {
         for (int i = 0; i < enquiries.size(); i++) {
             if (enquiries.get(i).getEnquiryID() == EnquiryID) {
@@ -104,6 +137,18 @@ public class EnquiriesArray {
         return -1;
     }
 
+    /**
+     * The function `findRepliesIndex` searches for a reply with a specific ID in a
+     * list of replies and
+     * returns its index.
+     * 
+     * @param replyID The replyID is a unique identifier for a reply. It is used to
+     *                search for a specific
+     *                reply in the list of replies.
+     * @return The method is returning the index of the reply with the specified
+     *         replyID in the replies
+     *         list. If no reply with the specified replyID is found, it returns -1.
+     */
     private int findRepliesIndex(String replyID) {
         for (int i = 0; i < enquiries.size(); i++) {
             if (replies.get(i).getReplyID() == replyID) {
@@ -113,6 +158,16 @@ public class EnquiriesArray {
         return -1;
     }
 
+    /**
+     * The function allows staff members and camp committee members to view all
+     * submitted enquiries.
+     * 
+     * @param user The "user" parameter is an instance of the "Users" class, which
+     *             is a superclass for
+     *             both the "Staff" and "Student" classes. It represents the user
+     *             who is trying to view the
+     *             enquiries.
+     */
     public void viewEnquiries(Users user) {
         // Need a feature for Camp Committee members to view
         if (user instanceof Staff) {
@@ -168,20 +223,17 @@ public class EnquiriesArray {
         }
     }
 
-    // This is deprecated as it's not required in the Assignment Rubrics
-    // public void deleteEnquiry(Users user) throws Exception {
-    // // Need a feature for Camp Committee members to delete
-    // System.out.printf("EnquiryID: \n");
-    // int idx = scanner.nextInt();
-
-    // if (user instanceof Staff) {
-    // enquiries.remove(idx);
-    // } else {
-    // throw new Exception("You shall not pass");
-    // }
-    // updateFile(enquiries);
-    // }
-
+    /**
+     * The function checks if a user has any enquiries related to their camp
+     * committee role or if they
+     * are in charge of any enquiries.
+     * 
+     * @param user The user parameter is an instance of the Users class, which is a
+     *             superclass for both
+     *             the Student and Staff classes. It represents a user in the
+     *             system.
+     * @return The method is returning a Boolean value, either true or false.
+     */
     private Boolean checkExistEnquiries(Users user) {
         if (user instanceof Student) {
             Student userStudent = (Student) user;
@@ -202,6 +254,16 @@ public class EnquiriesArray {
         return false;
     }
 
+    /**
+     * The function `replyEnquiry` allows a user (either a student or a staff) to
+     * reply to an enquiry
+     * by providing a reply message and storing it in the list of enquiry replies.
+     * 
+     * @param user The "user" parameter is an instance of the "Users" class, which
+     *             is a superclass for
+     *             both the "Student" and "Staff" classes. It represents the user
+     *             who is replying to an enquiry.
+     */
     public void replyEnquiry(Users user) {
         // Student
         if (user instanceof Student) {
@@ -312,6 +374,17 @@ public class EnquiriesArray {
         updateFile(replies);
     }
 
+    /**
+     * The function "viewReplies" prints all the submitted enquiries and their
+     * corresponding replies
+     * for a given user.
+     * 
+     * @param user The parameter "user" is of type "Users", which likely represents
+     *             a user in the
+     *             system. It is used to filter the enquiries and display only the
+     *             ones submitted by the specified
+     *             user.
+     */
     public void viewReplies(Users user) {
         System.out.println("╔═════════════════════════════════════════════════════════════════╗");
         System.out.println("║ All Submitted Enquiries & Replies:                              ║");
@@ -352,6 +425,14 @@ public class EnquiriesArray {
     }
 
     // @Override
+    /**
+     * The function `updateFile` updates a CSV file based on the type of objects in
+     * the input
+     * ArrayList.
+     * 
+     * @param Array The parameter `Array` is an `ArrayList` that can contain objects
+     *              of any type.
+     */
     private void updateFile(ArrayList<?> Array) {
         try {
             // Enquiries
@@ -397,6 +478,15 @@ public class EnquiriesArray {
         }
     }
 
+    /**
+     * The function `deleteCamp` deletes a camp and all related enquiries and
+     * replies from the
+     * `enquiries` and `replies` lists.
+     * 
+     * @param campName The campName parameter is a String that represents the name
+     *                 of the camp that
+     *                 needs to be deleted.
+     */
     public void deleteCamp(String campName) {
         for (int i = 0; i < enquiries.size();) {
             Enquiries enquiry = enquiries.get(i);
@@ -420,6 +510,13 @@ public class EnquiriesArray {
         updateFile(replies);
     }
 
+    /**
+     * The function edits the camp name of an enquiry object in a list and updates
+     * the file.
+     * 
+     * @param oldName The old name of the camp that needs to be edited.
+     * @param newName The new name that you want to change the camp name to.
+     */
     public void editCamp(String oldName, String newName) {
         for (int i = 0; i < enquiries.size(); i++) {
             Enquiries enquiry = enquiries.get(i);
@@ -430,11 +527,36 @@ public class EnquiriesArray {
         updateFile(enquiries);
     }
 
+    /**
+     * The function returns an ArrayList of Enquiries.
+     * 
+     * @return An ArrayList of Enquiries objects is being returned.
+     */
     public ArrayList<Enquiries> getEnquiries() {
         return enquiries;
     }
 
+    /**
+     * The function returns an ArrayList of EnqReplies objects.
+     * 
+     * @return An ArrayList of EnqReplies objects is being returned.
+     */
     public ArrayList<EnqReplies> getReplies() {
         return replies;
     }
+
+    // This is deprecated as it's not required in the Assignment Rubrics
+
+    // public void deleteEnquiry(Users user) throws Exception {
+    // // Need a feature for Camp Committee members to delete
+    // System.out.printf("EnquiryID: \n");
+    // int idx = scanner.nextInt();
+
+    // if (user instanceof Staff) {
+    // enquiries.remove(idx);
+    // } else {
+    // throw new Exception("You shall not pass");
+    // }
+    // updateFile(enquiries);
+    // }
 }

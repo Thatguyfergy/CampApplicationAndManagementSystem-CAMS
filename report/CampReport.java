@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-
 import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
@@ -15,16 +14,22 @@ import users.Student;
 import users.Users;
 import users.UsersDatabase;
 
-
 public class CampReport implements Report {
 
     private Camp camp;
     private Scanner sc;
     private Users user;
     private ArrayList<String> createdCamps;
-    private CampArray campArray; 
+    private CampArray campArray;
     private String fileName;
 
+    // The `CampReport` constructor is initializing the `user` and `campArray`
+    // variables with the
+    // provided parameters. It also checks if the `user` is an instance of `Staff`
+    // or `Student` and
+    // assigns the appropriate value to the `createdCamps` variable. Finally, it
+    // initializes the `sc`
+    // variable with a new `Scanner` object.
     public CampReport(Users user, CampArray campArray) {
         this.user = user;
         this.campArray = campArray;
@@ -35,16 +40,30 @@ public class CampReport implements Report {
         sc = new Scanner(System.in);
     }
 
+    // The `public CampReport(Users usr, Camp cmp)` constructor is initializing the
+    // `user`, `camp`, and
+    // `sc` variables with the provided parameters. It is used to create a
+    // `CampReport` object with a
+    // specific `user` and `camp` for generating a report.
     public CampReport(Users usr, Camp cmp) {
         user = usr;
         camp = cmp;
         sc = new Scanner(System.in);
     }
 
+    /**
+     * The function generates a report based on the user's choice and saves it to a
+     * file.
+     * 
+     * @param choice The parameter "choice" is an integer that represents the user's
+     *               selection for the
+     *               type of report to generate. The possible values for "choice"
+     *               are:
+     */
     public void generateReportforComm(int choice) {
         switch (choice) {
             case 1:
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() +"_Report.csv";
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
                 generateCampReport();
                 break;
             case 2:
@@ -52,7 +71,8 @@ public class CampReport implements Report {
                 generateCampAttendeesReport();
                 break;
             case 3:
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_CommitteeMembers_Report.csv";
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName()
+                        + "_CommitteeMembers_Report.csv";
                 generateCampCommitteeMembersReport();
                 break;
             default:
@@ -65,6 +85,10 @@ public class CampReport implements Report {
         System.out.println("Generating report for " + camp.getCampName() + "...");
     }
 
+    /**
+     * The function generates a report for a selected camp based on the user's
+     * choice of filter.
+     */
     public void generateReport() {
 
         if (createdCamps.size() == 0) {
@@ -85,7 +109,7 @@ public class CampReport implements Report {
                 return;
             if (Integer.parseInt(choice) > createdCamps.size() + 1)
                 throw new NumberFormatException();
-            
+
         } catch (NumberFormatException e) {
             System.out.println("Invalid choice!");
             return;
@@ -102,7 +126,7 @@ public class CampReport implements Report {
 
         switch (choice) {
             case "1":
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() +"_Report.csv";
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
                 generateCampReport();
                 break;
             case "2":
@@ -110,7 +134,8 @@ public class CampReport implements Report {
                 generateCampAttendeesReport();
                 break;
             case "3":
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_CommitteeMembers_Report.csv";
+                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName()
+                        + "_CommitteeMembers_Report.csv";
                 generateCampCommitteeMembersReport();
                 break;
             default:
@@ -123,7 +148,12 @@ public class CampReport implements Report {
         System.out.println("Generating report for " + camp.getCampName() + "...");
     }
 
-    private void generateCampReport( ) {
+    /**
+     * The function `generateCampReport()` generates a CSV report file containing
+     * information about a
+     * camp.
+     */
+    private void generateCampReport() {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
         try (FileWriter csvWriter = new FileWriter(file)) {
@@ -172,7 +202,11 @@ public class CampReport implements Report {
         }
     }
 
-    private void generateCampAttendeesReport( ) {
+    /**
+     * The function generates a CSV report containing information about a camp and
+     * its attendees.
+     */
+    private void generateCampAttendeesReport() {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
         try (FileWriter csvWriter = new FileWriter(file)) {
@@ -215,6 +249,11 @@ public class CampReport implements Report {
         }
     }
 
+    /**
+     * The function generates a report in CSV format containing information about a
+     * camp and its
+     * committee members.
+     */
     private void generateCampCommitteeMembersReport() {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist

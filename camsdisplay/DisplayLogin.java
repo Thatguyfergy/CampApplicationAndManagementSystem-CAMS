@@ -25,6 +25,9 @@ public class DisplayLogin {
 
     private Users user;
 
+    // The `DisplayLogin(Boolean bool)` constructor initializes the `campArray`,
+    // `enquiriesArray`,
+    // `UserDB`, and `suggestionArray` objects.
     // Only initialize this once your else you will get nightmares
     public DisplayLogin(Boolean bool) {
         campArray = new CampArray("csvfiles\\camps.csv");
@@ -34,10 +37,22 @@ public class DisplayLogin {
         suggestionArray = new SuggestionArray("csvfiles\\suggestions.csv", UserDB, campArray);
     }
 
+    // The `public DisplayLogin()` constructor is an empty constructor that does not
+    // have any
+    // parameters or code inside it. It is used to create an instance of the
+    // `DisplayLogin` class
+    // without initializing any objects or performing any actions. It is likely
+    // included for future use
+    // or as a placeholder for potential future functionality.
     public DisplayLogin() {
         // Empty so that the shit won't get reinitialised again
     }
 
+    /**
+     * The startScreen() function displays a menu for a camp application and
+     * management system, allowing
+     * the user to login, reset their password, or exit the program.
+     */
     public void startScreen() {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.println();
@@ -81,6 +96,12 @@ public class DisplayLogin {
         }
     }
 
+    /**
+     * The loginScreen() function displays a login screen for a camp application and
+     * management system,
+     * prompts the user to enter their userID and password, and checks if the
+     * credentials are valid.
+     */
     public void loginScreen() {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         String userID, password;
@@ -115,6 +136,16 @@ public class DisplayLogin {
 
     }
 
+    /**
+     * The function `resetPassword` allows a user to enter and confirm a new
+     * password, and if the
+     * passwords match, it updates the user's password in the database.
+     * 
+     * @param user The user object represents the user whose password needs to be
+     *             reset. It contains
+     *             information about the user, such as their ID, username, and
+     *             current password.
+     */
     public void resetPassword(Users user) {
         String newPassword1, newPassword2;
         do {
@@ -134,6 +165,15 @@ public class DisplayLogin {
         } while (!newPassword1.equals(newPassword2));
     }
 
+    /**
+     * The userScreen function takes a user object as input and displays a specific
+     * screen based on the
+     * type of user (staff or student).
+     * 
+     * @param user The user object represents a user in the system. It can be either
+     *             a Staff or a
+     *             Student object.
+     */
     public void userScreen(Users user) {
         if (user instanceof Staff) {
             new DisplayStaff((Staff) user, campArray, enquiriesArray, UserDB,
@@ -145,6 +185,15 @@ public class DisplayLogin {
         }
     }
 
+    /**
+     * The function `resetPasswordScreen` displays a password reset screen for a
+     * user in a camp
+     * application and management system.
+     * 
+     * @param user The "user" parameter is an object of the "Users" class. It
+     *             represents the user for
+     *             whom the password reset screen is being displayed.
+     */
     public void resetPasswordScreen(Users user) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         // Scanner sc = new Scanner(System.in);
