@@ -6,6 +6,16 @@ import java.util.Scanner;
 public class CampSorter {
     private static String sortBy;
 
+    /**
+     * The function performs an insertion sort on an ArrayList of Camp objects based
+     * on a specified
+     * sorting criteria.
+     * 
+     * @param camps  An ArrayList of Camp objects that needs to be sorted.
+     * @param sortBy The "sortBy" parameter is a string that specifies the attribute
+     *               by which the
+     *               "camps" ArrayList should be sorted.
+     */
     private static void insertionSort(ArrayList<Camp> camps, String sortBy) {
         for (int i = 1; i < camps.size(); i++) {
             Camp key = camps.get(i);
@@ -18,6 +28,12 @@ public class CampSorter {
         }
     }
 
+    /**
+     * The function sorts a list of camps based on user input for the desired
+     * sorting criteria.
+     * 
+     * @param camps An ArrayList of Camp objects.
+     */
     public static void sortCamps(ArrayList<Camp> camps) {
         Scanner sc = new Scanner(System.in);
         System.out.println("Sort by: ");
@@ -63,4 +79,5 @@ public class CampSorter {
         insertionSort(camps, sortBy);
 
     }
+
 }
