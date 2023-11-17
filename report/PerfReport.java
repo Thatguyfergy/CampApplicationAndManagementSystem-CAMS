@@ -17,14 +17,23 @@ public class PerfReport implements Report {
     private String fileName;
     private UsersDatabase users;
 
+    // The `public PerfReport(Camp cmp, int c, UsersDatabase usrs, Staff staff)` is
+    // a constructor for
+    // the `PerfReport` class. It takes four parameters: `cmp` of type `Camp`, `c`
+    // of type `int`,
+    // `usrs` of type `UsersDatabase`, and `staff` of type `Staff`.
     public PerfReport(Camp cmp, int c, UsersDatabase usrs, Staff staff) {
         camp = cmp;
         choice = c;
         users = usrs;
-        fileName = "PerfReports\\" + camp.getCampName() + "_for" + staff.getFirstName()+ "_PerfReport_by" + 
-        ((choice==1)? "Name":(choice==2)? "Points":"ERROR") + ".csv";
+        fileName = "PerfReports\\" + camp.getCampName() + "_for" + staff.getFirstName() + "_PerfReport_by" +
+                ((choice == 1) ? "Name" : (choice == 2) ? "Points" : "ERROR") + ".csv";
     }
 
+    /**
+     * The function generates a performance report based on the chosen sorting
+     * method.
+     */
     public void generateReport() {
         System.out.println("Generating performance report for " + camp.getCampName() + "...");
         switch (choice) {
@@ -38,7 +47,12 @@ public class PerfReport implements Report {
                 System.out.println("Error! Invalid Sorting!");
         }
     }
-    
+
+    /**
+     * The function `repByName()` writes a sorted list of committee members' names
+     * and their
+     * corresponding points to a file.
+     */
     private void repByName() {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
@@ -46,13 +60,15 @@ public class PerfReport implements Report {
         Collections.sort(list);
 
         try (FileWriter w = new FileWriter(file)) {
-            // w.append("        NAME        ||  POINTS  ");
+            // w.append(" NAME || POINTS ");
             // w.append("==================================");
             w.append("NAME,POINTS\n");
-            for (int i=0; i<list.size(); i++) {
-                // w.append(String.format("%20s||", list.get(i)) + 
-                // String.format("%10d\n", users.getStudentbyID(list.get(i)).getCampCommitteeRole().getPoints()));
-                w.append(list.get(i)+","+users.getStudentbyID(list.get(i)).getCampCommitteeRole().getPoints()+"\n");
+            for (int i = 0; i < list.size(); i++) {
+                // w.append(String.format("%20s||", list.get(i)) +
+                // String.format("%10d\n",
+                // users.getStudentbyID(list.get(i)).getCampCommitteeRole().getPoints()));
+                w.append(list.get(i) + "," + users.getStudentbyID(list.get(i)).getCampCommitteeRole().getPoints()
+                        + "\n");
             }
             w.flush();
         } catch (IOException e) {
@@ -60,19 +76,24 @@ public class PerfReport implements Report {
         }
     }
 
+    /**
+     * The function `repByPoints()` writes a list of committee members and their
+     * corresponding points
+     * to a file, sorted in descending order based on points.
+     */
     private void repByPoints() {
         File file = new File(fileName);
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
         List<String> list = camp.getCommitteeMembers();
 
         try (FileWriter w = new FileWriter(file)) {
-            // w.append("        NAME        ||  POINTS  ");
+            // w.append(" NAME || POINTS ");
             // w.append("==================================");
             w.append("NAME,POINTS\n");
-            for (int i=list.size(); i>0; i--) {
+            for (int i = list.size(); i > 0; i--) {
                 int max = users.getStudentbyID(list.get(0)).getCampCommitteeRole().getPoints();
                 int maxind = 0;
-                for (int j=1; j<i; j++) {
+                for (int j = 1; j < i; j++) {
                     // select highest points
                     int x = users.getStudentbyID(list.get(j)).getCampCommitteeRole().getPoints();
                     if (x > max) {
@@ -80,9 +101,9 @@ public class PerfReport implements Report {
                         maxind = j;
                     }
                 }
-                
+
                 // append and remove
-                w.append(list.get(maxind)+","+ max +"\n");
+                w.append(list.get(maxind) + "," + max + "\n");
                 list.remove(maxind);
             }
             w.flush();

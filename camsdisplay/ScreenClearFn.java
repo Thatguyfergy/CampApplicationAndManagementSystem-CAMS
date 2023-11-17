@@ -2,9 +2,16 @@ package camsdisplay;
 
 import java.util.Scanner;
 
+// The code is declaring a public interface named `ScreenClearFn`. An interface in Java is a collection
+// of abstract methods that can be implemented by classes.
 public interface ScreenClearFn {
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * The function clears the console screen and waits for the user to press Enter
+     * before returning to
+     * the menu.
+     */
     default void ScreenClearFn() {
         System.out.printf("\nPress Enter to return to menu.");
         sc.nextLine();

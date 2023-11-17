@@ -16,7 +16,7 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
-public class DisplayStaff extends DisplayLogin implements viewCampsScreen, ScreenClearFn {
+public class DisplayStaff extends DisplayLogin implements viewCampsScreen, ScreenClearFn, replyEnquiries {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -25,6 +25,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
 
     private Staff user;
 
+    // The above code is a constructor for a class called "DisplayStaff". It takes
+    // in several
+    // parameters, including a Staff object, CampArray object, EnquiriesArray
+    // object, UsersDatabase
+    // object, and SuggestionArray object. It assigns these objects to instance
+    // variables within the
+    // class. It also assigns the Staff object passed as a parameter to the "user"
+    // instance variable.
+    // Finally, it calls the "staffScreen" method, passing in the "user" object.
     public DisplayStaff(Staff _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
             SuggestionArray _suggestionArray) {
 
@@ -38,6 +47,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         staffScreen(user);
     }
 
+    /**
+     * The `staffScreen` function displays a menu for staff members in a camp
+     * management system and
+     * allows them to perform various actions based on their choice.
+     * 
+     * @param staff The staff parameter is an object of the Staff class, which
+     *              represents a staff
+     *              member in the system.
+     */
     private void staffScreen(Staff staff) {
         while (true) {
 
@@ -90,15 +108,11 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
                     break;
                 case 6:
                     // View enquiries
-                    System.out.print("\033[H\033[2J");
-                    enquiriesArray.viewEnquiries(staff);
-                    ScreenClearFn();
+                    viewEnquiriesScreen(staff);
                     break;
                 case 7:
                     // reply enquiries
-                    System.out.print("\033[H\033[2J");
-                    enquiriesArray.replyEnquiry(staff);
-                    ScreenClearFn();
+                    replyEnquiriesScreen(staff);
                     break;
                 case 8:
                     // View Suggestions
@@ -130,6 +144,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         }
     }
 
+    /**
+     * The function "viewCampsScreen" displays a screen that allows the user to view
+     * camps and then
+     * returns to the main menu when the user presses Enter.
+     * 
+     * @param user The "user" parameter is an object of the "Users" class. It
+     *             represents the user who
+     *             is currently using the camp application and management system.
+     */
     public void viewCampsScreen(Users user) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -146,6 +169,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
+    /**
+     * The function allows a user to view the details of a camp in a camp
+     * application and management
+     * system.
+     * 
+     * @param user The "user" parameter is an object of the "Users" class. It is
+     *             used to pass the user
+     *             information to the method.
+     */
     public void viewCampDetailsScreen(Users user) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -169,6 +201,17 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
+    /**
+     * The function "viewSuggestionsScreen" clears the screen, displays a header for
+     * the suggestions
+     * screen, calls a method to view suggestions specific to a staff member, and
+     * clears the screen
+     * again.
+     * 
+     * @param staff The "staff" parameter is an object of the "Staff" class. It
+     *              represents a staff
+     *              member in the camp application and management system.
+     */
     private void viewSuggestionsScreen(Staff staff) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
@@ -180,6 +223,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         ScreenClearFn();
     }
 
+    /**
+     * The function processes suggestions in a camp application and management
+     * system, updates the user
+     * database, and clears the screen.
+     * 
+     * @param staff The staff parameter is an object of the Staff class. It
+     *              represents the staff member
+     *              who is processing the suggestions.
+     */
     private void processSuggestionScreen(Staff staff) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
@@ -192,6 +244,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         ScreenClearFn();
     }
 
+    /**
+     * The function generates a camp report screen for a given staff member and
+     * waits for the user to
+     * press Enter to return to the main menu.
+     * 
+     * @param staff The staff parameter is an object of the Staff class. It
+     *              represents the staff member
+     *              who is generating the camp report.
+     */
     private void generateCampReportScreen(Staff staff) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -208,6 +269,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
+    /**
+     * The function `campPerfReportScreen` generates a performance report for a
+     * selected camp based on
+     * user input.
+     * 
+     * @param staff The "staff" parameter is an object of the Staff class. It
+     *              represents the staff
+     *              member who is accessing the camp performance report screen.
+     */
     private void campPerfReportScreen(Staff staff) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -256,8 +326,22 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
-    private void generateEnquiriesReportScreen(Staff staff) {
-
+    /**
+     * The function generates an enquiries report screen for a staff user in a camp
+     * application and
+     * management system.
+     * 
+     * @param user The user parameter is an instance of the Users class, which is a
+     *             superclass for
+     *             different types of users in the system. In this method, we are
+     *             checking if the user is an
+     *             instance of the Staff class before proceeding with generating the
+     *             enquiries report.
+     */
+    public void generateEnquiriesReportScreen(Users user) {
+        if (!(user instanceof Staff))
+            return;
+        Staff staff = (Staff) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                 "╔════════════════════════════════════════════════════════════════════╗\n" +
@@ -272,6 +356,15 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
+    /**
+     * The function creates a camp screen for the camp application and management
+     * system, allowing
+     * staff to create a new camp and update the camp array.
+     * 
+     * @param staff The staff parameter is an object of the Staff class. It is used
+     *              to access the
+     *              createCamp method of the Staff class.
+     */
     private void createCampScreen(Staff staff) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -287,6 +380,17 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
+    /**
+     * The function "editCampScreen" clears the screen, displays a menu for editing
+     * a camp, updates the
+     * camp information, saves the changes to a file, and waits for the user to
+     * press Enter to return
+     * to the main menu.
+     * 
+     * @param staff The staff parameter is an object of the Staff class. It is used
+     *              to pass the staff
+     *              information to the editCamp method.
+     */
     private void editCampScreen(Staff staff) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -302,6 +406,17 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         return;
     }
 
+    /**
+     * The function `deleteCampScreen` clears the screen, displays a header, deletes
+     * a camp from an
+     * array, updates a user database, and waits for the user to press Enter before
+     * returning to the
+     * main menu.
+     * 
+     * @param staff The staff object represents the staff member who is currently
+     *              logged in and
+     *              performing the delete camp operation.
+     */
     private void deleteCampScreen(Staff staff) {
 
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -319,5 +434,39 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
         // Exit the viewCampsScreen and return to the main menu
         return;
 
+    }
+
+    /**
+     * The function displays the enquiries screen for a staff user and clears the
+     * screen.
+     * 
+     * @param user The user parameter is an instance of the Users class, which
+     *             represents a user in the
+     *             system.
+     */
+    public void viewEnquiriesScreen(Users user) {
+        if (!(user instanceof Staff))
+            return;
+        Staff staff = (Staff) user;
+        System.out.print("\033[H\033[2J");
+        enquiriesArray.viewEnquiries(staff);
+        ScreenClearFn();
+    }
+
+    /**
+     * The function replies to enquiries on the screen if the user is a staff
+     * member.
+     * 
+     * @param user The user parameter is an instance of the Users class, which
+     *             represents a user in the
+     *             system.
+     */
+    public void replyEnquiriesScreen(Users user) {
+        if (!(user instanceof Staff))
+            return;
+        Staff staff = (Staff) user;
+        System.out.print("\033[H\033[2J");
+        enquiriesArray.replyEnquiry(staff);
+        ScreenClearFn();
     }
 }

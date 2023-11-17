@@ -20,22 +20,36 @@ import utils.inputInt;
 
 public class EnquiriesReport implements Report {
     private Staff userStaff;
+    private Student userStudent;
     private EnquiriesArray enquiriesArray;
     private static String folderPath = "EnquiriesReport\\";
     private ArrayList<String> createdCamps;
     private Scanner sc = new Scanner(System.in);
 
+    // The `EnquiriesReport` constructor is responsible for initializing the
+    // `EnquiriesReport` object.
+    // It takes two parameters: `user` of type `Users` and `enquiriesArray` of type
+    // `EnquiriesArray`.
     public EnquiriesReport(Users user, EnquiriesArray enquiriesArray) {
         if (user instanceof Staff) {
             userStaff = (Staff) user;
+            this.createdCamps = userStaff.getCampsInCharge();
+        } else if (user instanceof Student && ((Student) user).IsCampComm()) {
+            userStudent = (Student) user;
+            this.createdCamps = new ArrayList<String>();
+            this.createdCamps.add(userStudent.getCampCommitteeRole().getCampName());
         } else {
             System.out.println("You are not allowed to access Enquiries Report!");
             return;
         }
         this.enquiriesArray = enquiriesArray;
-        this.createdCamps = userStaff.getCampsInCharge();
     }
 
+    /**
+     * The function generates a report for a selected camp, displaying a list of
+     * created camps and
+     * allowing the user to choose one.
+     */
     public void generateReport() {
         if (createdCamps.size() == 0) {
             System.out.println("You have not created any camps!");
@@ -68,6 +82,14 @@ public class EnquiriesReport implements Report {
         System.out.println("Find the report in EnquiriesReport");
     }
 
+    /**
+     * The function generates a CSV report of enquiries and their replies for a
+     * specific camp.
+     * 
+     * @param fileName The fileName parameter is a String that represents the name
+     *                 of the camp for
+     *                 which the enquiries report is being generated.
+     */
     private void generateEnquriesReport(String fileName) {
         File file = new File(folderPath + fileName + "_EnquiriesReport.csv");
         file.getParentFile().mkdirs(); // Ensure the parent directories exist
@@ -111,4 +133,5 @@ public class EnquiriesReport implements Report {
         }
 
     }
+
 }

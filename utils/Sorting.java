@@ -1,10 +1,15 @@
 package utils;
 
 public class Sorting {
-	// -----------------------------------------------------------------
-	// Sorts the specified array of objects using the selection
-	// sort algorithm.
-	// -----------------------------------------------------------------
+
+	/**
+	 * The selectionSort function sorts an array of Comparable objects in ascending
+	 * order using the
+	 * selection sort algorithm.
+	 * 
+	 * @param list The parameter "list" is an array of objects that implement the
+	 *             Comparable interface.
+	 */
 	public static void selectionSort(Comparable[] list) {
 		int min;
 		Comparable temp;
@@ -20,10 +25,14 @@ public class Sorting {
 		}
 	}
 
-	// -----------------------------------------------------------------
-	// Sorts the specified array of objects using the insertion
-	// sort algorithm.
-	// -----------------------------------------------------------------
+	/**
+	 * The insertionSort function sorts an array of Comparable objects in descending
+	 * order using the
+	 * insertion sort algorithm.
+	 * 
+	 * @param list The parameter "list" is an array of objects that implement the
+	 *             Comparable interface.
+	 */
 	public static void insertionSort(Comparable[] list) {
 		for (int index = 1; index < list.length; index++) {
 			Comparable key = list[index];
