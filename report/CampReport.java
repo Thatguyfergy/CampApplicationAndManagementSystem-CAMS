@@ -35,54 +35,12 @@ public class CampReport implements Report {
         this.campArray = campArray;
         if (user instanceof Staff)
             createdCamps = ((Staff) user).getCampsInCharge();
-        else
+        else {
+            createdCamps = new ArrayList<String>();
             createdCamps.add(((Student) user).getCampCommitteeRole().getCampName());
-        sc = new Scanner(System.in);
-    }
-
-    // The `public CampReport(Users usr, Camp cmp)` constructor is initializing the
-    // `user`, `camp`, and
-    // `sc` variables with the provided parameters. It is used to create a
-    // `CampReport` object with a
-    // specific `user` and `camp` for generating a report.
-    public CampReport(Users usr, Camp cmp) {
-        user = usr;
-        camp = cmp;
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * The function generates a report based on the user's choice and saves it to a
-     * file.
-     * 
-     * @param choice The parameter "choice" is an integer that represents the user's
-     *               selection for the
-     *               type of report to generate. The possible values for "choice"
-     *               are:
-     */
-    public void generateReportforComm(int choice) {
-        switch (choice) {
-            case 1:
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
-                generateCampReport();
-                break;
-            case 2:
-                fileName = "CampReports\\" + camp.getCampName() + "_Attendees_Report.csv";
-                generateCampAttendeesReport();
-                break;
-            case 3:
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName()
-                        + "_CommitteeMembers_Report.csv";
-                generateCampCommitteeMembersReport();
-                break;
-            default:
-                System.out.println("Invalid choice! - Applying no filter");
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
-                generateCampReport();
-                break;
         }
 
-        System.out.println("Generating report for " + camp.getCampName() + "...");
+        sc = new Scanner(System.in);
     }
 
     /**
@@ -114,6 +72,7 @@ public class CampReport implements Report {
             System.out.println("Invalid choice!");
             return;
         }
+        System.out.println();
 
         camp = campArray.getCamp(createdCamps.get(Integer.parseInt(choice) - 1));
 

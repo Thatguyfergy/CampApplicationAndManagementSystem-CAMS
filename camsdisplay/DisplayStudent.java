@@ -578,12 +578,8 @@ public class DisplayStudent extends DisplayLogin
                 "╔══════════════════════════════════════════════════════════════════════╗\n" +
                         "║ Camp Application & Management System - Generate Camp Report          ║\n" +
                         "╚══════════════════════════════════════════════════════════════════════╝\r\n");
-        System.out.print(
-                "Select Filter:\n1: All (No Filter)\n2: Attendees\n3: Committee Members\n\nEnter choice: ");
-        int repchoice = inputInt.nextInt(sc);
-        CampReport campReport = new CampReport(student,
-                campArray.getCamp(student.getCampCommitteeRole().getCampName()));
-        campReport.generateReportforComm(repchoice);
+        CampReport campReport = new CampReport(student, campArray);
+        campReport.generateReport();
     }
 
     /**
