@@ -136,7 +136,7 @@ public class CampArray {
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
         // Check if the camp name already exists
-        if (campExists(campName)) {
+        if (checkCampExists(campName)) {
             System.out.println("Camp with the name '" + campName + "' already exists. Please choose a different name.");
             return null; // Exit the method
         }
@@ -255,26 +255,6 @@ public class CampArray {
         return campName;
     }
 
-    /**
-     * The function checks if a camp with the given name already exists in a list of
-     * camps.
-     * 
-     * @param campName The campName parameter is a String that represents the name
-     *                 of the camp that we
-     *                 want to check if it exists.
-     * @return The method is returning a boolean value. It returns true if a camp
-     *         with the same name
-     *         already exists in the list of camps, and false if the camp name
-     *         doesn't exist.
-     */
-    private boolean campExists(String campName) {
-        for (Camp camp : camps) {
-            if (camp.getCampName().equalsIgnoreCase(campName)) {
-                return true; // Camp with the same name already exists
-            }
-        }
-        return false; // Camp name doesn't exist
-    }
 
     /**
      * The function `editCamp` allows a staff member to edit various fields of a
