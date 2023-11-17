@@ -5,16 +5,26 @@ public class CAMDate implements Comparable<CAMDate> {
     private int month;
     private int year;
 
-    // The `public CAMDate()` constructor is a default constructor that initializes
-    // the 'day', 'month', and 'year' variables to 0.
+    /**  
+     * The `public CAMDate()` constructor is a default constructor that initializes
+     * the 'day', 'month', and 'year' variables to 0.
+     */
     public CAMDate() {
         this.day = 0;
         this.month = 0;
         this.year = 0;
     }
 
-    // The `CAMDate(int day, int month, int year)` constructor is used to
-    // create a new `CAMDate` object with the specified day, month, and year values.
+    /**
+     * The `public CAMDate(int day, int month, int year)` constructor is used to create a new
+     * `CAMDate` object with the same day, month, and year values as the `date`
+     * parameter. If the date given is non-existent, the constructor throws an
+     * illegal argument exception.
+     * 
+     * @param day   The 'day' parameter represents the day of the date.
+     * @param month The 'month' parameter represents the month of the date.
+     * @param year  The 'year' parameter represents the year of the date.
+     */
     public CAMDate(int day, int month, int year) throws IllegalArgumentException {
         if (isValidDate(day, month, year)) {
             this.day = day;
@@ -25,10 +35,14 @@ public class CAMDate implements Comparable<CAMDate> {
         }
     }
 
-    // The `CAMDate(String date)` constructor is used to create a new
-    // `CAMDate` object with the a string representation of the date in the format
-    // "dd/mm/yyyy".
-    // If date given is non-existent, the constructor throws an illegal argument exception.
+    /**
+     * The `CAMDate(CAMDate date)` constructor is used to create a new `CAMDate`
+     * object with a string representation of the date in the format "dd/mm/yyyy".
+     * If date given is non-existent, the constructor throws an illegal argument
+     * 
+     * @param date The 'date' parameter represents a string representation of the
+     *             date in the format "dd/mm/yyyy".
+     */
     public CAMDate(String date) {
         String[] dateArray = date.split("/");
         int newDay = Integer.parseInt(dateArray[0]);

@@ -17,9 +17,11 @@ public class CampFilter {
     private ArrayList<Camp> unfilteredCamps;
     private Scanner sc;
 
-    // The `public CampFilter()` is a constructor method for the `CampFilter` class.
-    // It initialises 'availableDates', 'availableFaculties', 'availableLocations',
-    // 'availableSIC', 'filteredCamps', 'unfilteredCamps', and 'sc' variables.
+    /**
+     *  The `CampFilter()` is a constructor method for the `CampFilter` class.
+     * It initialises 'availableDates', 'availableFaculties', 'availableLocations',
+     * 'availableSIC', 'filteredCamps', 'unfilteredCamps', and 'sc' variables.
+     */
     public CampFilter() {
         availableDates = new ArrayList<String>();
         availableFaculties = new ArrayList<String>();
