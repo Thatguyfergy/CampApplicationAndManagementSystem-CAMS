@@ -53,8 +53,7 @@ public class Student extends Users {
 
     /**
      * The function returns a boolean value indicating whether the variable
-     * IsCampComm is true or
-     * false.
+     * IsCampComm is true or false.
      * 
      * @return The method is returning the value of the variable "IsCampComm".
      */
