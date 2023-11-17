@@ -201,6 +201,10 @@ public class CampArray {
 
         System.out.println("Location:");
         String location = scanner.nextLine().toUpperCase();
+        if (location.equals("")) {
+            System.out.println("Location cannot be empty");
+            return null;
+        }
 
         System.out.println("Total Slots:");
         int totalSlots = scanner.nextInt();
@@ -289,16 +293,15 @@ public class CampArray {
         System.out.print("What field would you like to edit?\n" +
                 "1. Camp Name\n" +
                 "2. Registration Closing Date\n" +
-                "3. Camp Visibility\n" +
+                "3. Camp Availability\n" +
                 "4. Location\n" +
                 "5. Total Slots\n" +
                 "6. Committee Members Slots\n" +
                 "7. Camp Description\n" +
-                "8. Staff In Charge\n" +
-                "9. Add Date\n" +
-                "10. Remove Date\n" +
-                "11. Toggle Visibility\n" +
-                "12. Exit\n" +
+                "8. Add Date\n" +
+                "9. Remove Date\n" +
+                "10. Toggle Visibility\n" +
+                "11. Exit\n" +
                 "Enter your choice: ");
 
         String option = scanner.nextLine();
@@ -352,6 +355,10 @@ public class CampArray {
                 // Add logic to edit Location
                 System.out.println("Enter new location for the camp:");
                 String newLocation = scanner.nextLine();
+                if (newLocation.equals("")) {
+                    System.out.println("Location cannot be empty");
+                    return;
+                }
                 targetCamp.getCampInfo().setLocation(newLocation);
                 break;
             case "5":
@@ -382,11 +389,6 @@ public class CampArray {
                 targetCamp.getCampInfo().setCampDescription(newDescription);
                 break;
             case "8":
-                System.out.println("Enter new staff in charge for the camp:");
-                String newStaffInCharge = scanner.nextLine();
-                targetCamp.getCampInfo().setStaffInCharge(newStaffInCharge);
-                break;
-            case "9":
                 // Add logic to add dates
                 // targetCamp.getCampInfo().addDate(new CAMDate(startDate),
                 // newCAMDate(endDate));
@@ -422,7 +424,7 @@ public class CampArray {
                 }
                 break;
 
-            case "10":
+            case "9":
                 // Add logic to remove date
                 if (targetCamp.getAttendees().size() > 0) {
                     System.out.println("You cannot remove dates from a camp with registered attendees");
@@ -447,7 +449,7 @@ public class CampArray {
 
                 }
                 break;
-            case "11":
+            case "10":
                 while (true) {
                     System.out.println("Enter new visibility for camp (on/off):");
                     String manualVisibility = scanner.nextLine().toLowerCase();
@@ -460,7 +462,7 @@ public class CampArray {
                     }
                 }
                 break;
-            case "12":
+            case "11":
                 System.out.println("Exiting Edit Camp");
                 return;
             default:
@@ -753,14 +755,14 @@ public class CampArray {
         System.out.println("Attendees:");
         for (String attendee : camp.getAttendees()) {
             if (attendee != null)
-                System.out.println("- " + attendee);
+                System.out.println("- " + UsersDatabase.getFirstName(attendee) + " (" + attendee +  ")");
         }
 
         // Display committee members
         System.out.println("Committee Members:");
         for (String committeeMember : camp.getCommitteeMembers()) {
             if (committeeMember != null)
-                System.out.println("- " + committeeMember);
+                System.out.println("- " + UsersDatabase.getFirstName(committeeMember) + " (" + committeeMember + ")");
         }
 
         System.out.println(); // Add a line break for better readability
