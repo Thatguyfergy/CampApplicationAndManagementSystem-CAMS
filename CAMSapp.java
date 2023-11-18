@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 public class CAMSapp {
 
     /**
+     * Main function to enter app program
      * @param args
      * @throws IOException
      */
