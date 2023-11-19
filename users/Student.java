@@ -16,12 +16,10 @@ public class Student extends Users {
     private ArrayList<CAMDate> BusyDates;
     private ArrayList<Enquiries> PendingEnquiries = new ArrayList<Enquiries>();
 
-    // The above code is defining a constructor for a class called "Student". The
-    // constructor takes in
-    // several parameters including the student's first name, user ID, faculty
-    // information, information
-    // about their committee camp, regular camps, busy dates, and a CampArray
-    // object.
+    // The code below defines a constructor for the Student clas.
+    // The constructor takes in several parameters including the student's
+    // first name, user ID, faculty information, information about their committee camp,
+    // regular camps, busy dates, and a CampArray object.
     public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps,
             String busyDates, CampArray campArray) {
         super(FirstName, userID, facultyInfo);
@@ -53,10 +51,9 @@ public class Student extends Users {
 
     /**
      * The function returns a boolean value indicating whether the variable
-     * IsCampComm is true or
-     * false.
+     * IsCampComm is true or false.
      * 
-     * @return The method is returning the value of the variable "IsCampComm".
+     * @return The value of the variable "IsCampComm".
      */
     public boolean IsCampComm() {
         return IsCampComm;
@@ -76,18 +73,16 @@ public class Student extends Users {
      * the Attendee list.
      * 
      * @param index The index parameter is an integer value that represents the
-     *              position of the desired
-     *              attendee in the Attendee list.
-     * @return The method is returning a CampAttendeeRole object.
+     *              position of the required attendee in the Attendee list.
+     * @return A CampAttendeeRole object.
      */
     public CampAttendeeRole getAttendee(int index) {
         return Attendee.get(index);
     }
 
     /**
-     * The function "viewAvailAndRegCamps" calls the "viewCamps" method on the
-     * "currentCamps" object,
-     * passing in the current object as an argument.
+     * The function "viewAvailAndRegCamps" calls the "viewCamps" method of the
+     * "currentCamps" object, which is passed in as an argument.
      * 
      * @param currentCamps A CampArray object that contains a list of camps.
      */
@@ -98,26 +93,22 @@ public class Student extends Users {
     /**
      * The function returns an ArrayList of Strings called RegCamps.
      * 
-     * @return An ArrayList of Strings named "RegCamps" is being returned.
+     * @return An ArrayList of Strings named "RegCamps".
      */
     public ArrayList<String> getRegCampsArray() {
         return RegCamps;
     }
 
     /**
-     * The function `registerCampAttendee` checks various conditions before
-     * registering a camp attendee
-     * and adds them to the list of registered camps and attendees.
+     * The function `registerCampAttendee` checks the required conditions before
+     * registering a camp attendee adding them to the list of registered camps and attendees.
      * 
      * @param camp      The "camp" parameter is an object of the Camp class, which
-     *                  represents a specific
-     *                  camp that a student wants to register for. It contains
-     *                  information such as the camp name, dates,
-     *                  and visibility status.
-     * @param campArray The `campArray` parameter is an instance of the `CampArray`
-     *                  class. It is used
-     *                  to register the attendee for the camp by calling the
-     *                  `registerAttendee` method on it.
+     *                  represents a specific camp that a student wants to register for. 
+     *                  It contains information such as the camp name, dates, and visibility status.
+     * @param campArray The `campArray` parameter is an object of the `CampArray` class.
+     *                  It is used to register the attendee for the camp by calling the
+     *                  `registerAttendee` method from the `campArray` parameter.
      */
     public void registerCampAttendee(Camp camp, CampArray campArray) {
         // check if camp registered before
@@ -162,16 +153,14 @@ public class Student extends Users {
     }
 
     /**
-     * The function `registerCampCommittee` checks various conditions before
-     * allowing a student to
-     * register as a camp committee for a camp.
+     * The function `registerCampCommittee` checks the required conditions before
+     * allowing a student to register as a camp committee for a camp.
      * 
      * @param camp      The "camp" parameter is an object of the Camp class, which
-     *                  represents a specific
-     *                  camp that the user wants to register as a committee for.
-     * @param campArray The `campArray` parameter is an instance of the `CampArray`
-     *                  class. It is used
-     *                  to register the camp committee for a specific camp.
+     *                  represents the specific camp that the user wants to register as a committee for.
+     * @param campArray The `campArray` parameter is an object of the `CampArray` class.
+     *                  It is used to register the camp committee for the specific camp by calling the
+     *                  `registerCampComm` method from the `campArray` parameter.
      */
     public void registerCampCommittee(Camp camp, CampArray campArray) {
         // check if camp registered before
@@ -223,15 +212,14 @@ public class Student extends Users {
     }
 
     /**
-     * The function withdraws an attendee from a camp and removes their registration
-     * information.
+     * The function withdraws an attendee from a camp and updates the relevant attributes of the Student object
+     * related to camp registration.
      * 
      * @param camp      The "camp" parameter is an object of the Camp class. It
-     *                  represents the specific camp
-     *                  from which the attendee wants to withdraw.
-     * @param campArray The `campArray` parameter is an instance of the `CampArray`
-     *                  class. It is used
-     *                  to perform operations related to the collection of camps.
+     *                  represents the specific camp which the attendee wants to withdraw from.
+     * @param campArray The "campArray" parameter is an object of the `CampArray` class. 
+     *                  It is used to withdraw the student from the specific camp by calling the
+     *                  `withdrawAttendee` method from the `campArray` parameter.
      */
     public void withdrawFromCamp(Camp camp, CampArray campArray) {
         if (IsCampComm) {
@@ -258,17 +246,13 @@ public class Student extends Users {
     }
 
     /**
-     * The function creates a new enquiry object with the given enquiry string, camp
-     * name, and the ID
-     * of the current object, and adds it to the list of pending enquiries.
+     * The function creates a new enquiry object with the given enquiry string, camp name, and the ID
+     * of the current student object. Then it is added to the list PendingEnquiries.
      * 
      * @param enqString The enqString parameter is a string that represents the
-     *                  enquiry message or
-     *                  details. It contains the information provided by the user
-     *                  when creating the enquiry.
+     *                  enquiry message provided by the user when creating the enquiry.
      * @param campName  The campName parameter is a String that represents the name
-     *                  of the camp for
-     *                  which the enquiry is being created.
+     *                  of the camp the enquiry is for.
      */
     public void createEnquiry(String enqString, String campName) {
         Enquiries newEnquiry = new Enquiries(enqString, this.getID(), campName);
@@ -277,9 +261,8 @@ public class Student extends Users {
     }
 
     /**
-     * The function "viewEnquiries" prints out the details of pending enquiries,
-     * including their
-     * submission status, camp name, and enquiry text.
+     * The function "viewEnquiries" prints out the list of the student's PendingEnquiries,
+     * printing each of the submission status, camp name, and enquiry text.
      */
     public void viewEnquiries() {
         for (int i = 0; i < PendingEnquiries.size(); i++) {
@@ -298,16 +281,13 @@ public class Student extends Users {
     }
 
     /**
-     * The function edits an enquiry in a list of pending enquiries by modifying the
-     * enquiry string at
-     * the specified index.
+     * The function edits an enquiry from the list of pending enquiries of the student
+     * by modifying the enquiry string at the specified index of PendingEnquiries.
      * 
-     * @param enqString The enqString parameter is a String that represents the new
-     *                  content of the
-     *                  enquiry that you want to edit.
+     * @param enqString The enqString parameter is a String that represents the modified enquiry
+     *                  provided by the user.
      * @param index     The index parameter is an integer that represents the
-     *                  position of the enquiry in
-     *                  the PendingEnquiries list that you want to edit.
+     *                  position of the enquiry in PendingEnquiries that the user is editing.
      */
     public void editEnquiry(String enqString, int index) {
         PendingEnquiries.get(index).modifyEnquiry(enqString);
@@ -315,14 +295,11 @@ public class Student extends Users {
     }
 
     /**
-     * The submitEnquiry function submits an enquiry from the PendingEnquiries array
-     * to the
-     * EnquiriesArray.
+     * The submitEnquiry function submits an enquiry from PendingEnquiries to the main EnquiriesArray.
      * 
-     * @param enqArray An array of Enquiries objects.
+     * @param enqArray An array of Enquiries objects, main EnquiriesArray from the dsiplay classes.
      * @param index    The index parameter is an integer that represents the
-     *                 position of the enquiry in
-     *                 the PendingEnquiries list that you want to submit.
+     *                  position of the enquiry in PendingEnquiries that the user is submitting.
      */
     public void submitEnquiry(EnquiriesArray enqArray, int index) {
         enqArray.submitEnquiry(PendingEnquiries.get(index));
@@ -330,13 +307,11 @@ public class Student extends Users {
     }
 
     /**
-     * The function deletes an enquiry from a list of pending enquiries, but only if
-     * it has not been
-     * submitted.
+     * The function deletes an enquiry from PendingEnquiries, but only if
+     * it has not been submitted.
      * 
-     * @param index The index parameter represents the position of the enquiry in
-     *              the PendingEnquiries
-     *              list that you want to delete.
+     * @param index The index parameter is an integer that represents the
+     *              position of the enquiry in PendingEnquiries that the user is deleting.
      */
     public void deleteEnquiry(int index) {
         if (PendingEnquiries.get(index).getSubmitted()) {
@@ -348,29 +323,26 @@ public class Student extends Users {
     }
 
     /**
-     * The function returns an ArrayList of CAMDate objects representing busy dates.
+     * The function returns an ArrayList of CAMDate objects representing the dates which the student is busy.
      * 
-     * @return An ArrayList of CAMDate objects is being returned.
+     * @return An ArrayList of CAMDate objects is returned.
      */
     public ArrayList<CAMDate> getBusyDates() {
         return BusyDates;
     }
 
     /**
-     * The function "viewEnquiriesReplies" calls the "viewReplies" method on an
-     * EnquiriesArray object,
-     * passing in the current object as a parameter.
+     * The function "viewEnquiriesReplies" calls the "viewReplies" method of the main EnquiriesArray object,
+     * passing in the current student object as the parameter.
      * 
-     * @param enqArray The enqArray parameter is an instance of the EnquiriesArray
-     *                 class. It is used to
-     *                 store and manage a collection of enquiries and their replies.
+     * @param enqArrayAn array of Enquiries objects, main EnquiriesArray from the dsiplay classes.
      */
     public void viewEnquiriesReplies(EnquiriesArray enqArray) {
         enqArray.viewReplies(this);
     }
 
     /**
-     * The function returns the size of the PendingEnquiries list.
+     * The function returns the size of the student's PendingEnquiries.
      * 
      * @return The size of the PendingEnquiries list.
      */
@@ -379,7 +351,7 @@ public class Student extends Users {
     }
 
     /**
-     * The function returns the CampCommitteeRole object.
+     * The function returns the CampCommitteeRole attribute.
      * 
      * @return The method is returning a CampCommitteeRole object.
      */
@@ -389,20 +361,12 @@ public class Student extends Users {
 
     /**
      * The function compares the points of two students' camp committee roles and
-     * returns 1 if the
-     * first student has more points, -1 if the second student has more points, and
-     * 0 if they have the
-     * same number of points.
+     * returns 1 if student a has more points, -1 if student b has more points, and
+     * 0 if they have the same points.
      * 
      * @param a The first student object to compare.
-     * @param b The parameter "b" is a Student object.
-     * @return The method is returning an integer value. If the points of student a
-     *         are equal to the
-     *         points of student b, it returns 0. If the points of student a are
-     *         greater than the points of
-     *         student b, it returns 1. Otherwise, if the points of student a are
-     *         less than the points of
-     *         student b, it returns -1.
+     * @param b The second student object to compare.
+     * @return The method is returning an integer value, as described above
      */
     public static int compareCommPoints(Student a, Student b) {
         // if equal return 0
@@ -413,17 +377,13 @@ public class Student extends Users {
     }
 
     /**
-     * The function `deleteCamp` removes a camp from the list of attendees, removes
-     * busy dates
-     * associated with the camp, and removes the camp from the list of registered
-     * camps.
-     * If the student is a campCom, then he will be removed.
+     * The function `deleteCamp` updates the relevant attributes of the student when a camp is deleted by a Staff
+     * such as BusyDates, RegCamps and the Attendee arraylist.
+     * If the student is a campCom, then the camp comm role under this student object is removed
      * 
-     * @param campName    The name of the camp that you want to delete.
+     * @param campName    The name of the camp that is being deleted.
      * @param deleteDates The `deleteDates` parameter is an `ArrayList` of `CAMDate`
-     *                    objects. It
-     *                    represents the dates that need to be deleted from the
-     *                    `BusyDates` list.
+     *                    objects. It represents the dates of the camp that is being deleted
      */
     public void deleteCamp(String campName, ArrayList<CAMDate> deleteDates) {
         for (int i = 0; i < Attendee.size(); i++) {
@@ -454,10 +414,11 @@ public class Student extends Users {
     }
 
     /**
-     * The function edits the name of a camp for all attendees and registered camps.
+     * The function edits the name of a camp within the student class attributes
+     * when a Staff changes the name of the camp
      * 
-     * @param oldName The old name of the camp that needs to be edited.
-     * @param newName The new name that you want to replace the old name with.
+     * @param oldName The old name of the camp whose name has been changed.
+     * @param newName The new name of the camp.
      */
     public void editCamp(String oldName, String newName) {
         for (CampAttendeeRole attend : Attendee) {
@@ -473,7 +434,7 @@ public class Student extends Users {
         }
     }
 
-    // Deprecated methods
+
 
     // public void listEnquiries(){
     // for (int i=0;i<Attendee.size();i++){
