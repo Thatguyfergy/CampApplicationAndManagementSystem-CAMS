@@ -2,27 +2,22 @@ package camsdisplay;
 
 import users.Users;
 
-// The code is declaring a Java interface named `viewCampsScreen`. An interface in Java is a collection
-// of abstract methods that can be implemented by classes. In this case, the `viewCampsScreen`
-// interface is defining two abstract methods: `viewCampsScreen` and `viewCampDetailsScreen`. These
-// methods do not have any implementation details and are meant to be implemented by classes that
-// implement this interface.
+// The code is declaring a Java interface named `viewCampsScreen`. The interface defines the abstract methods
+// `viewCampsScreen` and `viewCampDetailsScreen`.
 public interface viewCampsScreen {
     /**
-     * This function is used to display the camps screen for a specific user.
+     * The function "viewCampsScreen" takes a parameter of type "Users" and does not return anything
      * 
-     * @param user The user object represents the user who wants to view the camps
-     *             screen.
+     * @param user The user parameter is an object of the Users class. It represents
+     *             the user who is accessing the display function
      */
     public void viewCampsScreen(Users user);
 
     /**
-     * The function "viewCampDetailsScreen" takes a user object as a parameter and
-     * is used to display the
-     * details of a camp.
+     * The function "viewCampDetailsScreen" takes a parameter of type "Users" and does not return anything
      * 
-     * @param user The user object represents the user who wants to view the camp
-     *             details screen.
+     * @param user The user parameter is an object of the Users class. It represents
+     *             the user who is accessing the display function
      */
     public void viewCampDetailsScreen(Users user);
 }

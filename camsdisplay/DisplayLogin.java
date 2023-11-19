@@ -38,14 +38,12 @@ public class DisplayLogin {
     }
 
     // The `public DisplayLogin()` constructor is an empty constructor that does not
-    // have any
-    // parameters or code inside it. It is used to create an instance of the
-    // `DisplayLogin` class
-    // without initializing any objects or performing any actions. It is likely
-    // included for future use
-    // or as a placeholder for potential future functionality.
+    // have any parameters or code inside it. It is used to create an instance of
+    // the `DisplayLogin` class without initializing any objects or performing any
+    // actions. Empty so that the derived classes won't reinitialise the superclass
+    // again
     public DisplayLogin() {
-        // Empty so that the shit won't get reinitialised again
+
     }
 
     /**
@@ -187,8 +185,7 @@ public class DisplayLogin {
 
     /**
      * The function `resetPasswordScreen` displays a password reset screen for a
-     * user in a camp
-     * application and management system.
+     * user in a camp application and management system.
      * 
      * @param user The "user" parameter is an object of the "Users" class. It
      *             represents the user for
