@@ -29,8 +29,10 @@ public class CampArray {
     private CampFilter campFilter;
 
     // The above code is a constructor for the CampArray class in Java. It takes a
-    // file name as a parameter and reads the contents of the file. The file is assumed to be in
-    // CSV format, with each row representing a camp.
+    // file name as a
+    // parameter and reads the contents of the file. The file is assumed to be in
+    // CSV format, with each
+    // row representing a camp.
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
         CampArray.campsFile = campsFile;
@@ -73,7 +75,9 @@ public class CampArray {
     }
 
     /**
-     * The function `updateFile` takes an ArrayList of Camp objects and writes their data to a CSV file.
+     * The function `updateFile` takes an ArrayList of Camp objects and writes their
+     * data to a CSV
+     * file.
      * 
      * @param camps An ArrayList of Camp objects.
      */
@@ -120,16 +124,19 @@ public class CampArray {
     }
 
     /**
-     * The function creates a new camp with user-provided details and adds it to a list of camps.
+     * The function creates a new camp with user-provided details and adds it to a
+     * list of camps.
      * 
-     * @param staffinCharge The parameter "staffinCharge" represents the staff member who is in charge of the camp.
+     * @param staffinCharge The parameter "staffinCharge" represents the staff
+     *                      member who is in charge
+     *                      of the camp.
      * @return The method is returning a String, which is the campName.
      */
     public String createCamp(String staffinCharge) {
         System.out.println("Camp Name:");
         String campName = scanner.nextLine();
         // Check if the camp name already exists
-        if (campExists(campName)) {
+        if (checkCampExists(campName)) {
             System.out.println("Camp with the name '" + campName + "' already exists. Please choose a different name.");
             return null; // Exit the method
         }
@@ -210,6 +217,10 @@ public class CampArray {
 
         System.out.println("Location:");
         String location = scanner.nextLine().toUpperCase();
+        if (location.equals("")) {
+            System.out.println("Location cannot be empty");
+            return null;
+        }
 
         System.out.println("Total Slots:");
         int totalSlots = scanner.nextInt();
@@ -245,33 +256,17 @@ public class CampArray {
     }
 
     /**
-     * The function checks if a camp with the given name already exists in a list of
-     * camps.
-     * 
-     * @param campName The campName parameter is a String that represents the name
-     *                 of the camp that we want to check if it exists.
-     * @return The method is returning a boolean value. It returns true if a camp with the same name
-     *         already exists in the list of camps, and false if the camp name doesn't exist.
-     */
-    private boolean campExists(String campName) {
-        for (Camp camp : camps) {
-            if (camp.getCampName().equalsIgnoreCase(campName)) {
-                return true; // Camp with the same name already exists
-            }
-        }
-        return false; // Camp name doesn't exist
-    }
-
-    /**
      * The function `editCamp` allows a staff member to edit various fields of a
      * camp, such as the camp
      * name, registration closing date, camp visibility, location, total slots,
-     * committee members slots, camp description, staff in charge, and camp dates.
+     * committee members
+     * slots, camp description, staff in charge, and camp dates.
      * 
      * @param staff          The staff object represents the staff member who is
      *                       editing the camp. It contains
      *                       information about the staff member, such as their name,
-     *                       position, and the camps they are in charge of.
+     *                       position, and the camps they are in
+     *                       charge of.
      * @param enquiriesArray The `enquiriesArray` parameter is an instance of the
      *                       `EnquiriesArray`
      *                       class, which is an array that stores all the enquiries
@@ -279,7 +274,8 @@ public class CampArray {
      * @param usersDB        The `usersDB` parameter is an instance of the
      *                       `UsersDatabase` class, which is
      *                       used to manage the database of users in the system. It
-     *                       likely contains methods for adding, updating, and retrieving user information.
+     *                       likely contains methods for adding,
+     *                       updating, and retrieving user information.
      */
     public void editCamp(Staff staff, EnquiriesArray enquiriesArray, UsersDatabase usersDB) {
         ArrayList<String> campsInCharge = staff.getCampsInCharge();
@@ -324,16 +320,15 @@ public class CampArray {
         System.out.print("What field would you like to edit?\n" +
                 "1. Camp Name\n" +
                 "2. Registration Closing Date\n" +
-                "3. Camp Visibility\n" +
+                "3. Camp Availability\n" +
                 "4. Location\n" +
                 "5. Total Slots\n" +
                 "6. Committee Members Slots\n" +
                 "7. Camp Description\n" +
-                "8. Staff In Charge\n" +
-                "9. Add Date\n" +
-                "10. Remove Date\n" +
-                "11. Toggle Visibility\n" +
-                "12. Exit\n" +
+                "8. Add Date\n" +
+                "9. Remove Date\n" +
+                "10. Toggle Visibility\n" +
+                "11. Exit\n" +
                 "Enter your choice: ");
 
         String option = scanner.nextLine();
@@ -388,6 +383,10 @@ public class CampArray {
                 // Add logic to edit Location
                 System.out.println("Enter new location for the camp:");
                 String newLocation = scanner.nextLine();
+                if (newLocation.equals("")) {
+                    System.out.println("Location cannot be empty");
+                    return;
+                }
                 targetCamp.getCampInfo().setLocation(newLocation);
                 break;
             case "5":
@@ -418,11 +417,6 @@ public class CampArray {
                 targetCamp.getCampInfo().setCampDescription(newDescription);
                 break;
             case "8":
-                System.out.println("Enter new staff in charge for the camp:");
-                String newStaffInCharge = scanner.nextLine();
-                targetCamp.getCampInfo().setStaffInCharge(newStaffInCharge);
-                break;
-            case "9":
                 // Add logic to add dates
                 // targetCamp.getCampInfo().addDate(new CAMDate(startDate),
                 // newCAMDate(endDate));
@@ -458,7 +452,7 @@ public class CampArray {
                 }
                 break;
 
-            case "10":
+            case "9":
                 // Add logic to remove date
                 if (targetCamp.getAttendees().size() > 0) {
                     System.out.println("You cannot remove dates from a camp with registered attendees");
@@ -483,7 +477,7 @@ public class CampArray {
 
                 }
                 break;
-            case "11":
+            case "10":
                 while (true) {
                     System.out.println("Enter new visibility for camp (on/off):");
                     String manualVisibility = scanner.nextLine().toLowerCase();
@@ -496,7 +490,7 @@ public class CampArray {
                     }
                 }
                 break;
-            case "12":
+            case "11":
                 System.out.println("Exiting Edit Camp");
                 return;
             default:
@@ -514,7 +508,8 @@ public class CampArray {
      * @param campName The parameter `campName` is a String that represents the name
      *                 of a camp.
      * @return The method is returning a boolean value. It returns true if a camp
-     *         with the specified campName exists in the camps list, and false otherwise.
+     *         with the specified
+     *         campName exists in the camps list, and false otherwise.
      */
     public boolean checkCampExists(String campName) {
         for (Camp camp : camps) {
@@ -544,17 +539,26 @@ public class CampArray {
     }
 
     /**
-     * The function `deleteCamp` allows a staff member to delete a camp from the system, along with its associated data.
+     * The function `deleteCamp` allows a staff member to delete a camp from the
+     * system, along with its
+     * associated data.
      * 
      * @param staff           An instance of the Staff class, which contains
-     *                        information about the staff member and the camps they are in charge of.
+     *                        information about the staff member
+     *                        and the camps they are in charge of.
      * @param usersDB         The `usersDB` parameter is an instance of the
-     *                        `UsersDatabase` class, which represents a database of user information. It is used
-     *                        to perform operations related to user data, such as deleting a camp from the database.
+     *                        `UsersDatabase` class, which
+     *                        represents a database of user information. It is used
+     *                        to perform operations related to user
+     *                        data, such as deleting a camp from the database.
      * @param enquiriesArray  The `enquiriesArray` parameter is an instance of the
-     *                        `EnquiriesArray` class, which is an array that stores all the enquiries related to camps.
+     *                        `EnquiriesArray`
+     *                        class, which is an array that stores all the enquiries
+     *                        related to camps.
      * @param suggestionArray The `suggestionArray` parameter is an instance of the
-     *                        `SuggestionArray` class, which is an array that stores suggestions for camps.
+     *                        `SuggestionArray`
+     *                        class, which is an array that stores suggestions for
+     *                        camps.
      */
     public void deleteCamp(Staff staff, UsersDatabase usersDB, EnquiriesArray enquiriesArray,
             SuggestionArray suggestionArray) {
@@ -604,11 +608,17 @@ public class CampArray {
      * The function truncates a string to a specified width, adding an ellipsis if
      * necessary.
      * 
-     * @param input The input parameter is a String that represents the text that needs to be truncated.
-     * @param width The "width" parameter specifies the maximum width of the truncated string.
+     * @param input The input parameter is a String that represents the text that
+     *              needs to be
+     *              truncated.
+     * @param width The "width" parameter specifies the maximum width of the
+     *              truncated string.
      * @return The method returns a truncated version of the input string with an
-     *         ellipsis (...) added at the end if the length of the input string is greater than the specified width. 
-     *         If the length of the input string is less than or equal to the specified width, the method returns the input
+     *         ellipsis (...) added
+     *         at the end if the length of the input string is greater than the
+     *         specified width. If the length
+     *         of the input string is less than or equal to the specified width, the
+     *         method returns the input
      *         string padded with spaces to match the width.
      */
     private String truncateWithEllipsis(String input, int width) {
@@ -620,11 +630,14 @@ public class CampArray {
     }
 
     /**
-     * The function "viewCamps" displays different camps based on the visibility requirements for staff
+     * The function "viewCamps" displays different camps based on the visibility
+     * requirements for staff
      * and students, filtering and sorting the camps accordingly.
      * 
-     * @param user The "user" parameter is an instance of the "Users" class, which is a superclass for
-     *             both "Staff" and "Student" classes. It represents the user who wants to view the camps.
+     * @param user The "user" parameter is an instance of the "Users" class, which
+     *             is a superclass for
+     *             both "Staff" and "Student" classes. It represents the user who
+     *             wants to view the camps.
      */
     public void viewCamps(Users user) {
         // Display camps based on different visibility requirements
@@ -801,12 +814,18 @@ public class CampArray {
 
     /**
      * The function "viewCampDetails" displays the details of a camp, including its
-     * name, dates, registration closing date, location, slots available, description, staff in charge, and the faculty the camp is available for.
+     * name, dates,
+     * registration closing date, location, slots available, description, staff in
+     * charge, and the
+     * faculty the camp is available for.
      * 
      * @param campName The campName parameter is a String that represents the name
-     *                 of the camp for which we want to view the details.
+     *                 of the camp for
+     *                 which we want to view the details.
      * @param user     The "user" parameter is an instance of the "Users" class,
-     *                 which represents a user in the system. It is used to determine the type of user accessing the camp details.
+     *                 which represents a user in
+     *                 the system. It is used to determine the type of user
+     *                 accessing the camp details.
      */
     public void viewCampDetails(String campName, Users user) {
         // view the details of the camp
@@ -841,8 +860,10 @@ public class CampArray {
      * The function displays the registered students, attendees, and committee
      * members of a camp.
      * 
-     * @param camp The "camp" parameter is an instance of the "Camp" class. It represents a camp object
-     *             that contains information about registered students, attendees, and committee members.
+     * @param camp The "camp" parameter is an instance of the "Camp" class. It
+     *             represents a camp object
+     *             that contains information about registered students, attendees,
+     *             and committee members.
      */
     private void displayRegisteredStudents(Camp camp) {
         System.out.println("Registered Students:");
@@ -851,23 +872,27 @@ public class CampArray {
         System.out.println("Attendees:");
         for (String attendee : camp.getAttendees()) {
             if (attendee != null)
-                System.out.println("- " + attendee);
+                System.out.println("- " + UsersDatabase.getFirstName(attendee) + " (" + attendee + ")");
         }
 
         // Display committee members
         System.out.println("Committee Members:");
         for (String committeeMember : camp.getCommitteeMembers()) {
             if (committeeMember != null)
-                System.out.println("- " + committeeMember);
+                System.out.println("- " + UsersDatabase.getFirstName(committeeMember) + " (" + committeeMember + ")");
         }
 
         System.out.println(); // Add a line break for better readability
     }
 
     /**
-     * The function "getCamp" returns a Camp object based on the given camp name, or null if no matching camp is found.
+     * The function "getCamp" returns a Camp object based on the given camp name, or
+     * null if no
+     * matching camp is found.
      * 
-     * @param campName The campName parameter is a String that represents the name of the camp that we are searching for.
+     * @param campName The campName parameter is a String that represents the name
+     *                 of the camp that we
+     *                 are searching for.
      * @return The method is returning a Camp object.
      */
     public Camp getCamp(String campName) {
@@ -880,10 +905,14 @@ public class CampArray {
     }
 
     /**
-     * The function registers an attendee for a camp if the registration is still open.
+     * The function registers an attendee for a camp if the registration is still
+     * open.
      * 
-     * @param campName  The name of the camp that the attendee wants to register for.
-     * @param studentID The studentID parameter is a unique identifier for each student. It is used to register the student for a camp.
+     * @param campName  The name of the camp that the attendee wants to register
+     *                  for.
+     * @param studentID The studentID parameter is a unique identifier for each
+     *                  student. It is used to
+     *                  register the student for a camp.
      */
     public void registerAttendee(String campName, String studentID) {
         for (Camp camp : camps) {
@@ -904,12 +933,15 @@ public class CampArray {
     }
 
     /**
-     * The function registers a student for a camp if the camp is still open for registration.
+     * The function registers a student for a camp if the camp is still open for
+     * registration.
      * 
      * @param campName  The campName parameter is a String that represents the name
-     *                  of the camp that the student wants to register for.
+     *                  of the camp that the
+     *                  student wants to register for.
      * @param studentID The student ID is a unique identifier for each student. It
-     *                  could be a number or a string that uniquely identifies a student.
+     *                  could be a number or
+     *                  a string that uniquely identifies a student.
      */
     public void registerCampCom(String campName, String studentID) {
         for (Camp camp : camps) {
@@ -929,11 +961,14 @@ public class CampArray {
 
     /**
      * The function withdraws an attendee from a camp by finding the camp with the
-     * given name and calling the withdrawAttendee method on it.
+     * given name and
+     * calling the withdrawAttendee method on it.
      * 
-     * @param campName  The name of the camp from which the attendee needs to be withdrawn.
+     * @param campName  The name of the camp from which the attendee needs to be
+     *                  withdrawn.
      * @param studentID The studentID parameter is a String that represents the
-     *                  unique identifier of the student who wants to withdraw from a camp.
+     *                  unique identifier of
+     *                  the student who wants to withdraw from a camp.
      */
     public void withdrawAttendee(String campName, String studentID) {
         for (Camp camp : camps) {
@@ -954,7 +989,9 @@ public class CampArray {
     }
 
     /**
-     * The function sets the value of the static variable "camps" in the CampArray class to the provided ArrayList of Camp objects.
+     * The function sets the value of the static variable "camps" in the CampArray
+     * class to the
+     * provided ArrayList of Camp objects.
      * 
      * @param camps An ArrayList of objects of type Camp.
      */
@@ -963,10 +1000,14 @@ public class CampArray {
     }
 
     /**
-     * The function checks if a student is eligible for a specific camp based on their faculty information and the availability of the camp.
+     * The function checks if a student is eligible for a specific camp based on
+     * their faculty
+     * information and the availability of the camp.
      * 
-     * @param student  An object of the class Student, which contains information about a student.
-     * @param campName The campName parameter is a String that represents the name of the camp.
+     * @param student  An object of the class Student, which contains information
+     *                 about a student.
+     * @param campName The campName parameter is a String that represents the name
+     *                 of the camp.
      * @return The method is returning a boolean value.
      */
     public boolean checkEligibleCamp(Student student, String campName) {
