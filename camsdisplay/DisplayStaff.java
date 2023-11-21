@@ -16,7 +16,7 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
-public class DisplayStaff extends DisplayLogin implements viewCampsScreen, ScreenClearFn, replyEnquiries {
+public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, ScreenClearFn, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -84,7 +84,7 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
                     "Enter your choice: ";
             System.out.print(menu);
 
-            int choice = inputInt.nextInt(sc);
+            int choice = InputInt.nextInt(sc);
             sc.nextLine(); // Consume the newline character
             switch (choice) {
                 case 0:
@@ -302,7 +302,7 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
 
         do {
             System.out.printf("Enter choice: ");
-            campChoice = inputInt.nextInt(sc);
+            campChoice = InputInt.nextInt(sc);
             if (campChoice == createdCamps.size() + 1) {
                 System.out.print("\033[H\033[2J"); // Clear the entire screen
                 return;
@@ -315,7 +315,7 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
                 "1. Name\n" +
                 "2. Points\n" +
                 "Enter your choice: ");
-        choice = inputInt.nextInt(sc);
+        choice = InputInt.nextInt(sc);
         sc.nextLine(); // Consume the newline character
         System.out.println(); // for readability
 

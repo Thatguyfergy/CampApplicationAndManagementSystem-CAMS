@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import users.*;
 import camps.*;
-import utils.inputInt;
+import utils.InputInt;
 
 public class SuggestionArray {
     private static ArrayList<Suggestion> suggestions = new ArrayList<Suggestion>();
@@ -228,7 +228,7 @@ public class SuggestionArray {
             return;
         }
         System.out.println("Which Suggestion do you want to process? ");
-        int id = inputInt.nextInt(sc);
+        int id = InputInt.nextInt(sc);
 
         for (Suggestion suggestion : suggestions) {
             if ((staff.checkStaffInCharge(suggestion.getCampName())) && (suggestion.getID() == id)
@@ -241,7 +241,7 @@ public class SuggestionArray {
                     int a;
                     do {
                         System.out.println("Do you want to accept (1) or reject (0) this suggestion? ");
-                        a = inputInt.nextInt(sc);
+                        a = InputInt.nextInt(sc);
                     } while (a != 0 && a != 1);
                     boolean accept = (a == 1) ? true : false;
 

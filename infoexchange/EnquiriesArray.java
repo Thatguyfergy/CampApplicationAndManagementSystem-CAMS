@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.UUID;
 
 import users.*;
-import utils.inputInt;
+import utils.InputInt;
 
 public class EnquiriesArray {
     private static ArrayList<Enquiries> enquiries = new ArrayList<Enquiries>();
@@ -285,7 +285,7 @@ public class EnquiriesArray {
             while (true) {
                 try {
                     System.out.printf("EnquiryID: \n");
-                    int idx = inputInt.nextInt(scanner);
+                    int idx = InputInt.nextInt(scanner);
                     scanner.nextLine();
                     enquiry = enquiries.get(idx);
                     break;
@@ -339,7 +339,7 @@ public class EnquiriesArray {
             while (true) {
                 try {
                     System.out.printf("EnquiryID: \n");
-                    int idx = inputInt.nextInt(scanner);
+                    int idx = InputInt.nextInt(scanner);
                     scanner.nextLine();
                     enquiry = enquiries.get(idx);
                     break;

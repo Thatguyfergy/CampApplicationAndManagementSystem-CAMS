@@ -3,7 +3,7 @@ package utils;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class inputInt {
+public class InputInt {
 
     /**
      * The function nextInt takes a Scanner object as input and repeatedly prompts

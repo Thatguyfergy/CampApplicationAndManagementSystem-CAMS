@@ -16,7 +16,7 @@ import users.Staff;
 import users.Student;
 import users.Users;
 import users.UsersDatabase;
-import utils.inputInt;
+import utils.InputInt;
 
 public class EnquiriesReport implements Report {
     private Staff userStaff;
@@ -63,7 +63,7 @@ public class EnquiriesReport implements Report {
         while (true) {
             try {
                 System.out.printf("Enter choice: ");
-                choice = inputInt.nextInt(sc);
+                choice = InputInt.nextInt(sc);
                 if (choice == -1) {
                     return;
                 }
