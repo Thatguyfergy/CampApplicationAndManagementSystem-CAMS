@@ -11,7 +11,6 @@ import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import infoexchange.EnquiriesArray;
-import infoexchange.Suggestion;
 import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
@@ -393,7 +392,7 @@ public class DisplayStudent extends DisplayLogin
      * The function "viewPointsScreen" displays a screen for the Committee points of
      * a camp committee member in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committe member
+     * @param student The student object represents a student who is a camp committee member
      *                that wants to view his/her points
      */
     private void viewPointsScreen(Student student) {

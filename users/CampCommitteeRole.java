@@ -134,17 +134,17 @@ public class CampCommitteeRole {
     }
 
     /**
-     * The function "addOnePoint" increments the value of the variable "points" by
-     * one.
+     * The function increments the value of the variable "points" by
+     * one. called when 
      */
     public void addOnePoint() {
         points++;
     }
 
     /**
-     * The function returns the value of the variable "points".
+     * The function returns the value of the variable "points" which stores the number of points the student has.
      * 
-     * @return The method is returning the value of the variable "points".
+     * @return number of points the student has.
      */
     public int getPoints() {
         return points;

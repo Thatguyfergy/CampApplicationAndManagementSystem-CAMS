@@ -2,7 +2,7 @@ package camsdisplay;
 
 import users.Users;
 
-// The line `public interface registerCamps` is declaring an interface named `registerCamps`. 
+// The line `public interface CampsRegisterable` is declaring an interface named `CampsRegisterable`. 
 // The interface defines the abstract method `registerCampsScreen` that takes a
 // parameter of type `Users` and does not return anything.
 public interface CampsRegisterable {
