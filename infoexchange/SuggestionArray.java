@@ -11,14 +11,39 @@ import users.*;
 import camps.*;
 import utils.InputInt;
 
+/**
+ * SuggestionArray class is used to store all suggestions in program
+ * Only 1 instance of SuggestionArray is created when program starts, 
+ * by loading suggestions stored in external file
+ * 
+ * @author Tan Jun Kiat
+ * @version 1.0
+ */
 public class SuggestionArray {
+    /**
+     * stores Suggestion objects in an ArrayList
+     */
     private static ArrayList<Suggestion> suggestions = new ArrayList<Suggestion>();
+    /**
+     * stores the static external file name that suggestions are stored in 
+     */
     private static String suggestionFile;
+    /**
+     * stores the scanner object used for getting user input
+     */
     private Scanner sc = new Scanner(System.in);
 
-    // The `SuggestionArray` constructor is responsible for initializing the
-    // `SuggestionArray` object.
-    // It takes three parameters: `suggestionFile`, `users`, and `campArray`.
+    /**
+     * Constructor for loading array of suggestions into program from stored external data
+     * Invokes special constructor for suggestion object used only when 
+     * loading data from external file
+     * 
+     * @param suggestionFile    string containing name of file that suggestions are stored in
+     * @param users             usersDatabase object that contains student references 
+     *                          to pass into Suggestion constructor
+     * @param campArray         campArray object that contains camp references
+     *                          to pass into Suggestion constructor
+     */
     public SuggestionArray(String suggestionFile, UsersDatabase users, CampArray campArray) {
         SuggestionArray.suggestionFile = suggestionFile;
 
@@ -39,15 +64,13 @@ public class SuggestionArray {
     }
 
     /**
-     * The function creates a suggestion object with a given string, student, and
-     * camp, and adds it to
-     * a list of suggestions.
+     * This method creates a suggestion object and adds it to the array of suggestions
+     * in this suggestionArray
+     * Updates external file whenever a new suggestion is created.
      * 
-     * @param s   The suggestion message.
-     * @param std The parameter "std" is of type Student and represents the student
-     *            who is making the
-     *            suggestion.
-     * @param cmp The "cmp" parameter is an object of the Camp class.
+     * @param s     a string representing a suggestion
+     * @param std   student that gave the suggestion
+     * @param cmp   camp that the suggestion is for
      */
     public void createSuggestion(String s, Student std, Camp cmp) {
         suggestions.add(new Suggestion(s, std, cmp));
@@ -55,16 +78,12 @@ public class SuggestionArray {
     }
 
     /**
-     * The function "viewSuggestions" allows a staff member to view suggestions they
-     * are in charge of,
-     * displaying information about each suggestion.
+     * Overloaded method for a staff to view suggestions details for camp
+     * that they are in charge of.
      * 
-     * @param staff The staff parameter is an object of the Staff class. It
-     *              represents a staff member
-     *              who is viewing the suggestions.
-     * @return The method is returning a boolean value, which indicates whether
-     *         there are any
-     *         suggestions found for the given staff or not.
+     * @param staff     staff that wants to view suggestions
+     * @return          true if there are suggestions for the staff, 
+     *                  false if no such suggestion exists
      */
     public boolean viewSuggestions(Staff staff) {
         // Staff sees all suggestions he/she is incharge of only
@@ -100,16 +119,12 @@ public class SuggestionArray {
     }
 
     /**
-     * The function "viewSuggestions" allows a student to view their own suggestions
-     * that have not been
-     * processed.
+     * Overloaded method for student to view suggestions that they have made.
+     * This function only displays suggestions which have not been processed yet.
      * 
-     * @param std The parameter "std" is of type Student and represents the student
-     *            for whom we want to
-     *            view suggestions.
-     * @return The method is returning a boolean value, which indicates whether any
-     *         suggestions were
-     *         found for the given student or not.
+     * @param std   student that wants to view suggestions
+     * @return      true if there are unprocessed suggestions made by the student,
+     *              false if no such suggestion exists
      */
     public boolean viewSuggestions(Student std) {
         // Student sees all suggestions created by them and not processed
@@ -129,12 +144,9 @@ public class SuggestionArray {
     }
 
     /**
-     * The function "viewProcessedSuggestions" prints out all processed suggestions
-     * for a given
-     * student.
+     * This method displays all processed suggestions created by a student.
      * 
-     * @param std The parameter "std" is of type "Student" and represents a student
-     *            object.
+     * @param std student that wants to view processed suggestions
      */
     public void viewProcessedSuggestions(Student std) {
         boolean x = false;
@@ -151,18 +163,15 @@ public class SuggestionArray {
     }
 
     /**
-     * The function `editSuggestion` edits a suggestion made by a student if it
-     * exists, and prints the
-     * edited suggestion.
+     * This method checks if the suggestion that a student wants to edit exists, 
+     * and checks if editing is allowed.
+     * Calls the setSuggestion method of the suggestion object if allowed.
+     * Prints the suggestion if the suggestion exists.
+     * Updates suggestion file if suggestion was edited.
      * 
-     * @param std The parameter "std" is of type Student and represents the student
-     *            whose suggestion
-     *            needs to be edited.
-     * @param i   The parameter "i" represents the ID of the suggestion that needs
-     *            to be edited.
-     * @param s   The parameter "s" in the method editSuggestion is a String that
-     *            represents the new
-     *            suggestion text that will be edited.
+     * @param std student who wants to edit the suggestion
+     * @param i   unique ID of the suggestion to be edited
+     * @param s   string containing suggestion to be edited to
      */
     public void editSuggestion(Student std, int i, String s) {
         for (Suggestion suggestion : suggestions) {
@@ -182,17 +191,13 @@ public class SuggestionArray {
     }
 
     /**
-     * The function `submitSuggestion` takes a student and an integer as parameters,
-     * checks if a
-     * suggestion with the given student ID and suggestion ID exists, and if so,
-     * submits the suggestion
-     * and updates the file.
+     * This method checks if the suggestion that a student wants to submit exists, 
+     * and attempts to submit the suggestion.
+     * Prints the suggestion and the points of the student if suggestion exists.
+     * Updates the suggestion file if submission is successful.
      * 
-     * @param std The parameter "std" is of type Student and represents the student
-     *            who is submitting
-     *            the suggestion.
-     * @param i   The parameter "i" represents the ID of the suggestion that the
-     *            student wants to submit.
+     * @param std student who wants to submit the suggestion
+     * @param i   unique ID of the suggestion to be submitted
      */
     public void submitSuggestion(Student std, int i) {
         for (Suggestion suggestion : suggestions) {
@@ -215,12 +220,12 @@ public class SuggestionArray {
     }
 
     /**
-     * The function processes a suggestion by accepting or rejecting it based on
-     * user input.
+     * This method prints all suggestions corresponding to a staff,
+     * and provides interface for a staff to process suggestions.
+     * Updates suggestion file if processing is successful.
+     * Prints suggestion after it has been processed.
      * 
-     * @param staff The "staff" parameter is an object of the "Staff" class. It
-     *              represents the staff
-     *              member who is processing the suggestion.
+     * @param staff staff that wants to process suggestions
      */
     public void processSuggestion(Staff staff) {
         if (!viewSuggestions(staff)) {
@@ -258,19 +263,14 @@ public class SuggestionArray {
     }
 
     /**
-     * The function "suggestionCanEdit" checks if a suggestion made by a student
-     * with a specific ID can
-     * be edited based on its ID and processing status.
+     * This method checks if a suggestion exists 
+     * and whether a student is allowed to edit it.
+     * Suggestion cannot be edited if it is processed.
      * 
-     * @param std A Student object representing a student.
-     * @param i   The parameter "i" is an integer representing the ID of a
-     *            suggestion.
-     * @return The method is returning an integer value. If the condition
-     *         `(s.getStudentID().equals(std.getID())) && (s.getID() == i)` is true
-     *         and the suggestion is not
-     *         processed, it will return 1. If the suggestion is processed, it will
-     *         return 0. If the condition
-     *         is not met or no suggestion is found, it will return -1.
+     * @param std   student trying to edit the suggestion
+     * @param i     unique ID of the suggestion that the student wants to edit
+     * @return      1 if can edit, 0 if cannot edit, 
+     *              -1 if the suggestion does not exist
      */
     public int suggestionCanEdit(Student std, int i) {
         for (Suggestion s : suggestions) {
@@ -285,15 +285,13 @@ public class SuggestionArray {
     }
 
     /**
-     * The function deletes a suggestion from a list if it matches the given student
-     * ID and suggestion
-     * ID, and prints an error message if the suggestion has already been processed.
+     * This method checks if a suggestion exists and whether it can be deleted.
+     * Deletes a suggestion if it is valid.
+     * Updates suggestion file if suggestion is deleted.
+     * Prints the corresponding message based on success of deletion.
      * 
-     * @param std The parameter "std" is of type Student and represents the student
-     *            for whom the
-     *            suggestion needs to be deleted.
-     * @param i   The parameter "i" represents the ID of the suggestion that needs
-     *            to be deleted.
+     * @param std student that wants to delete suggestion
+     * @param i   unique ID of the suggestion to be deleted
      */
     public void deleteSuggestion(Student std, int i) {
         for (int j = 0; j < suggestions.size(); j++) {
@@ -314,9 +312,11 @@ public class SuggestionArray {
     }
 
     /**
-     * The function deletes a camp from a list of suggestions and updates a file.
+     * This method is called when a camp is deleted.
+     * All suggestions for the camp will be deleted.
+     * Updates suggestion file after deletion.
      * 
-     * @param camp The "camp" parameter is an object of the Camp class.
+     * @param camp camp that is being deleted
      */
     public void deleteCamp(Camp camp) {
         for (int i = 0; i < suggestions.size(); i++) {
@@ -328,12 +328,9 @@ public class SuggestionArray {
     }
 
     /**
-     * The function `printSuggestion` prints the status and content of a suggestion.
+     * Private static method to print details of a single suggestion
      * 
-     * @param suggestion The parameter "suggestion" is an object of the class
-     *                   "Suggestion". It
-     *                   represents a suggestion that can be submitted, processed,
-     *                   and accepted or rejected.
+     * @param suggestion suggestion to print
      */
     private static void printSuggestion(Suggestion suggestion) {
         System.out.printf("Suggestion %06d", suggestion.getID());
@@ -355,8 +352,8 @@ public class SuggestionArray {
     }
 
     /**
-     * The function `updateFile()` writes the data from a list of `Suggestion`
-     * objects to a CSV file.
+     * Private method called when there are changes to suggestions in the system, 
+     * Updates external suggestion storage file.
      */
     private void updateFile() {
         try (FileWriter csvWriter = new FileWriter(suggestionFile)) {
