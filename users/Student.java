@@ -354,7 +354,7 @@ public class Student extends Users {
      * The function "viewEnquiriesReplies" calls the "viewReplies" method of the main EnquiriesArray object,
      * passing in the current student object as the parameter.
      * 
-     * @param EnquiriesArray of Enquiries objects, main EnquiriesArray from the dsiplay classes.
+     * @param enqArray of Enquiries objects (EnquiriesArray), main EnquiriesArray from the display classes.
      */
     public void viewEnquiriesReplies(EnquiriesArray enqArray) {
         enqArray.viewReplies(this);
@@ -448,7 +448,7 @@ public class Student extends Users {
             }
         }
         for (String campName : RegCamps) {
-            if (campName == oldName) {
+            if (campName.equals(oldName)) {
                 campName = newName;
             }
         }
