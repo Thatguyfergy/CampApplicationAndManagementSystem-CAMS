@@ -207,10 +207,9 @@ public class DisplayStudent extends DisplayLogin
      *             user, such as a student or staff
      */
     public void registerCampsScreen(Users user) {
-        Student student = new Student(null, null, null, null, null, null, campArray);
-        if (user instanceof Student) {
-            student = (Student) user;
-        }
+        if (!(user instanceof Student))
+            return;
+        Student student = (Student) user;
         System.out.print("\033[H\033[2J"); // Clear the entire screen
         System.out.print(
                 "╔══════════════════════════════════════════════════════════════════════╗\n" +

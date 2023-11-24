@@ -46,7 +46,7 @@ public class Student extends Users {
         BusyDates = new ArrayList<CAMDate>();
         RegCamps = new ArrayList<String>();
 
-        if (!commCamp.equals("")) {
+        if (commCamp != null && !commCamp.equals("")) {
             IsCampComm = true;
             String[] cc = commCamp.split(";");
             CommRole = new CampCommitteeRole(campArray.getCamp(cc[0]), Integer.parseInt(cc[1]));
