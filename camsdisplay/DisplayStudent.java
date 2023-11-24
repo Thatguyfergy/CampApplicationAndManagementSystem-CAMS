@@ -11,13 +11,12 @@ import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import infoexchange.EnquiriesArray;
-import infoexchange.Suggestion;
 import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
 public class DisplayStudent extends DisplayLogin
-        implements viewCampsScreen, ScreenClearFn, registerCamps, replyEnquiries {
+        implements ViewCampsScreen, ScreenClearFn, CampsRegisterable, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -86,7 +85,7 @@ public class DisplayStudent extends DisplayLogin
                 System.out.println("5. Logout");
             System.out.printf("Enter your choice: ");
 
-            choice = inputInt.nextInt(sc);
+            choice = InputInt.nextInt(sc);
             System.out.println();
             switch (choice) {
                 case 0:
@@ -208,7 +207,7 @@ public class DisplayStudent extends DisplayLogin
             campname = sc.nextLine();
         } while (true);
         System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
-        boolean comm = (inputInt.nextInt(sc) == 1) ? true : false;
+        boolean comm = (InputInt.nextInt(sc) == 1) ? true : false;
         Camp campPtr = campArray.getCamp(campname);
         if (comm)
             student.registerCampCommittee(campPtr, campArray);
@@ -285,7 +284,7 @@ public class DisplayStudent extends DisplayLogin
                 int enqindex1;
                 do {
                     System.out.printf("Select Enquiry to edit, input Enquiry index: ");
-                    enqindex1 = inputInt.nextInt(sc);
+                    enqindex1 = InputInt.nextInt(sc);
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex1 >= 1 && enqindex1 <= enqArraySize)
                         break;
@@ -306,7 +305,7 @@ public class DisplayStudent extends DisplayLogin
                 int enqindex2;
                 do {
                     System.out.printf("Select Enquiry to delete, input Enquiry index: ");
-                    enqindex2 = inputInt.nextInt(sc);
+                    enqindex2 = InputInt.nextInt(sc);
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex2 >= 1 && enqindex2 <= enqArraySize)
                         break;
@@ -324,7 +323,7 @@ public class DisplayStudent extends DisplayLogin
                 int enqindex;
                 do {
                     System.out.printf("Select Enquiry to submit, input Enquiry index: ");
-                    enqindex = inputInt.nextInt(sc);
+                    enqindex = InputInt.nextInt(sc);
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex >= 1 && enqindex <= enqArraySize)
                         break;
@@ -361,7 +360,7 @@ public class DisplayStudent extends DisplayLogin
         do {
             System.out.printf("Enter the index of the camp you are withdrawing from: ");
             sc.nextLine();
-            remCampIndex = inputInt.nextInt(sc) - 1;
+            remCampIndex = InputInt.nextInt(sc) - 1;
             if (remCampIndex == -1)
                 break;
             if (remCampIndex >= 0 && remCampIndex <= (studentRegCamps.size() - 1))
@@ -393,7 +392,7 @@ public class DisplayStudent extends DisplayLogin
      * The function "viewPointsScreen" displays a screen for the Committee points of
      * a camp committee member in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committe member
+     * @param student The student object represents a student who is a camp committee member
      *                that wants to view his/her points
      */
     private void viewPointsScreen(Student student) {
@@ -446,7 +445,7 @@ public class DisplayStudent extends DisplayLogin
             case "E", "e":
                 if (suggestionArray.viewSuggestions(student)) {
                     System.out.printf("Select Suggestion to edit, input Suggestion index: ");
-                    int sugindex1 = inputInt.nextInt(sc);
+                    int sugindex1 = InputInt.nextInt(sc);
                     sc.nextLine();
                     if (suggestionArray.suggestionCanEdit(student, sugindex1) == 1) {
                         System.out.printf("Please input the edited Suggestion: ");
@@ -462,7 +461,7 @@ public class DisplayStudent extends DisplayLogin
             case "D", "d":
                 if (suggestionArray.viewSuggestions(student)) {
                     System.out.printf("Select Suggestion to delete, input Suggestion index: ");
-                    int delindex = inputInt.nextInt(sc);
+                    int delindex = InputInt.nextInt(sc);
                     sc.nextLine();
                     suggestionArray.deleteSuggestion(student, delindex);
                 } else
@@ -471,7 +470,7 @@ public class DisplayStudent extends DisplayLogin
             case "S", "s":
                 if (suggestionArray.viewSuggestions(student)) {
                     System.out.printf("Select Suggestion to submit, input Suggestion index: ");
-                    int sugindex2 = inputInt.nextInt(sc);
+                    int sugindex2 = InputInt.nextInt(sc);
                     sc.nextLine();
                     suggestionArray.submitSuggestion(student, sugindex2);
                     UserDB.updateFile(); // for change in points

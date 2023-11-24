@@ -10,18 +10,42 @@ import camps.Camp;
 import users.UsersDatabase;
 import users.Staff;
 
+/**
+ * PerfReport class is used to generate performance report for a camp.
+ * Only a staff can generate performance reports.
+ * Report contains list of Student names and their corresponding points.
+ * 
+ * @author Tan Jun Kiat
+ * @version 1.0
+ */
 public class PerfReport implements Report {
-
+    /**
+     * stores the reference of the camp to generate a performance report for
+     */
     private Camp camp;
+    /**
+     * stores integer corresponding to how the report is to be sorted
+     * 1: by name; 2: by points
+     */
     private int choice;
+    /**
+     * stores a string containing name of the output file
+     */
     private String fileName;
+    /**
+     * stores the usersDatabase of users to access points of students in the camp
+     */
     private UsersDatabase users;
 
-    // The `public PerfReport(Camp cmp, int c, UsersDatabase usrs, Staff staff)` is
-    // a constructor for
-    // the `PerfReport` class. It takes four parameters: `cmp` of type `Camp`, `c`
-    // of type `int`,
-    // `usrs` of type `UsersDatabase`, and `staff` of type `Staff`.
+    /**
+     * Constructor to initialise fields for generating performance report 
+     * based on specific staff, camp and sorting.
+     * 
+     * @param cmp   camp to generate report for
+     * @param c     choice of sorting by name or points
+     * @param usrs  usersDatabase reference with information on points
+     * @param staff staff that wants to generate the report
+     */
     public PerfReport(Camp cmp, int c, UsersDatabase usrs, Staff staff) {
         camp = cmp;
         choice = c;
@@ -31,8 +55,10 @@ public class PerfReport implements Report {
     }
 
     /**
-     * The function generates a performance report based on the chosen sorting
-     * method.
+     * Method called to actually generate the report 
+     * based on the set conditions in this object.
+     * Calls private methods to generate report based on sorting chosen.
+     * Prints error statement if invalid sorting choice was passed into constructor.
      */
     public void generateReport() {
         System.out.println("Generating performance report for " + camp.getCampName() + "...");
@@ -49,9 +75,7 @@ public class PerfReport implements Report {
     }
 
     /**
-     * The function `repByName()` writes a sorted list of committee members' names
-     * and their
-     * corresponding points to a file.
+     * Private method to generate a performance report sorted by name.
      */
     private void repByName() {
         File file = new File(fileName);
@@ -77,9 +101,7 @@ public class PerfReport implements Report {
     }
 
     /**
-     * The function `repByPoints()` writes a list of committee members and their
-     * corresponding points
-     * to a file, sorted in descending order based on points.
+     * Private method to generate a performance report sorted by points.
      */
     private void repByPoints() {
         File file = new File(fileName);

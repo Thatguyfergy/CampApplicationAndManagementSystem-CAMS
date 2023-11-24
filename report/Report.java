@@ -1,9 +1,11 @@
 package report;
 
-// The interface 'Report' is to be realised by classes that require a report to be generated.
+/**
+ * This interface is to be realised by classes generating specific types of report
+ */
 public interface Report {
     /**
-     * The method "generateReport" generates a report.
+     * This method generates a report.
      */
     public void generateReport();
 }

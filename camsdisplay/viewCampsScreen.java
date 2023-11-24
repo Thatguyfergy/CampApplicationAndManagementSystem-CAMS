@@ -2,9 +2,9 @@ package camsdisplay;
 
 import users.Users;
 
-// The code is declaring a Java interface named `viewCampsScreen`. The interface defines the abstract methods
+// The code is declaring a Java interface named `ViewCampsScreen`. The interface defines the abstract methods
 // `viewCampsScreen` and `viewCampDetailsScreen`.
-public interface viewCampsScreen {
+public interface ViewCampsScreen {
     /**
      * The function "viewCampsScreen" takes a parameter of type "Users" and does not return anything
      * 

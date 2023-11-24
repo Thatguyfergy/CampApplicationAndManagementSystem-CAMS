@@ -2,9 +2,9 @@ package camsdisplay;
 
 import users.Users;
 
-// The code is declaring a Java interface named `replyEnquiries`. The interface defines the abstract methods
+// The code is declaring a Java interface named `EnquiriesScreen`. The interface defines the abstract methods
 // `viewEnquiriesScreen`, `replyEnquiriesScreen`, and `generateEnquiriesReportScreen`.
-public interface replyEnquiries {
+public interface EnquiriesScreen {
     /**
      * The function "viewEnquiriesScreen" takes a parameter of type "Users" and does not return anything
      * 

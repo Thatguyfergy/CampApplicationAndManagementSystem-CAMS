@@ -70,7 +70,7 @@ public class DisplayLogin {
         // System.out.println("2. Reset Password");
         System.out.println("2. Exit");
         System.out.printf("Enter your choice: ");
-        int choice = inputInt.nextInt(sc);
+        int choice = InputInt.nextInt(sc);
         sc.nextLine(); // Consume the newline character
         switch (choice) {
             case 1:
