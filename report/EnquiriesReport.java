@@ -16,8 +16,15 @@ import users.Staff;
 import users.Student;
 import users.Users;
 import users.UsersDatabase;
-import utils.inputInt;
+import utils.InputInt;
 
+/**
+ * The EnquiriesReport class implements the Report interface.
+ * It generates the enquiries report for Staff and Camp Comm
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class EnquiriesReport implements Report {
     private Staff userStaff;
     private Student userStudent;
@@ -26,10 +33,15 @@ public class EnquiriesReport implements Report {
     private ArrayList<String> createdCamps;
     private Scanner sc = new Scanner(System.in);
 
-    // The `EnquiriesReport` constructor is responsible for initializing the
-    // `EnquiriesReport` object.
-    // It takes two parameters: `user` of type `Users` and `enquiriesArray` of type
-    // `EnquiriesArray`.
+    /**
+     * The `EnquiriesReport` constructor is responsible for initializing the
+     * `EnquiriesReport` object.
+     * It takes two parameters: `user` of type `Users` and `enquiriesArray` of type
+     * `EnquiriesArray`.
+     * 
+     * @param user
+     * @param enquiriesArray
+     */
     public EnquiriesReport(Users user, EnquiriesArray enquiriesArray) {
         if (user instanceof Staff) {
             userStaff = (Staff) user;
@@ -63,7 +75,7 @@ public class EnquiriesReport implements Report {
         while (true) {
             try {
                 System.out.printf("Enter choice: ");
-                choice = inputInt.nextInt(sc);
+                choice = InputInt.nextInt(sc);
                 if (choice == -1) {
                     return;
                 }

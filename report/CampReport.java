@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import users.Staff;
@@ -14,108 +13,78 @@ import users.Student;
 import users.Users;
 import users.UsersDatabase;
 
+/**
+ * The CampReport class implements the Report interface.
+ * It generates the report for Staff and Camp Comm
+ * 
+ * @author Tan Ying Hao
+ * @version 1.0
+ */
 public class CampReport implements Report {
 
     private Camp camp;
     private Scanner sc;
     private Users user;
-    private ArrayList<String> createdCamps;
+    private ArrayList<String> campOptions;
     private CampArray campArray;
     private String fileName;
 
-    // The `CampReport` constructor is initializing the `user` and `campArray`
-    // variables with the
-    // provided parameters. It also checks if the `user` is an instance of `Staff`
-    // or `Student` and
-    // assigns the appropriate value to the `createdCamps` variable. Finally, it
-    // initializes the `sc`
-    // variable with a new `Scanner` object.
+    /**
+     * The constructor for the `CampReport` class.
+     * 
+     * @param user      The parameter 'user' represents the User object that is
+     *                  generating the report.
+     * @param campArray The parameter 'campArray' represents the CampArray object
+     *                  that contains all the camps.
+     */
     public CampReport(Users user, CampArray campArray) {
         this.user = user;
         this.campArray = campArray;
         if (user instanceof Staff)
-            createdCamps = ((Staff) user).getCampsInCharge();
-        else
-            createdCamps.add(((Student) user).getCampCommitteeRole().getCampName());
-        sc = new Scanner(System.in);
-    }
-
-    // The `public CampReport(Users usr, Camp cmp)` constructor is initializing the
-    // `user`, `camp`, and
-    // `sc` variables with the provided parameters. It is used to create a
-    // `CampReport` object with a
-    // specific `user` and `camp` for generating a report.
-    public CampReport(Users usr, Camp cmp) {
-        user = usr;
-        camp = cmp;
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * The function generates a report based on the user's choice and saves it to a
-     * file.
-     * 
-     * @param choice The parameter "choice" is an integer that represents the user's
-     *               selection for the
-     *               type of report to generate. The possible values for "choice"
-     *               are:
-     */
-    public void generateReportforComm(int choice) {
-        switch (choice) {
-            case 1:
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
-                generateCampReport();
-                break;
-            case 2:
-                fileName = "CampReports\\" + camp.getCampName() + "_Attendees_Report.csv";
-                generateCampAttendeesReport();
-                break;
-            case 3:
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName()
-                        + "_CommitteeMembers_Report.csv";
-                generateCampCommitteeMembersReport();
-                break;
-            default:
-                System.out.println("Invalid choice! - Applying no filter");
-                fileName = "CampReports\\" + camp.getCampName() + "_" + user.getFirstName() + "_Report.csv";
-                generateCampReport();
-                break;
+            campOptions = ((Staff) user).getCampsInCharge();
+        else {
+            campOptions = new ArrayList<String>();
+            campOptions.add(((Student) user).getCampCommitteeRole().getCampName());
         }
 
-        System.out.println("Generating report for " + camp.getCampName() + "...");
+        sc = new Scanner(System.in);
     }
 
     /**
-     * The function generates a report for a selected camp based on the user's
-     * choice of filter.
+     * The method `generateReport()` prompts the user to select a camp to generate
+     * the report for.
+     * It then prompts the user to select a filter. The method then calls the
+     * appropriate private method according to the filter selected
+     * and generates a report in CSV format.
      */
     public void generateReport() {
 
-        if (createdCamps.size() == 0) {
+        if (campOptions.size() == 0) {
             System.out.println("You have not created any camps!");
             return;
         }
         System.out.println("Select a camp to generate report for: ");
-        for (String camp : createdCamps) {
-            System.out.println(createdCamps.indexOf(camp) + 1 + ". " + camp);
+        for (String camp : campOptions) {
+            System.out.println(campOptions.indexOf(camp) + 1 + ". " + camp);
         }
-        System.out.println(createdCamps.size() + 1 + ". Exit (not a camp name)");
+        System.out.println(campOptions.size() + 1 + ". Exit (not a camp name)");
 
         String choice;
         try {
             System.out.printf("Enter choice: ");
             choice = sc.nextLine();
-            if (Integer.parseInt(choice) == createdCamps.size() + 1)
+            if (Integer.parseInt(choice) == campOptions.size() + 1)
                 return;
-            if (Integer.parseInt(choice) > createdCamps.size() + 1)
+            if (Integer.parseInt(choice) > campOptions.size() + 1)
                 throw new NumberFormatException();
 
         } catch (NumberFormatException e) {
             System.out.println("Invalid choice!");
             return;
         }
+        System.out.println();
 
-        camp = campArray.getCamp(createdCamps.get(Integer.parseInt(choice) - 1));
+        camp = campArray.getCamp(campOptions.get(Integer.parseInt(choice) - 1));
 
         System.out.println("Select Filter: ");
         System.out.println("1. No Filter");
@@ -149,9 +118,8 @@ public class CampReport implements Report {
     }
 
     /**
-     * The function `generateCampReport()` generates a CSV report file containing
-     * information about a
-     * camp.
+     * The method 'generateCampReport()' generates a report in CSV format containing
+     * the camp information, list of attendees and list of committee members.
      */
     private void generateCampReport() {
         File file = new File(fileName);
@@ -203,8 +171,8 @@ public class CampReport implements Report {
     }
 
     /**
-     * The function generates a CSV report containing information about a camp and
-     * its attendees.
+     * The method 'generateCampAttendeesReport()' generates a CSV report containing
+     * the camp information and list of attendees.
      */
     private void generateCampAttendeesReport() {
         File file = new File(fileName);
@@ -250,9 +218,9 @@ public class CampReport implements Report {
     }
 
     /**
-     * The function generates a report in CSV format containing information about a
-     * camp and its
-     * committee members.
+     * The method 'generateCampCommitteeMembersReport()' generates a CSV report
+     * containing
+     * the camp information and list of committee members.
      */
     private void generateCampCommitteeMembersReport() {
         File file = new File(fileName);

@@ -1,26 +1,38 @@
 package camdate;
 
-public class CAMDate {
+/**
+ * The CAMDate class is a Java class that implements the Comparable interface.
+ * Main class used for various dates as it contain the checkers for them.
+ * 
+ * @author Tan Ying Hao
+ * @version 1.0
+ */
+public class CAMDate implements Comparable<CAMDate> {
     private int day;
     private int month;
     private int year;
 
-    // The `public CAMDate()` constructor is a default constructor that initializes
-    // the `day`, `month`,
-    // and `year` fields of the `CAMDate` class to 0. This means that if an object
-    // of the `CAMDate`
-    // class is created using this constructor, the date will be set to 0/0/0, which
-    // is an invalid
-    // date.
+    /**
+     * The `public CAMDate()` constructor is a default constructor that initializes
+     * the 'day', 'month', and 'year' variables to 0.
+     */
     public CAMDate() {
         this.day = 0;
         this.month = 0;
         this.year = 0;
     }
 
-    // The `public CAMDate(int day, int month, int year)` constructor is used to
-    // create a new `CAMDate`
-    // object with the specified day, month, and year values.
+    /**
+     * The `public CAMDate(int day, int month, int year)` constructor is used to
+     * create a new
+     * `CAMDate` object with the same day, month, and year values as the `date`
+     * parameter. If the date given is non-existent, the constructor throws an
+     * illegal argument exception.
+     * 
+     * @param day   The 'day' parameter represents the day of the date.
+     * @param month The 'month' parameter represents the month of the date.
+     * @param year  The 'year' parameter represents the year of the date.
+     */
     public CAMDate(int day, int month, int year) throws IllegalArgumentException {
         if (isValidDate(day, month, year)) {
             this.day = day;
@@ -31,9 +43,14 @@ public class CAMDate {
         }
     }
 
-    // The `public CAMDate(String date)` constructor is used to create a new
-    // `CAMDate` object with the
-    // specified date string.
+    /**
+     * The `CAMDate(CAMDate date)` constructor is used to create a new `CAMDate`
+     * object with a string representation of the date in the format "dd/mm/yyyy".
+     * If date given is non-existent, the constructor throws an illegal argument
+     * 
+     * @param date The 'date' parameter represents a string representation of the
+     *             date in the format "dd/mm/yyyy".
+     */
     public CAMDate(String date) {
         String[] dateArray = date.split("/");
         int newDay = Integer.parseInt(dateArray[0]);
@@ -49,72 +66,84 @@ public class CAMDate {
     }
 
     /**
-     * The function returns the value of the variable "day".
+     * The method 'getDay' returns the value of the day variable.
      * 
-     * @return The method is returning the value of the variable "day".
+     * @return The method returns an int value
+     *         representing the day of the month.
      */
     public int getDay() {
         return day;
     }
 
     /**
-     * The function returns the value of the month.
+     * The method 'getMonth' returns the value of the month variable.
      * 
-     * @return The method is returning the value of the variable "month".
+     * @return The method returns an int value
+     *         representing the month of the year.
      */
     public int getMonth() {
         return month;
     }
 
     /**
-     * The function returns the value of the year variable.
+     * The method 'getYear' returns the value of the year variable.
      * 
-     * @return The method is returning the value of the variable "year".
+     * @return The method returns an int value
+     *         representing the year.
      */
     public int getYear() {
         return year;
     }
 
     /**
-     * The function sets the value of the "day" variable.
+     * The method sets the value of the "day" variable.
+     * If the date is invalid, the method throws an illegal argument exception.
      * 
      * @param day The parameter "day" is an integer that represents the day of the
      *            month.
      */
     public void setDay(int day) {
-        this.day = day;
+        if (isValidDate(day, this.month, this.year)) // Check if the date is valid before setting the day value
+            this.day = day;
+        else
+            throw new IllegalArgumentException("Invalid date");
     }
 
     /**
-     * The function sets the value of the month variable if the input is a valid
-     * month number.
+     * The method sets the value of the 'month' variable.
+     * If the date is invalid, the method throws an illegal argument exception.
      * 
      * @param month The parameter "month" is an integer representing the month of
      *              the year.
      */
     public void setMonth(int month) {
-        if (month > 0 && month < 13) {
+        if (month > 0 && month < 13 && isValidDate(this.day, month, this.year)) // Check if the date is valid before
+                                                                                // setting the month
             this.month = month;
-        }
+        else
+            throw new IllegalArgumentException("Invalid date");
     }
 
     /**
-     * The function sets the value of the "year" variable.
+     * The method sets the value of the "year" variable.
+     * If the date is invalid, the method throws an illegal argument exception.
      * 
      * @param year The parameter "year" is an integer that represents the year value
      *             to be set.
      */
     public void setYear(int year) {
-        this.year = year;
+        if (isValidDate(this.day, this.month, year)) // Check if the date is valid before setting the year value
+            this.year = year;
+        else
+            throw new IllegalArgumentException("Invalid date");
     }
 
     /**
-     * The toString() function returns a formatted string representation of the day,
-     * month, and year.
+     * The method 'toString' returns a formatted string representation of the day,
+     * month, and year in the format 'dd/mm/yyyy'.
      * 
      * @return The method is returning a formatted string representation of a date
-     *         in the format
-     *         "dd/mm/yyyy".
+     *         in the format "dd/mm/yyyy".
      */
     public String toString() {
         return String.format("%02d/%02d/%04d", day, month, year);
@@ -124,19 +153,18 @@ public class CAMDate {
     // return 1 if this is later than other return -1 if this is earlier than other
     // return 0 if this is the same as other
     /**
-     * The function compares two CAMDate objects based on their year, month, and day
+     * The method 'compareTo' compares two CAMDate objects based on their year,
+     * month, and day
      * values and returns
      * 1 if the first object is greater, -1 if the second object is greater, and 0
      * if they are equal.
      * 
      * @param other The "other" parameter is an object of the CAMDate class that we
-     *              are comparing the
-     *              current object to.
-     * @return The `compareTo` method is returning an integer value. If `this` date
-     *         is greater than
-     *         `other` date, it returns 1. If `this` date is less than `other` date,
-     *         it returns -1. If both
-     *         dates are equal, it returns 0.
+     *              are comparing the current object to.
+     * @return The method is returning an integer value.
+     *         If `this` date is greater than `other` date, it returns 1.
+     *         If `this` date is less than `other` date it returns -1.
+     *         If both dates are equal, it returns 0.
      */
     public int compareTo(CAMDate other) {
         if (this.year > other.year) {
@@ -162,8 +190,8 @@ public class CAMDate {
 
     // nextDay method
     /**
-     * The function "nextDay" increments the day, month, and year values to
-     * represent the next day,
+     * The method 'nextDay()' updates the day, month, and year values of the
+     * current CAMDate object to the next day,
      * taking into account different month lengths and leap years.
      */
     public void nextDay() {
@@ -190,37 +218,40 @@ public class CAMDate {
     }
 
     /**
-     * The function returns a new instance of the CAMDate class with the same day,
-     * month, and year
-     * values as the current instance.
+     * The method 'clone()' returns a new instance of the CAMDate class with the
+     * same 'day', 'month', and 'year' values.
      * 
-     * @return A new instance of the CAMDate class is being returned.
+     * @return The method returns CAMDate object
+     *         with the same 'day', 'month', and 'year' values as this.
      */
     public CAMDate clone() {
         return new CAMDate(this.day, this.month, this.year);
     }
 
     /**
-     * The equals() function checks if the day, month, and year of two CAMDate
-     * objects are equal.
+     * The 'equals()' method checks if the day, month, and year values of the
+     * other CAMDate object are equal to the day, month, and year values of the
+     * current object.
      * 
      * @param other The "other" parameter is an object of type CAMDate that is being
-     *              compared to the
-     *              current object.
-     * @return The method is returning a boolean value.
+     *              compared to the current object.
+     * @return The method returns a boolean value.
+     *         If the day, month, and year values of the two objects are equal, it
+     *         returns true.
+     *         else it returns false.
      */
     public boolean equals(CAMDate other) {
         return this.day == other.day && this.month == other.month && this.year == other.year;
     }
 
     /**
-     * The getNextDay() function returns a new CAMDate object representing the next
-     * day after the
-     * current date.
+     * The 'getNextDay()' method returns a new CAMDate object with the day, month,
+     * and year values
+     * of the next day after the date in the current object.
      * 
-     * @return The method is returning a CAMDate object, which represents the next
-     *         day after the
-     *         current date.
+     * @return The method return a CAMDate object with the day, month, and year
+     *         values
+     *         of the next day after the date in the current object.
      */
     public CAMDate getNextDay() {
         CAMDate nextDay = this.clone();
@@ -229,24 +260,16 @@ public class CAMDate {
     }
 
     /**
-     * The function checks if a given date is valid by checking if the day, month,
-     * and year values are
-     * within valid ranges and if the day value is within the maximum number of days
-     * for the given
-     * month and year.
+     * The method 'isValidDate' checks if the day, month, and year values form a
+     * valid date.
      * 
-     * @param day   The day of the month. It should be an integer value between 1
-     *              and 31.
-     * @param month The month parameter represents the month of the date. It should
-     *              be an integer value
-     *              between 1 and 12, where 1 represents January and 12 represents
-     *              December.
-     * @param year  The year parameter represents the year of the date. It should be
-     *              a positive integer
-     *              value.
-     * @return The method is returning a boolean value. It returns true if the given
-     *         day, month, and
-     *         year form a valid date, and false otherwise.
+     * @param day   The 'day' parameter represents the day of the date.
+     * @param month The 'month' parameter represents the month of the date.
+     * @param year  The 'year' parameter represents the year of the date.
+     * @return The method returns a boolean value.
+     *         If the day, month, and year values form a valid date, it returns
+     *         true.
+     *         else it returns false.
      */
     private boolean isValidDate(int day, int month, int year) {
         if (year < 1 || month < 1 || month > 12 || day < 1) {

@@ -5,14 +5,25 @@ import java.util.ArrayList;
 import camps.Camp;
 import infoexchange.*;
 
+/**
+ * The CampAttendeeRole class represents the role of an attendee at a camp.
+ * It is used to store the campAttending (ie. campName).
+ * 
+ * @author Enric Tan
+ * @version 1.0
+ */
 public class CampAttendeeRole {
 
     private String CampAttending;
     private Student StudentAttending;
 
-    // The code `public CampAttendeeRole(String camp, Student student)` is a
-    // constructor for the
-    // `CampAttendeeRole` class. It takes two parameters: `camp` and `student`.
+    /**
+     * The code below is a constructor for the
+     * `CampAttendeeRole` class. It takes two parameters: `camp` and `student`.
+     * 
+     * @param camp
+     * @param student
+     */
     public CampAttendeeRole(String camp, Student student) {
         CampAttending = camp;
         StudentAttending = student;
@@ -21,16 +32,16 @@ public class CampAttendeeRole {
     /**
      * The function returns the value of the CampAttending variable.
      * 
-     * @return The method is returning the value of the variable "CampAttending".
+     * @return The value of the variable "CampAttending".
      */
     public String getCampAttending() {
         return CampAttending;
     }
 
     /**
-     * The function sets the value of the CampAttending variable to a new name.
+     * The function modifies the value of the CampAttending variable.
      * 
-     * @param newName The new name that will be assigned to the CampAttending
+     * @param newName The modified value that will be assigned to the CampAttending
      *                variable.
      */
     public void setCampAttending(String newName) {

@@ -9,6 +9,13 @@ import java.util.Set;
 
 import camdate.CAMDate;
 
+/**
+ * The Camp class is a blueprint for creating objects that represent a camp.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class Camp {
     private CampInfo campInfo;
     private List<String> attendees;
@@ -16,9 +23,19 @@ public class Camp {
     private Set<String> withdrawnStudents;
     private String manualVisibility;
 
-    // This is the constructor for the `Camp` class. It is used to create a new
-    // instance of the `Camp`
-    // class with the specified parameters.
+    /**
+     * This is the constructor for the Camp class. It is used to create a new
+     * instance of the Camp class with the specified parameters.
+     * 
+     * @param campName
+     * @param registrationClosingDate
+     * @param campVisibility
+     * @param location
+     * @param totalSlots
+     * @param committeeMembersSlots
+     * @param campDescription
+     * @param staffInCharge
+     */
     public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
@@ -61,15 +78,14 @@ public class Camp {
      * The function returns the registration closing date for a camp.
      * 
      * @return The method is returning a CAMDate object, which represents the
-     *         registration closing date for
-     *         a camp.
+     *         registration closing date for a camp.
      */
     public CAMDate getRegistrationClosingDate() {
         return campInfo.getRegistrationClosingDate();
     }
 
     /**
-     * The function returns the availability of a camp.
+     * The function returns the availability of a camp for the faculties.
      * 
      * @return The method is returning the camp availability as a String.
      */
@@ -99,8 +115,7 @@ public class Camp {
      * The function returns the staff in charge of a camp.
      * 
      * @return The method is returning the value of the staffInCharge variable from
-     *         the campInfo
-     *         object.
+     *         the campInfo object.
      */
     public String getStaffInCharge() {
         return campInfo.getStaffInCharge();
@@ -173,8 +188,8 @@ public class Camp {
 
     /**
      * The function `toggleVisibility()` determines whether the visibility of a camp
-     * should be set to
-     * "on" or "off" based on the number of occupied slots and the current date.
+     * should be set to "on" or "off" based on the number of occupied slots and the
+     * current date.
      * 
      * @return The method returns a String value, either "on" or "off".
      */
@@ -206,10 +221,10 @@ public class Camp {
      * "off" or "on", and the input value otherwise.
      * 
      * @param manualVisibility The parameter "manualVisibility" is a string that
-     *                         represents the
-     *                         visibility setting for a manual. It can have three
-     *                         possible values: "on", "off", or any other
-     *                         string value.
+     *                         represents the visibility setting for a manual. It
+     *                         can have three
+     *                         possible values: "on", "off", or any other string
+     *                         value.
      */
     public void setManualVisibility(String manualVisibility) {
         if (manualVisibility == null) {
@@ -236,8 +251,7 @@ public class Camp {
      * or as an attendee, based on the provided parameters.
      * 
      * @param StudentID       The unique identifier for the student. It could be a
-     *                        string or an integer
-     *                        value.
+     *                        string or an integer value.
      * @param FirstName       The first name of the student.
      * @param isCampCommittee A boolean value indicating whether the student is
      *                        registering as a camp
@@ -281,8 +295,7 @@ public class Camp {
 
     /**
      * The function withdrawFromCamp takes a student ID as input and calls the
-     * withdrawAttendee
-     * function.
+     * withdrawAttendee function.
      * 
      * @param StudentID The StudentID parameter is a unique identifier for a student
      *                  attending a camp.
@@ -315,11 +328,10 @@ public class Camp {
     }
 
     /**
-     * The function checks if a student with a given ID has withdrawn.
+     * The function checks if a student with a given ID has withdrawn from a camp.
      * 
      * @param StudentID The StudentID parameter is a String that represents the
-     *                  unique identifier of a
-     *                  student.
+     *                  unique identifier of a student.
      * @return The method is returning a boolean value.
      */
     public boolean hasWithdrawn(String StudentID) {
@@ -363,15 +375,12 @@ public class Camp {
 
     /**
      * The function compares two Camp objects based on the specified sortBy
-     * parameter and returns an
-     * integer value indicating their relative order.
+     * parameter and returns an integer value indicating their relative order.
      * 
      * @param other  The "other" parameter is an instance of the Camp class that we
-     *               are comparing the
-     *               current instance to.
+     *               are comparing the current instance to.
      * @param sortBy The "sortBy" parameter is a String that specifies the attribute
-     *               by which the Camp
-     *               objects should be sorted.
+     *               by which the Camp objects should be sorted.
      * @return The method is returning an integer value.
      */
     public int compareTo(Camp other, String sortBy) {
@@ -408,8 +417,7 @@ public class Camp {
     // Helper method to calculate remaining slots for attendees
     /**
      * The function calculates the number of remaining attendee slots by subtracting
-     * the total occupied
-     * slots from the total slots available.
+     * the total occupied slots from the total slots available.
      * 
      * @return The method is returning the number of remaining attendee slots.
      */
@@ -425,8 +433,7 @@ public class Camp {
     // Helper method to calculate remaining slots for committee members
     /**
      * The function calculates the number of remaining slots in a committee by
-     * subtracting the number
-     * of occupied slots from the total number of slots.
+     * subtracting the number of occupied slots from the total number of slots.
      * 
      * @return The method is returning the number of remaining committee slots.
      */
@@ -439,8 +446,7 @@ public class Camp {
 
     /**
      * The function calculates the number of remaining slots by subtracting the
-     * total occupied slots
-     * from the total slots available.
+     * total occupied slots from the total slots available.
      * 
      * @return The method is returning the number of remaining slots available.
      */

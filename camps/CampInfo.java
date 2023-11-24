@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import camdate.CAMDate;
 
+/**
+ * The CampInfo class is a Java class that provides information about a camp.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class CampInfo {
     // private int campID;
     private String campName;
@@ -16,15 +23,10 @@ public class CampInfo {
     private String campDescription;
     private String staffInCharge;
 
-    // The `public CampInfo()` constructor is the default constructor for the
-    // `CampInfo` class. It
-    // initializes all the fields of the class to their default values. In this
-    // case, it sets the
-    // `campName`, `campAvailability`, `location`, `campDescription`, and
-    // `staffInCharge` fields to
-    // empty strings, and the `dates` field to an empty `ArrayList` of `CAMDate`
-    // objects. It also sets
-    // the `totalSlots` and `committeeMembersSlots` fields to 0.
+    /**
+     * The default constructor of the 'CampInfo' class. It initializes the values
+     * for all the fields of the class.
+     */
     public CampInfo() {
         // this.campID = 0;
         this.campName = "";
@@ -37,13 +39,34 @@ public class CampInfo {
         this.staffInCharge = "";
     }
 
-    // The `public CampInfo(String campName, CAMDate registrationClosingDate, String
-    // campAvailability,
-    // String location, int totalSlots, int committeeMembersSlots, String
-    // campDescription, String
-    // staffInCharge)` constructor is a parameterized constructor for the `CampInfo`
-    // class. It takes in
-    // values for all the fields of the class and initializes them accordingly.
+    /**
+     * The constructor of the 'CampInfo' class. It initializes the values for all
+     * the fields of the class with the given parameters.
+     * 
+     * @param campName                The String parameter "campName" represents the
+     *                                name of a camp.
+     * @param registrationClosingDate The CAMDate parameter
+     *                                "registrationClosingDate" represents the date
+     *                                when registration for a camp closes.
+     * @param campAvailability        The String parameter "campAvailability"
+     *                                represents
+     *                                the availability of a camp.
+     * @param location                The String parameter "location" represents
+     *                                the location of a camp.
+     * @param totalSlots              The integer parameter "totalSlots" represents
+     *                                the total number of slots available for a
+     *                                camp.
+     * @param committeeMembersSlots   The integer parameter "committeeMembersSlots"
+     *                                represents
+     *                                the number of slots available for committee
+     *                                members.
+     * @param campDescription         The String parameter "campDescription"
+     *                                represents
+     *                                the description of a camp.
+     * @param staffInCharge           The String parameter "staffInCharge"
+     *                                represents
+     *                                the staff member in charge of a camp.
+     */
     public CampInfo(String campName, CAMDate registrationClosingDate, String campAvailability,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
 
@@ -60,8 +83,8 @@ public class CampInfo {
     }
 
     /**
-     * The function sorts a list of dates in ascending order using the insertion
-     * sort algorithm.
+     * The method 'sortDates()' sort the ArrayList of dates in ascending order using
+     * insertion sort.
      */
     public void sortDates() {
         for (int i = 1; i < dates.size(); i++) {
@@ -76,25 +99,27 @@ public class CampInfo {
     }
 
     /**
-     * The function adds a CAMDate object to a list of dates.
+     * The method 'addDate(CAMDate date)' adds a single date to the ArrayList of
+     * dates.
      * 
-     * @param date The parameter "date" is of type CAMDate, which is likely a custom
-     *             class representing
-     *             a date.
+     * @param date The CAMDate parameter "date" represents a date that needs to be
+     *             added to the list of dates.
      */
     public void addDate(CAMDate date) {
         dates.add(date);
     }
 
     /**
-     * The function adds a range of dates to a list, starting from a given start
-     * date and ending at a
-     * given end date.
+     * The method 'addDate(CAMDate startDate, CAMDate endDate)' adds a range of
+     * dates to the ArrayList of dates.
+     * Starting from the start date, the method adds all the dates up to the end
+     * date
+     * to the ArrayList of dates.
      * 
-     * @param startDate The start date of the range of dates to be added.
-     * @param endDate   The endDate parameter is of type CAMDate, which represents a
-     *                  date in the CAMDate
-     *                  class.
+     * @param startDate The CAMDate parameter "startDate" represents the start date
+     *                  of the range of dates.
+     * @param endDate   The CAMDate parameter "endDate" represents the end date of
+     *                  the range of dates.
      */
     public void addDate(CAMDate startDate, CAMDate endDate) {
         CAMDate temp = startDate;
@@ -110,11 +135,11 @@ public class CampInfo {
     }
 
     /**
-     * The function removes a specific date from a list of dates.
+     * The method 'removeDate(String date)' removes a date from the ArrayList of
+     * dates.
      * 
-     * @param date The parameter "date" is a string representing a date that needs
-     *             to be removed from
-     *             the "dates" list.
+     * @param date The String parameter "date" represents a date that needs to be
+     *             removed from the list of dates.
      */
     public void removeDate(String date) {
         for (CAMDate d : dates) {
@@ -126,12 +151,14 @@ public class CampInfo {
     }
 
     /**
-     * The function checks if a given date exists in a list of CAMDate objects.
+     * The method 'dateExists(String date)' checks if a date exists in the ArrayList
+     * of dates.
      * 
-     * @param date The "date" parameter is a string representing a date.
-     * @return The method is returning a boolean value. It returns true if the given
-     *         date exists in the
-     *         list of dates, and false otherwise.
+     * @param date The String parameter "date" represents a date that needs to be
+     *             checked if it exists in the list of dates.
+     * @return The methods returns a boolean value.
+     *         If the date exists in the list of dates, the method returns true.
+     *         else, the method returns false.
      */
     public boolean dateExists(String date) {
         for (CAMDate d : dates) {
@@ -143,93 +170,103 @@ public class CampInfo {
     }
 
     /**
-     * The function returns the name of a camp.
+     * The method 'getCampName()' returns the name of a camp.
      * 
-     * @return The method is returning the value of the variable "campName".
+     * @return The method returns the String that represents the name of a camp.
      */
     public String getCampName() {
         return campName;
     }
 
     /**
-     * The function returns an ArrayList of CAMDate objects.
+     * The method 'getDates()' returns the ArrayList<Date> that represents the
+     * dates of a camp.
      * 
-     * @return An ArrayList of CAMDate objects.
+     * @return The method returns the ArrayList<Date> stored in the variable
+     *         "dates".
      */
     public ArrayList<CAMDate> getDates() {
         return dates;
     }
 
     /**
-     * The function returns the registration closing date as a CAMDate object.
+     * The method 'getRegistrationClosingDate()' returns the registration closing
+     * date for a camp.
      * 
-     * @return The method is returning a CAMDate object.
+     * @return The method returns the CAMDate object stored in the variable
+     *         "registrationClosingDate"
      */
     public CAMDate getRegistrationClosingDate() {
         return registrationClosingDate;
     }
 
     /**
-     * The function returns the availability of a camp.
+     * The method 'getCampAvailability()' returns the faculty availability for a
+     * camp.
      * 
-     * @return The method is returning the value of the variable "campAvailability".
+     * @return The method returns the String stored in the variable
+     *         "campAvailability"
      */
     public String getCampAvailability() {
         return campAvailability;
     }
 
     /**
-     * The getLocation() function returns the location.
+     * The method 'getLocation()' returns the location of a camp.
      * 
-     * @return The method is returning the value of the variable "location".
+     * @return The method returns the String stored in the variable "location".
      */
     public String getLocation() {
         return location;
     }
 
     /**
-     * The function returns the total number of slots.
+     * The method 'getTotalSlots()' returns the total number of slots available for
+     * a camp.
      * 
-     * @return The method is returning the value of the variable "totalSlots".
+     * @return The method returns the integer stored in the variable "totalSlots".
      */
     public int getTotalSlots() {
         return totalSlots;
     }
 
     /**
-     * The function returns the number of slots available for committee members.
+     * The method 'getCommitteeMembersSlots()' returns the number of slots available
+     * for committee members.
      * 
-     * @return The method is returning the value of the variable
-     *         committeeMembersSlots.
+     * @return The method returns the integer stored in the variable
+     *         "committeeMembersSlots".
      */
     public int getCommitteeMembersSlots() {
         return committeeMembersSlots;
     }
 
     /**
-     * The function returns the camp description as a string.
+     * The method 'getCampDescription()' returns the description of a camp.
      * 
-     * @return The method is returning the value of the variable "campDescription".
+     * @return The method returns the String stored in the variable
+     *         "campDescription".
      */
     public String getCampDescription() {
         return campDescription;
     }
 
     /**
-     * The function returns the staff member in charge.
+     * The method 'getStaffInCharge()' returns the staff in charge of a camp.
      * 
-     * @return The method is returning the value of the variable "staffInCharge".
+     * @return The method returns the String stored in the variable
+     *         "staffInCharge".
      */
     public String getStaffInCharge() {
         return staffInCharge;
     }
 
     /**
-     * The function `getFormatedDates` formats a list of dates into a string
-     * representation with
-     * consecutive dates grouped together.
+     * The method 'getFormatedDates()' returns a String of dates.
+     * Consecutive dates are formatted as a range of dates.
+     * Non-consecutive dates are formatted as individual dates.
      * 
-     * @return The method is returning a string that contains formatted dates.
+     * @return The method returns a String of dates formatted in presentable form.
      */
     public String getFormatedDates() {
         String formatedDates = "";
@@ -262,18 +299,10 @@ public class CampInfo {
     }
 
     /**
-     * The function returns a string containing information about a camp, including
-     * its name, dates,
-     * registration closing date, visibility, location, total slots, committee
-     * members slots,
-     * description, and staff in charge.
+     * The method 'getCampInfo()' returns a String that contains information about a
+     * camp.
      * 
-     * @return The method is returning a string that contains information about a
-     *         camp. The information
-     *         includes the camp name, camp dates, registration closing date, camp
-     *         visibility, location, total
-     *         slots, committee members slots, camp description, and staff in
-     *         charge.
+     * @return The method returns a String that contains information about a camp.
      */
     public String getCampInfo() {
         return "Camp Name: " + campName + "\n" + "Camp Dates: " + dates + "\n" + "Registration Closing Date: "
@@ -284,9 +313,9 @@ public class CampInfo {
     }
 
     /**
-     * The toString() function returns the camp information as a string.
+     * The method 'toString()' returns the result of the getCampInfo() method.
      * 
-     * @return The method is returning the result of the getCampInfo() method.
+     * @return The method returns the result of the getCampInfo() method.
      */
     @Override
     public String toString() {
@@ -294,7 +323,8 @@ public class CampInfo {
     }
 
     /**
-     * The function sets the value of the campName variable.
+     * The method 'setCampName(String campName)' sets attribute 'campName' to the
+     * parameter campName.
      * 
      * @param campName The parameter "campName" is a String that represents the name
      *                 of a camp.
@@ -304,19 +334,20 @@ public class CampInfo {
     }
 
     /**
-     * The function sets the registration closing date for a specific event.
+     * The method 'setDates(ArrayList<CAMDate> dates)' sets attribute 'dates' to the
+     * parameter registrationClosingDate.
      * 
-     * @param registrationClosingDate The registration closing date is a CAMDate
-     *                                object, which
-     *                                represents the date when registration for
-     *                                something closes.
+     * @param registrationClosingDate The parameter "registrationClosingDate" is a
+     *                                CAMDate object that represents the date when
+     *                                registration for a camp closes.
      */
     public void setRegistrationClosingDate(CAMDate registrationClosingDate) {
         this.registrationClosingDate = registrationClosingDate;
     }
 
     /**
-     * The function sets the availability of a camp.
+     * The method 'setCampAvailability(String campAvailability)' sets attribute
+     * 'campAvailability' to the parameter campAvailability.
      * 
      * @param campAvailability The parameter "campAvailability" is a String that
      *                         represents the
@@ -327,93 +358,89 @@ public class CampInfo {
     }
 
     /**
-     * The function sets the location of an object.
+     * The method 'setLocation(String location)' sets attribute 'location' to the
+     * parameter location.
      * 
-     * @param location The "location" parameter is a String that represents the new
-     *                 location to be set.
+     * @param location The parameter "location" is a String that represents the
+     *                 location of a camp.
      */
     public void setLocation(String location) {
         this.location = location;
     }
 
     /**
-     * The function sets the value of the totalSlots variable.
+     * The method 'setTotalSlots(int totalSlots)' sets attribute 'totalSlots' to the
+     * parameter totalSlots.
      * 
-     * @param TotalSlots The parameter TotalSlots is an integer that represents the
-     *                   total number of
-     *                   slots.
+     * @param TotalSlots The parameter "TotalSlots" is an integer that represents
+     *                   the total number of slots available for a camp.
      */
     public void setTotalSlots(int TotalSlots) {
         this.totalSlots = TotalSlots;
     }
 
     /**
-     * The function sets the number of slots available for committee members.
+     * The method 'setCommitteeMembersSlots(int committeeMembersSlots)' sets
+     * attribute 'committeeMembersSlots' to the parameter committeeMembersSlots.
      * 
      * @param committeeMembersSlots The parameter "committeeMembersSlots" is an
-     *                              integer that represents
-     *                              the number of slots available for committee
-     *                              members.
+     *                              integer that represents the number of slots
+     *                              available for committee members.
      */
     public void setCommitteeMembersSlots(int committeeMembersSlots) {
         this.committeeMembersSlots = committeeMembersSlots;
     }
 
     /**
-     * The function sets the camp description for a Java object.
+     * The method 'setCampDescription(String campDescription)' sets attribute
+     * 'campDescription' to the parameter campDescription.
      * 
-     * @param campDescription The campDescription parameter is a String that
-     *                        represents the description
-     *                        of a camp.
+     * @param campDescription The parameter "campDescription" is a String that
+     *                        represents the description of a camp.
      */
     public void setCampDescription(String campDescription) {
         this.campDescription = campDescription;
     }
 
     /**
-     * The function sets the staff in charge for a particular task or
-     * responsibility.
+     * The method 'setStaffInCharge(String staffInCharge)' sets attribute
+     * 'staffInCharge' to the parameter staffInCharge.
      * 
-     * @param staffInCharge The staff member who is in charge of a particular task
-     *                      or responsibility.
+     * @param staffInCharge The parameter "staffInCharge" is a String that
+     *                      represents the staff member in charge of a camp.
      */
     public void setStaffInCharge(String staffInCharge) {
         this.staffInCharge = staffInCharge;
     }
 
-    // Set all camp info except commitee members and camp dates in a single method
+    // Set all camp info except camp dates in a single method
     /**
-     * The function sets the information for a camp, including its name,
-     * registration closing date,
-     * availability, location, total slots, committee members slots, description,
-     * and staff in charge.
+     * The method 'setCampInfo(String campName, CAMDate registrationClosingDate,
+     * String campAvailability, String location, int totalSlots, int
+     * committeeMembersSlots, String campDescription, String staffInCharge)'
+     * sets all the attributes of the class except 'dates' to the given parameters.
      * 
-     * @param campName                The name of the camp.
-     * @param registrationClosingDate The registrationClosingDate parameter is of
-     *                                type CAMDate, which
-     *                                is a custom class that represents a date for
-     *                                the closing of registration for the camp.
-     * @param campAvailability        The availability of the camp, such as "open"
-     *                                or "closed".
+     * @param campName                The campName parameter is a String that
+     *                                represents the name of the camp.
+     * @param registrationClosingDate The registrationClosingDate parameter is a
+     *                                CAMDate object that represents the date when
+     *                                registration for the camp closes.
+     * @param campAvailability        The campAvailability parameter is a String
+     *                                that represents the
+     *                                facultiy availability of the camp.
      * @param location                The location parameter is a String that
-     *                                represents the location of the camp. It
-     *                                could be the name of a city, a specific
-     *                                address, or any other information that
-     *                                identifies the
-     *                                physical location of the camp.
-     * @param totalSlots              The total number of slots available for the
-     *                                camp.
-     * @param committeeMembersSlots   The parameter "committeeMembersSlots"
-     *                                represents the number of
-     *                                slots available specifically for committee
-     *                                members at the camp.
-     * @param campDescription         A description of the camp, providing
-     *                                information about the activities,
-     *                                goals, and purpose of the camp.
+     *                                represents the location of the camp.
+     * @param totalSlots              The totalSlots parameter is an integer that
+     *                                represents the total number of slots
+     *                                available for the camp.
+     * @param committeeMembersSlots   The committeeMembersSlots parameter is an
+     *                                integer that represents the number of slots
+     *                                available for committee members.
+     * @param campDescription         The campDescription parameter is a String
+     *                                that represents the description of the camp.
      * @param staffInCharge           The staffInCharge parameter is a String that
-     *                                represents the name or
-     *                                identifier of the staff member who is in
-     *                                charge of the camp.
+     *                                represents the staff member in charge of the
+     *                                camp.
      */
     public void setCampInfo(String campName, CAMDate registrationClosingDate, String campAvailability,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
@@ -428,11 +455,7 @@ public class CampInfo {
     }
 
     /**
-     * The function displays information about a camp, including its name, dates,
-     * registration closing
-     * date, availability, location, total slots, committee members slots,
-     * description, and staff in
-     * charge.
+     * The method 'displayCampInfo()' displays all the information about a camp.
      */
     public void displayCampInfo() {
         System.out.println("======================================");

@@ -1,5 +1,12 @@
 package users;
 
+/**
+ * The Users class is an abstract class that implements the Comparable
+ * interface. Base user class for Staff and Student.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public abstract class Users implements Comparable<Users> {
     private String FirstName;
     private String userID;

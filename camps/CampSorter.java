@@ -3,18 +3,24 @@ package camps;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The CampSorter class is used for sorting a list of camps.
+ * Sort by various params such as campName or campAvailability.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class CampSorter {
     private static String sortBy;
 
     /**
-     * The function performs an insertion sort on an ArrayList of Camp objects based
-     * on a specified
-     * sorting criteria.
+     * The method 'insertionSort' sorts the ArrayList of Camp objects based on the
+     * "sortBy" parameter.
      * 
      * @param camps  An ArrayList of Camp objects that needs to be sorted.
-     * @param sortBy The "sortBy" parameter is a string that specifies the attribute
-     *               by which the
-     *               "camps" ArrayList should be sorted.
+     * @param sortBy The "sortBy" parameter is a String that specifies the attribute
+     *               by which the "camps" ArrayList should be sorted.
      */
     private static void insertionSort(ArrayList<Camp> camps, String sortBy) {
         for (int i = 1; i < camps.size(); i++) {
@@ -29,8 +35,16 @@ public class CampSorter {
     }
 
     /**
-     * The function sorts a list of camps based on user input for the desired
-     * sorting criteria.
+     * The method 'sortCamps' sorts the ArrayList of Camp objects based on the
+     * user's choice which sets the 'sortby' parameter of insertionSort method.
+     * The user is prompted to enter a choice for the attribute by which the
+     * ArrayList
+     * should be sorted.
+     * The attributes includes: Camp Name, Registration Closing Date,
+     * Camp Availability, Location, Total Slots, Committee Members Slots,
+     * Staff in Charge.
+     * If the user enters an invalid choice, the ArrayList will be sorted by the
+     * default attribute, which is Camp Name.
      * 
      * @param camps An ArrayList of Camp objects.
      */
@@ -46,7 +60,7 @@ public class CampSorter {
         System.out.println("7. Staff in Charge");
         System.out.printf("Enter choice: ");
         String choice = sc.nextLine();
-        // Clear the lines printed by this function
+
         insertionSort(camps, "campName");
         switch (choice) {
             case "1":
@@ -75,9 +89,7 @@ public class CampSorter {
                 return;
         }
 
-        // Clear the entire line
         insertionSort(camps, sortBy);
-
     }
 
 }

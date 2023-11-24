@@ -3,6 +3,13 @@ package infoexchange;
 import camps.Camp;
 import users.*;
 
+/**
+ * The Enquiries class implements the Comparable interface.
+ * Student can submit enquiries.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class Enquiries implements Comparable<Enquiries> {
     private String enquiryID;
     private String enquiryString;
@@ -10,6 +17,13 @@ public class Enquiries implements Comparable<Enquiries> {
     private String campName;
     private boolean submitted = false;
 
+    /**
+     * Constructor for a new Enquiry.
+     * 
+     * @param enqString
+     * @param sender
+     * @param campName
+     */
     public Enquiries(String enqString, String sender, String campName) {
         this.enquiryString = enqString;
         this.sender = sender;
