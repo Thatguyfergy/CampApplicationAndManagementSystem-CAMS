@@ -6,6 +6,8 @@ LAB group: `SMACS` \
 Group Number: `6` \
 Members: `Ferguson`, `Chin Yi`, `Enric`, `Jun Kiat`, `Ying Hao`
 
+Click [here](https://drive.google.com/drive/folders/1TfUKbkJdoM-3EOIhEjAw5re0QFtx4_bK?usp=sharing) for the Javadocs.
+
 # Installation
 
 I have pre-compiled the .class files already, so you can just run the CAMSapp to start
