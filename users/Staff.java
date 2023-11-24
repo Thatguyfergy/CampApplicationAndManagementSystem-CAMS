@@ -1,10 +1,8 @@
 package users;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import camps.*;
-import infoexchange.*;
 
 /**
  * Staff class is used to create staff objects to represent a staff in the
@@ -15,7 +13,6 @@ import infoexchange.*;
  * @version 1.0
  */
 public class Staff extends Users {
-    private Scanner scanner = new Scanner(System.in);
     private ArrayList<String> campsInCharge = new ArrayList<String>();
 
     /**

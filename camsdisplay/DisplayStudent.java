@@ -2,12 +2,9 @@ package camsdisplay;
 
 import users.*;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
-import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import infoexchange.EnquiriesArray;
@@ -23,7 +20,7 @@ import utils.*;
  * @version 1.0
  */
 public class DisplayStudent extends DisplayLogin
-        implements ViewCampsScreen, ScreenClearFn, CampsRegisterable, EnquiriesScreen {
+        implements ViewCampsScreen, ScreenClearFunction, CampsRegisterable, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -41,21 +38,24 @@ public class DisplayStudent extends DisplayLogin
      * Finally, it calls the studentScreen method, passing in the user object
      * attribute.
      * 
-     * @param _user
-     * @param _campArray
-     * @param _enquiriesArray
-     * @param _UserDB
-     * @param _suggestionArray
+     * @param user
+     * @param campArray
+     * @param enquiriesArray
+     * @param UserDB
+     * @param suggestionArray
      */
-    public DisplayStudent(Student _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
-            SuggestionArray _suggestionArray) {
-        super(_campArray, _enquiriesArray, _UserDB, _suggestionArray);
-        this.campArray = _campArray;
-        this.enquiriesArray = _enquiriesArray;
-        this.UserDB = _UserDB;
-        this.suggestionArray = _suggestionArray;
+    public DisplayStudent(Student user, CampArray campArray, EnquiriesArray enquiriesArray, UsersDatabase UserDB,
+            SuggestionArray suggestionArray) {
 
-        this.user = _user;
+        // To ensure that the DisplayLogin contain the same Arrays/Databases
+        super(campArray, enquiriesArray, UserDB, suggestionArray);
+
+        this.campArray = campArray;
+        this.enquiriesArray = enquiriesArray;
+        this.UserDB = UserDB;
+        this.suggestionArray = suggestionArray;
+
+        this.user = user;
 
         studentScreen(user);
     }
@@ -316,7 +316,7 @@ public class DisplayStudent extends DisplayLogin
                     System.out.println("Invalid index! Please try again!");
                 } while (true);
                 System.out.printf("Please input the edited Enquiry: ");
-                //sc.nextLine();
+                // sc.nextLine();
                 String newenq = sc.nextLine();
                 student.editEnquiry(newenq, enqindex1 - 1);
                 break;
@@ -387,7 +387,7 @@ public class DisplayStudent extends DisplayLogin
         System.out.println("0: Exit to menu");
         do {
             System.out.printf("Enter the index of the camp you are withdrawing from: ");
-            //sc.nextLine();
+            // sc.nextLine();
             remCampIndex = InputInt.nextInt(sc) - 1;
             sc.nextLine(); // flush nextline char
             if (remCampIndex == -1)

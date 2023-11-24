@@ -2,22 +2,18 @@ package camsdisplay;
 
 import users.*;
 
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import camdate.CAMDate;
-import camps.Camp;
 import camps.CampArray;
 import infoexchange.EnquiriesArray;
-import infoexchange.Suggestion;
 import infoexchange.SuggestionArray;
-import report.*;
 import utils.*;
 
 /**
  * The DisplayLogin class is used to display the login interface.
+ * !! Important - Read this when deriving new classes from DisplayLogin!!
+ * Check the 2 different Constructors.
  * 
  * @author Kok Chin Yi, Ferguson Chiew
  * @version 1.0
@@ -32,11 +28,12 @@ public class DisplayLogin {
     private Users user;
 
     /**
-     * The `DisplayLogin(Boolean bool)` constructor initializes the `campArray`,
+     * The `DisplayLogin` constructor initializes the `campArray`,
      * `enquiriesArray`, `UserDB`, and `suggestionArray` objects.
+     * The respective arrays/database will read from the csvfiles.
      * Only initialize this once your else you will get nightmares
      */
-    public DisplayLogin(Boolean bool) {
+    public DisplayLogin() {
         campArray = new CampArray("csvfiles\\camps.csv");
         enquiriesArray = new EnquiriesArray("csvfiles\\enquiries.csv", "csvfiles\\replies.csv");
         UserDB = new UsersDatabase("csvfiles\\usersStudent.csv",
@@ -45,11 +42,15 @@ public class DisplayLogin {
     }
 
     /**
-     * The `public DisplayLogin()` constructor is an empty constructor that does not
-     * have any parameters or code inside it. It is used to create an instance of
-     * the `DisplayLogin` class without initializing any objects or performing any
-     * actions. Empty so that the derived classes won't reinitialise the superclass
-     * again.
+     * 
+     * The `public DisplayLogin()` constructor is used to create an instance of
+     * the `DisplayLogin` class without reinitializing any objects or performing any
+     * actions.
+     * The respective arrays/databse WILL NOT read from the csvfiles.
+     * 
+     * 
+     * Make sure to invoke super(...) in the respective derived classes to prevent
+     * it from invoking the default one.
      */
     public DisplayLogin(CampArray campArray, EnquiriesArray enquiriesArray, UsersDatabase UserDB,
             SuggestionArray suggestionArray) {

@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author Tan Ying Hao
  * @version 1.0
  */
-public interface ScreenClearFn {
+public interface ScreenClearFunction {
     Scanner sc = new Scanner(System.in);
 
     /**

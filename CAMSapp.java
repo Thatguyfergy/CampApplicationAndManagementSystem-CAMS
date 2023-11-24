@@ -1,7 +1,6 @@
 import camsdisplay.*;
 
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The CAMSapp class is a Java program that represents an application for
@@ -20,7 +19,7 @@ public class CAMSapp {
      */
     public static void main(String[] args) throws IOException {
 
-        DisplayLogin cams = new DisplayLogin(true);
+        DisplayLogin cams = new DisplayLogin();
 
         while (true) {
 

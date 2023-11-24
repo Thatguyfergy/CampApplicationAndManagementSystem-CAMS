@@ -1,10 +1,5 @@
 package users;
 
-import java.util.ArrayList;
-
-import camps.Camp;
-import infoexchange.*;
-
 /**
  * The CampAttendeeRole class represents the role of an attendee at a camp.
  * It is used to store the campAttending (ie. campName).
@@ -50,12 +45,3 @@ public class CampAttendeeRole {
     }
 
 }
-
-// =======================================================================================================
-// Enquiry handling for students
-// -------------------------------------------------------------------------------------------------------
-// There shld be a camp Tag for each enquiry.
-// This Camptag is auto generated when the Student is viewing a particular camp
-// details. ie. They can only make an enquiry if he/she is viewing the details
-// of a particular camp details.
-// -------------------------------------------------------------------------------------------------------

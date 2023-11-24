@@ -2,16 +2,12 @@ package camsdisplay;
 
 import users.*;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
 
-import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import infoexchange.EnquiriesArray;
-import infoexchange.Suggestion;
 import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
@@ -23,7 +19,7 @@ import utils.*;
  * @author Enric Tan, Kok Chin Yi, Ferguson Chiew
  * @version 1.0
  */
-public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, ScreenClearFn, EnquiriesScreen {
+public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, ScreenClearFunction, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -42,21 +38,24 @@ public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, Scree
      * "user" instance variable.
      * Finally, it calls the "staffScreen" method, passing in the "user" object.
      * 
-     * @param _user
-     * @param _campArray
-     * @param _enquiriesArray
-     * @param _UserDB
-     * @param _suggestionArray
+     * @param user
+     * @param campArray
+     * @param enquiriesArray
+     * @param UserDB
+     * @param suggestionArray
      */
-    public DisplayStaff(Staff _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
-            SuggestionArray _suggestionArray) {
-        super(_campArray, _enquiriesArray, _UserDB, _suggestionArray);
-        this.campArray = _campArray;
-        this.enquiriesArray = _enquiriesArray;
-        this.UserDB = _UserDB;
-        this.suggestionArray = _suggestionArray;
+    public DisplayStaff(Staff user, CampArray campArray, EnquiriesArray enquiriesArray, UsersDatabase UserDB,
+            SuggestionArray suggestionArray) {
 
-        this.user = _user;
+        // To ensure that the DisplayLogin contain the same Arrays/Databases
+        super(campArray, enquiriesArray, UserDB, suggestionArray);
+
+        this.campArray = campArray;
+        this.enquiriesArray = enquiriesArray;
+        this.UserDB = UserDB;
+        this.suggestionArray = suggestionArray;
+
+        this.user = user;
 
         staffScreen(user);
     }

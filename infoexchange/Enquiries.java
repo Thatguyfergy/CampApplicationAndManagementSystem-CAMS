@@ -1,8 +1,5 @@
 package infoexchange;
 
-import camps.Camp;
-import users.*;
-
 /**
  * The Enquiries class implements the Comparable interface.
  * Student can submit enquiries.

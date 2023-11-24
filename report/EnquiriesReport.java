@@ -6,16 +6,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import camdate.CAMDate;
-import camps.Camp;
-import camps.CampArray;
 import infoexchange.EnqReplies;
 import infoexchange.Enquiries;
 import infoexchange.EnquiriesArray;
 import users.Staff;
 import users.Student;
 import users.Users;
-import users.UsersDatabase;
 import utils.InputInt;
 
 /**
