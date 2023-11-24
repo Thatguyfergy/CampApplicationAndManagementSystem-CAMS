@@ -22,16 +22,26 @@ import users.Users;
 import users.UsersDatabase;
 import users.Student;
 
+/**
+ * The CampArray class maintains the various camps.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class CampArray {
     private static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);
     private static String campsFile;
     private CampFilter campFilter;
 
-    // The above code is a constructor for the CampArray class in Java. It takes a
-    // file name as a parameter and reads the contents of the file. The file is
-    // assumed to be in
-    // CSV format, with each row representing a camp.
+    /**
+     * The above code is a constructor for the CampArray class in Java. It takes a
+     * file name as a parameter and reads the contents of the file. The file is
+     * assumed to be in CSV format, with each row representing a camp.
+     * 
+     * @param campsFile
+     */
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
         CampArray.campsFile = campsFile;
@@ -858,7 +868,7 @@ public class CampArray {
         System.out.println("Attendees:");
         for (String attendee : camp.getAttendees()) {
             if (attendee != null)
-                System.out.println("- " + UsersDatabase.getFirstName(attendee) + " (" + attendee +  ")");
+                System.out.println("- " + UsersDatabase.getFirstName(attendee) + " (" + attendee + ")");
         }
 
         // Display committee members

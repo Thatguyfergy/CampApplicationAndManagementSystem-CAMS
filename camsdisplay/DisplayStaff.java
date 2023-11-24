@@ -16,7 +16,14 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
-public class DisplayStaff extends DisplayLogin implements viewCampsScreen, ScreenClearFn, replyEnquiries {
+/**
+ * The DisplayStaff class extends DisplayLogin and implements ViewCampsScreen,
+ * ScreenClearFn, and EnquiriesScreen.
+ * 
+ * @author Enric Tan, Kok Chin Yi, Ferguson Chiew
+ * @version 1.0
+ */
+public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, ScreenClearFn, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -25,15 +32,22 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
 
     private Staff user;
 
-    // The above code is a constructor for a class called "DisplayStaff". It takes
-    // in several
-    // parameters, including a Staff object, CampArray object, EnquiriesArray
-    // object, UsersDatabase
-    // object, and SuggestionArray object. It assigns these objects to instance
-    // variables within the
-    // class. It also assigns the Staff object passed as a parameter to the "user"
-    // instance variable.
-    // Finally, it calls the "staffScreen" method, passing in the "user" object.
+    /**
+     * 
+     * The above code is a constructor for a class called "DisplayStaff". It
+     * takes in several parameters, including a Staff object, CampArray object,
+     * EnquiriesArray object, UsersDatabase object, and SuggestionArray object. It
+     * assigns these objects to instance variables within the
+     * class. It also assigns the Staff object passed as a parameter to the
+     * "user" instance variable.
+     * Finally, it calls the "staffScreen" method, passing in the "user" object.
+     * 
+     * @param _user
+     * @param _campArray
+     * @param _enquiriesArray
+     * @param _UserDB
+     * @param _suggestionArray
+     */
     public DisplayStaff(Staff _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
             SuggestionArray _suggestionArray) {
 
@@ -84,7 +98,7 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
                     "Enter your choice: ";
             System.out.print(menu);
 
-            int choice = inputInt.nextInt(sc);
+            int choice = InputInt.nextInt(sc);
             sc.nextLine(); // Consume the newline character
             switch (choice) {
                 case 0:
@@ -302,7 +316,7 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
 
         do {
             System.out.printf("Enter choice: ");
-            campChoice = inputInt.nextInt(sc);
+            campChoice = InputInt.nextInt(sc);
             if (campChoice == createdCamps.size() + 1) {
                 System.out.print("\033[H\033[2J"); // Clear the entire screen
                 return;
@@ -315,7 +329,7 @@ public class DisplayStaff extends DisplayLogin implements viewCampsScreen, Scree
                 "1. Name\n" +
                 "2. Points\n" +
                 "Enter your choice: ");
-        choice = inputInt.nextInt(sc);
+        choice = InputInt.nextInt(sc);
         sc.nextLine(); // Consume the newline character
         System.out.println(); // for readability
 

@@ -7,6 +7,13 @@ import camdate.CAMDate;
 import users.Student;
 import users.Users;
 
+/**
+ * The CampFilter class is used to filter a list of camps based on certain
+ * criteria such as dates or faculties.
+ * 
+ * @author Tan Ying Hao
+ * @version 1.0
+ */
 public class CampFilter {
 
     private ArrayList<String> availableDates;
@@ -18,7 +25,7 @@ public class CampFilter {
     private Scanner sc;
 
     /**
-     *  The `CampFilter()` is a constructor method for the `CampFilter` class.
+     * The `CampFilter()` is a constructor method for the `CampFilter` class.
      * It initialises 'availableDates', 'availableFaculties', 'availableLocations',
      * 'availableSIC', 'filteredCamps', 'unfilteredCamps', and 'sc' variables.
      */
@@ -36,9 +43,9 @@ public class CampFilter {
      * The method 'addAvailableDate()' adds a date to 'availableDates' ArrayList
      * if it is not already in the list
      * 
-     * @param date The parameter "date" is a String that represents a date 
+     * @param date The parameter "date" is a String that represents a date
      *             to be added to 'availableDates' ArrayList
-     * @return The method returns a boolean value. 
+     * @return The method returns a boolean value.
      *         It returns true if the date is successfully added to the list,
      *         and false if the date is already in the list.
      */
@@ -50,12 +57,13 @@ public class CampFilter {
     }
 
     /**
-     * The method 'addAvailableFaculty()' adds a faculty to 'availableFaculties' ArrayList
+     * The method 'addAvailableFaculty()' adds a faculty to 'availableFaculties'
+     * ArrayList
      * if it is not already in the list
      * 
      * @param faculty The parameter "faculty" is a String that represents
      *                the faculty that to be added to 'availableFaculties' ArrayList
-     * @return The method returns a boolean value. 
+     * @return The method returns a boolean value.
      *         It returns true if the faculty is successfully added to the list,
      *         and false if the faculty is already in the list.
      */
@@ -67,12 +75,13 @@ public class CampFilter {
     }
 
     /**
-     * The method 'addAvailableLocation()' adds a location to 'availableLocations' ArrayList
+     * The method 'addAvailableLocation()' adds a location to 'availableLocations'
+     * ArrayList
      * if it is not already in the list
      * 
      * @param location The location parameter is a String that represents the
      *                 location to be added to 'availableLocations' ArrayList
-     * @return The method returnds a boolean value. 
+     * @return The method returnds a boolean value.
      *         It returns true if the location was successfully added to the list,
      *         and false if the location is already in the list.
      */
@@ -84,12 +93,13 @@ public class CampFilter {
     }
 
     /**
-     * The method 'addAvailableSIC()' adds a staff in charge to 'availableSIC' ArrayList
+     * The method 'addAvailableSIC()' adds a staff in charge to 'availableSIC'
+     * ArrayList
      * if it is not already in the list
      * 
-     * @param sic The parameter "sic" is a String representing a Staff In Charge 
+     * @param sic The parameter "sic" is a String representing a Staff In Charge
      *            to be added to 'availableSIC' ArrayList
-     * @return The method returns a boolean value. 
+     * @return The method returns a boolean value.
      *         It returns true if sic was successfully added to the list,
      *         and false if sic is already in the list.
      */
@@ -101,7 +111,8 @@ public class CampFilter {
     }
 
     /**
-     * The method 'filter(Users user)' filters a list of camps based on user's input for the type of filter,
+     * The method 'filter(Users user)' filters a list of camps based on user's input
+     * for the type of filter,
      * such as date, faculty, location, and staff in charge.
      * if the user enters an invalid choice, no filter will be applied.
      * 
@@ -172,11 +183,15 @@ public class CampFilter {
     }
 
     /**
-     * The method 'filterByFaculty(Users user)' filters a list of camps by a user-selected faculty.
-     * If user is a Student, the method will display the student's faculty and NTU as options.
-     * If user is a Staff, the method will display all available faculties as options.
+     * The method 'filterByFaculty(Users user)' filters a list of camps by a
+     * user-selected faculty.
+     * If user is a Student, the method will display the student's faculty and NTU
+     * as options.
+     * If user is a Staff, the method will display all available faculties as
+     * options.
      * The user is prompted to enter a faculty to filter by.
-     * The method adds all camps that have the given faculty into the 'filteredCamps' ArrayList.
+     * The method adds all camps that have the given faculty into the
+     * 'filteredCamps' ArrayList.
      * 
      * @param user The user parameter is an instance of the Users class, which is
      *             the parent class for both the Student and Staff classes.
@@ -230,9 +245,11 @@ public class CampFilter {
     }
 
     /**
-     * The method 'filterByLocation()' filters a list of camps by a user-selected location.
+     * The method 'filterByLocation()' filters a list of camps by a user-selected
+     * location.
      * The user is prompted to enter a location to filter by.
-     * The method adds all camps that have the given location into the 'filteredCamps' ArrayList.
+     * The method adds all camps that have the given location into the
+     * 'filteredCamps' ArrayList.
      */
     private void filterByLocation() {
         String location;
@@ -259,9 +276,11 @@ public class CampFilter {
     }
 
     /**
-     * The method 'filterBySIC()' filters a list of camps by a user-selected staff in charge.
+     * The method 'filterBySIC()' filters a list of camps by a user-selected staff
+     * in charge.
      * The user is prompted to enter a staff in charge to filter by.
-     * The method adds all camps that have the given staff in charge into the 'filteredCamps' ArrayList.
+     * The method adds all camps that have the given staff in charge into the
+     * 'filteredCamps' ArrayList.
      */
     private void filterBySIC() {
 

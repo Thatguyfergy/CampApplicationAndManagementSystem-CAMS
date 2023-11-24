@@ -11,13 +11,19 @@ import camdate.CAMDate;
 import camps.Camp;
 import camps.CampArray;
 import infoexchange.EnquiriesArray;
-import infoexchange.Suggestion;
 import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
+/**
+ * The above code is defining a class called DisplayStudent that extends
+ * another class called DisplayLogin.
+ * 
+ * @author Enric Tan, Tan Jun Kiat
+ * @version 1.0
+ */
 public class DisplayStudent extends DisplayLogin
-        implements viewCampsScreen, ScreenClearFn, registerCamps, replyEnquiries {
+        implements ViewCampsScreen, ScreenClearFn, CampsRegisterable, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;
     private EnquiriesArray enquiriesArray;
@@ -26,11 +32,21 @@ public class DisplayStudent extends DisplayLogin
 
     private Student user;
 
-    // The below code is defining a constructor for a class called DisplayStudent.
-    // The constructor takes in several parameters, including 
-    // a Student object, CampArray object, EnquiriesArray object, UsersDatabase object, and SuggestionArray object.
-    // It assigns these objects to instance variables within the class.
-    // Finally, it calls the studentScreen method, passing in the user object attribute.
+    /**
+     * The below code is defining a constructor for a class called DisplayStudent.
+     * The constructor takes in several parameters, including
+     * a Student object, CampArray object, EnquiriesArray object, UsersDatabase
+     * object, and SuggestionArray object.
+     * It assigns these objects to instance variables within the class.
+     * Finally, it calls the studentScreen method, passing in the user object
+     * attribute.
+     * 
+     * @param _user
+     * @param _campArray
+     * @param _enquiriesArray
+     * @param _UserDB
+     * @param _suggestionArray
+     */
     public DisplayStudent(Student _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
             SuggestionArray _suggestionArray) {
 
@@ -45,7 +61,8 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The `studentScreen` function displays a menu for a student in the CAMS app and
+     * The `studentScreen` function displays a menu for a student in the CAMS app
+     * and
      * allows them to perform various actions based on their role.
      * 
      * @param student The parameter "student" is an object of the class "Student".
@@ -86,7 +103,7 @@ public class DisplayStudent extends DisplayLogin
                 System.out.println("5. Logout");
             System.out.printf("Enter your choice: ");
 
-            choice = inputInt.nextInt(sc);
+            choice = InputInt.nextInt(sc);
             System.out.println();
             switch (choice) {
                 case 0:
@@ -165,9 +182,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "viewCampsScreen" displays a screen for viewing camps in the CAMS app
+     * The function "viewCampsScreen" displays a screen for viewing camps in the
+     * CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void viewCampsScreen(Users user) {
 
@@ -181,9 +200,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "registerCampsScreen" displays a screen for registering for a camp in the CAMS app
+     * The function "registerCampsScreen" displays a screen for registering for a
+     * camp in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void registerCampsScreen(Users user) {
         Student student = new Student(null, null, null, null, null, null, campArray);
@@ -208,7 +229,7 @@ public class DisplayStudent extends DisplayLogin
             campname = sc.nextLine();
         } while (true);
         System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
-        boolean comm = (inputInt.nextInt(sc) == 1) ? true : false;
+        boolean comm = (InputInt.nextInt(sc) == 1) ? true : false;
         Camp campPtr = campArray.getCamp(campname);
         if (comm)
             student.registerCampCommittee(campPtr, campArray);
@@ -218,10 +239,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "manageEnquiriesScreen" displays a screen for a student to manage his/her enquiries in the CAMS app
+     * The function "manageEnquiriesScreen" displays a screen for a student to
+     * manage his/her enquiries in the CAMS app
      * 
      * @param student The "student" parameter is an object of the Student class. It
-     *                represents the student who is using the CAMS app to manage their enquiries.
+     *                represents the student who is using the CAMS app to manage
+     *                their enquiries.
      */
     private void manageEnquiriesScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -285,7 +308,7 @@ public class DisplayStudent extends DisplayLogin
                 int enqindex1;
                 do {
                     System.out.printf("Select Enquiry to edit, input Enquiry index: ");
-                    enqindex1 = inputInt.nextInt(sc);
+                    enqindex1 = InputInt.nextInt(sc);
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex1 >= 1 && enqindex1 <= enqArraySize)
                         break;
@@ -306,7 +329,7 @@ public class DisplayStudent extends DisplayLogin
                 int enqindex2;
                 do {
                     System.out.printf("Select Enquiry to delete, input Enquiry index: ");
-                    enqindex2 = inputInt.nextInt(sc);
+                    enqindex2 = InputInt.nextInt(sc);
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex2 >= 1 && enqindex2 <= enqArraySize)
                         break;
@@ -324,7 +347,7 @@ public class DisplayStudent extends DisplayLogin
                 int enqindex;
                 do {
                     System.out.printf("Select Enquiry to submit, input Enquiry index: ");
-                    enqindex = inputInt.nextInt(sc);
+                    enqindex = InputInt.nextInt(sc);
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex >= 1 && enqindex <= enqArraySize)
                         break;
@@ -341,7 +364,8 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "withdrawFromCampScreen" displays a screen for a student to withdraw from a camp in the CAMS app
+     * The function "withdrawFromCampScreen" displays a screen for a student to
+     * withdraw from a camp in the CAMS app
      * 
      * @param student The student object represents a student who wants to withdraw
      *                from a camp.
@@ -361,7 +385,7 @@ public class DisplayStudent extends DisplayLogin
         do {
             System.out.printf("Enter the index of the camp you are withdrawing from: ");
             sc.nextLine();
-            remCampIndex = inputInt.nextInt(sc) - 1;
+            remCampIndex = InputInt.nextInt(sc) - 1;
             if (remCampIndex == -1)
                 break;
             if (remCampIndex >= 0 && remCampIndex <= (studentRegCamps.size() - 1))
@@ -376,9 +400,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "viewCampDetailsScreen" displays a screen for the camp details of the camps in the CAMS app
+     * The function "viewCampDetailsScreen" displays a screen for the camp details
+     * of the camps in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void viewCampDetailsScreen(Users user) {
         System.out.print("\033[H\033[2J");
@@ -393,7 +419,8 @@ public class DisplayStudent extends DisplayLogin
      * The function "viewPointsScreen" displays a screen for the Committee points of
      * a camp committee member in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committe member
+     * @param student The student object represents a student who is a camp
+     *                committee member
      *                that wants to view his/her points
      */
     private void viewPointsScreen(Student student) {
@@ -406,10 +433,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "manageSuggestionsScreen" displays a screen for a camp committee member to manage his/her
+     * The function "manageSuggestionsScreen" displays a screen for a camp committee
+     * member to manage his/her
      * suggestions in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committe member
+     * @param student The student object represents a student who is a camp committe
+     *                member
      *                that wants to manage his/her suggestions
      */
     private void manageSuggestionsScreen(Student student) {
@@ -446,7 +475,7 @@ public class DisplayStudent extends DisplayLogin
             case "E", "e":
                 if (suggestionArray.viewSuggestions(student)) {
                     System.out.printf("Select Suggestion to edit, input Suggestion index: ");
-                    int sugindex1 = inputInt.nextInt(sc);
+                    int sugindex1 = InputInt.nextInt(sc);
                     sc.nextLine();
                     if (suggestionArray.suggestionCanEdit(student, sugindex1) == 1) {
                         System.out.printf("Please input the edited Suggestion: ");
@@ -462,7 +491,7 @@ public class DisplayStudent extends DisplayLogin
             case "D", "d":
                 if (suggestionArray.viewSuggestions(student)) {
                     System.out.printf("Select Suggestion to delete, input Suggestion index: ");
-                    int delindex = inputInt.nextInt(sc);
+                    int delindex = InputInt.nextInt(sc);
                     sc.nextLine();
                     suggestionArray.deleteSuggestion(student, delindex);
                 } else
@@ -471,7 +500,7 @@ public class DisplayStudent extends DisplayLogin
             case "S", "s":
                 if (suggestionArray.viewSuggestions(student)) {
                     System.out.printf("Select Suggestion to submit, input Suggestion index: ");
-                    int sugindex2 = inputInt.nextInt(sc);
+                    int sugindex2 = InputInt.nextInt(sc);
                     sc.nextLine();
                     suggestionArray.submitSuggestion(student, sugindex2);
                     UserDB.updateFile(); // for change in points
@@ -484,10 +513,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "viewEnquiriesScreen" displays a screen for a camp committee member to view Enquiries
+     * The function "viewEnquiriesScreen" displays a screen for a camp committee
+     * member to view Enquiries
      * addressed to him/her in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void viewEnquiriesScreen(Users user) {
         if (!(user instanceof Student))
@@ -502,10 +533,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "replyEnquiriesScreen" displays a screen for a camp committee member to reply to Enquiries
+     * The function "replyEnquiriesScreen" displays a screen for a camp committee
+     * member to reply to Enquiries
      * addressed to him/her in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void replyEnquiriesScreen(Users user) {
         if (!(user instanceof Student))
@@ -521,10 +554,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "generateReportScreen" displays a screen for a camp committee member to generate 
+     * The function "generateReportScreen" displays a screen for a camp committee
+     * member to generate
      * a camp report in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committe member
+     * @param student The student object represents a student who is a camp committe
+     *                member
      *                that wants to generate a camp report
      */
     private void generateReportScreen(Student student) {
@@ -538,10 +573,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function displays a screen for a camp committee member to generate 
+     * The function displays a screen for a camp committee member to generate
      * an enquiry report in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void generateEnquiriesReportScreen(Users user) {
         if (!(user instanceof Student))

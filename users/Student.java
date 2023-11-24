@@ -8,6 +8,14 @@ import camps.CampArray;
 import infoexchange.Enquiries;
 import infoexchange.EnquiriesArray;
 
+/**
+ * Student class is used to create student objects to represent a student in the system.
+ * It is a sub class of Users as student is a type of user.
+ * 
+ * @author Enric Tan
+ * @author Tan Jun Kiat
+ * @version 1.0
+ */
 public class Student extends Users {
     private boolean IsCampComm = false;
     private CampCommitteeRole CommRole;
@@ -16,10 +24,21 @@ public class Student extends Users {
     private ArrayList<CAMDate> BusyDates;
     private ArrayList<Enquiries> PendingEnquiries = new ArrayList<Enquiries>();
 
-    // The code below defines a constructor for the Student clas.
-    // The constructor takes in several parameters including the student's
-    // first name, user ID, faculty information, information about their committee camp,
-    // regular camps, busy dates, and a CampArray object.
+    /**
+     * Constructor for Student class, information is input from external file 
+     * to create the student object
+     * 
+     * @param FirstName     string containing name of student
+     * @param userID        string containing unique userID of student 
+     * @param facultyInfo   string containing faculty info of student
+     * @param commCamp      string containing name of camp that the student is a camp comm for, 
+     *                      empty string if student is not a camp comm for any camp
+     * @param regCamps      string containing name of camps that the student is an attendee for, 
+     *                      empty string if student is not attending any camp
+     * @param busyDates     string containing dates where student is busy (has a camp), 
+     *                      empty string if student has no busy dates
+     * @param campArray     campArray object used to get reference to camps the student is involved in
+     */
     public Student(String FirstName, String userID, String facultyInfo, String commCamp, String regCamps,
             String busyDates, CampArray campArray) {
         super(FirstName, userID, facultyInfo);
@@ -335,7 +354,7 @@ public class Student extends Users {
      * The function "viewEnquiriesReplies" calls the "viewReplies" method of the main EnquiriesArray object,
      * passing in the current student object as the parameter.
      * 
-     * @param enqArrayAn array of Enquiries objects, main EnquiriesArray from the dsiplay classes.
+     * @param enqArray of Enquiries objects (EnquiriesArray), main EnquiriesArray from the display classes.
      */
     public void viewEnquiriesReplies(EnquiriesArray enqArray) {
         enqArray.viewReplies(this);
@@ -351,22 +370,23 @@ public class Student extends Users {
     }
 
     /**
-     * The function returns the CampCommitteeRole attribute.
+     * This method returns the CampCommitteeRole object reference 
+     * to access the committee member functions.
      * 
-     * @return The method is returning a CampCommitteeRole object.
+     * @return campCommitteeRole that the student has
      */
     public CampCommitteeRole getCampCommitteeRole() {
         return CommRole;
     }
 
     /**
-     * The function compares the points of two students' camp committee roles and
-     * returns 1 if student a has more points, -1 if student b has more points, and
-     * 0 if they have the same points.
+     * This method is used to compare 2 students based on their points as camp comm member
      * 
-     * @param a The first student object to compare.
-     * @param b The second student object to compare.
-     * @return The method is returning an integer value, as described above
+     * @param a     first student object to compare
+     * @param b     second student object to compare
+     * @return      0 if they have the same points
+     *              1 if first student has more points
+     *              -1 if second student has more points
      */
     public static int compareCommPoints(Student a, Student b) {
         // if equal return 0
@@ -428,7 +448,7 @@ public class Student extends Users {
             }
         }
         for (String campName : RegCamps) {
-            if (campName == oldName) {
+            if (campName.equals(oldName)) {
                 campName = newName;
             }
         }

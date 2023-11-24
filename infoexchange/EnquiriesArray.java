@@ -10,8 +10,15 @@ import java.util.Scanner;
 import java.util.UUID;
 
 import users.*;
-import utils.inputInt;
+import utils.InputInt;
 
+/**
+ * The EnquiriesArray class is used to store and manage a collection of
+ * enquiries.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class EnquiriesArray {
     private static ArrayList<Enquiries> enquiries = new ArrayList<Enquiries>();
     private static ArrayList<EnqReplies> replies = new ArrayList<EnqReplies>();
@@ -19,11 +26,14 @@ public class EnquiriesArray {
     private static String enquiriesFile;
     private static String repliesFile;
 
-    // The above code is a constructor for the EnquiriesArray class. It takes two
-    // parameters,
-    // enquiriesFile and repliesFile, which are the file paths for the enquiries and
-    // replies CSV files,
-    // respectively.
+    /**
+     * The above code is a constructor for the EnquiriesArray class. It takes two
+     * parameters, enquiriesFile and repliesFile, which are the file paths for the
+     * enquiries and replies CSV files, respectively.
+     * 
+     * @param enquiriesFile
+     * @param repliesFile
+     */
     public EnquiriesArray(String enquiriesFile, String repliesFile) {
         EnquiriesArray.enquiriesFile = enquiriesFile;
         EnquiriesArray.repliesFile = repliesFile;
@@ -285,7 +295,7 @@ public class EnquiriesArray {
             while (true) {
                 try {
                     System.out.printf("EnquiryID: \n");
-                    int idx = inputInt.nextInt(scanner);
+                    int idx = InputInt.nextInt(scanner);
                     scanner.nextLine();
                     enquiry = enquiries.get(idx);
                     break;
@@ -339,7 +349,7 @@ public class EnquiriesArray {
             while (true) {
                 try {
                     System.out.printf("EnquiryID: \n");
-                    int idx = inputInt.nextInt(scanner);
+                    int idx = InputInt.nextInt(scanner);
                     scanner.nextLine();
                     enquiry = enquiries.get(idx);
                     break;

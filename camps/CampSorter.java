@@ -3,6 +3,14 @@ package camps;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * The CampSorter class is used for sorting a list of camps.
+ * Sort by various params such as campName or campAvailability.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class CampSorter {
     private static String sortBy;
 

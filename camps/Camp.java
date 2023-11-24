@@ -9,6 +9,13 @@ import java.util.Set;
 
 import camdate.CAMDate;
 
+/**
+ * The Camp class is a blueprint for creating objects that represent a camp.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class Camp {
     private CampInfo campInfo;
     private List<String> attendees;
@@ -16,8 +23,19 @@ public class Camp {
     private Set<String> withdrawnStudents;
     private String manualVisibility;
 
-    // This is the constructor for the Camp class. It is used to create a new
-    // instance of the Camp class with the specified parameters.
+    /**
+     * This is the constructor for the Camp class. It is used to create a new
+     * instance of the Camp class with the specified parameters.
+     * 
+     * @param campName
+     * @param registrationClosingDate
+     * @param campVisibility
+     * @param location
+     * @param totalSlots
+     * @param committeeMembersSlots
+     * @param campDescription
+     * @param staffInCharge
+     */
     public Camp(String campName, CAMDate registrationClosingDate, String campVisibility,
             String location, int totalSlots, int committeeMembersSlots, String campDescription, String staffInCharge) {
         // Create campInfo
@@ -96,7 +114,8 @@ public class Camp {
     /**
      * The function returns the staff in charge of a camp.
      * 
-     * @return The method is returning the value of the staffInCharge variable from the campInfo object.
+     * @return The method is returning the value of the staffInCharge variable from
+     *         the campInfo object.
      */
     public String getStaffInCharge() {
         return campInfo.getStaffInCharge();
@@ -169,7 +188,8 @@ public class Camp {
 
     /**
      * The function `toggleVisibility()` determines whether the visibility of a camp
-     * should be set to "on" or "off" based on the number of occupied slots and the current date.
+     * should be set to "on" or "off" based on the number of occupied slots and the
+     * current date.
      * 
      * @return The method returns a String value, either "on" or "off".
      */
@@ -201,8 +221,10 @@ public class Camp {
      * "off" or "on", and the input value otherwise.
      * 
      * @param manualVisibility The parameter "manualVisibility" is a string that
-     *                         represents the visibility setting for a manual. It can have three
-     *                         possible values: "on", "off", or any other string value.
+     *                         represents the visibility setting for a manual. It
+     *                         can have three
+     *                         possible values: "on", "off", or any other string
+     *                         value.
      */
     public void setManualVisibility(String manualVisibility) {
         if (manualVisibility == null) {
@@ -272,7 +294,8 @@ public class Camp {
     }
 
     /**
-     * The function withdrawFromCamp takes a student ID as input and calls the withdrawAttendee function.
+     * The function withdrawFromCamp takes a student ID as input and calls the
+     * withdrawAttendee function.
      * 
      * @param StudentID The StudentID parameter is a unique identifier for a student
      *                  attending a camp.

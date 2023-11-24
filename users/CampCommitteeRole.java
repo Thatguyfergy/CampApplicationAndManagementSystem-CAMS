@@ -6,145 +6,178 @@ import java.util.List;
 import camdate.CAMDate;
 import camps.Camp;
 
+/**
+ * CampCommitteeRole class is used to store all attributes and methods
+ * of a student who is a camp committee member.
+ * Each student can only have 1 instance of a CampCommitteeRole.
+ * 
+ * @author Tan Jun Kiat
+ * @version 1.0
+ */
 public class CampCommitteeRole {
+    /**
+     * stores the camp object that this student is a committee member for
+     */
     private Camp camp;
+    /**
+     * stores the amount of points this student/camp committee member has
+     */
     private int points;
-    // private ArrayList<Suggestion> suggestions = new ArrayList<Suggestion>();
 
-    // The code `public CampCommitteeRole(Camp cmp, int pts)` is a constructor for
-    // the
-    // `CampCommitteeRole` class. It takes two parameters: `cmp` of type `Camp` and
-    // `pts` of type
-    // `int`.
+    /**
+     * Constructor for when a student signs up as a committee member.
+     * points is initialised to 0 by calling method when student signs up for the
+     * role.
+     * This constructor is also used to load student data from external file to
+     * program,
+     * so the points can be non-zero if this object is created from external file
+     * 
+     * @param cmp camp that the student is a committee member for
+     * @param pts number of points the student has for this role
+     */
     public CampCommitteeRole(Camp cmp, int pts) {
         this.camp = cmp;
         points = pts;
     }
 
     /**
-     * The function returns the name of a camp.
+     * This method returns the name of the camp which the student is a camp comm
+     * for,
+     * by calling the camp method.
      * 
-     * @return The method is returning the camp name.
+     * @return string containing name of camp
      */
     public String getCampName() {
         return camp.getCampName();
     }
 
     /**
-     * The function returns an ArrayList of CAMDate objects from the camp.
+     * This method returns an ArrayList of CAMDate objects containing the dates of
+     * the camp.
+     * Represents when the student/camp comm is busy due to this camp.
+     * Calls the camp method.
      * 
-     * @return An ArrayList of CAMDate objects.
+     * @return ArrayList of CAMDate objects with dates of camp
      */
     public ArrayList<CAMDate> getCampDates() {
         return camp.getDates();
     }
 
     /**
-     * The function returns the registration closing date for a camp.
+     * This method returns the registration closing date for the camp
+     * that the student is a camp comm for.
+     * Calls the camp method.
      * 
-     * @return The method is returning a CAMDate object, which represents the
-     *         registration closing date
-     *         for a camp.
+     * @return CAMDate containing the registration closing date
      */
     public CAMDate getCampRegistrationClosingDate() {
         return camp.getRegistrationClosingDate();
     }
 
     /**
-     * The function returns the availability of a camp.
+     * This method returns the availability of the camp
+     * that the student is a camp comm for.
+     * Calls the camp method.
      * 
-     * @return The method is returning the availability of a camp.
+     * @return String representing availability of the camp
      */
     public String getCampAvailability() {
         return camp.getCampAvailability();
     }
 
     /**
-     * The function returns the location of a camp.
+     * This method returns the location of the camp.
+     * Calls the camp method.
      * 
-     * @return The method is returning the location of the camp.
+     * @return String containing location of the camp
      */
     public String getCampLocation() {
         return camp.getLocation();
     }
 
     /**
-     * The function returns the total number of slots in a camp.
+     * This method returns the total number of slots in the camp.
+     * Calls the camp method.
      * 
-     * @return The method is returning the total number of slots in a camp.
+     * @return number of total slots in the camp
      */
     public int getCampTotalSlots() {
         return camp.getTotalSlots();
     }
 
     /**
-     * The function returns the number of available slots for committee members in a
-     * camp.
+     * This method returns the number of available slots for committee members
+     * in the camp.
+     * Calls the camp method.
      * 
-     * @return The method is returning the number of slots available for committee
-     *         members in a camp.
+     * @return number of slots available for committee members in the camp
      */
     public int getCampCommitteeMembersSlots() {
         return camp.getCommitteeMembersSlots();
     }
 
     /**
-     * The function returns the description of a camp.
+     * This method returns the description of the camp.
+     * Calls the camp method.
      * 
-     * @return The method is returning the camp description.
+     * @return String containing camp description
      */
     public String getCampDescription() {
         return camp.getCampDescription();
     }
 
     /**
-     * The function returns the staff in charge of a camp.
+     * This method returns the name of the staff in charge of the camp.
+     * Calls the camp method.
      * 
-     * @return The method is returning the value of the staffInCharge variable from
-     *         the camp object.
+     * @return String containing name of staff in charge
      */
     public String getCampStaffInCharge() {
         return camp.getStaffInCharge();
     }
 
     /**
-     * The function "displayCampInfo" calls the "displayCampInfo" method of the
-     * "camp" object.
+     * This method prints the information for the camp which the student
+     * is a camp comm for.
+     * Calls the camp method.
      */
     public void displayCampInfo() {
         camp.displayCampInfo();
     }
 
     /**
-     * The function returns a list of attendees for a camp.
+     * This method returns a list of attendees for the camp.
+     * Calls the camp method.
      * 
-     * @return A List of Strings representing the attendees of a camp.
+     * @return List of Strings containing names of the attendees of the camp
      */
     public List<String> getCampAttendees() {
         return camp.getAttendees();
     }
 
     /**
-     * The function returns a list of committee members for a camp.
+     * This method returns a list of committee members for the camp.
+     * Calls the camp method.
      * 
-     * @return A List of Strings representing the committee members of a camp.
+     * @return List of Strings containing names of the committee members of the camp
      */
     public List<String> getCampCommitteeMembers() {
         return camp.getCommitteeMembers();
     }
 
     /**
-     * The function "addOnePoint" increments the value of the variable "points" by
-     * one.
+     * This method increases the attribute points by one.
+     * Called when a student submits a suggestion, answers an enquiry,
+     * and when their suggestion is accepted.
      */
     public void addOnePoint() {
         points++;
     }
 
     /**
-     * The function returns the value of the variable "points".
+     * This method returns the amount of points the student/camp comm member has.
      * 
-     * @return The method is returning the value of the variable "points".
+     * @return number of points the student has
      */
     public int getPoints() {
         return points;

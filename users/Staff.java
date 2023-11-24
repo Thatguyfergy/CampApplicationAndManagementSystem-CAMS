@@ -6,15 +6,30 @@ import java.util.Scanner;
 import camps.*;
 import infoexchange.*;
 
+/**
+ * Staff class is used to create staff objects to represent a staff in the
+ * system.
+ * It is a sub class of Users as staff is a type of user.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class Staff extends Users {
     private Scanner scanner = new Scanner(System.in);
     private ArrayList<String> campsInCharge = new ArrayList<String>();
 
-    // The `public Staff(String FirstName, String userID, String facultyInfo, String
-    // campsStaff)`
-    // constructor is used to create a new Staff object. It takes four parameters:
-    // `FirstName`,
-    // `userID`, `facultyInfo`, and `campsStaff`.
+    /**
+     * The `public Staff(String FirstName, String userID, String facultyInfo, String
+     * campsStaff)`
+     * constructor is used to create a new Staff object. It takes four parameters:
+     * `FirstName`,
+     * `userID`, `facultyInfo`, and `campsStaff`.
+     * 
+     * @param FirstName
+     * @param userID
+     * @param facultyInfo
+     * @param campsStaff
+     */
     public Staff(String FirstName, String userID, String facultyInfo, String campsStaff) {
         super(FirstName, userID, facultyInfo);
         if (!campsStaff.equals("")) {
