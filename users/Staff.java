@@ -10,11 +10,18 @@ public class Staff extends Users {
     private Scanner scanner = new Scanner(System.in);
     private ArrayList<String> campsInCharge = new ArrayList<String>();
 
-    // The `public Staff(String FirstName, String userID, String facultyInfo, String
-    // campsStaff)`
-    // constructor is used to create a new Staff object. It takes four parameters:
-    // `FirstName`,
-    // `userID`, `facultyInfo`, and `campsStaff`.
+    /**
+     * The `public Staff(String FirstName, String userID, String facultyInfo, String
+     * campsStaff)`
+     * constructor is used to create a new Staff object. It takes four parameters:
+     * `FirstName`,
+     * `userID`, `facultyInfo`, and `campsStaff`.
+     * 
+     * @param FirstName
+     * @param userID
+     * @param facultyInfo
+     * @param campsStaff
+     */
     public Staff(String FirstName, String userID, String facultyInfo, String campsStaff) {
         super(FirstName, userID, facultyInfo);
         if (!campsStaff.equals("")) {

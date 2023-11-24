@@ -7,7 +7,7 @@ import camdate.CAMDate;
 import camps.Camp;
 
 /**
- * CampCommitteeRole class is used to store all attributes and methods 
+ * CampCommitteeRole class is used to store all attributes and methods
  * of a student who is a camp committee member.
  * Each student can only have 1 instance of a CampCommitteeRole.
  * 
@@ -24,19 +24,16 @@ public class CampCommitteeRole {
      */
     private int points;
 
-    // The code `public CampCommitteeRole(Camp cmp, int pts)` is a constructor for
-    // the
-    // `CampCommitteeRole` class. It takes two parameters: `cmp` of type `Camp` and
-    // `pts` of type
-    // `int`.
     /**
      * Constructor for when a student signs up as a committee member.
-     * points is initialised to 0 by calling method when student signs up for the role.
-     * This constructor is also used to load student data from external file to program,
+     * points is initialised to 0 by calling method when student signs up for the
+     * role.
+     * This constructor is also used to load student data from external file to
+     * program,
      * so the points can be non-zero if this object is created from external file
      * 
-     * @param cmp   camp that the student is a committee member for
-     * @param pts   number of points the student has for this role
+     * @param cmp camp that the student is a committee member for
+     * @param pts number of points the student has for this role
      */
     public CampCommitteeRole(Camp cmp, int pts) {
         this.camp = cmp;
@@ -44,7 +41,8 @@ public class CampCommitteeRole {
     }
 
     /**
-     * This method returns the name of the camp which the student is a camp comm for,
+     * This method returns the name of the camp which the student is a camp comm
+     * for,
      * by calling the camp method.
      * 
      * @return string containing name of camp
@@ -54,7 +52,8 @@ public class CampCommitteeRole {
     }
 
     /**
-     * This method returns an ArrayList of CAMDate objects containing the dates of the camp.
+     * This method returns an ArrayList of CAMDate objects containing the dates of
+     * the camp.
      * Represents when the student/camp comm is busy due to this camp.
      * Calls the camp method.
      * 
@@ -65,7 +64,7 @@ public class CampCommitteeRole {
     }
 
     /**
-     * This method returns the registration closing date for the camp 
+     * This method returns the registration closing date for the camp
      * that the student is a camp comm for.
      * Calls the camp method.
      * 
@@ -76,7 +75,7 @@ public class CampCommitteeRole {
     }
 
     /**
-     * This method returns the availability of the camp 
+     * This method returns the availability of the camp
      * that the student is a camp comm for.
      * Calls the camp method.
      * 
@@ -107,7 +106,7 @@ public class CampCommitteeRole {
     }
 
     /**
-     * This method returns the number of available slots for committee members 
+     * This method returns the number of available slots for committee members
      * in the camp.
      * Calls the camp method.
      * 
@@ -167,9 +166,9 @@ public class CampCommitteeRole {
     }
 
     /**
-     * This method increases the attribute points by one. 
+     * This method increases the attribute points by one.
      * Called when a student submits a suggestion, answers an enquiry,
-     * and when their suggestion is accepted. 
+     * and when their suggestion is accepted.
      */
     public void addOnePoint() {
         points++;

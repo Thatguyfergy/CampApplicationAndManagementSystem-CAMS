@@ -10,8 +10,13 @@ public class CampAttendeeRole {
     private String CampAttending;
     private Student StudentAttending;
 
-    // The code below is a constructor for the
-    // `CampAttendeeRole` class. It takes two parameters: `camp` and `student`.
+    /**
+     * The code below is a constructor for the
+     * `CampAttendeeRole` class. It takes two parameters: `camp` and `student`.
+     * 
+     * @param camp
+     * @param student
+     */
     public CampAttendeeRole(String camp, Student student) {
         CampAttending = camp;
         StudentAttending = student;

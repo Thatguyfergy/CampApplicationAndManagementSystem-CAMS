@@ -25,11 +25,21 @@ public class DisplayStudent extends DisplayLogin
 
     private Student user;
 
-    // The below code is defining a constructor for a class called DisplayStudent.
-    // The constructor takes in several parameters, including 
-    // a Student object, CampArray object, EnquiriesArray object, UsersDatabase object, and SuggestionArray object.
-    // It assigns these objects to instance variables within the class.
-    // Finally, it calls the studentScreen method, passing in the user object attribute.
+    /**
+     * The below code is defining a constructor for a class called DisplayStudent.
+     * The constructor takes in several parameters, including
+     * a Student object, CampArray object, EnquiriesArray object, UsersDatabase
+     * object, and SuggestionArray object.
+     * It assigns these objects to instance variables within the class.
+     * Finally, it calls the studentScreen method, passing in the user object
+     * attribute.
+     * 
+     * @param _user
+     * @param _campArray
+     * @param _enquiriesArray
+     * @param _UserDB
+     * @param _suggestionArray
+     */
     public DisplayStudent(Student _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
             SuggestionArray _suggestionArray) {
 
@@ -44,7 +54,8 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The `studentScreen` function displays a menu for a student in the CAMS app and
+     * The `studentScreen` function displays a menu for a student in the CAMS app
+     * and
      * allows them to perform various actions based on their role.
      * 
      * @param student The parameter "student" is an object of the class "Student".
@@ -164,9 +175,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "viewCampsScreen" displays a screen for viewing camps in the CAMS app
+     * The function "viewCampsScreen" displays a screen for viewing camps in the
+     * CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void viewCampsScreen(Users user) {
 
@@ -180,9 +193,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "registerCampsScreen" displays a screen for registering for a camp in the CAMS app
+     * The function "registerCampsScreen" displays a screen for registering for a
+     * camp in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void registerCampsScreen(Users user) {
         Student student = new Student(null, null, null, null, null, null, campArray);
@@ -217,10 +232,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "manageEnquiriesScreen" displays a screen for a student to manage his/her enquiries in the CAMS app
+     * The function "manageEnquiriesScreen" displays a screen for a student to
+     * manage his/her enquiries in the CAMS app
      * 
      * @param student The "student" parameter is an object of the Student class. It
-     *                represents the student who is using the CAMS app to manage their enquiries.
+     *                represents the student who is using the CAMS app to manage
+     *                their enquiries.
      */
     private void manageEnquiriesScreen(Student student) {
         System.out.print("\033[H\033[2J"); // Clear the entire screen
@@ -340,7 +357,8 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "withdrawFromCampScreen" displays a screen for a student to withdraw from a camp in the CAMS app
+     * The function "withdrawFromCampScreen" displays a screen for a student to
+     * withdraw from a camp in the CAMS app
      * 
      * @param student The student object represents a student who wants to withdraw
      *                from a camp.
@@ -375,9 +393,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "viewCampDetailsScreen" displays a screen for the camp details of the camps in the CAMS app
+     * The function "viewCampDetailsScreen" displays a screen for the camp details
+     * of the camps in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void viewCampDetailsScreen(Users user) {
         System.out.print("\033[H\033[2J");
@@ -392,7 +412,8 @@ public class DisplayStudent extends DisplayLogin
      * The function "viewPointsScreen" displays a screen for the Committee points of
      * a camp committee member in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committee member
+     * @param student The student object represents a student who is a camp
+     *                committee member
      *                that wants to view his/her points
      */
     private void viewPointsScreen(Student student) {
@@ -405,10 +426,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "manageSuggestionsScreen" displays a screen for a camp committee member to manage his/her
+     * The function "manageSuggestionsScreen" displays a screen for a camp committee
+     * member to manage his/her
      * suggestions in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committe member
+     * @param student The student object represents a student who is a camp committe
+     *                member
      *                that wants to manage his/her suggestions
      */
     private void manageSuggestionsScreen(Student student) {
@@ -483,10 +506,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "viewEnquiriesScreen" displays a screen for a camp committee member to view Enquiries
+     * The function "viewEnquiriesScreen" displays a screen for a camp committee
+     * member to view Enquiries
      * addressed to him/her in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void viewEnquiriesScreen(Users user) {
         if (!(user instanceof Student))
@@ -501,10 +526,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "replyEnquiriesScreen" displays a screen for a camp committee member to reply to Enquiries
+     * The function "replyEnquiriesScreen" displays a screen for a camp committee
+     * member to reply to Enquiries
      * addressed to him/her in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void replyEnquiriesScreen(Users user) {
         if (!(user instanceof Student))
@@ -520,10 +547,12 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function "generateReportScreen" displays a screen for a camp committee member to generate 
+     * The function "generateReportScreen" displays a screen for a camp committee
+     * member to generate
      * a camp report in the CAMS app
      * 
-     * @param student The student object represents a student who is a camp committe member
+     * @param student The student object represents a student who is a camp committe
+     *                member
      *                that wants to generate a camp report
      */
     private void generateReportScreen(Student student) {
@@ -537,10 +566,11 @@ public class DisplayStudent extends DisplayLogin
     }
 
     /**
-     * The function displays a screen for a camp committee member to generate 
+     * The function displays a screen for a camp committee member to generate
      * an enquiry report in the CAMS app
      * 
-     * @param user The "user" parameter is of type "Users". It could be any type of user, such as a student or staff
+     * @param user The "user" parameter is of type "Users". It could be any type of
+     *             user, such as a student or staff
      */
     public void generateEnquiriesReportScreen(Users user) {
         if (!(user instanceof Student))

@@ -28,10 +28,13 @@ public class CampArray {
     private static String campsFile;
     private CampFilter campFilter;
 
-    // The above code is a constructor for the CampArray class in Java. It takes a
-    // file name as a parameter and reads the contents of the file. The file is
-    // assumed to be in
-    // CSV format, with each row representing a camp.
+    /**
+     * The above code is a constructor for the CampArray class in Java. It takes a
+     * file name as a parameter and reads the contents of the file. The file is
+     * assumed to be in CSV format, with each row representing a camp.
+     * 
+     * @param campsFile
+     */
     public CampArray(String campsFile) {
         campFilter = new CampFilter();
         CampArray.campsFile = campsFile;
@@ -858,7 +861,7 @@ public class CampArray {
         System.out.println("Attendees:");
         for (String attendee : camp.getAttendees()) {
             if (attendee != null)
-                System.out.println("- " + UsersDatabase.getFirstName(attendee) + " (" + attendee +  ")");
+                System.out.println("- " + UsersDatabase.getFirstName(attendee) + " (" + attendee + ")");
         }
 
         // Display committee members

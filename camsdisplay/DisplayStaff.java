@@ -25,15 +25,22 @@ public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, Scree
 
     private Staff user;
 
-    // The above code is a constructor for a class called "DisplayStaff". It takes
-    // in several
-    // parameters, including a Staff object, CampArray object, EnquiriesArray
-    // object, UsersDatabase
-    // object, and SuggestionArray object. It assigns these objects to instance
-    // variables within the
-    // class. It also assigns the Staff object passed as a parameter to the "user"
-    // instance variable.
-    // Finally, it calls the "staffScreen" method, passing in the "user" object.
+    /**
+     * 
+     * The above code is a constructor for a class called "DisplayStaff". It
+     * takes in several parameters, including a Staff object, CampArray object,
+     * EnquiriesArray object, UsersDatabase object, and SuggestionArray object. It
+     * assigns these objects to instance variables within the
+     * class. It also assigns the Staff object passed as a parameter to the
+     * "user" instance variable.
+     * Finally, it calls the "staffScreen" method, passing in the "user" object.
+     * 
+     * @param _user
+     * @param _campArray
+     * @param _enquiriesArray
+     * @param _UserDB
+     * @param _suggestionArray
+     */
     public DisplayStaff(Staff _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
             SuggestionArray _suggestionArray) {
 

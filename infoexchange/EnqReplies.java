@@ -7,9 +7,17 @@ public class EnqReplies implements Comparable<Enquiries> {
     private String recipient;
     private String replyCreator;
 
-    // The `EnqReplies` class has a constructor that takes in five parameters:
-    // `replyString`,
-    // `enquiryID`, `recipient`, `replyID`, and `replyCreator`.
+    /**
+     * The `EnqReplies` class has a constructor that takes in five parameters:
+     * `replyString`,
+     * `enquiryID`, `recipient`, `replyID`, and `replyCreator`.
+     * 
+     * @param replyString
+     * @param enquiryID
+     * @param recipient
+     * @param replyID
+     * @param replyCreator
+     */
     public EnqReplies(String replyString, String enquiryID, String recipient, String replyID, String replyCreator) {
         this.replyString = replyString;
         this.enquiryID = enquiryID;

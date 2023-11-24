@@ -14,9 +14,15 @@ public class UsersDatabase {
     private static String studentFile = "csvfiles\\students.csv";
     private static String staffFile = "csvfiles\\staff.csv";
 
-    // The `UsersDatabase` constructor is responsible for initializing the
-    // `UsersDatabase` object. It
-    // takes three parameters: `studentFile`, `staffFile`, and `campArray`.
+    /**
+     * The `UsersDatabase` constructor is responsible for initializing the
+     * `UsersDatabase` object. It
+     * takes three parameters: `studentFile`, `staffFile`, and `campArray`.
+     * 
+     * @param studentFile
+     * @param staffFile
+     * @param campArray
+     */
     public UsersDatabase(String studentFile, String staffFile, CampArray campArray) {
         UsersDatabase.studentFile = studentFile;
         UsersDatabase.staffFile = staffFile;

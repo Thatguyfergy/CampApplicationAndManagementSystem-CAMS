@@ -10,6 +10,13 @@ public class Enquiries implements Comparable<Enquiries> {
     private String campName;
     private boolean submitted = false;
 
+    /**
+     * Constructor for a new Enquiry.
+     * 
+     * @param enqString
+     * @param sender
+     * @param campName
+     */
     public Enquiries(String enqString, String sender, String campName) {
         this.enquiryString = enqString;
         this.sender = sender;

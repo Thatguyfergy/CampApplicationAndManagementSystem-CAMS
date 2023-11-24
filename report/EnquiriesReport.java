@@ -26,10 +26,15 @@ public class EnquiriesReport implements Report {
     private ArrayList<String> createdCamps;
     private Scanner sc = new Scanner(System.in);
 
-    // The `EnquiriesReport` constructor is responsible for initializing the
-    // `EnquiriesReport` object.
-    // It takes two parameters: `user` of type `Users` and `enquiriesArray` of type
-    // `EnquiriesArray`.
+    /**
+     * The `EnquiriesReport` constructor is responsible for initializing the
+     * `EnquiriesReport` object.
+     * It takes two parameters: `user` of type `Users` and `enquiriesArray` of type
+     * `EnquiriesArray`.
+     * 
+     * @param user
+     * @param enquiriesArray
+     */
     public EnquiriesReport(Users user, EnquiriesArray enquiriesArray) {
         if (user instanceof Staff) {
             userStaff = (Staff) user;

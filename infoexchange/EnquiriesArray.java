@@ -19,11 +19,14 @@ public class EnquiriesArray {
     private static String enquiriesFile;
     private static String repliesFile;
 
-    // The above code is a constructor for the EnquiriesArray class. It takes two
-    // parameters,
-    // enquiriesFile and repliesFile, which are the file paths for the enquiries and
-    // replies CSV files,
-    // respectively.
+    /**
+     * The above code is a constructor for the EnquiriesArray class. It takes two
+     * parameters, enquiriesFile and repliesFile, which are the file paths for the
+     * enquiries and replies CSV files, respectively.
+     * 
+     * @param enquiriesFile
+     * @param repliesFile
+     */
     public EnquiriesArray(String enquiriesFile, String repliesFile) {
         EnquiriesArray.enquiriesFile = enquiriesFile;
         EnquiriesArray.repliesFile = repliesFile;
