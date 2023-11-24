@@ -25,10 +25,11 @@ public class DisplayLogin {
 
     private Users user;
 
-    // The `DisplayLogin(Boolean bool)` constructor initializes the `campArray`,
-    // `enquiriesArray`,
-    // `UserDB`, and `suggestionArray` objects.
-    // Only initialize this once your else you will get nightmares
+    /**
+     * The `DisplayLogin(Boolean bool)` constructor initializes the `campArray`,
+     * `enquiriesArray`, `UserDB`, and `suggestionArray` objects.
+     * Only initialize this once your else you will get nightmares
+     */
     public DisplayLogin(Boolean bool) {
         campArray = new CampArray("csvfiles\\camps.csv");
         enquiriesArray = new EnquiriesArray("csvfiles\\enquiries.csv", "csvfiles\\replies.csv");
@@ -37,11 +38,13 @@ public class DisplayLogin {
         suggestionArray = new SuggestionArray("csvfiles\\suggestions.csv", UserDB, campArray);
     }
 
-    // The `public DisplayLogin()` constructor is an empty constructor that does not
-    // have any parameters or code inside it. It is used to create an instance of
-    // the `DisplayLogin` class without initializing any objects or performing any
-    // actions. Empty so that the derived classes won't reinitialise the superclass
-    // again
+    /**
+     * The `public DisplayLogin()` constructor is an empty constructor that does not
+     * have any parameters or code inside it. It is used to create an instance of
+     * the `DisplayLogin` class without initializing any objects or performing any
+     * actions. Empty so that the derived classes won't reinitialise the superclass
+     * again.
+     */
     public DisplayLogin() {
 
     }

@@ -335,7 +335,7 @@ public class Student extends Users {
      * The function "viewEnquiriesReplies" calls the "viewReplies" method of the main EnquiriesArray object,
      * passing in the current student object as the parameter.
      * 
-     * @param enqArrayAn array of Enquiries objects, main EnquiriesArray from the dsiplay classes.
+     * @param EnquiriesArray of Enquiries objects, main EnquiriesArray from the dsiplay classes.
      */
     public void viewEnquiriesReplies(EnquiriesArray enqArray) {
         enqArray.viewReplies(this);
