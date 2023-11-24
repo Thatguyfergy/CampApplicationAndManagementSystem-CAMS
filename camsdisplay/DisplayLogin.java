@@ -51,7 +51,12 @@ public class DisplayLogin {
      * actions. Empty so that the derived classes won't reinitialise the superclass
      * again.
      */
-    public DisplayLogin() {
+    public DisplayLogin(CampArray campArray, EnquiriesArray enquiriesArray, UsersDatabase UserDB,
+            SuggestionArray suggestionArray) {
+        this.campArray = campArray;
+        this.enquiriesArray = enquiriesArray;
+        this.UserDB = UserDB;
+        this.suggestionArray = suggestionArray;
 
     }
 

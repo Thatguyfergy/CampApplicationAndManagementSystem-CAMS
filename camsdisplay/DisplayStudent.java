@@ -49,7 +49,7 @@ public class DisplayStudent extends DisplayLogin
      */
     public DisplayStudent(Student _user, CampArray _campArray, EnquiriesArray _enquiriesArray, UsersDatabase _UserDB,
             SuggestionArray _suggestionArray) {
-
+        super(_campArray, _enquiriesArray, _UserDB, _suggestionArray);
         this.campArray = _campArray;
         this.enquiriesArray = _enquiriesArray;
         this.UserDB = _UserDB;
