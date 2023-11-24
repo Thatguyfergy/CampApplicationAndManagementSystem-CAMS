@@ -2,7 +2,12 @@ package camsdisplay;
 
 import java.util.Scanner;
 
-// The code is declaring a public interface named `ScreenClearFn`.
+/**
+ * The code is declaring a public interface named `ScreenClearFn`.
+ * 
+ * @author Tan Ying Hao
+ * @version 1.0
+ */
 public interface ScreenClearFn {
     Scanner sc = new Scanner(System.in);
 

@@ -1,5 +1,13 @@
 package infoexchange;
 
+/**
+ * The EnqReplies class implements the Comparable interface with the Enquiries
+ * class as the generic type. Used to create replies for enquiries. Only
+ * accessible to Staff and Camp Comm members.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class EnqReplies implements Comparable<Enquiries> {
     private String enquiryID;
     private String replyID;

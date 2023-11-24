@@ -18,6 +18,13 @@ import users.Users;
 import users.UsersDatabase;
 import utils.InputInt;
 
+/**
+ * The EnquiriesReport class implements the Report interface.
+ * It generates the enquiries report for Staff and Camp Comm
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class EnquiriesReport implements Report {
     private Staff userStaff;
     private Student userStudent;

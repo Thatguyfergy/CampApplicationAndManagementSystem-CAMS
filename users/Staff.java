@@ -6,6 +6,14 @@ import java.util.Scanner;
 import camps.*;
 import infoexchange.*;
 
+/**
+ * Staff class is used to create staff objects to represent a staff in the
+ * system.
+ * It is a sub class of Users as staff is a type of user.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class Staff extends Users {
     private Scanner scanner = new Scanner(System.in);
     private ArrayList<String> campsInCharge = new ArrayList<String>();

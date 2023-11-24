@@ -7,6 +7,9 @@ import users.Users;
  * `CampsRegisterable`.
  * The interface defines the abstract method `registerCampsScreen` that takes a
  * parameter of type `Users` and does not return anything.
+ * 
+ * @author Enric Tan
+ * @version 1.0
  */
 public interface CampsRegisterable {
     /**

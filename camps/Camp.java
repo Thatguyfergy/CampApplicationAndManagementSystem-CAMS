@@ -9,6 +9,13 @@ import java.util.Set;
 
 import camdate.CAMDate;
 
+/**
+ * The Camp class is a blueprint for creating objects that represent a camp.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class Camp {
     private CampInfo campInfo;
     private List<String> attendees;

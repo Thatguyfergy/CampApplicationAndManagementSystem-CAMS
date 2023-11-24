@@ -3,6 +3,13 @@ package infoexchange;
 import camps.Camp;
 import users.*;
 
+/**
+ * The Enquiries class implements the Comparable interface.
+ * Student can submit enquiries.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class Enquiries implements Comparable<Enquiries> {
     private String enquiryID;
     private String enquiryString;

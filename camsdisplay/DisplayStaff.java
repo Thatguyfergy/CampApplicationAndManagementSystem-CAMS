@@ -16,6 +16,13 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
+/**
+ * The DisplayStaff class extends DisplayLogin and implements ViewCampsScreen,
+ * ScreenClearFn, and EnquiriesScreen.
+ * 
+ * @author Enric Tan, Kok Chin Yi, Ferguson Chiew
+ * @version 1.0
+ */
 public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, ScreenClearFn, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;

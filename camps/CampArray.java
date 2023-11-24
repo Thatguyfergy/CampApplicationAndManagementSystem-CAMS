@@ -22,6 +22,13 @@ import users.Users;
 import users.UsersDatabase;
 import users.Student;
 
+/**
+ * The CampArray class maintains the various camps.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class CampArray {
     private static ArrayList<Camp> camps = new ArrayList<Camp>();
     private Scanner scanner = new Scanner(System.in);

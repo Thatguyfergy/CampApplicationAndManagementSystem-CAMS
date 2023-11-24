@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import camps.Camp;
 import infoexchange.*;
 
+/**
+ * The CampAttendeeRole class represents the role of an attendee at a camp.
+ * It is used to store the campAttending (ie. campName).
+ * 
+ * @author Enric Tan
+ * @version 1.0
+ */
 public class CampAttendeeRole {
 
     private String CampAttending;

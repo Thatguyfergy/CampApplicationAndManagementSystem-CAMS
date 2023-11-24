@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import camdate.CAMDate;
 import camps.*;
 
+/**
+ * The UsersDatabase class is used to manage and store user information.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class UsersDatabase {
     private static ArrayList<Users> users = new ArrayList<Users>();
     private static String studentFile = "csvfiles\\students.csv";

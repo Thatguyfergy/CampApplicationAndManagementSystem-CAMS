@@ -12,6 +12,13 @@ import java.util.UUID;
 import users.*;
 import utils.InputInt;
 
+/**
+ * The EnquiriesArray class is used to store and manage a collection of
+ * enquiries.
+ * 
+ * @author Kok Chin Yi
+ * @version 1.0
+ */
 public class EnquiriesArray {
     private static ArrayList<Enquiries> enquiries = new ArrayList<Enquiries>();
     private static ArrayList<EnqReplies> replies = new ArrayList<EnqReplies>();

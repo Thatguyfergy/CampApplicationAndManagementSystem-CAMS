@@ -1,11 +1,18 @@
 package camdate;
 
+/**
+ * The CAMDate class is a Java class that implements the Comparable interface.
+ * Main class used for various dates as it contain the checkers for them.
+ * 
+ * @author Tan Ying Hao
+ * @version 1.0
+ */
 public class CAMDate implements Comparable<CAMDate> {
     private int day;
     private int month;
     private int year;
 
-    /**  
+    /**
      * The `public CAMDate()` constructor is a default constructor that initializes
      * the 'day', 'month', and 'year' variables to 0.
      */
@@ -16,7 +23,8 @@ public class CAMDate implements Comparable<CAMDate> {
     }
 
     /**
-     * The `public CAMDate(int day, int month, int year)` constructor is used to create a new
+     * The `public CAMDate(int day, int month, int year)` constructor is used to
+     * create a new
      * `CAMDate` object with the same day, month, and year values as the `date`
      * parameter. If the date given is non-existent, the constructor throws an
      * illegal argument exception.
@@ -109,8 +117,9 @@ public class CAMDate implements Comparable<CAMDate> {
      *              the year.
      */
     public void setMonth(int month) {
-        if (month > 0 && month < 13 && isValidDate(this.day, month, this.year)) // Check if the date is valid before setting the month
-                this.month = month;
+        if (month > 0 && month < 13 && isValidDate(this.day, month, this.year)) // Check if the date is valid before
+                                                                                // setting the month
+            this.month = month;
         else
             throw new IllegalArgumentException("Invalid date");
     }
@@ -144,16 +153,17 @@ public class CAMDate implements Comparable<CAMDate> {
     // return 1 if this is later than other return -1 if this is earlier than other
     // return 0 if this is the same as other
     /**
-     * The method 'compareTo' compares two CAMDate objects based on their year, month, and day
+     * The method 'compareTo' compares two CAMDate objects based on their year,
+     * month, and day
      * values and returns
      * 1 if the first object is greater, -1 if the second object is greater, and 0
      * if they are equal.
      * 
      * @param other The "other" parameter is an object of the CAMDate class that we
      *              are comparing the current object to.
-     * @return The method is returning an integer value. 
-     *         If `this` date is greater than `other` date, it returns 1. 
-     *         If `this` date is less than `other` date it returns -1. 
+     * @return The method is returning an integer value.
+     *         If `this` date is greater than `other` date, it returns 1.
+     *         If `this` date is less than `other` date it returns -1.
      *         If both dates are equal, it returns 0.
      */
     public int compareTo(CAMDate other) {
@@ -208,23 +218,26 @@ public class CAMDate implements Comparable<CAMDate> {
     }
 
     /**
-     * The method 'clone()' returns a new instance of the CAMDate class with the same 'day', 'month', and 'year' values.
+     * The method 'clone()' returns a new instance of the CAMDate class with the
+     * same 'day', 'month', and 'year' values.
      * 
      * @return The method returns CAMDate object
-     *          with the same 'day', 'month', and 'year' values as this.
+     *         with the same 'day', 'month', and 'year' values as this.
      */
     public CAMDate clone() {
         return new CAMDate(this.day, this.month, this.year);
     }
 
     /**
-     * The 'equals()' method checks if the day, month, and year values of the 
-     * other CAMDate object are equal to the day, month, and year values of the current object.
+     * The 'equals()' method checks if the day, month, and year values of the
+     * other CAMDate object are equal to the day, month, and year values of the
+     * current object.
      * 
      * @param other The "other" parameter is an object of type CAMDate that is being
      *              compared to the current object.
      * @return The method returns a boolean value.
-     *         If the day, month, and year values of the two objects are equal, it returns true.
+     *         If the day, month, and year values of the two objects are equal, it
+     *         returns true.
      *         else it returns false.
      */
     public boolean equals(CAMDate other) {
@@ -232,10 +245,12 @@ public class CAMDate implements Comparable<CAMDate> {
     }
 
     /**
-     * The 'getNextDay()' method returns a new CAMDate object with the day, month, and year values
+     * The 'getNextDay()' method returns a new CAMDate object with the day, month,
+     * and year values
      * of the next day after the date in the current object.
      * 
-     * @return The method return a CAMDate object with the day, month, and year values
+     * @return The method return a CAMDate object with the day, month, and year
+     *         values
      *         of the next day after the date in the current object.
      */
     public CAMDate getNextDay() {
@@ -245,14 +260,16 @@ public class CAMDate implements Comparable<CAMDate> {
     }
 
     /**
-     * The method 'isValidDate' checks if the day, month, and year values form a valid date.
+     * The method 'isValidDate' checks if the day, month, and year values form a
+     * valid date.
      * 
-     * @param day   The 'day' parameter represents the day of the date. 
+     * @param day   The 'day' parameter represents the day of the date.
      * @param month The 'month' parameter represents the month of the date.
      * @param year  The 'year' parameter represents the year of the date.
      * @return The method returns a boolean value.
-     *         If the day, month, and year values form a valid date, it returns true.
-     *         else it returns false. 
+     *         If the day, month, and year values form a valid date, it returns
+     *         true.
+     *         else it returns false.
      */
     private boolean isValidDate(int day, int month, int year) {
         if (year < 1 || month < 1 || month > 12 || day < 1) {

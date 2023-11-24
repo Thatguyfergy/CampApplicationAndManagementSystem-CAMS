@@ -16,6 +16,12 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
+/**
+ * The DisplayLogin class is used to display the login interface.
+ * 
+ * @author Kok Chin Yi, Ferguson Chiew
+ * @version 1.0
+ */
 public class DisplayLogin {
     private Scanner sc = new Scanner(System.in);
     private CampArray campArray;

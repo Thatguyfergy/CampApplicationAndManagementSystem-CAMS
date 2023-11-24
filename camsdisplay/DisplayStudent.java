@@ -15,6 +15,13 @@ import infoexchange.SuggestionArray;
 import report.*;
 import utils.*;
 
+/**
+ * The above code is defining a class called DisplayStudent that extends
+ * another class called DisplayLogin.
+ * 
+ * @author Enric Tan, Tan Jun Kiat
+ * @version 1.0
+ */
 public class DisplayStudent extends DisplayLogin
         implements ViewCampsScreen, ScreenClearFn, CampsRegisterable, EnquiriesScreen {
     private Scanner sc = new Scanner(System.in);

@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import camdate.CAMDate;
 
+/**
+ * The CampInfo class is a Java class that provides information about a camp.
+ * 
+ * @author Tan Ying Hao
+ * @author Ferguson Chiew
+ * @version 1.0
+ */
 public class CampInfo {
     // private int campID;
     private String campName;

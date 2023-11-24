@@ -13,6 +13,13 @@ import users.Student;
 import users.Users;
 import users.UsersDatabase;
 
+/**
+ * The CampReport class implements the Report interface.
+ * It generates the report for Staff and Camp Comm
+ * 
+ * @author Tan Ying Hao
+ * @version 1.0
+ */
 public class CampReport implements Report {
 
     private Camp camp;
