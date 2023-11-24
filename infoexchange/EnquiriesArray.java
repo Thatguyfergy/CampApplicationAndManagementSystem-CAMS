@@ -294,12 +294,15 @@ public class EnquiriesArray {
             Enquiries enquiry;
             while (true) {
                 try {
-                    System.out.printf("EnquiryID: \n");
+                    System.out.printf("EnquiryID (Key in -1 to leave): \n");
                     int idx = InputInt.nextInt(scanner);
                     scanner.nextLine();
+                    if (idx == -1)
+                        return;
                     enquiry = enquiries.get(idx);
                     break;
                 } catch (IndexOutOfBoundsException e) {
+
                     System.out.println("Enquiry cannot be found, make sure you selected the correct enquiry.");
                 }
             }
@@ -555,18 +558,4 @@ public class EnquiriesArray {
         return replies;
     }
 
-    // This is deprecated as it's not required in the Assignment Rubrics
-
-    // public void deleteEnquiry(Users user) throws Exception {
-    // // Need a feature for Camp Committee members to delete
-    // System.out.printf("EnquiryID: \n");
-    // int idx = scanner.nextInt();
-
-    // if (user instanceof Staff) {
-    // enquiries.remove(idx);
-    // } else {
-    // throw new Exception("You shall not pass");
-    // }
-    // updateFile(enquiries);
-    // }
 }

@@ -70,7 +70,7 @@ public class EnquiriesReport implements Report {
         int choice;
         while (true) {
             try {
-                System.out.printf("Enter choice: ");
+                System.out.printf("Enter choice (Key in -1 to leave): ");
                 choice = InputInt.nextInt(sc);
                 if (choice == -1) {
                     return;
@@ -80,7 +80,6 @@ public class EnquiriesReport implements Report {
                 break;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid choice, try again! (Key in -1 to leave)");
-                System.out.println("Enter choice: ");
             }
         }
 

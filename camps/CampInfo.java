@@ -478,13 +478,4 @@ public class CampInfo {
         System.out.println();
     }
 
-    // Deprecated
-
-    // public int getCampID() {
-    // return campID;
-    // }
-
-    // public void setCampID(int campID) {
-    // this.campID = campID;
-    // }
 }

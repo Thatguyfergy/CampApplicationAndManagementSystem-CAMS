@@ -118,13 +118,4 @@ public class Staff extends Users {
         throw new UnsupportedOperationException("Unimplemented method 'compareTo'");
     }
 
-    // Deprecated Methods
-
-    // public void viewCamp(CampArray campArray, String sortby) {
-    // campArray.viewCamps(this, sortby);
-    // }
-
-    // public void editCamp(CampArray campArray, EnquiriesArray enquiriesArray) {
-    // campArray.editCamp(this, enquiriesArray);
-    // }
 }
