@@ -3,8 +3,7 @@ package camsdisplay;
 import users.Users;
 
 /**
- * The code is declaring a Java interface named `ViewCampsScreen`. The interface
- * defines the abstract methods `viewCampsScreen` and `viewCampDetailsScreen`.
+ * This interface is implemented by classes which can view camps
  * 
  * @author Enric Tan
  * @version 1.0

@@ -2,7 +2,8 @@ package users;
 
 /**
  * The CampAttendeeRole class represents the role of an attendee at a camp.
- * It is used to store the campAttending (ie. campName).
+ * It is used to store the relevant camp related attributes and methods.
+ * More functionality can be added in the future for a student who is an attendee.
  * 
  * @author Enric Tan
  * @version 1.0

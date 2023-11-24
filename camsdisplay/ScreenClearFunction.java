@@ -3,7 +3,7 @@ package camsdisplay;
 import java.util.Scanner;
 
 /**
- * The code is declaring a public interface named `ScreenClearFn`.
+ * This interface is implemented by classes which uses the screen clear function
  * 
  * @author Tan Ying Hao
  * @version 1.0

@@ -13,10 +13,10 @@ import report.*;
 import utils.*;
 
 /**
- * The above code is defining a class called DisplayStudent that extends
- * another class called DisplayLogin.
+ * The DisplayStudent class is used for displaying interface for students.
  * 
- * @author Enric Tan, Tan Jun Kiat
+ * @author Enric Tan
+ * @author Tan Jun Kiat
  * @version 1.0
  */
 public class DisplayStudent extends DisplayLogin
@@ -30,11 +30,8 @@ public class DisplayStudent extends DisplayLogin
     private Student user;
 
     /**
-     * The below code is defining a constructor for a class called DisplayStudent.
-     * The constructor takes in several parameters, including
-     * a Student object, CampArray object, EnquiriesArray object, UsersDatabase
-     * object, and SuggestionArray object.
-     * It assigns these objects to instance variables within the class.
+     * The constructor takes in several parameters and assigns
+     * these objects to instance variables within the class.
      * Finally, it calls the studentScreen method, passing in the user object
      * attribute.
      * 
@@ -62,8 +59,7 @@ public class DisplayStudent extends DisplayLogin
 
     /**
      * The `studentScreen` function displays a menu for a student in the CAMS app
-     * and
-     * allows them to perform various actions based on their role.
+     * and allows them to perform various actions based on their role.
      * 
      * @param student The parameter "student" is an object of the class "Student".
      *                It represents the student user accessing the CAMS app.

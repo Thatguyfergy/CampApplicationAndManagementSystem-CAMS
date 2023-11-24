@@ -3,9 +3,7 @@ package camsdisplay;
 import users.Users;
 
 /**
- * The code is declaring a Java interface named `EnquiriesScreen`. The
- * interface defines the abstract methods `viewEnquiriesScreen`,
- * `replyEnquiriesScreen`, and `generateEnquiriesReportScreen`.
+ * The EnquiriesScreen interface is implemented by classes which have screens for enquiries
  * 
  * @author Enric Tan
  * @version 1.0

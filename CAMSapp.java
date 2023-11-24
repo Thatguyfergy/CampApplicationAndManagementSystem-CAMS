@@ -3,8 +3,8 @@ import camsdisplay.*;
 import java.io.IOException;
 
 /**
- * The CAMSapp class is a Java program that represents an application for
- * managing various camps.
+ * The CAMSapp class contains the main method to start the application for
+ * managing various camps, CAMS.
  * You may check the README.md file for more information.
  * 
  * @author Ferguson Chiew

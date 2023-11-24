@@ -1,8 +1,7 @@
 package camdate;
 
 /**
- * The CAMDate class is a Java class that implements the Comparable interface.
- * Main class used for various dates as it contain the checkers for them.
+ * The CAMDate class is used for various dates and contains the checkers for them.
  * 
  * @author Tan Ying Hao
  * @version 1.0

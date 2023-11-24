@@ -3,10 +3,7 @@ package camsdisplay;
 import users.Users;
 
 /**
- * The line `public interface CampsRegisterable` is declaring an interface named
- * `CampsRegisterable`.
- * The interface defines the abstract method `registerCampsScreen` that takes a
- * parameter of type `Users` and does not return anything.
+ * The CampsRegisterable interface is implemented by classes which can register for camps
  * 
  * @author Enric Tan
  * @version 1.0

@@ -13,8 +13,7 @@ import report.*;
 import utils.*;
 
 /**
- * The DisplayStaff class extends DisplayLogin and implements ViewCampsScreen,
- * ScreenClearFn, and EnquiriesScreen.
+ * The DisplayStaff class is used to display the interface for staffs.
  * 
  * @author Enric Tan, Kok Chin Yi, Ferguson Chiew
  * @version 1.0
@@ -30,13 +29,9 @@ public class DisplayStaff extends DisplayLogin implements ViewCampsScreen, Scree
 
     /**
      * 
-     * The above code is a constructor for a class called "DisplayStaff". It
-     * takes in several parameters, including a Staff object, CampArray object,
-     * EnquiriesArray object, UsersDatabase object, and SuggestionArray object. It
+     * The constructor for a class called takes in several parameters and
      * assigns these objects to instance variables within the
-     * class. It also assigns the Staff object passed as a parameter to the
-     * "user" instance variable.
-     * Finally, it calls the "staffScreen" method, passing in the "user" object.
+     * class.
      * 
      * @param user
      * @param campArray
