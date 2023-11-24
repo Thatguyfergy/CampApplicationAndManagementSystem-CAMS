@@ -104,6 +104,7 @@ public class DisplayStudent extends DisplayLogin
             System.out.printf("Enter your choice: ");
 
             choice = InputInt.nextInt(sc);
+            sc.nextLine(); // flush nextline char
             System.out.println();
             switch (choice) {
                 case 0:
@@ -218,7 +219,6 @@ public class DisplayStudent extends DisplayLogin
         student.viewAvailAndRegCamps(campArray);
         String campname;
         System.out.printf("\nWhich camp do you want to register for? ");
-        sc.nextLine(); // flush nextline char
         campname = sc.nextLine();
         do {
             if (campArray.checkCampExists(campname))
@@ -229,6 +229,7 @@ public class DisplayStudent extends DisplayLogin
         } while (true);
         System.out.printf("Do you want to register as committee (1) or attendee (2)? ");
         boolean comm = (InputInt.nextInt(sc) == 1) ? true : false;
+        sc.nextLine(); // flush nextline char
         Camp campPtr = campArray.getCamp(campname);
         if (comm)
             student.registerCampCommittee(campPtr, campArray);
@@ -308,13 +309,14 @@ public class DisplayStudent extends DisplayLogin
                 do {
                     System.out.printf("Select Enquiry to edit, input Enquiry index: ");
                     enqindex1 = InputInt.nextInt(sc);
+                    sc.nextLine(); // flush nextline char
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex1 >= 1 && enqindex1 <= enqArraySize)
                         break;
                     System.out.println("Invalid index! Please try again!");
                 } while (true);
                 System.out.printf("Please input the edited Enquiry: ");
-                sc.nextLine();
+                //sc.nextLine();
                 String newenq = sc.nextLine();
                 student.editEnquiry(newenq, enqindex1 - 1);
                 break;
@@ -329,6 +331,7 @@ public class DisplayStudent extends DisplayLogin
                 do {
                     System.out.printf("Select Enquiry to delete, input Enquiry index: ");
                     enqindex2 = InputInt.nextInt(sc);
+                    sc.nextLine(); // flush nextline char
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex2 >= 1 && enqindex2 <= enqArraySize)
                         break;
@@ -347,6 +350,7 @@ public class DisplayStudent extends DisplayLogin
                 do {
                     System.out.printf("Select Enquiry to submit, input Enquiry index: ");
                     enqindex = InputInt.nextInt(sc);
+                    sc.nextLine(); // flush nextline char
                     int enqArraySize = student.getPendingEnquiriesSize();
                     if (enqindex >= 1 && enqindex <= enqArraySize)
                         break;
@@ -383,8 +387,9 @@ public class DisplayStudent extends DisplayLogin
         System.out.println("0: Exit to menu");
         do {
             System.out.printf("Enter the index of the camp you are withdrawing from: ");
-            sc.nextLine();
+            //sc.nextLine();
             remCampIndex = InputInt.nextInt(sc) - 1;
+            sc.nextLine(); // flush nextline char
             if (remCampIndex == -1)
                 break;
             if (remCampIndex >= 0 && remCampIndex <= (studentRegCamps.size() - 1))
